@@ -1,0 +1,1323 @@
+--[ Dark_Sadist ]--
+--[ MONSTEROUS V2 ]--
+
+-- woohoo monsterous v2 is here11!1 (god ngl monsterous v1 was a glitchy disaster)
+
+
+
+
+-- NOTICES:
+
+-- Known issue: If you are missing your arms or legs (not hats) that is not part of the script, please run a net bypass of your own. (THIS SCRIPT WAS RAN ON KRNL AND WORKS PERFECTLY FINE FOR ALL CLIENTS.)
+-- Tip: As soon as the script successfully loads, move at least 10 studs away from the previous location where it was first loaded to avoid the limbs from falling if your having this issue.
+-- Sadly: Im not too sure if I'll add fling as most attempts came out with the humanoidrootpart falling on contact.
+
+
+
+
+-- HATS: (total cost: 8 robux)
+--https://www.roblox.com/catalog/8337370/Blockhead-Baseball-Cap
+--https://www.roblox.com/catalog/48474313/Red-Roblox-Cap
+--https://www.roblox.com/catalog/376527115/Jade-Necklace-with-Shell-Pendant
+--https://www.roblox.com/catalog/63690008/Pal-Hair
+--https://www.roblox.com/catalog/62234425/Brown-Hair
+--https://www.roblox.com/catalog/48474294/ROBLOX-Girl-Hair
+--https://www.roblox.com/catalog/451220849/Lavender-Updo
+--https://www.roblox.com/catalog/62724852/Chestnut-Bun
+
+
+
+
+-- CONTROLS:
+
+-- X to switch between extended or compact.
+
+-- Y to reset transition time to preset.
+-- B to decrease transition time by 1.
+-- H to increase transition time by 1.
+
+-- F to super jump (Extended).
+-- R to screech (Extended).
+-- G to teleport (Extended).
+-- Click to grab (Extended).
+
+-- Z to sit (Compact).
+-- C to speed boost (Compact).
+-- V to toggle crouch (Compact).
+-- T to visualise victims (Compact).
+
+
+
+
+-- SETTINGS:
+
+TransitionTime = 2 -- The time it takes to transition between compact and extended.
+UseInbuiltNetbypass = true -- If you want, you can disable this and run your own net bypass that is probably better then mine in all ways. (I recommend using MyWorld#4430's reanimate if it doesn't work)
+DelayBeforeBeginAnimations = 3 -- Gives it time for the limbs to settle to not fall after the rig has been set up before starting animations.
+
+
+
+
+-- SCRIPT:
+
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Player = Players.LocalPlayer
+local Character = Player.Character
+local Children = Character:GetChildren()
+local Descendants = Character:GetDescendants()
+local CoreGui = game:GetService("StarterGui")
+local uis = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local Camera = game.Workspace:FindFirstChildOfClass("Camera")
+
+local animatescript = nil
+
+local isextended = false
+local switchingmodes = false
+
+local devmodeactive = false -- disables some functions so it will run in studio
+
+if devmodeactive == false then -- preloading the rig to avoid bodypart falling
+ preload = game:GetObjects("rbxassetid://12603156605")[1]
+end
+
+Humanoid = Character:FindFirstChildOfClass("Humanoid")
+
+animatescript = Character.Animate
+animatescript.Disabled = true
+
+if Humanoid.RigType == Enum.HumanoidRigType.R6 then
+ R6 = true
+else
+ CoreGui:SetCore("SendNotification", {
+  Title = "Uncompatible";
+  Text = "Your character must be R6 to work.";
+  Duration = 5;
+  Icon = "rbxassetid://5087913874";
+  Button1 = "Ok";
+ })
+ return
+end
+
+local chalarm = Character:FindFirstChild("Left Arm")
+local chararm = Character:FindFirstChild("Right Arm")
+local challeg = Character:FindFirstChild("Left Leg")
+local charleg = Character:FindFirstChild("Right Leg")
+local chatorso = Character:FindFirstChild("Torso")
+
+if chalarm == nil then
+ CoreGui:SetCore("SendNotification", {
+  Title = "Error";
+  Text = "Left Arm is missing.";
+  Duration = 5;
+  Icon = "rbxassetid://5087913874";
+  Button1 = "Ok";
+ })
+end
+
+if chararm == nil then
+ CoreGui:SetCore("SendNotification", {
+  Title = "Error";
+  Text = "Right Arm is missing.";
+  Duration = 5;
+  Icon = "rbxassetid://5087913874";
+  Button1 = "Ok";
+ })
+end
+
+if challeg == nil then
+ CoreGui:SetCore("SendNotification", {
+  Title = "Error";
+  Text = "Left Leg is missing.";
+  Duration = 5;
+  Icon = "rbxassetid://5087913874";
+  Button1 = "Ok";
+ })
+end
+
+if charleg == nil then
+ CoreGui:SetCore("SendNotification", {
+  Title = "Error";
+  Text = "Right Leg is missing.";
+  Duration = 5;
+  Icon = "rbxassetid://5087913874";
+  Button1 = "Ok";
+ })
+end
+
+if chatorso == nil then
+ CoreGui:SetCore("SendNotification", {
+  Title = "Error";
+  Text = "Torso is missing.";
+  Duration = 5;
+  Icon = "rbxassetid://5087913874";
+  Button1 = "Ok";
+ })
+end
+
+CoreGui:SetCore("SendNotification", {
+ Title = "Monsterous V2 Loaded.";
+ Text = "Made by thebigreeman / professional dumbass#5743.";
+ Duration = 5;
+ Icon = "rbxassetid://4485364377";
+ Button1 = "Ok";
+})
+
+if UseInbuiltNetbypass == true then -- Instead of relying on someone else's net system, im going to look at 100 net systems and make my own so it fits well with the existing code.
+ if devmodeactive == false then
+  
+  pcall(function()
+   settings().Physics.AllowSleep = false
+   settings().Physics.PhysicsEnvironmentalThrottle = Enum.EnviromentalPhysicsThrottle.Disabled
+  end)
+
+
+ end
+
+ for i,v in next, game:GetService("Players").LocalPlayer.Character:GetChildren() do
+  if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then 
+   v.Massless = true -- I find having massless parts tend to fall less often.
+   game:GetService("RunService").Heartbeat:connect(function()
+    v.Velocity = Vector3.new(-30,0,0) -- Switched velocity from y axis to x axis for better chance of stability.
+   end)
+  elseif v:IsA("Accessory") then
+   v.Handle.Massless = true
+   game:GetService("RunService").Heartbeat:connect(function()
+    v.Handle.Velocity = Vector3.new(-30,0,0)
+   end)
+  end
+ end
+end
+
+for i,v in pairs(Character.Humanoid:GetPlayingAnimationTracks()) do
+ v:Stop()
+end
+
+for i,v in pairs(Descendants) do
+ if v:IsA("Motor6D") and v.Name ~= "Neck" and v.Name ~= "Waist" then
+  v:Destroy()
+ end
+end
+
+for i,v in pairs(Children) do
+ if v:IsA("Accessory") then
+  v.Handle:FindFirstChildOfClass("Weld"):Destroy()
+  v.Handle:FindFirstChildOfClass("SpecialMesh"):Destroy()
+ end
+end
+--game.ReplicatedStorage.Dummy:Clone() -- Used for testing purposes in studio.
+local rig = nil
+if devmodeactive == false then
+ rig = preload
+else
+ rig = game.ReplicatedStorage.Dummy:Clone()
+end
+--local rig = game.ReplicatedStorage.Dummy:Clone()--game:GetObjects("rbxassetid://12603156605")[1]
+rig.Name = "Dummy"
+rig.Parent = Character
+
+rig.HumanoidRootPart.Anchored = false
+workspace.CurrentCamera.CameraSubject = rig
+
+rig.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+
+function cf(part,rigpart,offset) -- Of course im using cframe reanimate, its easier, faster and more precise. I had a bad, glitchy experience with align movers...
+ --part.Velocity = Vector3.new(0,30,0)
+ part.Velocity = Vector3.new(rig.HumanoidRootPart.CFrame.LookVector.X * 50, rig.HumanoidRootPart.Velocity.Y * 5, rig.HumanoidRootPart.CFrame.LookVector.Z * 50)
+ if offset then
+  part.CFrame = rigpart.CFrame * offset
+ else
+  part.CFrame = rigpart.CFrame
+ end
+end
+
+Collision = RunService.Stepped:Connect(function()
+ for i,v in pairs(Children) do
+  if v:IsA("BasePart") then
+   v.CanCollide = false
+  end
+ end
+end)
+
+-- unfortunitely its difficult to make a humanoid fling crappery WHILE still being NETLESS.
+
+
+CFLoop = RunService.Heartbeat:Connect(function()
+ if not rig then
+  CFLoop:Disconnect()
+  Collision:Disconnect()
+ end
+ rig.Humanoid.Jump = Humanoid.Jump
+ rig.Humanoid:Move(Humanoid.MoveDirection)
+ cf(chatorso,rig["Torso"])
+ cf(chalarm,rig["Left Arm"])
+ cf(chararm,rig["Right Arm"])
+ cf(challeg,rig["Left Leg"])
+ cf(charleg,rig["Right Leg"])
+
+ cf(Character["BlockheadBaseballCap"].Handle,rig["Left Wrist"])
+ cf(Character["Hat1"].Handle,rig["Right Wrist"])
+ cf(Character["Kate Hair"].Handle,rig["Left Thigh"])
+ cf(Character["LavanderHair"].Handle,rig["Right Thigh"])
+
+ cf(Character["Necklace"].Handle,rig["Left Hand"])
+ cf(Character["Pal Hair"].Handle,rig["Right Hand"])
+ cf(Character["Pink Hair"].Handle,rig["Left Foot"])
+ cf(Character["Robloxclassicred"].Handle,rig["Right Foot"])
+end)
+
+if R6 then
+ animatescript = Character.Animate:Clone()
+ animatescript.Parent = rig
+ animatescript.Disabled = false
+ Character.Animate:Destroy()
+else
+ -- There is never going to be R15 support because hats in R15 work differently.
+end
+
+
+function damageplayer(victimroot)  -- sad
+
+end
+
+local movement = false
+local previousmove = false
+
+local currentlygrabbing = false
+
+local lighteffect = Instance.new("ColorCorrectionEffect")
+lighteffect.Parent = game.Lighting
+lighteffect.Name = "LightingEffects"
+
+local UIMain = Instance.new("ScreenGui")
+local Hint = Instance.new("TextLabel")
+local ImageLabel = Instance.new("ImageLabel")
+
+UIMain.Name = "UIMain"
+UIMain.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+UIMain.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+UIMain.IgnoreGuiInset = true
+
+Hint.Name = "Hint"
+Hint.Parent = UIMain
+Hint.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Hint.BackgroundTransparency = 1.000
+Hint.Position = UDim2.new(0.03, 0, 0.042, 0)
+Hint.Size = UDim2.new(0.122523464, 0, 0.0210970473, 0)
+Hint.Font = Enum.Font.Code
+Hint.Text = ""
+Hint.TextColor3 = Color3.fromRGB(255, 255, 255)
+Hint.TextScaled = true
+Hint.TextSize = 14.000
+Hint.TextWrapped = true
+Hint.TextXAlignment = Enum.TextXAlignment.Left
+
+ImageLabel.Parent = UIMain
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.Size = UDim2.new(1, 0, 1, 0)
+ImageLabel.ZIndex = 0
+ImageLabel.Image = "rbxassetid://2687114640"
+ImageLabel.ImageTransparency = 1.000
+
+--game:GetService("ContentProvider"):PreloadAsync({"rbxassetid://9113970449"})
+
+currenttexting = 0
+
+function clicktext(text, pitch)
+ local g = coroutine.wrap(function()
+  local breakup = false
+  Hint.Text = ""
+  local splitString: table = string.split(text, "")
+  local signal = Hint:GetPropertyChangedSignal("Text"):Connect(function()
+   if Hint.Text == "" then
+    breakup = true
+   end
+  end)
+  for i,v in pairs(splitString) do
+   if breakup == true then
+    break
+   end
+   Hint.Text = Hint.Text .. v
+   local blip = Instance.new("Sound")
+   blip.Parent = game.Workspace
+   blip.SoundId = "rbxassetid://9125397532"
+   blip.PlaybackSpeed = pitch
+   blip:Play()
+   game:GetService("Debris"):AddItem(blip, 2)
+   wait(0.1)
+  end
+  signal:Disconnect()
+ end)
+ g()
+end
+
+clicktext("I feel... Strange.", 1)
+
+local originalPosition = Hint.Position
+local absolutePosition = Hint.AbsolutePosition 
+
+local shakeIntensity = 5
+
+RunService.Stepped:Connect(function()
+ if isextended == true then
+  local desiredPosition = absolutePosition + Vector2.new(math.random(-shakeIntensity, shakeIntensity), math.random(-shakeIntensity, shakeIntensity))
+  local newPosition = (desiredPosition - Hint.Parent.AbsolutePosition) -- subtract the parent's position from the desired position to get its offset
+  Hint.Position = UDim2.fromOffset(newPosition.X, newPosition.Y)
+ end
+end)
+
+
+-- Animation:
+
+function MonsterController()
+ local r = coroutine.wrap(function()
+  while true do
+   if isextended == false then
+    break
+   end
+   local info = TweenInfo.new(
+    2,
+    Enum.EasingStyle.Cubic,
+    Enum.EasingDirection.InOut,
+    0,
+    false,
+    0
+   )
+
+   local goal1 = {
+    C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-90), math.rad(-180), math.rad(0)),
+    C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-80), math.rad(0), math.rad(180))
+   }
+
+   local goal2 = {
+    C0 = CFrame.new(-1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+    C1 = CFrame.new(-0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(-10))
+   }
+
+   local goal3 = {
+    C0 = CFrame.new(1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+    C1 = CFrame.new(0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(-50))
+   }
+
+   local goal4 = {
+    C0 = CFrame.new(-1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+    C1 = CFrame.new(0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(55), math.rad(-90), math.rad(-60))
+   }
+
+
+   local goal5 = {
+    C0 = CFrame.new(1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+    C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(55), math.rad(90), math.rad(60))
+   }
+
+   local tween5 = TweenService:Create(rig["Torso"]["Right Shoulder"], info, goal5)
+
+   local tween4 = TweenService:Create(rig["Torso"]["Left Shoulder"], info, goal4)
+
+   local tween3 = TweenService:Create(rig["Torso"]["Right Hip"], info, goal3)
+
+   local tween2 = TweenService:Create(rig["Torso"]["Left Hip"], info, goal2)
+
+   local tween1 = TweenService:Create(rig["HumanoidRootPart"].RootJoint, info, goal1)
+   if currentlygrabbing == false then
+    tween5:Play()
+    tween4:Play()
+   end
+   if movement == false then
+    tween3:Play()
+    tween2:Play()
+    tween1:Play()
+   end
+   wait(2)
+   if isextended == false then
+    break
+   end
+   local info = TweenInfo.new(
+    2,
+    Enum.EasingStyle.Cubic,
+    Enum.EasingDirection.InOut,
+    0,
+    false,
+    0
+   )
+
+   local goal1 = {
+    C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-90), math.rad(-180), math.rad(0)),
+    C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-60), math.rad(0), math.rad(180))
+   }
+
+   local goal2 = {
+    C0 = CFrame.new(-1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+    C1 = CFrame.new(-0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(10))
+   }
+
+   local goal3 = {
+    C0 = CFrame.new(1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+    C1 = CFrame.new(0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(-70))
+   }
+
+   local goal4 = {
+    C0 = CFrame.new(-1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+    C1 = CFrame.new(0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(40), math.rad(-90), math.rad(-20))
+   }
+
+
+   local goal5 = {
+    C0 = CFrame.new(1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+    C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(40), math.rad(90), math.rad(20))
+   }
+
+   local tween5 = TweenService:Create(rig["Torso"]["Right Shoulder"], info, goal5)
+
+   local tween4 = TweenService:Create(rig["Torso"]["Left Shoulder"], info, goal4)
+
+   local tween3 = TweenService:Create(rig["Torso"]["Right Hip"], info, goal3)
+
+   local tween2 = TweenService:Create(rig["Torso"]["Left Hip"], info, goal2)
+
+   local tween1 = TweenService:Create(rig["HumanoidRootPart"].RootJoint, info, goal1)
+   if currentlygrabbing == false then
+    tween5:Play()
+    tween4:Play()
+   end
+   if movement == false then
+    tween3:Play()
+    tween2:Play() 
+    tween1:Play()
+   end
+   wait(2)
+  end
+ end)
+ local g = coroutine.wrap(function()
+  while true do
+   if isextended == false then
+    break
+   end
+   if rig.Humanoid.MoveDirection.Magnitude > 0 then
+    movement = true
+   else
+    movement = false
+   end
+   wait()
+  end
+ end)
+ local h = coroutine.wrap(function()
+  local function loop()
+   wait()
+   if isextended == false then
+    return
+   end
+   if movement == true then
+    previousmove = true
+    if isextended == false then
+     return
+    end
+    local info = TweenInfo.new(
+     0.3,
+     Enum.EasingStyle.Cubic,
+     Enum.EasingDirection.InOut,
+     0,
+     false,
+     0
+    )
+
+    local goal1 = {
+     C0 = CFrame.new(1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+     C1 = CFrame.new(0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(-10))
+    }
+
+    local goal2 = {
+     C0 = CFrame.new(-1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+     C1 = CFrame.new(-0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(70))
+    }
+
+    local goal3 = {
+     C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-90), math.rad(-180), math.rad(0)),
+     C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-50), math.rad(0), math.rad(180))
+    }
+
+    local tween1 = TweenService:Create(rig["Torso"]["Right Hip"], info, goal1)
+
+    local tween2 = TweenService:Create(rig["Torso"]["Left Hip"], info, goal2)
+
+    local tween3 = TweenService:Create(rig["HumanoidRootPart"].RootJoint, info, goal3)
+
+    tween1:Play()
+    tween2:Play()
+    tween3:Play()
+    tween1.Completed:Wait()
+    if isextended == false then
+     return
+    end
+    if movement == false then
+     loop()
+     return
+    end
+    local info = TweenInfo.new(
+     0.3,
+     Enum.EasingStyle.Cubic,
+     Enum.EasingDirection.InOut,
+     0,
+     false,
+     0
+    )
+
+    local goal1 = {
+     C0 = CFrame.new(1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+     C1 = CFrame.new(0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(-70))
+    }
+
+    local goal2 = {
+     C0 = CFrame.new(-1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+     C1 = CFrame.new(-0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(10))
+    }
+
+    local goal3 = {
+     C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-90), math.rad(-180), math.rad(0)),
+     C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-60), math.rad(0), math.rad(180))
+    }
+
+    local tween1 = TweenService:Create(rig["Torso"]["Right Hip"], info, goal1)
+
+    local tween2 = TweenService:Create(rig["Torso"]["Left Hip"], info, goal2)
+
+    local tween3 = TweenService:Create(rig["HumanoidRootPart"].RootJoint, info, goal3)
+
+    tween1:Play()
+    tween2:Play()
+    tween3:Play()
+
+    tween1.Completed:Wait()
+    loop()
+    return
+   else
+    if previousmove == true then
+     previousmove = false
+     local info = TweenInfo.new(
+      0.3,
+      Enum.EasingStyle.Cubic,
+      Enum.EasingDirection.InOut,
+      0,
+      false,
+      0
+     )
+
+     local goal1 = {
+      C0 = CFrame.new(1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+      C1 = CFrame.new(0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(-70))
+     }
+
+     local goal2 = {
+      C0 = CFrame.new(-1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+      C1 = CFrame.new(-0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(10))
+     }
+
+     local tween1 = TweenService:Create(rig["Torso"]["Right Hip"], info, goal1)
+
+     local tween2 = TweenService:Create(rig["Torso"]["Left Hip"], info, goal2)
+
+     tween1:Play()
+     tween2:Play()
+    end
+    loop()
+    return
+   end
+  end
+  loop()
+ end)
+ h()
+ g()
+ r()
+end
+
+function StartExtend()
+ for i,v in pairs(rig.Humanoid:GetPlayingAnimationTracks()) do
+  v:Stop()
+ end
+ local info = TweenInfo.new(
+  TransitionTime,
+  Enum.EasingStyle.Cubic,
+  Enum.EasingDirection.Out,
+  0,
+  false,
+  0
+ )
+
+ local goal1 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-90), math.rad(-180), math.rad(0)),
+  C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-60), math.rad(0), math.rad(180))
+ }
+
+ local tween1 = TweenService:Create(rig["HumanoidRootPart"].RootJoint, info, goal1)
+
+
+ local goal2 = {
+  C0 = CFrame.new(-1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+  C1 = CFrame.new(-0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(10))
+ }
+
+ local tween2 = TweenService:Create(rig["Torso"]["Left Hip"], info, goal2)
+
+
+ local goal3 = {
+  C0 = CFrame.new(-1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+  C1 = CFrame.new(0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(40), math.rad(-90), math.rad(-20))
+ }
+
+ local tween3 = TweenService:Create(rig["Torso"]["Left Shoulder"], info, goal3)
+
+
+ local goal4 = {
+  C0 = CFrame.new(1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+  C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(40), math.rad(90), math.rad(20))
+ }
+
+ local tween4 = TweenService:Create(rig["Torso"]["Right Shoulder"], info, goal4)
+
+
+ local goal5 = {
+  C0 = CFrame.new(1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+  C1 = CFrame.new(0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(-70))
+ }
+
+ local tween5 = TweenService:Create(rig["Torso"]["Right Hip"], info, goal5)
+
+
+ local goal6 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(90), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0.26, -2) * CFrame.fromOrientation(math.rad(15), math.rad(0), math.rad(0))
+ }
+
+ local tween6 = TweenService:Create(rig["Left Leg"]["LeftTConnection"], info, goal6)
+
+
+ local goal7 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0.26, -2) * CFrame.fromOrientation(math.rad(15), math.rad(0), math.rad(0))
+ }
+
+ local tween7 = TweenService:Create(rig["Left Thigh"]["LeftFConnection"], info, goal7)
+
+
+ local goal8 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(90), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0.26, -2) * CFrame.fromOrientation(math.rad(15), math.rad(0), math.rad(0))
+ }
+
+ local tween8 = TweenService:Create(rig["Right Leg"]["RightTConnection"], info, goal8)
+
+
+ local goal9 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0.26, -2) * CFrame.fromOrientation(math.rad(15), math.rad(0), math.rad(0))
+ }
+
+ local tween9 = TweenService:Create(rig["Right Thigh"]["RightFConnection"], info, goal9)
+
+
+ local goal10 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(90), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, -0.55, -2) * CFrame.fromOrientation(math.rad(-30), math.rad(0), math.rad(0))
+ }
+
+ local tween10 = TweenService:Create(rig["Left Arm"]["LeftWConnection"], info, goal10)
+
+ local goal11 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, -0.55, -2) * CFrame.fromOrientation(math.rad(-30), math.rad(0), math.rad(0))
+ }
+
+ local tween11 = TweenService:Create(rig["Left Wrist"]["LeftHConnection"], info, goal11)
+
+
+ local goal12 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(90), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, -0.55, -2) * CFrame.fromOrientation(math.rad(-30), math.rad(0), math.rad(0))
+ }
+
+ local tween12 = TweenService:Create(rig["Right Arm"]["RightWConnection"], info, goal12)
+
+
+ local goal13 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, -0.55, -2) * CFrame.fromOrientation(math.rad(-30), math.rad(0), math.rad(0))
+ }
+
+ local tween13 = TweenService:Create(rig["Right Wrist"]["RightHConnection"], info, goal13)
+
+ tween1:Play()
+ tween2:Play()
+ tween3:Play()
+ tween4:Play()
+ tween5:Play()
+ tween6:Play()
+ tween7:Play()
+ tween8:Play()
+ tween9:Play()
+ tween10:Play()
+ tween11:Play()
+ tween12:Play()
+ tween13:Play()
+
+ tween1.Completed:Wait()
+
+ rig.Humanoid.WalkSpeed = 32
+ switchingmodes = false
+ MonsterController()
+end
+
+function ReturnCompact()
+ local info = TweenInfo.new(
+  TransitionTime,
+  Enum.EasingStyle.Cubic,
+  Enum.EasingDirection.Out,
+  0,
+  false,
+  0
+ )
+
+ local goal1 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-90), math.rad(-180), math.rad(0)),
+  C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(-90), math.rad(-180), math.rad(0))
+ }
+
+ local tween1 = TweenService:Create(rig["HumanoidRootPart"].RootJoint, info, goal1)
+
+
+ local goal2 = {
+  C0 = CFrame.new(-1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+  C1 = CFrame.new(-0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0))
+ }
+
+ local tween2 = TweenService:Create(rig["Torso"]["Left Hip"], info, goal2)
+
+
+ local goal3 = {
+  C0 = CFrame.new(-1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+  C1 = CFrame.new(0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0))
+ }
+
+ local tween3 = TweenService:Create(rig["Torso"]["Left Shoulder"], info, goal3)
+
+
+ local goal4 = {
+  C0 = CFrame.new(1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+  C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0))
+ }
+
+ local tween4 = TweenService:Create(rig["Torso"]["Right Shoulder"], info, goal4)
+
+
+ local goal5 = {
+  C0 = CFrame.new(1, -1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+  C1 = CFrame.new(0.5, 1, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0))
+ }
+
+ local tween5 = TweenService:Create(rig["Torso"]["Right Hip"], info, goal5)
+
+
+ local goal6 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(90), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0))
+ }
+
+ local tween6 = TweenService:Create(rig["Left Leg"]["LeftTConnection"], info, goal6)
+
+
+ local goal7 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0))
+ }
+
+ local tween7 = TweenService:Create(rig["Left Thigh"]["LeftFConnection"], info, goal7)
+
+
+ local goal8 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(90), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0))
+ }
+
+ local tween8 = TweenService:Create(rig["Right Leg"]["RightTConnection"], info, goal8)
+
+
+ local goal9 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0))
+ }
+
+ local tween9 = TweenService:Create(rig["Right Thigh"]["RightFConnection"], info, goal9)
+
+
+ local goal10 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(90), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0))
+ }
+
+ local tween10 = TweenService:Create(rig["Left Arm"]["LeftWConnection"], info, goal10)
+
+ local goal11 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0))
+ }
+
+ local tween11 = TweenService:Create(rig["Left Wrist"]["LeftHConnection"], info, goal11)
+
+
+ local goal12 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(90), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0))
+ }
+
+ local tween12 = TweenService:Create(rig["Right Arm"]["RightWConnection"], info, goal12)
+
+
+ local goal13 = {
+  C0 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0)),
+  C1 = CFrame.new(0, 0, 0) * CFrame.fromOrientation(math.rad(0), math.rad(0), math.rad(0))
+ }
+
+ local tween13 = TweenService:Create(rig["Right Wrist"]["RightHConnection"], info, goal13)
+
+ tween1:Play()
+ tween2:Play()
+ tween3:Play()
+ tween4:Play()
+ tween5:Play()
+ tween6:Play()
+ tween7:Play()
+ tween8:Play()
+ tween9:Play()
+ tween10:Play()
+ tween11:Play()
+ tween12:Play()
+ tween13:Play()
+
+ tween1.Completed:Wait()
+
+ for i,v in pairs(rig.Humanoid:GetPlayingAnimationTracks()) do
+  v:Stop()
+ end
+ rig.Humanoid.WalkSpeed = 16
+ switchingmodes = false
+ animatescript.Disabled = false
+end
+
+currentanim1 = nil
+currentanim2 = nil
+
+local monsterambient = Instance.new("Sound")
+monsterambient.Parent = game.Workspace
+monsterambient.Name = "AmbientMonMain"
+monsterambient.SoundId = "rbxassetid://9125351901"
+monsterambient.Looped = true
+
+uis.InputBegan:Connect(function(input)
+ if (uis:GetFocusedTextBox()) then
+  return;
+ end
+ if switchingmodes == true then
+  return;
+ end
+ if input.KeyCode == Enum.KeyCode.X then
+  if isextended == false then
+   isextended = true
+   animatescript.Disabled = true
+   for i,v in pairs(rig.Humanoid:GetPlayingAnimationTracks()) do
+    v:Stop()
+   end
+   rig.Humanoid.WalkSpeed = 0
+   switchingmodes = true
+   local info = TweenInfo.new(
+    TransitionTime,
+    Enum.EasingStyle.Cubic,
+    Enum.EasingDirection.Out,
+    0,
+    false,
+    0
+   )
+
+   local goal = {
+    HipHeight = 3
+   }
+
+   local tween = TweenService:Create(rig.Humanoid, info, goal)
+   tween:Play()
+   
+   clicktext("KILL ALL HUMANS.", 0.4)
+   game:GetService("TweenService"):Create(lighteffect, TweenInfo.new(TransitionTime,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut), {TintColor = Color3.new(0.392157, 0, 0)}):Play()
+   game:GetService("TweenService"):Create(ImageLabel, TweenInfo.new(TransitionTime,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut), {ImageTransparency = 0}):Play()
+   monsterambient:Play()
+   
+   StartExtend()
+  else
+   isextended = false
+   rig.Humanoid.WalkSpeed = 0
+   switchingmodes = true
+   local info = TweenInfo.new(
+    TransitionTime,
+    Enum.EasingStyle.Cubic,
+    Enum.EasingDirection.Out,
+    0,
+    false,
+    0
+   )
+
+   local goal = {
+    HipHeight = 0
+   }
+
+   local tween = TweenService:Create(rig.Humanoid, info, goal)
+   tween:Play()
+   
+   clicktext("I feel... Strange.", 1)
+   game:GetService("TweenService"):Create(lighteffect, TweenInfo.new(TransitionTime,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut), {TintColor = Color3.new(1, 1, 1)}):Play()
+   game:GetService("TweenService"):Create(ImageLabel, TweenInfo.new(TransitionTime,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut), {ImageTransparency = 1}):Play()
+   monsterambient:Stop()
+      
+   ReturnCompact()
+  end
+ end 
+ if input.KeyCode == Enum.KeyCode.Z then
+  if isextended == false then
+   clicktext("I'm going to sit down.", 1)
+   rig.Humanoid.Sit = true
+  end
+ end
+ if input.KeyCode == Enum.KeyCode.B then
+  if TransitionTime > 0 then
+   TransitionTime = TransitionTime - 1
+  end
+  CoreGui:SetCore("SendNotification", {
+   Title = tostring(TransitionTime);
+   Text = "Decreased transition time by 1.";
+   Duration = 3;
+   Icon = "rbxassetid://7059346373";
+   Button1 = "Ok";
+  })
+ end
+ if input.KeyCode == Enum.KeyCode.H then
+  TransitionTime = TransitionTime + 1
+  CoreGui:SetCore("SendNotification", {
+   Title = tostring(TransitionTime);
+   Text = "Increased transition time by 1.";
+   Duration = 3;
+   Icon = "rbxassetid://7059346373";
+   Button1 = "Ok";
+  })
+ end
+ if input.KeyCode == Enum.KeyCode.Y then
+  TransitionTime = 2
+  CoreGui:SetCore("SendNotification", {
+   Title = tostring(TransitionTime);
+   Text = "Resetted transition time to preset.";
+   Duration = 3;
+   Icon = "rbxassetid://7059346373";
+   Button1 = "Ok";
+  })
+ end
+ if input.KeyCode == Enum.KeyCode.F then
+  if isextended == true then
+   clicktext("I SEE YOU.", 0.4)
+   local orig = rig["Humanoid"].JumpPower
+   rig["Humanoid"].JumpPower = 250
+   rig["Humanoid"].WalkSpeed = 100
+   rig["Humanoid"].Jump = true
+   local bomb = Instance.new("Explosion")
+   bomb.BlastPressure = 0
+   bomb.ExplosionType = Enum.ExplosionType.NoCraters
+   bomb.DestroyJointRadiusPercent = 0
+   bomb.Parent = game.Workspace
+   local pos = rig["HumanoidRootPart"].CFrame * CFrame.new(0, -6, 0)
+   bomb.Position = pos.Position
+   bomb.Parent = game.Workspace
+   local scream = Instance.new("Sound")
+   scream.Parent = game.Workspace
+   scream.SoundId = "rbxassetid://2648568095"
+   scream.Volume = 3
+   scream.Name = "KABOOM"
+   scream:Play()
+   local effect = Instance.new("Trail")
+   effect.Parent = rig["Torso"]
+   effect.Attachment0  = rig["Torso"].NeckAttachment
+   effect.Attachment1  = rig["Torso"].WaistCenterAttachment
+   effect.FaceCamera = true
+   game:GetService("Debris"):AddItem(scream, 10)
+   game:GetService("Debris"):AddItem(effect, 10)
+   wait(0.1)
+   rig["Humanoid"].JumpPower = orig
+   wait(2)
+   effect.Enabled = false
+   rig["Humanoid"].WalkSpeed = 32
+  end
+ end
+ if input.KeyCode == Enum.KeyCode.G then
+  if isextended == true then
+   clicktext("YOU CANT HIDE FOREVER.", 0.4)
+   local teleport = Instance.new("Sound")
+   teleport.Parent = game.Workspace
+   teleport.SoundId = "rbxassetid://5568266006"
+   teleport.Name = "TELEPORTATION"
+   teleport.Volume = 3
+   teleport:Play()
+   local blind = Instance.new("ColorCorrectionEffect")
+   blind.Parent = game.Lighting
+   blind.Brightness = -1
+   game:GetService("Debris"):AddItem(teleport, 10)
+   rig["HumanoidRootPart"].CFrame = CFrame.new(Player:GetMouse().Hit.Position.X, Player:GetMouse().Hit.Position.Y, Player:GetMouse().Hit.Position.Z)
+   wait(0.1)
+   blind:Destroy()
+  end
+ end
+ if input.KeyCode == Enum.KeyCode.C then
+  if isextended == false then
+   clicktext("Where am I?", 1)
+   rig.Humanoid.WalkSpeed = 25
+   wait(2)
+   rig.Humanoid.WalkSpeed = 16
+  end
+ end
+ if input.KeyCode == Enum.KeyCode.T then
+  if isextended == false then
+   clicktext("I must, find, them.", 1)
+   for i,v in pairs(game.Players:GetPlayers()) do
+    if v.Character ~= nil then
+     local g = Instance.new("Highlight")
+     g.Parent = v.Character
+     g.Adornee = v.Character
+     g.OutlineColor = Color3.new(1, 0, 0)
+     g.FillTransparency = 1
+     g.OutlineTransparency = 1
+     g.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+     coroutine.wrap(function()
+      game:GetService("TweenService"):Create(g, TweenInfo.new(2,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut), {OutlineTransparency = 0}):Play()
+      wait(3)
+      game:GetService("TweenService"):Create(g, TweenInfo.new(2,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut), {OutlineTransparency = 1}):Play()
+     end)()
+     game:GetService("Debris"):AddItem(g, 5)
+    end
+   end
+  end
+ end
+ if input.KeyCode == Enum.KeyCode.V then
+  if isextended == false then
+   if currentanim1 == nil then
+    clicktext("I need to think.", 1)
+    currentanim1 = Instance.new("Animation")
+    currentanim1.AnimationId = "rbxassetid://180612465"
+    currentanim2 = rig.Humanoid:LoadAnimation(currentanim1)
+    currentanim2.Priority = Enum.AnimationPriority.Action
+    rig.Humanoid.WalkSpeed = 0
+    currentanim2:AdjustSpeed(0.001)
+    currentanim2:Play()
+    wait(1)
+    if currentanim2 ~= nil then
+     currentanim2:AdjustSpeed(0)
+    end
+   else
+    clicktext("This cant be right.", 1)
+    currentanim1:Destroy()
+    currentanim1 = nil
+    currentanim2:Stop()
+    currentanim2:Destroy()
+    currentanim2 = nil
+    rig.Humanoid.WalkSpeed = 16
+   end
+  end
+ end
+ if input.KeyCode == Enum.KeyCode.R then
+  if currentlygrabbing == true then
+   return;
+  end
+  if isextended == true then
+   clicktext("COME BACK HERE.", 0.4)
+   currentlygrabbing = true
+   local info = TweenInfo.new(
+    0.3,
+    Enum.EasingStyle.Cubic,
+    Enum.EasingDirection.InOut,
+    0,
+    false,
+    0
+   )
+   local infoslow = TweenInfo.new(
+    1,
+    Enum.EasingStyle.Cubic,
+    Enum.EasingDirection.InOut,
+    0,
+    false,
+    0
+   )
+   
+   local caminfo = TweenInfo.new(
+    0.3,
+    Enum.EasingStyle.Cubic,
+    Enum.EasingDirection.InOut,
+    0,
+    false,
+    0
+   )
+
+   local goal1 = {
+    C0 = CFrame.new(-1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+    C1 = CFrame.new(0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(40), math.rad(-90), math.rad(-110))
+   }
+   
+   local camgoal = {
+    FieldOfView = 120
+   }
+
+
+   local goal2 = {
+    C0 = CFrame.new(1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+    C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(40), math.rad(90), math.rad(110))
+   }
+
+   local tween2 = TweenService:Create(rig["Torso"]["Right Shoulder"], info, goal2)
+
+   local tween1 = TweenService:Create(rig["Torso"]["Left Shoulder"], info, goal1)
+   
+   local tween3 = TweenService:Create(Camera, caminfo, camgoal)
+
+   tween1:Play()
+   tween2:Play()
+   tween3:Play()
+
+   local scream = Instance.new("Sound")
+   scream.Parent = game.Workspace
+   scream.SoundId = "rbxassetid://9126422335"
+   scream.Volume = 3
+   scream.Name = "RAGE"
+   scream:Play()
+   game:GetService("Debris"):AddItem(scream, 10)
+
+   tween1.Completed:Wait()
+   wait(2)
+
+   local goal1 = {
+    C0 = CFrame.new(-1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+    C1 = CFrame.new(0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(40), math.rad(-90), math.rad(-20))
+   }
+   
+   local camgoal = {
+    FieldOfView = 70
+   }
+
+
+
+   local goal2 = {
+    C0 = CFrame.new(1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+    C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(40), math.rad(90), math.rad(20))
+   }
+
+   local tween2 = TweenService:Create(rig["Torso"]["Right Shoulder"], infoslow, goal2)
+
+   local tween1 = TweenService:Create(rig["Torso"]["Left Shoulder"], infoslow, goal1)
+   
+   local tween3 = TweenService:Create(Camera, caminfo, camgoal)
+
+   tween1:Play()
+   tween2:Play()
+   tween3:Play()
+
+   tween1.Completed:Wait()
+
+   currentlygrabbing = false
+  end
+ end 
+end)
+
+game:GetService("Players").LocalPlayer:GetMouse().Button1Down:Connect(function()
+ if (uis:GetFocusedTextBox()) then
+  return;
+ end
+ if switchingmodes == true then
+  return;
+ end
+ if currentlygrabbing == true then
+  return;
+ end
+ if isextended == true then
+  clicktext("DIE, DIE.", 0.4)
+  currentlygrabbing = true
+  local info = TweenInfo.new(
+   0.3,
+   Enum.EasingStyle.Cubic,
+   Enum.EasingDirection.InOut,
+   0,
+   false,
+   0
+  )
+
+  local infoslow = TweenInfo.new(
+   1,
+   Enum.EasingStyle.Cubic,
+   Enum.EasingDirection.InOut,
+   0,
+   false,
+   0
+  )
+
+  local goal1 = {
+   C0 = CFrame.new(-1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+   C1 = CFrame.new(0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(70), math.rad(-90), math.rad(-10))
+  }
+
+
+  local goal2 = {
+   C0 = CFrame.new(1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+   C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(70), math.rad(90), math.rad(-10))
+  }
+
+  local tween2 = TweenService:Create(rig["Torso"]["Right Shoulder"], info, goal2)
+
+  local tween1 = TweenService:Create(rig["Torso"]["Left Shoulder"], info, goal1)
+
+  tween1:Play()
+  tween2:Play()
+  tween1.Completed:Wait()
+
+  local goal1 = {
+   C0 = CFrame.new(-1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-155), math.rad(0)),
+   C1 = CFrame.new(0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(70), math.rad(-90), math.rad(-10))
+  }
+
+
+  local goal2 = {
+   C0 = CFrame.new(1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(155), math.rad(0)),
+   C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(70), math.rad(90), math.rad(-10))
+  }
+
+  local tween2 = TweenService:Create(rig["Torso"]["Right Shoulder"], info, goal2)
+
+  local tween1 = TweenService:Create(rig["Torso"]["Left Shoulder"], info, goal1)
+
+  tween1:Play()
+  tween2:Play()
+  tween1.Completed:Wait()
+
+  local goal1 = {
+   C0 = CFrame.new(-1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(-90), math.rad(0)),
+   C1 = CFrame.new(0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(40), math.rad(-90), math.rad(-20))
+  }
+
+
+  local goal2 = {
+   C0 = CFrame.new(1, 0.5, 0) * CFrame.fromOrientation(math.rad(0), math.rad(90), math.rad(0)),
+   C1 = CFrame.new(-0.5, 0.5, 0) * CFrame.fromOrientation(math.rad(40), math.rad(90), math.rad(20))
+  }
+
+  local tween2 = TweenService:Create(rig["Torso"]["Right Shoulder"], infoslow, goal2)
+
+  local tween1 = TweenService:Create(rig["Torso"]["Left Shoulder"], infoslow, goal1)
+
+  tween1:Play()
+  tween2:Play()
+
+  tween1.Completed:Wait()
+
+  currentlygrabbing = false
+ end
+end)
