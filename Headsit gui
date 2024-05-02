@@ -1,0 +1,103 @@
+-- Script by Shadow Sadist
+
+-- Function to equip a headset on the player's head
+local function equipHeadset(player)
+    local character = player.Character
+    if character then
+        local head = character:FindFirstChild("Head")
+        if head then
+            -- Check if the player already has a headset
+            if not character:FindFirstChild("Headset") then
+                local headset = Instance.new("Part")
+                headset.Name = "Headset"
+                headset.Size = Vector3.new(1, 1, 1)
+                headset.Anchored = false
+                headset.CanCollide = false
+                headset.Position = head.Position
+                headset.Parent = character
+            end
+        end
+    end
+end
+
+-- Function to remove the headset from the player's head
+local function unequipHeadset(player)
+    local character = player.Character
+    if character then
+        local headset = character:FindFirstChild("Headset")
+        if headset then
+            headset:Destroy()
+        end
+    end
+end
+
+-- Function to display GUI for entering victim's name
+local function displayGUI(player)
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "VictimNameGUI"
+    gui.Parent = player.PlayerGui
+
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0.5, 0, 0.5, 0)
+    frame.Position = UDim2.new(0.25, 0, 0.25, 0)
+    frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    frame.Parent = gui
+
+    local textBox = Instance.new("TextBox")
+    textBox.Size = UDim2.new(0.8, 0, 0.2, 0)
+    textBox.Position = UDim2.new(0.1, 0, 0.4, 0)
+    textBox.PlaceholderText = "Enter victim's name"
+    textBox.Parent = frame
+
+    local submitButton = Instance.new("TextButton")
+    submitButton.Size = UDim2.new(0.3, 0, 0.15, 0)
+    submitButton.Position = UDim2.new(0.35, 0, 0.6, 0)
+    submitButton.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+    submitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    submitButton.Text = "Submit"
+    submitButton.Parent = frame
+
+    submitButton.MouseButton1Click:Connect(function()
+        local victimName = textBox.Text
+        -- You can use victimName here for further processing
+        print("Victim's name: " .. victimName)
+        gui:Destroy()
+    end)
+end
+
+-- Function to sit on the victim's head
+local function sitOnHead(victim, player)
+    local victimHead = victim:FindFirstChild("Head")
+    local playerCharacter = player.Character
+    local playerHumanoid = playerCharacter and playerCharacter:FindFirstChildOfClass("Humanoid")
+    if victimHead and playerHumanoid then
+        playerHumanoid.Sit = true
+        playerHumanoid.SitTarget = victimHead.Position + Vector3.new(0, 2, 0)
+    end
+end
+
+-- Connect the functions to player events
+game.Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        equipHeadset(player)
+    end)
+    displayGUI(player)
+end)
+
+game.Players.PlayerRemoving:Connect(function(player)
+    unequipHeadset(player)
+end)
+
+-- Detect collision with victim's head
+game.Workspace.ChildAdded:Connect(function(child)
+    if child:IsA("Part") then
+        local player = game.Players:GetPlayerFromCharacter(child.Parent)
+        if player then
+            local victimName = child.Name
+            local victim = game.Players:FindFirstChild(victimName)
+            if victim and victim.Character then
+                sitOnHead(victim.Character, player)
+            end
+        end
+    end
+end)
