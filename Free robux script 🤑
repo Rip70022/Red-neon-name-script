@@ -1,0 +1,48 @@
+-- Event triggered when a player performs a prohibited action
+moderation.OnServerEvent:Connect(function(player, reason, badPlayer)
+    if badPlayer then
+        if reason == 'Kick' then
+            handleKick(badPlayer)
+        elseif reason == 'Ban' then
+            handleBan(badPlayer)
+        else
+            -- Handle unrecognized reasons
+            warn('Unrecognized reason: ' .. tostring(reason))
+        end
+    end
+end)
+
+-- Function to handle kicking a player
+function handleKick(badPlayer)
+    badPlayer:Kick('A member of staff has kicked you')
+end
+
+-- Function to handle banning a player
+function handleBan(badPlayer)
+    local bannedPlayer = game.Players:GetUserIdFromNameAsync(badPlayer)
+    if bannedPlayer then
+        local myData = bannedPlayers[bannedPlayer]
+        if myData then
+            -- Mark the player as banned
+            myData.banned = true
+            bannedData:SetAsync(bannedPlayer, myData)
+            -- Check if the player is currently in the game and disconnect them
+            if isPlayerInGame(bannedPlayer) then
+                badPlayer:Kick('A member of staff has banned you')
+            end
+        end
+    end
+end
+
+-- Function to check if the player is in the game (needs implementation)
+function isPlayerInGame(bannedPlayer)
+    -- Implement logic to check if the player is in the game
+    -- Return true if the player is in the game, false otherwise
+    -- Example:
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if player.UserId == bannedPlayer then
+            return true
+        end
+    end
+    return false
+end
