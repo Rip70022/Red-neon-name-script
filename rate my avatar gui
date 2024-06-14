@@ -1,5 +1,5 @@
 -- Rate My Avatar GUI - 2024
-
+--by Shadow Sadist
 -- Join the required game -👆
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Kavo-UI-Library"))()
