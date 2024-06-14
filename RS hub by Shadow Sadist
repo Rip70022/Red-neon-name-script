@@ -1,9 +1,6 @@
 --hub by Shadow Sadist
 --RS hub, LUCKY BLOCKS Battlegrounds
 -- KEY IS RSHUB217A25432A462D5A
-
-
-
 --// Decompiled Code. 
 --SCRIPT
 if not game:IsLoaded() then
