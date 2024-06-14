@@ -1,5 +1,4 @@
 -- Script by Shadow Sadist
-
 -- Function to equip a headset on the player's head
 local function equipHeadset(player)
     local character = player.Character
