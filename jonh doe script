@@ -1,42 +1,5 @@
 ---Convert Shadow Sadist 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 game:GetService("StarterGui"):SetCore("SendNotification",{
     Title = "Im Patrick";
     Text = "Netless Loaded";
@@ -534,4 +497,4 @@ jtrace.Material = "Granite"
 BurningEff(jtrace)
 game.Debris:AddItem(jtrace,1)
 end
-end
+end)
