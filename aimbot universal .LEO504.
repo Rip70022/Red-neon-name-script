@@ -1,0 +1,11 @@
+ -- Busca enemigos en la pantalla
+  local enemies = getEnemies()
+
+  -- Dispara a los enemigos
+  for i, enemy in ipairs(enemies) do
+    shoot(enemy.x, enemy.y)
+  end
+
+  -- Espera un segundo antes de seguir
+  wait(1)
+end
