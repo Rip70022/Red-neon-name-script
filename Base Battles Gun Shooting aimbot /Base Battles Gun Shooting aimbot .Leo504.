@@ -1,0 +1,55 @@
+-- Services
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+
+-- Get the local player
+local player = Players.LocalPlayer
+
+-- Auto farm function
+function autoFarm()
+-- Get a list of resources to collect
+local resources = Workspace:GetDescendants()
+for _, resource in pairs(resources) do
+if resource:IsA("Part") and resource.Name == "Resource" then
+-- Move to the resource location
+player.Character.HumanoidRootPart.CFrame = resource.CFrame
+wait(0.5)
+-- Collect the resource
+fireproximityprompt(resource, "Collect")
+end
+end
+end
+
+-- Aimbot function
+function aimbot()
+-- Get a list of enemies in range
+local enemies = Workspace:GetDescendants()
+for _, enemy in pairs(enemies) do
+if enemy:IsA("Model") and enemy:FindFirstChild("Humanoid") and enemy.Name ~= player.Name then
+-- Get the enemy's head position
+local head = enemy:FindFirstChild("Head")
+if head then
+-- Aim at the enemy
+player.Character.HumanoidRootPart.CFrame = CFrame.new(head.Position)
+wait(0.1)
+-- Shoot the enemy
+local gun = player.Character:FindFirstChild("Gun")
+if gun then
+gun:FindFirstChild("Shoot").OnServerEvent:FireServer(head)
+end
+end
+end
+end
+end
+
+-- Main loop
+while true do
+-- Auto farm
+autoFarm()
+
+-- Aimbot
+aimbot()
+
+-- Wait for a short period before repeating
+wait(1)
+end
