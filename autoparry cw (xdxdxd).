@@ -1,0 +1,15 @@
+local player = game.Players.LocalPlayer
+local character = player.Character
+
+while true do
+    wait(0.1)
+    if character then
+        local humanoid = character:FindFirstChild("Humanoid")
+        if humanoid then
+            local blockchain = humanoid:FindFirstChild("Block")
+            if blockchain then
+                blockchain:Destroy()
+            end
+        end
+    end
+end
