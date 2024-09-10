@@ -1,0 +1,141 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+// Class to represent a task
+class Task {
+public:
+    Task(const string& description, bool completed = false)
+        : description(description), completed(completed) {}
+
+    string to_string() const {
+        return (completed ? "[✓] " : "[✗] ") + description;
+    }
+
+    string description;
+    bool completed;
+};
+
+// Class to manage the to-do list
+class TodoList {
+public:
+    TodoList(const string& filename = "tasks.txt")
+        : filename(filename) {
+        load_tasks();
+    }
+
+    void add_task(const string& description) {
+        tasks.push_back(Task(description));
+        save_tasks();
+    }
+
+    void remove_task(size_t index) {
+        if (index < tasks.size()) {
+            tasks.erase(tasks.begin() + index);
+            save_tasks();
+        } else {
+            throw out_of_range("Task index out of range");
+        }
+    }
+
+    void mark_task_complete(size_t index) {
+        if (index < tasks.size()) {
+            tasks[index].completed = true;
+            save_tasks();
+        } else {
+            throw out_of_range("Task index out of range");
+        }
+    }
+
+    void list_tasks() const {
+        for (size_t i = 0; i < tasks.size(); ++i) {
+            cout << i << ". " << tasks[i].to_string() << endl;
+        }
+    }
+
+private:
+    void save_tasks() const {
+        ofstream file(filename);
+        for (const auto& task : tasks) {
+            file << task.description << "|" << task.completed << endl;
+        }
+    }
+
+    void load_tasks() {
+        ifstream file(filename);
+        string line;
+        while (getline(file, line)) {
+            stringstream ss(line);
+            string description;
+            bool completed;
+            getline(ss, description, '|');
+            ss >> completed;
+            tasks.emplace_back(description, completed);
+        }
+    }
+
+    vector<Task> tasks;
+    string filename;
+};
+
+// Function to display usage instructions
+void print_usage() {
+    cout << "Usage:\n";
+    cout << "  add <description>    Add a new task\n";
+    cout << "  remove <index>       Remove a task by index\n";
+    cout << "  complete <index>     Mark a task as complete by index\n";
+    cout << "  list                List all tasks\n";
+}
+
+int main(int argc, char* argv[]) {
+    if (argc < 2) {
+        print_usage();
+        return 1;
+    }
+
+    string command = argv[1];
+    TodoList todo_list;
+
+    try {
+        if (command == "add") {
+            if (argc < 3) {
+                cout << "Error: Description is required for 'add' command" << endl;
+                return 1;
+            }
+            string description = argv[2];
+            todo_list.add_task(description);
+            cout << "Added task: " << description << endl;
+        } else if (command == "remove") {
+            if (argc < 3) {
+                cout << "Error: Index is required for 'remove' command" << endl;
+                return 1;
+            }
+            size_t index = stoi(argv[2]);
+            todo_list.remove_task(index);
+            cout << "Removed task at index " << index << endl;
+        } else if (command == "complete") {
+            if (argc < 3) {
+                cout << "Error: Index is required for 'complete' command" << endl;
+                return 1;
+            }
+            size_t index = stoi(argv[2]);
+            todo_list.mark_task_complete(index);
+            cout << "Marked task at index " << index << " as complete" << endl;
+        } else if (command == "list") {
+            cout << "Tasks:" << endl;
+            todo_list.list_tasks();
+        } else {
+            print_usage();
+            return 1;
+        }
+    } catch (const exception& e) {
+        cout << "Error: " << e.what() << endl;
+        return 1;
+    }
+
+    return 0;
+}
