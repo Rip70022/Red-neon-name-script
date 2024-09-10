@@ -1,0 +1,96 @@
+import argparse
+import os
+import json
+
+# Class to represent a task
+class Task:
+    def __init__(self, description, completed=False):
+        self.description = description
+        self.completed = completed
+
+    def __repr__(self):
+        status = "✓" if self.completed else "✗"
+        return f"[{status}] {self.description}"
+
+# Class to manage the to-do list
+class TodoList:
+    def __init__(self, filename="tasks.json"):
+        self.filename = filename
+        self.tasks = self.load_tasks()
+
+    def add_task(self, description):
+        self.tasks.append(Task(description))
+        self.save_tasks()
+
+    def remove_task(self, index):
+        if 0 <= index < len(self.tasks):
+            del self.tasks[index]
+            self.save_tasks()
+        else:
+            raise IndexError("Task index out of range")
+
+    def mark_task_complete(self, index):
+        if 0 <= index < len(self.tasks):
+            self.tasks[index].completed = True
+            self.save_tasks()
+        else:
+            raise IndexError("Task index out of range")
+
+    def list_tasks(self):
+        return "\n".join([f"{i}. {task}" for i, task in enumerate(self.tasks)])
+
+    def save_tasks(self):
+        with open(self.filename, 'w') as file:
+            json.dump([task.__dict__ for task in self.tasks], file)
+
+    def load_tasks(self):
+        if os.path.exists(self.filename):
+            with open(self.filename, 'r') as file:
+                task_dicts = json.load(file)
+                return [Task(**task_dict) for task_dict in task_dicts]
+        return []
+
+# Main function to handle command-line interface
+def main():
+    parser = argparse.ArgumentParser(description="A simple command-line TODO list manager.")
+    parser.add_argument("command", choices=["add", "remove", "complete", "list"], help="Command to execute")
+    parser.add_argument("description", nargs="?", help="Description of the task (for 'add' command)")
+    parser.add_argument("index", type=int, nargs="?", help="Index of the task (for 'remove' and 'complete' commands)")
+
+    args = parser.parse_args()
+    todo_list = TodoList()
+
+    if args.command == "add":
+        if args.description:
+            todo_list.add_task(args.description)
+            print(f"Added task: {args.description}")
+        else:
+            print("Error: Description is required for 'add' command")
+
+    elif args.command == "remove":
+        if args.index is not None:
+            try:
+                removed_task = todo_list.tasks[args.index]
+                todo_list.remove_task(args.index)
+                print(f"Removed task: {removed_task}")
+            except IndexError:
+                print("Error: Task index out of range")
+        else:
+            print("Error: Index is required for 'remove' command")
+
+    elif args.command == "complete":
+        if args.index is not None:
+            try:
+                todo_list.mark_task_complete(args.index)
+                print(f"Marked task {args.index} as complete")
+            except IndexError:
+                print("Error: Task index out of range")
+        else:
+            print("Error: Index is required for 'complete' command")
+
+    elif args.command == "list":
+        print("Tasks:")
+        print(todo_list.list_tasks())
+
+if __name__ == "__main__":
+    main()
