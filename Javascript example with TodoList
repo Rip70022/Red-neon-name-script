@@ -1,0 +1,114 @@
+const fs = require('fs');
+const path = require('path');
+
+const FILE_PATH = path.join(__dirname, 'tasks.json');
+
+// Class to represent a task
+class Task {
+    constructor(description, completed = false) {
+        this.description = description;
+        this.completed = completed;
+    }
+
+    toString() {
+        return `${this.completed ? '[✓]' : '[✗]'} ${this.description}`;
+    }
+}
+
+// Class to manage the to-do list
+class TodoList {
+    constructor(filename = FILE_PATH) {
+        this.filename = filename;
+        this.tasks = this.loadTasks();
+    }
+
+    addTask(description) {
+        this.tasks.push(new Task(description));
+        this.saveTasks();
+    }
+
+    removeTask(index) {
+        if (index >= 0 && index < this.tasks.length) {
+            this.tasks.splice(index, 1);
+            this.saveTasks();
+        } else {
+            throw new Error('Task index out of range');
+        }
+    }
+
+    markTaskComplete(index) {
+        if (index >= 0 && index < this.tasks.length) {
+            this.tasks[index].completed = true;
+            this.saveTasks();
+        } else {
+            throw new Error('Task index out of range');
+        }
+    }
+
+    listTasks() {
+        return this.tasks.map((task, index) => `${index}. ${task.toString()}`).join('\n');
+    }
+
+    saveTasks() {
+        fs.writeFileSync(this.filename, JSON.stringify(this.tasks, null, 2));
+    }
+
+    loadTasks() {
+        if (fs.existsSync(this.filename)) {
+            const data = fs.readFileSync(this.filename);
+            return JSON.parse(data).map(task => new Task(task.description, task.completed));
+        }
+        return [];
+    }
+}
+
+// Command-line interface
+function printUsage() {
+    console.log('Usage:');
+    console.log('  node todo.js add <description>    Add a new task');
+    console.log('  node todo.js remove <index>       Remove a task by index');
+    console.log('  node todo.js complete <index>     Mark a task as complete by index');
+    console.log('  node todo.js list                List all tasks');
+}
+
+function main() {
+    const args = process.argv.slice(2);
+    const command = args[0];
+    const todoList = new TodoList();
+
+    try {
+        if (command === 'add') {
+            if (args[1]) {
+                todoList.addTask(args[1]);
+                console.log(`Added task: ${args[1]}`);
+            } else {
+                console.error('Error: Description is required for the "add" command');
+            }
+        } else if (command === 'remove') {
+            const index = parseInt(args[1], 10);
+            if (!isNaN(index)) {
+                todoList.removeTask(index);
+                console.log(`Removed task at index ${index}`);
+            } else {
+                console.error('Error: Valid index is required for the "remove" command');
+            }
+        } else if (command === 'complete') {
+            const index = parseInt(args[1], 10);
+            if (!isNaN(index)) {
+                todoList.markTaskComplete(index);
+                console.log(`Marked task at index ${index} as complete`);
+            } else {
+                console.error('Error: Valid index is required for the "complete" command');
+            }
+        } else if (command === 'list') {
+            console.log('Tasks:');
+            console.log(todoList.listTasks());
+        } else {
+            printUsage();
+        }
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+}
+
+main();
