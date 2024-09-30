@@ -1,0 +1,72 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "Synergy Nexus Hub",
+    SubTitle = "by ERROR_USERBANNED",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(460, 250),
+    Acrylic = true,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl 
+})
+
+local Tabs = {
+    Main = Window:AddTab({ Title = "Fe Black Hole Script", Icon = "contact" }),
+    Discord = Window:AddTab({ Title = "Discord Server", Icon = "discord" })  -- Nueva pestaña para el servidor de Discord
+}
+
+local Options = Fluent.Options
+
+do
+    Fluent:Notify({
+        Title = "Loaded",
+        Content = "Black Hole scripts loaded successfully!",
+        SubContent = "Enjoy the power of the black hole!",
+        Duration = 5
+    })
+
+    Tabs.Main:AddParagraph({
+        Title = "Warning: Use at your own risk!",
+        Content = ""
+    })
+
+    Tabs.Main:AddButton({
+        Title = "Activate Black Hole Script",
+        Description = "Loads the black hole script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Fe%20blackhole%20script"))()
+        end
+    })
+    
+    Tabs.Main:AddButton({
+        Title = "Activate Fixed Black Hole Script",
+        Description = "Loads the fixed black hole script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Fe%20blackhole%20script%20fixed"))()
+        end
+    })
+
+    -- Contenido de la nueva pestaña de Discord
+    Tabs.Discord:AddParagraph({
+        Title = "Join My Discord Server",
+        Content = "Click the button below to copy the Discord server link."
+    })
+
+    Tabs.Discord:AddButton({
+        Title = "Discord Server",
+        Description = "Copy the link to my Discord server.",
+        Callback = function()
+            setclipboard("https://discord.gg/N2vqD4qUZf")  -- Copiar al portapapeles
+            Fluent:Notify({
+                Title = "Copied!",
+                Content = "Discord server link copied to clipboard.",
+                Duration = 3
+            })
+        end
+    })
+
+end
+    
+Window:SelectTab(1)
