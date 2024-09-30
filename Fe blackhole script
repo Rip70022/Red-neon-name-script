@@ -1,0 +1,115 @@
+-- by shadow_sadist, ERROR_USERBANNED = Roblox+USERNAME
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Workspace = game:GetService("Workspace")
+
+local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+local Folder = Instance.new("Folder", Workspace)
+local Part = Instance.new("Part", Folder)
+local Attachment1 = Instance.new("Attachment", Part)
+Part.Anchored = true
+Part.CanCollide = false
+Part.Transparency = 1
+
+local blackHoleActive = false
+
+local function ForcePart(v)
+    if v:IsA("Part") and not v.Anchored and not v.Parent:FindFirstChild("Humanoid") and not v.Parent:FindFirstChild("Head") and v.Name ~= "Handle" then
+        v.CanCollide = false
+        local bodyPosition = Instance.new("BodyPosition", v)
+        bodyPosition.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+        bodyPosition.P = 10000
+        bodyPosition.D = 100
+        
+        -- Move the part towards the player on each update
+        RunService.RenderStepped:Connect(function()
+            if blackHoleActive then
+                bodyPosition.Position = humanoidRootPart.Position
+            end
+        end)
+    end
+end
+
+local function toggleBlackHole()
+    blackHoleActive = not blackHoleActive
+    if blackHoleActive then
+        for _, v in next, Workspace:GetDescendants() do
+            ForcePart(v)
+        end
+
+        Workspace.DescendantAdded:Connect(function(v)
+            if blackHoleActive then
+                ForcePart(v)
+            end
+        end)
+
+        spawn(function()
+            while blackHoleActive do
+                wait(0.1)  -- Small delay to prevent lag
+                if humanoidRootPart then
+                    Attachment1.WorldCFrame = humanoidRootPart.CFrame
+                end
+            end
+        end)
+    end
+end
+
+local function createControlButton()
+    local screenGui = Instance.new("ScreenGui")
+    local button = Instance.new("TextButton")
+
+    screenGui.Name = "BlackHoleControlGUI"
+    screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+    button.Name = "ToggleBlackHoleButton"
+    button.Size = UDim2.new(0, 200, 0, 50)
+    button.Position = UDim2.new(0.5, -100, 0, 100)
+    button.Text = "Activate Black Hole"
+    button.TextColor3 = Color3.fromRGB(0, 255, 255) -- Neon Blue
+    button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    button.BorderSizePixel = 0
+    button.Parent = screenGui
+
+    local uicorner = Instance.new("UICorner")
+    uicorner.CornerRadius = UDim.new(0, 15)
+    uicorner.Parent = button
+
+    -- Function to move the button
+    local function startDrag(input)
+        local initialPosition = button.Position
+        local startPosition = input.Position
+
+        local function updateDrag(input)
+            local delta = input.Position - startPosition
+            button.Position = UDim2.new(initialPosition.X.Scale, initialPosition.X.Offset + delta.X, initialPosition.Y.Scale, initialPosition.Y.Offset + delta.Y)
+        end
+
+        local function endDrag()
+            button.InputChanged:Disconnect(updateDrag)
+            button.InputEnded:Disconnect(endDrag)
+        end
+
+        button.InputChanged:Connect(updateDrag)
+        button.InputEnded:Connect(endDrag)
+    end
+
+    button.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            startDrag(input)
+        end
+    end)
+
+    button.MouseButton1Click:Connect(function()
+        toggleBlackHole()
+        if blackHoleActive then
+            button.Text = "Deactivate Black Hole"
+        else
+            button.Text = "Activate Black Hole"
+        end
+    end)
+end
+
+createControlButton()
