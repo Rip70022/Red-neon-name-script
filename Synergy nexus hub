@@ -3,8 +3,8 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Synergy Nexus Hub",
-    SubTitle = "....by ERROR_USERBANNED",
+    Title = "Synergy Nexus",
+    SubTitle = "HUB by ERROR_USERBANNED",
     TabWidth = 160,
     Size = UDim2.fromOffset(460, 250),
     Acrylic = true,
