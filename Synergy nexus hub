@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "𝐒𝐲𝐧𝐞𝐫𝐠𝐲 𝐍𝐞𝐱𝐮𝐬 Hub",
+    Title = "🟣Synergy Nexus Hub🟣",
     SubTitle = "_____●By ERROR_USERBANNED●",
     TabWidth = 160,
     Size = UDim2.fromOffset(460, 250),
@@ -53,7 +53,7 @@ do
     
     Tabs.BloxFruits:AddParagraph({
         Title = "Blox Fruits Scripts",
-        Content = "scripts not mine."
+        Content = "scripts not mine 😛."
     })
 
     Tabs.BloxFruits:AddButton({
@@ -115,7 +115,7 @@ do
     -- Contenido de la pestaña Scripts Random
     Tabs.RandomScripts:AddParagraph({
         Title = "Random Scripts",
-        Content = "scripts not mine."
+        Content = "scripts not mine 😛."
     })
 
     Tabs.RandomScripts:AddButton({
