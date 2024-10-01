@@ -16,8 +16,9 @@ local Tabs = {
     Main = Window:AddTab({ Title = "Fe Black Hole Script", Icon = "contact" }),
     BloxFruits = Window:AddTab({ Title = "Blox Fruits", Icon = "contact" }), 
     RandomScripts = Window:AddTab({ Title = "Scripts Random", Icon = "contact" }), 
-    TSB = Window:AddTab({ Title = "TSB Scripts", Icon = "contact" }), 
-    Discord = Window:AddTab({ Title = "Discord Server", Icon = "info" })  
+    TSB_Scripts = Window:AddTab({ Title = "TSB Scripts", Icon = "contact" }),
+    Discord = Window:AddTab({ Title = "Discord Server", Icon = "info" })
+
 }
 
 local Options = Fluent.Options
@@ -59,73 +60,6 @@ do
         end
     })
 
-    
-    Tabs.TSB:AddButton({
-        Title = "TOJI Moveset",
-        Description = "Load the TOJI moveset.",
-        Callback = function()
-            loadstring(game:HttpGet('https://pastebin.com/raw/VQnyWP5D'))()
-        end
-    })
-
-    Tabs.TSB:AddButton({
-        Title = "SUKUNA Moveset",
-        Description = "Load the SUKUNA moveset.",
-        Callback = function()
-            loadstring(game:HttpGet('https://pastebin.com/raw/gUrBYsGK'))()
-        end
-    })
-
-    Tabs.TSB:AddButton({
-        Title = "GOJO Moveset",
-        Description = "Load the GOJO moveset.",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/BaldyToSorcerer/main/Latest.lua"))()
-        end
-    })
-
-    Tabs.TSB:AddButton({
-        Title = "HAKARI MOVESET",
-        Description = "Load the HAKARI MOVESET.",
-        Callback = function()
-            loadstring(game:HttpGet("https://rawscripts.net/raw/The-Strongest-Battlegrounds-Hero-to-True-Nosakatan-18742"))()
-        end
-    })
-
-    Tabs.TSB:AddButton({
-        Title = "DEKU Moveset",
-        Description = "Load the DEKU moveset.",
-        Callback = function()
-            loadstring(game:HttpGet("https://pastefy.app/MNg2zcxz/raw"))()
-        end
-    })
-
-    Tabs.TSB:AddButton({
-        Title = "REAPER Moveset",
-        Description = "Load the REAPER moveset.",
-        Callback = function()
-            getgenv().Music = false
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Reapvitalized/TSB/main/APOPHENIA.lua"))()
-        end
-    })
-
-    Tabs.TSB:AddButton({
-        Title = "GOJO script",
-        Description = "Load the GOJO script.",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/BaldyToSorcerer/main/Latest.lua"))()
-        end
-    })
-
-    Tabs.TSB:AddButton({
-        Title = "SUKUNA Moveset OP",
-        Description = "Load the SUKUNA moveset OP.",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrask/Nexus-Base/main/atomic-blademaster%20to%20sukuna"))()
-        end
-    })
-
-    
     Tabs.BloxFruits:AddParagraph({
         Title = "Blox Fruits Scripts",
         Content = "scripts not mine 😛."
@@ -187,7 +121,7 @@ do
         end
     })
 
-    -- Contenido de la pestaña Scripts Random
+    
     Tabs.RandomScripts:AddParagraph({
         Title = "Random Scripts",
         Content = "scripts not mine 😛."
@@ -202,28 +136,149 @@ do
     })
 
     Tabs.RandomScripts:AddButton({
-        Title = "prision life script fe",
+        Title = "Prison Life Script FE",
         Description = "Load the second random script.",
         Callback = function()
-            loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\48\48\108\88\112\108\111\105\116\101\114\47\103\48\48\108\88\112\108\111\105\116\101\114\47\109\97\105\110\47\83\104\97\100\111\119\72\97\99\107\46\108\117\97\34\41\41")()
+            loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\48\48\108\88\112\108\111\105\116\101\114\47\103\48\48\108\88\112\108\111\105\116\101\114\47\109\97\105\110\47\70\101\37\50\48\98\121\112\97\115\115\34\44\32\116\114\117\101\41\41\40\41\10")()
         end
     })
 
-    Tabs.Discord:AddButton({
-        Title = "Join Discord Server",
-        Description = "Click to copy the Discord invite link.",
+    Tabs.RandomScripts:AddButton({
+        Title = "Bypass Chat",
+        Description = "Load a random script from Pastebin.",
         Callback = function()
-            setclipboard("https://discord.gg/7ThdVFRs")
-            Fluent:Notify({
-                Title = "Copied",
-                Content = "Discord invite link copied to clipboard",
-                Duration = 3
-            })
+            loadstring(game:HttpGet("https://pastes.io/raw/lstrrfipqq"))()
         end
     })
 
-    -- Guardar Configuración
-    SaveManager:SetIgnoreIndexes({"MenuKeybind"})
-    SaveManager:BuildConfigSection(Window)
-    InterfaceManager:BuildInterfaceSection(Window)
+    Tabs.RandomScripts:AddButton({
+        Title = "Better Bypass Chat",
+        Description = "Load another random script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Synergy-Networks/products/main/BetterBypasser/loader.lua"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "OP Script Lucky Blocks",
+        Description = "Load a random script from Scriptblox.",
+        Callback = function()
+            loadstring(game:HttpGet("https://scriptblox.com/raw/LUCKY-BLOCKS-Battlegrounds-Mythic-Hub-12542"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "System_Broken OP",
+        Description = "Load a Ragdoll Engine script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://scriptblox.com/raw/Ragdoll-Engine-BEST-SCRIPT-WORKING-SystemBroken-7544"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "Script Hub Universal",
+        Description = "Load a script from Pastebin.",
+        Callback = function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/ubcyvmNH"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "Ghosthub Script OP",
+        Description = "Load a GhostHub script.",
+        Callback = function()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub'))()
+        end
+    })
+
+    
+    Tabs.TSB_Scripts:AddParagraph({
+        Title = "TSB Scripts",
+        Content = "Various scripts for TSB."
+    })
+
+    Tabs.TSB_Scripts:AddButton({
+        Title = "TOJI Moveset",
+        Description = "Load the TOJI moveset script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/raw/main/Fe%20Telekinesis%20script"))()
+        end
+    })
+
+    Tabs.TSB_Scripts:AddButton({
+        Title = "SUKUNA Moveset",
+        Description = "Load the SUKUNA moveset script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/raw/main/Fe%20blackhole%20script"))()
+        end
+    })
+
+    Tabs.TSB_Scripts:AddButton({
+        Title = "GOJO Moveset",
+        Description = "Load the GOJO moveset script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/BaldyToSorcerer/main/Latest.lua"))()
+        end
+    })
+
+    Tabs.TSB_Scripts:AddButton({
+        Title = "HAKARI Moveset",
+        Description = "Load the HAKARI moveset script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://rawscripts.net/raw/The-Strongest-Battlegrounds-Hero-to-True-Nosakatan-18742"))()
+        end
+    })
+
+    Tabs.TSB_Scripts:AddButton({
+        Title = "DEKU Moveset",
+        Description = "Load the DEKU moveset script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://pastefy.app/MNg2zcxz/raw"))()
+        end
+    })
+
+    Tabs.TSB_Scripts:AddButton({
+        Title = "REAPER Moveset",
+        Description = "Load the REAPER moveset script.",
+        Callback = function()
+            getgenv().Music = false
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Reapvitalized/TSB/main/APOPHENIA.lua"))()
+        end
+    })
+
+    Tabs.TSB_Scripts:AddButton({
+        Title = "GOJO Script",
+        Description = "Load the GOJO script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/BaldyToSorcerer/main/Latest.lua"))()
+        end
+    })
+
+    Tabs.TSB_Scripts:AddButton({
+        Title = "SUKUNA Moveset OP",
+        Description = "Load the SUKUNA moveset OP script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrask/Nexus-Base/main/atomic-blademaster%20to%20sukuna"))()
+        end
+    })
+end
+})
+
+Tabs.Discord:AddButton({
+    Title = "Join Discord Server",
+    Description = "Click to copy the Discord invite link.",
+    Callback = function()
+        setclipboard("https://discord.gg/7ThdVFRs")
+        Fluent:Notify({
+            Title = "Copied",
+            Content = "Discord invite link copied to clipboard",
+            Duration = 3
+        })
+    end
+})
+
+
+SaveManager:SetIgnoreIndexes({"MenuKeybind"})
+SaveManager:BuildConfigSection(Window)
+InterfaceManager:BuildInterfaceSection(Window)
 end
