@@ -13,9 +13,9 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Main = Window:AddTab({ Title = "Fe Black Hole Script", Icon = "game" }),
-    BloxFruits = Window:AddTab({ Title = "Blox Fruits", Icon = "game" }), 
-    RandomScripts = Window:AddTab({ Title = "Scripts Random", Icon = "game" }), 
+    Main = Window:AddTab({ Title = "Fe Black Hole Script", Icon = "contact" }),
+    BloxFruits = Window:AddTab({ Title = "Blox Fruits", Icon = "contact" }), 
+    RandomScripts = Window:AddTab({ Title = "Scripts Random", Icon = "contact" }), 
     Discord = Window:AddTab({ Title = "Discord Server", Icon = "info" })  
 }
 
