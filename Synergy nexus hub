@@ -191,6 +191,17 @@ do
         end
     })
 
+
+    Tabs.Emotes = Window:AddTab({ Title = "Fe Emotes", Icon = "contact" })  -- Cambia el ícono si lo deseas
+
+    Tabs.Emotes:AddButton({
+        Title = "Crazy Anim GUI",
+        Description = "Loads the crazy animation GUI.",
+        Callback = function()
+            loadstring(game:HttpGet(('https://pastefy.ga/KdzVDQFp/raw'),true))()
+        end
+    })
+
     
     Tabs.Discord:AddParagraph({
         Title = "Join My Discord Server",
