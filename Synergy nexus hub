@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Synergy Nexus Hub",
+    Title = "𝐒𝐲𝐧𝐞𝐫𝐠𝐲 𝐍𝐞𝐱𝐮𝐬 Hub",
     SubTitle = "_____●By ERROR_USERBANNED●",
     TabWidth = 160,
     Size = UDim2.fromOffset(460, 250),
@@ -24,7 +24,7 @@ local Options = Fluent.Options
 do
     Fluent:Notify({
         Title = "Loaded",
-        Content = "Synergy Nexus Hub",
+        Content = "𝐒𝐲𝐧𝐞𝐫𝐠𝐲 𝐍𝐞𝐱𝐮𝐬 Hub",
         SubContent = "By shadow_sadist",
         Duration = 5
     })
