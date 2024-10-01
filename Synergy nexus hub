@@ -3,8 +3,8 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Synergy Nexus",
-    SubTitle = "______by ERROR_USERBANNED",
+    Title = "Synergy Nexus Hub",
+    SubTitle = "_____●By ERROR_USERBANNED●",
     TabWidth = 160,
     Size = UDim2.fromOffset(460, 250),
     Acrylic = true,
@@ -13,9 +13,9 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Main = Window:AddTab({ Title = "Fe Black Hole Script", Icon = "contact" }),
-    BloxFruits = Window:AddTab({ Title = "Blox Fruits", Icon = "contact" }),
-    RandomScripts = Window:AddTab({ Title = "Scripts Random", Icon = "contact" }), 
+    Main = Window:AddTab({ Title = "Fe Black Hole Script", Icon = "game" }),
+    BloxFruits = Window:AddTab({ Title = "Blox Fruits", Icon = "game" }), 
+    RandomScripts = Window:AddTab({ Title = "Scripts Random", Icon = "game" }), 
     Discord = Window:AddTab({ Title = "Discord Server", Icon = "info" })  
 }
 
@@ -24,8 +24,8 @@ local Options = Fluent.Options
 do
     Fluent:Notify({
         Title = "Loaded",
-        Content = "Black Hole scripts loaded successfully!",
-        SubContent = "Enjoy the power of the black hole!",
+        Content = "Synergy Nexus Hub",
+        SubContent = "By shadow_sadist",
         Duration = 5
     })
 
@@ -53,7 +53,7 @@ do
     
     Tabs.BloxFruits:AddParagraph({
         Title = "Blox Fruits Scripts",
-        Content = "These scripts are not mine."
+        Content = "scripts not mine."
     })
 
     Tabs.BloxFruits:AddButton({
@@ -112,14 +112,14 @@ do
         end
     })
 
-    
+    -- Contenido de la pestaña Scripts Random
     Tabs.RandomScripts:AddParagraph({
         Title = "Random Scripts",
-        Content = "These scripts are not mine."
+        Content = "scripts not mine."
     })
 
     Tabs.RandomScripts:AddButton({
-        Title = "Load Script 1",
+        Title = "Random Script",
         Description = "Load the first random script.",
         Callback = function()
             loadstring(game:HttpGet(('https://glot.io/snippets/a6c7y0/raw/main.lua'), true))()
@@ -127,10 +127,58 @@ do
     })
 
     Tabs.RandomScripts:AddButton({
-        Title = "Load Script 2",
+        Title = "prision life script fe",
         Description = "Load the second random script.",
         Callback = function()
             loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\48\48\108\88\112\108\111\105\116\101\114\47\103\48\48\108\88\112\108\111\105\116\101\114\47\109\97\105\110\47\70\101\37\50\48\98\121\112\97\115\115\34\44\32\116\114\117\101\41\41\40\41\10")()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "Bypass chat",
+        Description = "Load a random script from Pastebin.",
+        Callback = function()
+            loadstring(game:HttpGet("https://pastes.io/raw/lstrrfipqq"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "Better Bypass chat",
+        Description = "Load another random script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Synergy-Networks/products/main/BetterBypasser/loader.lua"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "op script Lucky blocks",
+        Description = "Load a random script from Scriptblox.",
+        Callback = function()
+            loadstring(game:HttpGet("https://scriptblox.com/raw/LUCKY-BLOCKS-Battlegrounds-Mythic-Hub-12542"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "System_broken op",
+        Description = "Load a Ragdoll Engine script.",
+        Callback = function()
+            loadstring(game:HttpGet("https://scriptblox.com/raw/Ragdoll-Engine-BEST-SCRIPT-WORKING-SystemBroken-7544"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "script hub Universal",
+        Description = "Load a script from Pastebin.",
+        Callback = function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/ubcyvmNH"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "Ghosthub script op",
+        Description = "Load a GhostHub script.",
+        Callback = function()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub'))()
         end
     })
 
