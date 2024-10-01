@@ -5,7 +5,7 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Duration = 5 -- Duración en segundos
 })
 
--- Resto del código
+
 local function a(b, c)
     local d = getfenv(c)
     local e =
