@@ -24,14 +24,23 @@ local Options = Fluent.Options
 do
     Fluent:Notify({
         Title = "Loaded",
-        Content = "𝐒𝐲𝐧𝐞𝐫𝐠𝐲 𝐍𝐞𝐱𝐮𝐬 Hub",
-        SubContent = "By shadow_sadist",
+        Content = "🔴Synergy Nexus Hub🟢",
+        SubContent = "●By shadow_sadist●",
         Duration = 5
     })
 
     Tabs.Main:AddParagraph({
         Title = "Warning: you need telekinesis",
         Content = "Natural Disaster"
+    })
+
+    
+    Tabs.Main:AddButton({
+        Title = "Activate Telekinesis Script",
+        Description = "Required to execute the other scripts.",
+        Callback = function()
+            loadstring(game:HttpGet("https://github.com/Rip70022/Red-neon-name-script/raw/main/Fe%20Telekinesis%20script"))()
+        end
     })
 
     Tabs.Main:AddButton({
