@@ -4,7 +4,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
     Title = "🟣Synergy Nexus Hub🟣",
-    SubTitle = "_●By ERROR_USERBANNED●",
+    SubTitle = "_____●By ERROR_USERBANNED●",
     TabWidth = 160,
     Size = UDim2.fromOffset(460, 250),
     Acrylic = true,
@@ -13,7 +13,7 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Main = Window:AddTab({ Title = "🛡️RoTotal🛡️", Icon = "contact" }),
+    Main = Window:AddTab({ Title = "🛡️RoTotal🛡️", Icon = "globe" }),
     SynergyNexusScript = Window:AddTab({ Title = "Synergy Nexus Script", Icon = "contact" }),
     BloxFruits = Window:AddTab({ Title = "Blox Fruits", Icon = "contact" }), 
     RandomScripts = Window:AddTab({ Title = "Scripts Random", Icon = "contact" }), 
