@@ -87,8 +87,8 @@ function tocURL(args)
 end
 
 local Window = Fluent:CreateWindow({
-    Title = "RoTotal",
-    SubTitle = "by vxsty",
+    Title = "🛡️RoTotal🛡️",
+    SubTitle = "by ERROR_USERBANNED",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = true,
@@ -127,9 +127,9 @@ Tabs.Socials:AddButton({
 })
 Tabs.Socials:AddButton({
   Title = "Other Scripts",
-  Content = "https://scriptblox.com/u/vxsty",
+  Content = "https://github.com/Rip70022/Red-neon-name-script",
   Callback = function()
-    setclipboard("https://scriptblox.com/u/vxsty")
+    setclipboard("https://github.com/Rip70022/Red-neon-name-script")
   end
 })
 local old0, old00, old, old2, old3, old4, old5, old6, old7, old8, old9, old10, old11 -- Namecall HttpPost, Anti chat ban, Abusing filesystem (Adding urls to RoTotal/config.json)
