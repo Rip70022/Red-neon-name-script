@@ -4,7 +4,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
     Title = "🟣Synergy Nexus Hub🟣",
-    SubTitle = "___●By ERROR_USERBANNED●",
+    SubTitle = "_●By ERROR_USERBANNED●",
     TabWidth = 160,
     Size = UDim2.fromOffset(460, 250),
     Acrylic = true,
@@ -13,7 +13,8 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Main = Window:AddTab({ Title = "Fe Black Hole Script", Icon = "contact" }),
+    Main = Window:AddTab({ Title = "🛡️RoTotal🛡️", Icon = "contact" }),
+    SynergyNexusScript = Window:AddTab({ Title = "Synergy Nexus Script", Icon = "contact" }),
     BloxFruits = Window:AddTab({ Title = "Blox Fruits", Icon = "contact" }), 
     RandomScripts = Window:AddTab({ Title = "Scripts Random", Icon = "contact" }), 
     TSB_Scripts = Window:AddTab({ Title = "TSB Scripts", Icon = "contact" }),
@@ -32,11 +33,24 @@ do
     })
 
     Tabs.Main:AddParagraph({
+        Title = "🛡️RoTotal🛡️",
+        Content = "RoTotal is a Roblox version of VirusTotal. It scans and analyzes scripts before running them, protecting you from malicious code or vulnerabilities. Perfect for keeping your Roblox experience safe.    SPANISH: RoTotal es una versión de VirusTotal para Roblox. Escanea y analiza scripts antes de ejecutarlos, protegiéndote de código malicioso o vulnerabilidades. Perfecto para mantener tu experiencia segura en Roblox."
+    })
+
+    Tabs.Main:AddButton({
+        Title = "🛡️RoTotal🛡️",
+        Description = "BY ERROR_USERBANNED",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/RoTotal"))()
+        end
+    })
+
+    Tabs.SynergyNexusScript:AddParagraph({
         Title = "Warning: you need telekinesis",
         Content = "Natural Disaster"
     })
     
-    Tabs.Main:AddButton({
+    Tabs.SynergyNexusScript:AddButton({
         Title = "Activate Telekinesis Script",
         Description = "Required to execute the other scripts.",
         Callback = function()
@@ -44,7 +58,7 @@ do
         end
     })
     
-    Tabs.Main:AddButton({
+    Tabs.SynergyNexusScript:AddButton({
         Title = "Activate Black Hole Script",
         Description = "Loads the black hole script.",
         Callback = function()
@@ -52,7 +66,7 @@ do
         end
     })
     
-    Tabs.Main:AddButton({
+    Tabs.SynergyNexusScript:AddButton({
         Title = "Activate Fixed Black Hole Script",
         Description = "Loads the fixed black hole script.",
         Callback = function()
@@ -149,12 +163,85 @@ do
             loadstring(game:HttpGet("https://pastes.io/raw/lstrrfipqq"))()
         end
     })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "Tiger_Admin",
+        Description = "prision Life",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/H17S32/Tiger_Admin/main/Tiger%20Admin%203.0"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "REDz HUB",
+        Description = "prision Life",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/REDzHUB/main/REDzHUB"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "Te Veo El Hoyo Hub",
+        Description = "game: i see you.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Juanko-Scripts/Roblox-scripts/main/Te%20Veo%20%7C%20Te%20Veo%20El%20Hoyo"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "Unlock All Characters",
+        Description = "Strongest Battlegrounds",
+        Callback = function()
+            loadstring(game:HttpGet("https://rentry.co/tghuofnu/raw"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "OP Script I Reupload",
+        Description = "🍓Dandy's World [ALPHA]",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Bac0nHck/Scripts/main/Dandy's%20World"))("t.me/arceusxscripts")
+        end
+    })
     
     Tabs.RandomScripts:AddButton({
         Title = "Better Bypass Chat",
         Description = "Load another random script.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Synergy-Networks/products/main/BetterBypasser/loader.lua"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "ZapHub",
+        Description = "The Best PS99 Script [Elemental World]",
+        Callback = function()
+            loadstring(game:HttpGet('https://zaphub.xyz/Exec'))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "Forge Hub",
+        Description = "[🥊UPDATE] Slap Battles👏",
+        Callback = function()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/Skzuppy/forge-hub/main/loader.lua'))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "therHub OP",
+        Description = "Build A Boat For Treasure",
+        Callback = function()
+            loadstring(game:HttpGet('https://api.luarmor.net/files/v3/loaders/2529a5f9dfddd5523ca4e22f21cceffa.lua'))()
+        end
+    })
+
+
+    Tabs.RandomScripts:AddButton({
+        Title = "OP",
+        Description = "Be a Pickaxe",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Bac0nHck/Scripts/refs/heads/main/BeAPickaxe"))("t.me/arceusxscripts")
         end
     })
     
