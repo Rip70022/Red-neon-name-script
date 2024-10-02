@@ -35,7 +35,7 @@ do
         Title = "Warning: you need telekinesis",
         Content = "Natural Disaster"
     })
-
+    
     Tabs.Main:AddButton({
         Title = "Activate Telekinesis Script",
         Description = "Required to execute the other scripts.",
@@ -43,7 +43,7 @@ do
             loadstring(game:HttpGet("https://github.com/Rip70022/Red-neon-name-script/raw/main/Fe%20Telekinesis%20script"))()
         end
     })
-
+    
     Tabs.Main:AddButton({
         Title = "Activate Black Hole Script",
         Description = "Loads the black hole script.",
@@ -59,12 +59,12 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Fe%20blackhole%20script%20fixed"))()
         end
     })
-
+    
     Tabs.BloxFruits:AddParagraph({
         Title = "Blox Fruits Scripts",
         Content = "scripts not mine 😛."
     })
-
+    
     Tabs.BloxFruits:AddButton({
         Title = "Speed Hub X Script",
         Description = "Load the Speed Hub X script for Blox Fruits.",
@@ -72,7 +72,7 @@ do
             loadstring(game:HttpGet("https://rawscripts.net/raw/Blox-Fruits-Speed-Hub-X-Best-Sea-Event-No-Key-16135"))()
         end
     })
-
+    
     Tabs.BloxFruits:AddButton({
         Title = "Cokkahub OP Script",
         Description = "Load the Cokkahub OP script for Blox Fruits.",
@@ -80,7 +80,7 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))()
         end
     })
-
+    
     Tabs.BloxFruits:AddButton({
         Title = "Auto Mirage Script",
         Description = "Load the Auto Mirage script for Blox Fruits.",
@@ -88,7 +88,7 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/xDepressionx/Free-Script/main/AllScript.lua"))()
         end
     })
-
+    
     Tabs.BloxFruits:AddButton({
         Title = "Snake Hub Script",
         Description = "Load the Snake Hub script for Blox Fruits.",
@@ -96,7 +96,7 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/toosiwhip/snake-hub/main/blox-fruits.lua"))()
         end
     })
-
+    
     Tabs.BloxFruits:AddButton({
         Title = "Shadow Hub Script",
         Description = "Load the Shadow Hub script for Blox Fruits.",
@@ -104,7 +104,7 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/xPeachy/Shadow-Hub/main/Blox-Fruits"))()
         end
     })
-
+    
     Tabs.BloxFruits:AddButton({
         Title = "Redz Hub Script",
         Description = "Load the Redz Hub script for Blox Fruits.",
@@ -112,7 +112,7 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/main/redz9999"))()
         end
     })
-
+    
     Tabs.BloxFruits:AddButton({
         Title = "Mtriet Hub Script",
         Description = "Load the Mtriet Hub script for Blox Fruits.",
@@ -120,13 +120,12 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
         end
     })
-
     
     Tabs.RandomScripts:AddParagraph({
         Title = "Random Scripts",
         Content = "scripts not mine 😛."
     })
-
+    
     Tabs.RandomScripts:AddButton({
         Title = "Random Script",
         Description = "Load the first random script.",
@@ -134,7 +133,7 @@ do
             loadstring(game:HttpGet(('https://glot.io/snippets/a6c7y0/raw/main.lua'), true))()
         end
     })
-
+    
     Tabs.RandomScripts:AddButton({
         Title = "Prison Life Script FE",
         Description = "Load the second random script.",
@@ -142,7 +141,7 @@ do
             loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\48\48\108\88\112\108\111\105\116\101\114\47\103\48\48\108\88\112\108\111\105\116\101\114\47\109\97\105\110\47\70\101\37\50\48\98\121\112\97\115\115\34\44\32\116\114\117\101\41\41\40\41\10")()
         end
     })
-
+    
     Tabs.RandomScripts:AddButton({
         Title = "Bypass Chat",
         Description = "Load a random script from Pastebin.",
@@ -150,7 +149,7 @@ do
             loadstring(game:HttpGet("https://pastes.io/raw/lstrrfipqq"))()
         end
     })
-
+    
     Tabs.RandomScripts:AddButton({
         Title = "Better Bypass Chat",
         Description = "Load another random script.",
@@ -158,7 +157,7 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Synergy-Networks/products/main/BetterBypasser/loader.lua"))()
         end
     })
-
+    
     Tabs.RandomScripts:AddButton({
         Title = "OP Script Lucky Blocks",
         Description = "Load a random script from Scriptblox.",
@@ -166,7 +165,7 @@ do
             loadstring(game:HttpGet("https://scriptblox.com/raw/LUCKY-BLOCKS-Battlegrounds-Mythic-Hub-12542"))()
         end
     })
-
+    
     Tabs.RandomScripts:AddButton({
         Title = "System_Broken OP",
         Description = "Load a Ragdoll Engine script.",
@@ -174,7 +173,7 @@ do
             loadstring(game:HttpGet("https://scriptblox.com/raw/Ragdoll-Engine-BEST-SCRIPT-WORKING-SystemBroken-7544"))()
         end
     })
-
+    
     Tabs.RandomScripts:AddButton({
         Title = "Script Hub Universal",
         Description = "Load a script from Pastebin.",
@@ -182,7 +181,7 @@ do
             loadstring(game:HttpGet("https://pastebin.com/raw/ubcyvmNH"))()
         end
     })
-
+    
     Tabs.RandomScripts:AddButton({
         Title = "Ghosthub Script OP",
         Description = "Load a GhostHub script.",
@@ -190,13 +189,12 @@ do
             loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub'))()
         end
     })
-
     
     Tabs.TSB_Scripts:AddParagraph({
         Title = "TSB Scripts",
         Content = "Various scripts for TSB."
     })
-
+    
     Tabs.TSB_Scripts:AddButton({
         Title = "TOJI Moveset",
         Description = "Load the TOJI moveset script.",
@@ -204,7 +202,7 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/raw/main/Fe%20Telekinesis%20script"))()
         end
     })
-
+    
     Tabs.TSB_Scripts:AddButton({
         Title = "SUKUNA Moveset",
         Description = "Load the SUKUNA moveset script.",
@@ -212,7 +210,7 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/raw/main/Fe%20blackhole%20script"))()
         end
     })
-
+    
     Tabs.TSB_Scripts:AddButton({
         Title = "GOJO Moveset",
         Description = "Load the GOJO moveset script.",
@@ -220,7 +218,7 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/BaldyToSorcerer/main/Latest.lua"))()
         end
     })
-
+    
     Tabs.TSB_Scripts:AddButton({
         Title = "HAKARI Moveset",
         Description = "Load the HAKARI moveset script.",
@@ -228,7 +226,7 @@ do
             loadstring(game:HttpGet("https://rawscripts.net/raw/The-Strongest-Battlegrounds-Hero-to-True-Nosakatan-18742"))()
         end
     })
-
+    
     Tabs.TSB_Scripts:AddButton({
         Title = "DEKU Moveset",
         Description = "Load the DEKU moveset script.",
@@ -236,7 +234,7 @@ do
             loadstring(game:HttpGet("https://pastefy.app/MNg2zcxz/raw"))()
         end
     })
-
+    
     Tabs.TSB_Scripts:AddButton({
         Title = "REAPER Moveset",
         Description = "Load the REAPER moveset script.",
@@ -245,24 +243,14 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Reapvitalized/TSB/main/APOPHENIA.lua"))()
         end
     })
-
+    
     Tabs.TSB_Scripts:AddButton({
         Title = "GOJO Script",
         Description = "Load the GOJO script.",
         Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/BaldyToSorcerer/main/Latest.lua"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/AlphaKeyzz/Gojo-Script/main/Gojo-Script"))()
         end
     })
-
-    Tabs.TSB_Scripts:AddButton({
-        Title = "SUKUNA Moveset OP",
-        Description = "Load the SUKUNA moveset OP script.",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrask/Nexus-Base/main/atomic-blademaster%20to%20sukuna"))()
-        end
-    })
-end
-})
 
 Tabs.Discord:AddButton({
     Title = "Join Discord Server",
