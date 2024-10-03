@@ -12,7 +12,6 @@ local HubName = "Synergy Bypasser"
 local Key = "kittyyy" 
 local KeyEntered = false 
 
-
 local function createNotification(title, text)
     local Notification = Instance.new("Frame")
     Notification.Size = UDim2.new(0, 300, 0, 100)
@@ -54,7 +53,6 @@ end
 
 createNotification("Synergy Bypasser", "By ERROR_USERBANNED")
 
-
 local function createGUI()
     local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -69,7 +67,6 @@ local function createGUI()
     textBox.PlaceholderText = "Enter Key"
     textBox.Parent = screenGui  
 
-    
     textBox.FocusLost:Connect(function(enterPressed)
         if enterPressed then
             checkKey()
@@ -77,9 +74,7 @@ local function createGUI()
     end)
 end
 
-
 createGUI()
-
 
 local function checkKey()
     local playerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
@@ -113,9 +108,15 @@ local function checkKey()
     end
 end
 
-checkKey()
 
-if KeyEntered then
+local function Chat(message)
+    local player = game.Players.LocalPlayer
+    if player then
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:Fire(message, "All")
+    end
+end
+
+
     Tab:AddButton({
         Name = "My apologies, i dont speak to fags❤️",
         Callback = function()
