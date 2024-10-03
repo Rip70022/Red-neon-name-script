@@ -13,6 +13,7 @@ local Key = "kittyyy"
 local KeyEntered = false 
 
 local function createNotification(title, text)
+  
     local Notification = Instance.new("Frame")
     Notification.Size = UDim2.new(0, 300, 0, 100)
     Notification.Position = UDim2.new(0.5, -150, 0, 50)
@@ -78,24 +79,17 @@ createGUI()
 
 local function checkKey()
     local playerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-
-    print("PlayerGui found.")  -- Debug print
-
     local screenGui = playerGui:FindFirstChild("ScreenGui")
     if not screenGui then
         createNotification("Error", "ScreenGui not found!")
         return
     end
 
-    print("ScreenGui found.")  -- Debug print
-
     local textBox = screenGui:FindFirstChild("TextBox")
     if not textBox then
         createNotification("Error", "TextBox not found!")
         return
     end
-
-    print("TextBox found.")  -- Debug print
 
     local userInput = textBox.Text 
 
@@ -117,10 +111,8 @@ local function Chat(message)
     end
 end
 
-
 if KeyEntered then
     if Tab then
-        print("Adding button to Tab")
 
         Tab:AddButton({
             Name = "My apologies, I don't speak to fags❤️",
