@@ -51,7 +51,6 @@ local function createNotification(title, text)
     Notification:Destroy()
 end
 
-
 createNotification("Synergy Bypasser", "By ERROR_USERBANNED")
 
 local function checkKey()
@@ -77,111 +76,111 @@ if KeyEntered then
         end    
     })
 
-Tab:AddButton({
-	Name = "Shut Up Nigger",
-	Callback = function()
-      		Chat("ⓢⓗⓤⓣ ⓤⓟ ⓝⓘⓖⓖⓔⓡ")
-  	end    
-})
+    Tab:AddButton({
+        Name = "Shut Up Nigger",
+        Callback = function()
+              Chat("ⓢⓗⓤⓣ ⓤⓟ ⓝⓘⓖⓖⓔⓡ")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "Take the dildo off your ass.",
-	Callback = function()
-      		Chat("🆃🅰🅺🅴 🆃🅷🅴 🅳🅸🅻🅳🅾 🅾🅵🅵 🆈🅾🆄🆁 🅰🆂🆂")
-  	end    
-})
+    Tab:AddButton({
+        Name = "Take the dildo off your ass.",
+        Callback = function()
+              Chat("🆃🅰🅺🅴 🆃🅷🅴 🅳🅸🅻🅳🅾 🅾🅵🅵 🆈🅾🆄🆁 🅰🆂🆂")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "I'm going to rape you",
-	Callback = function()
-      		Chat("I'ɱ ɠσιɳɠ ƚσ ɾαρҽ ყσυ")
-  	end    
-})
+    Tab:AddButton({
+        Name = "I'm going to rape you",
+        Callback = function()
+              Chat("I'ɱ ɠσιɳɠ ƚσ ɾαρҽ ყσυ")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "COOL TEXT",
-	Callback = function()
-      		Chat("(っ◔◡◔)っ ♥ a true exploiter always speaks well of Synergy Bypass ♥")
-  	end    
-})
+    Tab:AddButton({
+        Name = "COOL TEXT",
+        Callback = function()
+              Chat("(っ◔◡◔)っ ♥ a true exploiter always speaks well of Synergy Bypass ♥")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "I'm going to kill you yourself.",
-	Callback = function()
-      		Chat("I'ɱ ɠσιɳɠ ƚσ ƙιʅʅ ყσυ ყσυɾʂҽʅϝ.")
-  	end    
-})
+    Tab:AddButton({
+        Name = "I'm going to kill you yourself.",
+        Callback = function()
+              Chat("ı'ɱ ɠơıŋɠ ɬơ ƙıƖƖ ყơų ყơųཞʂɛƖʄ.")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "niggers suck it",
-	Callback = function()
-      		Chat("ₙᵢggₑᵣₛ ₛᵤcₖ ᵢₜ")
-  	end    
-})
+    Tab:AddButton({
+        Name = "niggers suck it",
+        Callback = function()
+              Chat("ₙᵢggₑᵣₛ ₛᵤcₖ ᵢₜ")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "I love CP",
-	Callback = function()
-      		Chat("Ⓘ ⓛⓞⓥⓔ ⒸⓅ")
-  	end    
-})
+    Tab:AddButton({
+        Name = "I love CP",
+        Callback = function()
+              Chat("Ⓘ ⓛⓞⓥⓔ ⒸⓅ")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "i love XVIDEOS.COM",
-	Callback = function()
-      		Chat("i̳ ̳l̳o̳v̳e̳ ̳X̳V̳I̳D̳E̳O̳S̳.̳C̳O̳M̳")
-  	end    
-})
+    Tab:AddButton({
+        Name = "i love XVIDEOS.COM",
+        Callback = function()
+              Chat("i̳ ̳l̳o̳v̳e̳ ̳X̳V̳I̳D̳E̳O̳S̳.̳C̳O̳M̳")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "i love PORNHUB.COM",
-	Callback = function()
-      		Chat("i̳ ̳l̳o̳v̳e̳ ̳P̳O̳R̳N̳H̳U̳B̳.̳C̳O̳M̳")
-  	end    
-})
+    Tab:AddButton({
+        Name = "i love PORNHUB.COM",
+        Callback = function()
+              Chat("i̳ ̳l̳o̳v̳e̳ ̳P̳O̳R̳N̳H̳U̳B̳.̳C̳O̳M̳")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "To get free Robux visit XNXX.COM",
-	Callback = function()
-      		Chat("T̳o̳ ̳g̳e̳t̳ ̳f̳r̳e̳e̳ ̳R̳o̳b̳u̳x̳ ̳v̳i̳s̳i̳t̳ ̳X̳N̳X̳X̳.̳C̳O̳M̳")
-  	end    
-})
+    Tab:AddButton({
+        Name = "To get free Robux visit XNXX.COM",
+        Callback = function()
+              Chat("T̳o̳ ̳g̳e̳t̳ ̳f̳r̳e̳e̳ ̳R̳o̳b̳u̳x̳ ̳v̳i̳s̳i̳t̳ ̳X̳N̳X̳X̳.̳C̳O̳M̳")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "My dick is giant",
-	Callback = function()
-      		Chat("M̳y̳ ̳d̳i̳c̳k̳ ̳i̳s̳ ̳g̳i̳a̳n̳t̳")
-  	end    
-})
+    Tab:AddButton({
+        Name = "My dick is giant",
+        Callback = function()
+              Chat("M̳y̳ ̳d̳i̳c̳k̳ ̳i̳s̳ ̳g̳i̳a̳n̳t̳")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "Tilín fucks better than you",
-	Callback = function()
-      		Chat("T̳i̳l̳í̳n̳ ̳f̳u̳c̳k̳s̳ ̳b̳e̳t̳t̳e̳r̳ ̳t̳h̳a̳n̳ ̳y̳o̳u̳")
-  	end    
-})
+    Tab:AddButton({
+        Name = "Tilín fucks better than you",
+        Callback = function()
+              Chat("T̳i̳l̳í̳n̳ ̳f̳u̳c̳k̳s̳ ̳b̳e̳t̳t̳e̳r̳ ̳t̳h̳a̳n̳ ̳y̳o̳u̳")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "fuck me",
-	Callback = function()
-      		Chat("f̳u̳c̳k̳ ̳m̳e̳")
-  	end    
-})
+    Tab:AddButton({
+        Name = "fuck me",
+        Callback = function()
+              Chat("f̳u̳c̳k̳ ̳m̳e̳")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "Stupid shit",
-	Callback = function()
-      		Chat("S̳t̳u̳p̳i̳d̳ ̳s̳h̳i̳t̳")
-  	end    
-})
+    Tab:AddButton({
+        Name = "Stupid shit",
+        Callback = function()
+              Chat("S̳t̳u̳p̳i̳d̳ ̳s̳h̳i̳t̳")
+        end    
+    })
 
-Tab:AddButton({
-	Name = "Damn it, fuck you",
-	Callback = function()
-      		Chat("D̳a̳m̳n̳ ̳i̳t̳,̳ ̳f̳u̳c̳k̳ ̳y̳o̳u̳")
-  	end    
-})
+    Tab:AddButton({
+        Name = "Damn it, fuck you",
+        Callback = function()
+              Chat("D̳a̳m̳n̳ ̳i̳t̳,̳ ̳f̳u̳c̳k̳ ̳y̳o̳u̳")
+        end    
+    })
+
 else
-
-	createNotification("Synergy Bypasser", "Key is required to access the buttons.")
+    createNotification("Synergy Bypasser", "Key is required to access the buttons.")
 end
