@@ -63,11 +63,18 @@ local function createGUI()
     screenGui.Parent = playerGui  
 
     local textBox = Instance.new("TextBox")
-    textBox.Name = "TextBox"
+    textBox.Name = "Key"
     textBox.Size = UDim2.new(0, 200, 0, 50) 
-    textBox.Position = UDim2.new(0.5, -100, 0.5, -25)  
+    textBox.Position = UDim2.new(0.5, -100, 0.5, -25) 
     textBox.PlaceholderText = "Enter Key"
     textBox.Parent = screenGui  
+
+    
+    textBox.FocusLost:Connect(function(enterPressed)
+        if enterPressed then
+            checkKey()
+        end
+    end)
 end
 
 
