@@ -113,6 +113,7 @@ end
 
 if KeyEntered then
     if Tab then
+        print("Adding button to Tab")
 
         Tab:AddButton({
             Name = "My apologies, I don't speak to fags❤️",
@@ -227,7 +228,7 @@ if KeyEntered then
         })
 
     else
-        print("Tab is nil")
+        createNotification("Error", "Tab is nil! Make sure it is initialized.")
     end
 else
     createNotification("Synergy Bypasser", "Key is required to access the buttons.")
