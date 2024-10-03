@@ -119,8 +119,10 @@ local function Chat(message)
 end
 
 
-if Tab then
-    print("Adding button to Tab")
+
+if KeyEntered then
+    if Tab then
+        print("Adding button to Tab")
     Tab:AddButton({
         Name = "My apologies, i dont speak to fags❤️",
         Callback = function()
@@ -232,9 +234,9 @@ if Tab then
               Chat("D̳a̳m̳n̳ ̳i̳t̳,̳ ̳f̳u̳c̳k̳ ̳y̳o̳u̳")
         end    
     })
+else
 	print("Tab is nil")
 end
-
 else
-    createNotification("Synergy Bypasser", "Key is required to access the buttons.")
+createNotification("Synergy Bypasser", "Key is required to access the buttons.")
 end
