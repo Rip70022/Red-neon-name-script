@@ -12,6 +12,7 @@ local HubName = "Synergy Bypasser"
 local Key = "kittyyy" 
 local KeyEntered = false 
 
+
 local function createNotification(title, text)
     local Notification = Instance.new("Frame")
     Notification.Size = UDim2.new(0, 300, 0, 100)
@@ -53,9 +54,29 @@ end
 
 createNotification("Synergy Bypasser", "By ERROR_USERBANNED")
 
+
+local function createGUI()
+    local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "ScreenGui"
+    screenGui.Parent = playerGui  
+
+    local textBox = Instance.new("TextBox")
+    textBox.Name = "TextBox"
+    textBox.Size = UDim2.new(0, 200, 0, 50) 
+    textBox.Position = UDim2.new(0.5, -100, 0.5, -25)  
+    textBox.PlaceholderText = "Enter Key"
+    textBox.Parent = screenGui  
+end
+
+
+createGUI()
+
+
 local function checkKey()
     local playerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-    
+
     print("PlayerGui found.")  -- Debug print
 
     local screenGui = playerGui:FindFirstChild("ScreenGui")
@@ -84,8 +105,6 @@ local function checkKey()
         createNotification("Access Denied", "Invalid key. Please try again.")
     end
 end
-
-
 
 checkKey()
 
