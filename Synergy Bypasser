@@ -54,17 +54,25 @@ end
 createNotification("Synergy Bypasser", "By ERROR_USERBANNED")
 
 local function checkKey()
-    local screenGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("ScreenGui")
+    local playerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+    
+    print("PlayerGui found.")  -- Debug print
+
+    local screenGui = playerGui:FindFirstChild("ScreenGui")
     if not screenGui then
         createNotification("Error", "ScreenGui not found!")
         return
     end
+
+    print("ScreenGui found.")  -- Debug print
 
     local textBox = screenGui:FindFirstChild("TextBox")
     if not textBox then
         createNotification("Error", "TextBox not found!")
         return
     end
+
+    print("TextBox found.")  -- Debug print
 
     local userInput = textBox.Text 
 
@@ -76,6 +84,7 @@ local function checkKey()
         createNotification("Access Denied", "Invalid key. Please try again.")
     end
 end
+
 
 
 checkKey()
