@@ -4,7 +4,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
     Title = "🟣Synergy Nexus Hub🟣",
-    SubTitle = "_____●By ERROR_USERBANNED●",
+    SubTitle = "_●By ERROR_USERBANNED●",
     TabWidth = 160,
     Size = UDim2.fromOffset(460, 250),
     Acrylic = true,
@@ -13,7 +13,7 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Main = Window:AddTab({ Title = "🛡️RoTotal🛡️", Icon = "globe" }),
+    Main = Window:AddTab({ Title = "🛡️RoTotal🛡️", Icon = "global" }),
     SynergyNexusScript = Window:AddTab({ Title = "Synergy Nexus Script", Icon = "contact" }),
     BloxFruits = Window:AddTab({ Title = "Blox Fruits", Icon = "contact" }), 
     RandomScripts = Window:AddTab({ Title = "Scripts Random", Icon = "contact" }), 
@@ -46,31 +46,39 @@ do
     })
 
     Tabs.SynergyNexusScript:AddParagraph({
-        Title = "Warning: you need telekinesis",
-        Content = "Natural Disaster"
+        Title = "Warning: Synergy OP Scripts",
+        Content = "Scripts By Me"
     })
     
     Tabs.SynergyNexusScript:AddButton({
-        Title = "Activate Telekinesis Script",
-        Description = "Required to execute the other scripts.",
+        Title = "Telekinesis Script OP",
+        Description = "Required to execute blackhole scripts.",
         Callback = function()
             loadstring(game:HttpGet("https://github.com/Rip70022/Red-neon-name-script/raw/main/Fe%20Telekinesis%20script"))()
         end
     })
     
     Tabs.SynergyNexusScript:AddButton({
-        Title = "Activate Black Hole Script",
-        Description = "Loads the black hole script.",
+        Title = "Black Hole Script",
+        Description = "You need Telekinesis.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Fe%20blackhole%20script"))()
         end
     })
     
     Tabs.SynergyNexusScript:AddButton({
-        Title = "Activate Fixed Black Hole Script",
-        Description = "Loads the fixed black hole script.",
+        Title = "Fixed Black Hole Script",
+        Description = "You need Telekinesis.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Fe%20blackhole%20script%20fixed"))()
+        end
+    })
+
+    Tabs.SynergyNexusScript:AddButton({
+        Title = "FE BEST BLACKHOLE",
+        Description = "You need Telekinesis.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/FE%20BEST%20BLACKHOLE"))()
         end
     })
     
@@ -81,7 +89,7 @@ do
     
     Tabs.BloxFruits:AddButton({
         Title = "Speed Hub X Script",
-        Description = "Load the Speed Hub X script for Blox Fruits.",
+        Description = "Speed Hub X script for Blox Fruits.",
         Callback = function()
             loadstring(game:HttpGet("https://rawscripts.net/raw/Blox-Fruits-Speed-Hub-X-Best-Sea-Event-No-Key-16135"))()
         end
@@ -89,7 +97,7 @@ do
     
     Tabs.BloxFruits:AddButton({
         Title = "Cokkahub OP Script",
-        Description = "Load the Cokkahub OP script for Blox Fruits.",
+        Description = "Cokkahub OP script for Blox Fruits.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))()
         end
@@ -97,7 +105,7 @@ do
     
     Tabs.BloxFruits:AddButton({
         Title = "Auto Mirage Script",
-        Description = "Load the Auto Mirage script for Blox Fruits.",
+        Description = "Auto Mirage script for Blox Fruits.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/xDepressionx/Free-Script/main/AllScript.lua"))()
         end
@@ -105,7 +113,7 @@ do
     
     Tabs.BloxFruits:AddButton({
         Title = "Snake Hub Script",
-        Description = "Load the Snake Hub script for Blox Fruits.",
+        Description = "Snake Hub script for Blox Fruits.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/toosiwhip/snake-hub/main/blox-fruits.lua"))()
         end
@@ -113,7 +121,7 @@ do
     
     Tabs.BloxFruits:AddButton({
         Title = "Shadow Hub Script",
-        Description = "Load the Shadow Hub script for Blox Fruits.",
+        Description = "Shadow Hub script for Blox Fruits.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/xPeachy/Shadow-Hub/main/Blox-Fruits"))()
         end
@@ -121,7 +129,7 @@ do
     
     Tabs.BloxFruits:AddButton({
         Title = "Redz Hub Script",
-        Description = "Load the Redz Hub script for Blox Fruits.",
+        Description = "Redz Hub script for Blox Fruits.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/main/redz9999"))()
         end
@@ -129,28 +137,21 @@ do
     
     Tabs.BloxFruits:AddButton({
         Title = "Mtriet Hub Script",
-        Description = "Load the Mtriet Hub script for Blox Fruits.",
+        Description = "Mtriet Hub script for Blox Fruits.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
         end
     })
     
     Tabs.RandomScripts:AddParagraph({
-        Title = "Random Scripts",
+        Title = "Random Scripts OP",
         Content = "scripts not mine 😛."
     })
     
     Tabs.RandomScripts:AddButton({
-        Title = "Random Script",
-        Description = "Load the first random script.",
-        Callback = function()
-            loadstring(game:HttpGet(('https://glot.io/snippets/a6c7y0/raw/main.lua'), true))()
-        end
-    })
-    
-    Tabs.RandomScripts:AddButton({
         Title = "Prison Life Script FE",
-        Description = "Load the second random script.",
+        Description = "Script OP  for Prison Life.",
+
         Callback = function()
             loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\48\48\108\88\112\108\111\105\116\101\114\47\103\48\48\108\88\112\108\111\105\116\101\114\47\109\97\105\110\47\70\101\37\50\48\98\121\112\97\115\115\34\44\32\116\114\117\101\41\41\40\41\10")()
         end
@@ -158,7 +159,7 @@ do
     
     Tabs.RandomScripts:AddButton({
         Title = "Bypass Chat",
-        Description = "Load a random script from Pastebin.",
+        Description = "Bypass FE Chat OP.",
         Callback = function()
             loadstring(game:HttpGet("https://pastes.io/raw/lstrrfipqq"))()
         end
@@ -166,7 +167,7 @@ do
 
     Tabs.RandomScripts:AddButton({
         Title = "Tiger_Admin",
-        Description = "prision Life",
+        Description = "Script OP  for Prison Life.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/H17S32/Tiger_Admin/main/Tiger%20Admin%203.0"))()
         end
@@ -182,7 +183,7 @@ do
 
     Tabs.RandomScripts:AddButton({
         Title = "Te Veo El Hoyo Hub",
-        Description = "game: i see you.",
+        Description = "game: i see you/TE Veo",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Juanko-Scripts/Roblox-scripts/main/Te%20Veo%20%7C%20Te%20Veo%20El%20Hoyo"))()
         end
@@ -206,7 +207,8 @@ do
     
     Tabs.RandomScripts:AddButton({
         Title = "Better Bypass Chat",
-        Description = "Load another random script.",
+        Description = "Another  Bypass Chat",
+
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Synergy-Networks/products/main/BetterBypasser/loader.lua"))()
         end
