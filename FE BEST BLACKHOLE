@@ -61,6 +61,7 @@ end
 
 local function toggleBlackHole()
     blackHoleActive = not blackHoleActive
+    print("Black Hole Active:", blackHoleActive) 
     if blackHoleActive then
         for _, v in pairs(Workspace:GetDescendants()) do
             if v:IsA("BasePart") and (v.Position - humanoidRootPart.Position).magnitude <= blackHoleRange then
@@ -106,7 +107,6 @@ local function makeDraggable(frame)
     local dragging = false
     local dragInput, initialPos, initialFramePos
 
-    
     frame.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
@@ -121,7 +121,6 @@ local function makeDraggable(frame)
         end
     end)
 
-    
     frame.InputChanged:Connect(function(input)
         if dragging then
             local delta = input.Position - initialPos
@@ -142,21 +141,18 @@ local function createControlButton()
 
     frame.Size = UDim2.new(0, 200, 0, 50)
     frame.BackgroundTransparency = 1
-    frame.Position = UDim2.new(0, 0, 0, 0)
+    frame.Position = UDim2.new(0.5, -100, 0.5, -25) 
 
-    
     button.Size = UDim2.new(1, 0, 1, 0)
     button.BackgroundTransparency = 0 
     button.BackgroundColor3 = Color3.fromRGB(0, 255, 255) 
-
-    
     button.TextColor3 = Color3.fromRGB(191, 0, 255) 
     button.Text = "Enable Black Hole"
     button.Font = Enum.Font.SourceSans
     button.TextScaled = true 
+    button.BorderSizePixel = 0 
 
     button.MouseButton1Click:Connect(toggleBlackHole)
-    
     makeDraggable(frame) 
 end
 
