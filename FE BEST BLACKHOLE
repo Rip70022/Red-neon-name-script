@@ -1,0 +1,129 @@
+-- by shadow_sadist, ERROR_USERBANNED = Roblox+USERNAME
+
+local StarterGui = game:GetService("StarterGui")
+
+
+StarterGui:SetCore("SendNotification", {
+    Title = "Script Ejecutado",
+    Text = "FE BEST BLACKHOLE By ERROR_USERBANNED",
+    Duration = 5, 
+})
+
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Workspace = game:GetService("Workspace")
+local StarterGui = game:GetService("StarterGui")
+
+local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+local Folder = Instance.new("Folder", Workspace)
+local Part = Instance.new("Part", Folder)
+local Attachment1 = Instance.new("Attachment", Part)
+Part.Anchored = true
+Part.CanCollide = false
+Part.Transparency = 1
+
+local blackHoleActive = false
+local blackHoleRange = 20 
+local blackHoleForce = 10000 
+local blackHoleRotationSpeed = 10 
+
+local function ForcePart(v)
+    if v:IsA("BasePart") and not v.Anchored and not v.Parent:FindFirstChild("Humanoid") and not v.Parent:FindFirstChild("Head") and v.Name ~= "Handle" then
+        v.CanCollide = false
+
+    
+        local bodyPosition = Instance.new("BodyPosition", v)
+        local bodyGyro = Instance.new("BodyGyro", v)
+
+        bodyPosition.MaxForce = Vector3.new(blackHoleForce, blackHoleForce, blackHoleForce)
+        bodyPosition.P = 10000
+        bodyPosition.D = 100
+
+        bodyGyro.MaxTorque = Vector3.new(blackHoleForce, blackHoleForce, blackHoleForce)
+        bodyGyro.P = 3000 
+
+        
+        RunService.RenderStepped:Connect(function()
+            if blackHoleActive then
+               
+                bodyPosition.Position = humanoidRootPart.Position
+
+                
+                local offset = (v.Position - humanoidRootPart.Position).unit 
+                local angle = tick() * blackHoleRotationSpeed 
+                local newPosition = humanoidRootPart.Position + offset * 3 
+                newPosition = newPosition + Vector3.new(math.cos(angle), 0, math.sin(angle)) 
+                bodyPosition.Position = newPosition
+                bodyGyro.CFrame = humanoidRootPart.CFrame 
+            end
+        end)
+    end
+end
+
+local function toggleBlackHole()
+    blackHoleActive = not blackHoleActive
+    if blackHoleActive then
+        for _, v in next, Workspace:GetDescendants() do
+            if (v.Position - humanoidRootPart.Position).magnitude <= blackHoleRange then
+                ForcePart(v)
+            end
+        end
+
+        Workspace.DescendantAdded:Connect(function(v)
+            if blackHoleActive and (v.Position - humanoidRootPart.Position).magnitude <= blackHoleRange then
+                ForcePart(v)
+            end
+        end)
+
+        spawn(function()
+            while blackHoleActive do
+                wait(0.1)  
+                if humanoidRootPart then
+                    Attachment1.WorldCFrame = humanoidRootPart.CFrame
+                end
+            end
+        end)
+    else
+        
+        for _, v in next, Workspace:GetDescendants() do
+            if v:FindFirstChild("BodyPosition") then
+                v:FindFirstChild("BodyPosition"):Destroy()
+            end
+            if v:FindFirstChild("BodyGyro") then
+                v:FindFirstChild("BodyGyro"):Destroy()
+            end
+        end
+    end
+
+    
+    if blackHoleActive then
+        button.Text = "Disable Black Hole"
+    else
+        button.Text = "Enable Black Hole"
+    end
+end
+
+local function createControlButton()
+    local screenGui = Instance.new(" ScreenGui", StarterGui)
+    local frame = Instance.new("Frame", screenGui)
+    local button = Instance.new("TextButton", frame)
+
+    frame.Size = UDim2.new(0, 200, 0, 50)
+    frame.BackgroundTransparency = 1
+    frame.Position = UDim2.new(0, 0, 0, 0)
+
+    button.Size = UDim2.new(1, 0, 1, 0)
+    button.BackgroundTransparency = 0.5
+    button.TextColor3 = Color3.new(1, 1, 1)
+    button.Text = "Enable Black Hole"
+    button.Font = Enum.Font.SourceSans
+    button.FontSize = Enum.FontSize.Size24
+
+    button.MouseButton1Click:Connect(toggleBlackHole)
+end
+
+createControlButton()
