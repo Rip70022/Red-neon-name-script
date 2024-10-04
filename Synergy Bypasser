@@ -5,41 +5,41 @@
 local Release = "V1"
 local NotificationDuration = 6.5
 local RayfieldFolder = "Rayfield"
-local ConfigurationFolder = RayfieldFolder.."/Configurations"
+local ConfigurationFolder = RayfieldFolder .. "/Configurations"
 local ConfigurationExtension = ".rfld"
 
 local HubName = "Synergy Bypasser"
-local Key = "kittyyy" 
-local KeyEntered = false 
+local Key = "kittyyy"
+local KeyEntered = false
 
+-- Create a notification function
 local function createNotification(title, text)
-  
-    local Notification = Instance.new("Frame")
-    Notification.Size = UDim2.new(0, 300, 0, 100)
-    Notification.Position = UDim2.new(0.5, -150, 0, 50)
-    Notification.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-    Notification.BorderSizePixel = 0
-    Notification.Parent = game:GetService("CoreGui")
+    local notification = Instance.new("Frame")
+    notification.Size = UDim2.new(0, 300, 0, 100)
+    notification.Position = UDim2.new(0.5, -150, 0, 50)
+    notification.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    notification.BorderSizePixel = 0
+    notification.Parent = game:GetService("CoreGui")
 
-    local TitleLabel = Instance.new("TextLabel")
-    TitleLabel.Size = UDim2.new(1, 0, 0, 40)
-    TitleLabel.BackgroundTransparency = 1
-    TitleLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
-    TitleLabel.Text = title
-    TitleLabel.TextScaled = true
-    TitleLabel.Parent = Notification
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Size = UDim2.new(1, 0, 0, 40)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
+    titleLabel.Text = title
+    titleLabel.TextScaled = true
+    titleLabel.Parent = notification
 
-    local TextLabel = Instance.new("TextLabel")
-    TextLabel.Size = UDim2.new(1, 0, 1, -40)
-    TextLabel.Position = UDim2.new(0, 0, 0, 40)
-    TextLabel.BackgroundTransparency = 1
-    TextLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
-    TextLabel.Text = text
-    TextLabel.TextScaled = true
-    TextLabel.Parent = Notification
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, 0, 1, -40)
+    textLabel.Position = UDim2.new(0, 0, 0, 40)
+    textLabel.BackgroundTransparency = 1
+    textLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
+    textLabel.Text = text
+    textLabel.TextScaled = true
+    textLabel.Parent = notification
 
-    local tweenIn = game:GetService("TweenService"):Create(Notification, TweenInfo.new(0.5), {Position = UDim2.new(0.5, -150, 0, 50)})
-    local tweenOut = game:GetService("TweenService"):Create(Notification, TweenInfo.new(0.5), {Position = UDim2.new(0.5, -150, 0, -100)})
+    local tweenIn = game:GetService("TweenService"):Create(notification, TweenInfo.new(0.5), {Position = UDim2.new(0.5, -150, 0, 50)})
+    local tweenOut = game:GetService("TweenService"):Create(notification, TweenInfo.new(0.5), {Position = UDim2.new(0.5, -150, 0, -100)})
 
     tweenIn:Play()
     tweenIn.Completed:Wait()
@@ -49,32 +49,84 @@ local function createNotification(title, text)
     tweenOut:Play()
     tweenOut.Completed:Wait()
 
-    Notification:Destroy()
+    notification:Destroy()
 end
 
-createNotification("Synergy Bypasser", "By ERROR_USERBANNED")
-
+-- Create a GUI function
 local function createGUI()
     local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
     local screenGui = Instance.new("ScreenGui")
     screenGui.Name = "ScreenGui"
-    screenGui.Parent = playerGui  
+    screenGui.Parent = playerGui
+
+    local background = Instance.new("Frame")
+    background.Size = UDim2.new(0, 300, 0, 200)
+    background.Position = UDim2.new(0.5, -150, 0, 50)
+    background.BackgroundTransparency = 0.5
+    background.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    background.Parent = screenGui
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, 0, 0, 40)
+    title.BackgroundTransparency = 1
+    title.TextColor3 = Color3.fromRGB(240, 240, 240)
+    title.Text = "Synergy Bypasser"
+    title.TextScaled = true
+    title.Parent = background
 
     local textBox = Instance.new("TextBox")
     textBox.Name = "TextBox"
-    textBox.Size = UDim2.new(0, 200, 0, 50) 
-    textBox.Position = UDim2.new(0.5, -100, 0.5, -25) 
-    textBox.PlaceholderText = "Enter Key"
-    textBox.Parent = screenGui  
+    textBox.Size = UDim2.new(1, 0, 0, 30)
+    textBox.Position = UDim2.new(0, 0, 0, 50)
+    textBox.BackgroundTransparency = 0.5
+    textBox.TextColor3 = Color3.fromRGB(240, 240, 240)
+    textBox.PlaceholderText = "Enter key..."
+    textBox.Parent = background
 
-    textBox.FocusLost:Connect(function(enterPressed)
-        if enterPressed then
-            checkKey()
+    local buttonFrame = Instance.new("Frame")
+    buttonFrame.Size = UDim2.new(1, 0, 0, 50)
+    buttonFrame.Position = UDim2.new(0, 0, 0, 90)
+    buttonFrame.BackgroundTransparency = 1
+    buttonFrame.Parent = background
+
+    local unlockButton = Instance.new("TextButton")
+    unlockButton.Name = "UnlockButton"
+    unlockButton.Size = UDim2.new(0, 100, 0, 30)
+    unlockButton.Position = UDim2.new(0, 0, 0, 10)
+    unlockButton.BackgroundTransparency = 0.5
+    unlockButton.TextColor3 = Color3.fromRGB(240, 240, 240 )
+    unlockButton.Text = "Unlock"
+    unlockButton.Parent = buttonFrame
+
+    local exitButton = Instance.new("TextButton")
+    exitButton.Name = "ExitButton"
+    exitButton.Size = UDim2.new(0, 100, 0, 30)
+    exitButton.Position = UDim2.new(0, 120, 0, 10)
+    exitButton.BackgroundTransparency = 0.5
+    exitButton.TextColor3 = Color3.fromRGB(240, 240, 240)
+    exitButton.Text = "Exit"
+    exitButton.Parent = buttonFrame
+
+    local function onUnlockButtonClicked()
+        local enteredKey = textBox.Text
+        if enteredKey == Key then
+            KeyEntered = true
+            createNotification("Success!", "You have unlocked the GUI!")
+        else
+            createNotification("Error!", "Invalid key!")
         end
-    end)
+    end
+
+    local function onExitButtonClicked()
+        screenGui:Destroy()
+    end
+
+    unlockButton.Activated:Connect(onUnlockButtonClicked)
+    exitButton.Activated:Connect(onExitButtonClicked)
 end
 
+-- Create the GUI
 createGUI()
 
 local function checkKey()
@@ -114,6 +166,14 @@ end
 if KeyEntered then
     if Tab then
         print("Adding button to Tab")
+    end
+end
+
+createGUI()
+
+if Tab then
+
+    print("Adding tabs")
 
         Tab:AddButton({
             Name = "My apologies, I don't speak to fags❤️",
@@ -214,6 +274,20 @@ if KeyEntered then
         })
 
         Tab:AddButton({
+            Name = "text",
+            Callback = function()
+                Chat("text")
+            end    
+        })
+
+        Tab:AddButton({
+            Name = "text",
+            Callback = function()
+                Chat("text")
+            end    
+        })
+
+        Tab:AddButton({
             Name = "Stupid shit",
             Callback = function()
                 Chat("S̳t̳u̳p̳i̳d̳ ̳s̳h̳i̳t̳")
@@ -226,10 +300,6 @@ if KeyEntered then
                 Chat("D̳a̳m̳n̳ ̳i̳t̳,̳ ̳f̳u̳c̳k̳ ̳y̳o̳u̳")
             end    
         })
-
-    else
-        createNotification("Error", "Tab is nil! Make sure it is initialized.")
-    end
-else
-    createNotification("Synergy Bypasser", "Key is required to access the buttons.")
+        
+     end
 end
