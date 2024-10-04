@@ -63,13 +63,13 @@ local function toggleBlackHole()
     blackHoleActive = not blackHoleActive
     if blackHoleActive then
         for _, v in pairs(Workspace:GetDescendants()) do
-            if (v.Position - humanoidRootPart.Position).magnitude <= blackHoleRange then
+            if v:IsA("BasePart") and (v.Position - humanoidRootPart.Position).magnitude <= blackHoleRange then
                 ForcePart(v)
             end
         end
 
         Workspace.DescendantAdded:Connect(function(v)
-            if blackHoleActive and (v.Position - humanoidRootPart.Position).magnitude <= blackHoleRange then
+            if blackHoleActive and v:IsA("BasePart") and (v.Position - humanoidRootPart.Position).magnitude <= blackHoleRange then
                 ForcePart(v)
             end
         end)
@@ -102,23 +102,66 @@ local function toggleBlackHole()
     end
 end
 
+local function makeDraggable(frame)
+    local dragging = false
+    local dragInput, mousePos, framePos
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            mousePos = input.Position
+            framePos = frame.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    RunService.RenderStepped:Connect(function()
+        if dragging then
+            local delta = game:GetService("UserInputService"):GetMouseLocation() - mousePos
+            frame.Position = UDim2.new(
+                framePos.X.Scale,
+                framePos.X.Offset + delta.X,
+                framePos.Y.Scale,
+                framePos.Y.Offset + delta.Y
+            )
+        end
+    end)
+end
+
 local function createControlButton()
-    local screenGui = Instance.new("ScreenGui", StarterGui)
+    local screenGui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
     local frame = Instance.new("Frame", screenGui)
-    button = Instance.new("TextButton", frame) 
+    button = Instance.new("TextButton", frame)
 
     frame.Size = UDim2.new(0, 200, 0, 50)
     frame.BackgroundTransparency = 1
     frame.Position = UDim2.new(0, 0, 0, 0)
 
+    
     button.Size = UDim2.new(1, 0, 1, 0)
-    button.BackgroundTransparency = 0.5
-    button.TextColor3 = Color3.new(1, 1, 1)
+    button.BackgroundTransparency = 0 
+    button.BackgroundColor3 = Color3.fromRGB(0, 255, 255) 
+
+    
+    button.TextColor3 = Color3.fromRGB(191, 0, 255) 
     button.Text = "Enable Black Hole"
     button.Font = Enum.Font.SourceSans
-    button.FontSize = Enum.FontSize.Size24
+    button.TextScaled = true 
 
     button.MouseButton1Click:Connect(toggleBlackHole)
+    
+    makeDraggable(frame) 
 end
 
 createControlButton()
