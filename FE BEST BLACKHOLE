@@ -1,13 +1,5 @@
 -- by shadow_sadist, ERROR_USERBANNED = Roblox+USERNAME
 
-local StarterGui = game:GetService("StarterGui")
-
-StarterGui:SetCore("SendNotification", {
-    Title = "FE BEST BLACKHOLE",
-    Text = "By ERROR_USERBANNED",
-    Duration = 5,
-})
-
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
@@ -24,36 +16,31 @@ Part.CanCollide = false
 Part.Transparency = 1
 
 local blackHoleActive = false
-local blackHoleRange = 20
-local blackHoleForce = 10000
-local blackHoleRotationSpeed = 10
 
-local button 
+-- Initial notification
+game.StarterGui:SetCore("SendNotification", {
+    Title = "FE BEST BLACKHOLE";
+    Text = "By ERROR_USERBANNED";
+    Duration = 5; -- Duration in seconds
+})
 
 local function ForcePart(v)
-    if v:IsA("BasePart") and not v.Anchored and not v.Parent:FindFirstChild("Humanoid") and not v.Parent:FindFirstChild("Head") and v.Name ~= "Handle" then
+    if v:IsA("Part") and not v.Anchored and not v.Parent:FindFirstChild("Humanoid") and not v.Parent:FindFirstChild("Head") and v.Name ~= "Handle" then
         v.CanCollide = false
-
         local bodyPosition = Instance.new("BodyPosition", v)
-        local bodyGyro = Instance.new("BodyGyro", v)
-
-        bodyPosition.MaxForce = Vector3.new(blackHoleForce, blackHoleForce, blackHoleForce)
+        bodyPosition.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
         bodyPosition.P = 10000
         bodyPosition.D = 100
-
-        bodyGyro.MaxTorque = Vector3.new(blackHoleForce, blackHoleForce, blackHoleForce)
-        bodyGyro.P = 3000
-
+        
+        -- Make the part spin around the player
         RunService.RenderStepped:Connect(function()
             if blackHoleActive then
                 bodyPosition.Position = humanoidRootPart.Position
-
-                local offset = (v.Position - humanoidRootPart.Position).unit
-                local angle = tick() * blackHoleRotationSpeed
-                local newPosition = humanoidRootPart.Position + offset * 3
-                newPosition = newPosition + Vector3.new(math.cos(angle), 0, math.sin(angle))
-                bodyPosition.Position = newPosition
-                bodyGyro.CFrame = humanoidRootPart.CFrame
+                
+                -- Add spinning effect
+                local bodyAngularVelocity = Instance.new("BodyAngularVelocity", v)
+                bodyAngularVelocity.AngularVelocity = Vector3.new(0, 1000, 0) -- Adjust speed as needed
+                bodyAngularVelocity.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
             end
         end)
     end
@@ -61,102 +48,95 @@ end
 
 local function toggleBlackHole()
     blackHoleActive = not blackHoleActive
-    print("Black Hole Active:", blackHoleActive) 
     if blackHoleActive then
-        for _, v in pairs(Workspace:GetDescendants()) do
-            if v:IsA("BasePart") and (v.Position - humanoidRootPart.Position).magnitude <= blackHoleRange then
-                ForcePart(v)
-            end
+        for _, v in next, Workspace:GetDescendants() do
+            ForcePart(v)
         end
 
         Workspace.DescendantAdded:Connect(function(v)
-            if blackHoleActive and v:IsA("BasePart") and (v.Position - humanoidRootPart.Position).magnitude <= blackHoleRange then
+            if blackHoleActive then
                 ForcePart(v)
             end
         end)
 
         spawn(function()
             while blackHoleActive do
-                wait(0.1)
+                wait(0.1)  -- Small delay to avoid lag
                 if humanoidRootPart then
                     Attachment1.WorldCFrame = humanoidRootPart.CFrame
                 end
             end
         end)
+        
+        -- Send notification on activation
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Black Hole Activated";
+            Text = "The black hole is now active!";
+            Duration = 2; -- Duration in seconds
+        })
     else
-        for _, v in pairs(Workspace:GetDescendants()) do
-            local bodyPosition = v:FindFirstChild("BodyPosition")
-            if bodyPosition then
-                bodyPosition:Destroy()
-            end
-            local bodyGyro = v:FindFirstChild("BodyGyro")
-            if bodyGyro then
-                bodyGyro:Destroy()
-            end
-        end
+        -- Send notification on deactivation
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Black Hole Deactivated";
+            Text = "The black hole is now inactive!";
+            Duration = 2; -- Duration in seconds
+        })
     end
-
-    if blackHoleActive then
-        button.Text = "Disable Black Hole"
-    else
-        button.Text = "Enable Black Hole"
-    end
-end
-
-local function makeDraggable(frame)
-    local dragging = false
-    local dragInput, initialPos, initialFramePos
-
-    local function onInputBegan(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dragging = true
-            initialPos = input.Position
-            initialFramePos = frame.Position
-
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                end
-            end)
-        end
-    end
-
-    local function onInputChanged(input)
-        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-            local delta = input.Position - initialPos
-            frame.Position = UDim2.new(
-                initialFramePos.X.Scale,
-                initialFramePos.X.Offset + delta.X,
-                initialFramePos.Y.Scale,
-                initialFramePos.Y.Offset + delta.Y
-            )
-        end
-    end
-
-    frame.InputBegan:Connect(onInputBegan)
-    frame.InputChanged:Connect(onInputChanged)
 end
 
 local function createControlButton()
-    local screenGui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
-    local frame = Instance.new("Frame", screenGui)
-    button = Instance.new("TextButton", frame)
+    local screenGui = Instance.new("ScreenGui")
+    local button = Instance.new("TextButton")
 
-    frame.Size = UDim2.new(0, 200, 0, 50)
-    frame.BackgroundTransparency = 1
-    frame.Position = UDim2.new(0.5, -100, 0.5, -25) 
+    screenGui.Name = "BlackHoleControlGUI"
+    screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 
-    button.Size = UDim2.new(1, 0, 1, 0)
-    button.BackgroundTransparency = 0 
-    button.BackgroundColor3 = Color3.fromRGB(0, 255, 255) 
-    button.TextColor3 = Color3.fromRGB(191, 0, 255) 
-    button.Text = "Enable Black Hole"
-    button.Font = Enum.Font.SourceSans
-    button.TextScaled = true 
-    button.BorderSizePixel = 0 
+    button.Name = "ToggleBlackHoleButton"
+    button.Size = UDim2.new(0, 200, 0, 50)
+    button.Position = UDim2.new(0.5, -100, 0, 100)
+    button.Text = "Activate Black Hole"
+    button.TextColor3 = Color3.fromRGB(0, 255, 255) -- Neon blue
+    button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    button.BorderSizePixel = 0
+    button.Parent = screenGui
 
-    button.MouseButton1Click:Connect(toggleBlackHole)
-    makeDraggable(frame) 
+    local uicorner = Instance.new("UICorner")
+    uicorner.CornerRadius = UDim.new(0, 15)
+    uicorner.Parent = button
+
+    -- Function to move the button
+    local function startDrag(input)
+        local initialPosition = button.Position
+        local startPosition = input.Position
+
+        local function updateDrag(input)
+            local delta = input.Position - startPosition
+            button.Position = UDim2.new(initialPosition.X.Scale, initialPosition.X.Offset + delta.X, initialPosition.Y.Scale, initialPosition.Y.Offset + delta.Y)
+        end
+
+        local function endDrag()
+            button.InputChanged:Disconnect(updateDrag)
+            button.InputEnded:Disconnect(endDrag)
+        end
+
+        button.InputChanged:Connect(updateDrag)
+        button.InputEnded:Connect(endDrag)
+    end
+
+    button.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            startDrag(input)
+        end
+    end)
+
+    button.MouseButton1Click:Connect(function()
+        toggleBlackHole()
+        if blackHoleActive then
+            button.Text = "Deactivate Black Hole"
+        else
+            button.Text = "Activate Black Hole"
+        end
+    end)
 end
 
 createControlButton()
