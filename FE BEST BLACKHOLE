@@ -107,7 +107,7 @@ local function makeDraggable(frame)
     local dragging = false
     local dragInput, initialPos, initialFramePos
 
-    frame.InputBegan:Connect(function(input)
+    local function onInputBegan(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
             initialPos = input.Position
@@ -119,10 +119,10 @@ local function makeDraggable(frame)
                 end
             end)
         end
-    end)
+    end
 
-    frame.InputChanged:Connect(function(input)
-        if dragging then
+    local function onInputChanged(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
             local delta = input.Position - initialPos
             frame.Position = UDim2.new(
                 initialFramePos.X.Scale,
@@ -131,7 +131,10 @@ local function makeDraggable(frame)
                 initialFramePos.Y.Offset + delta.Y
             )
         end
-    end)
+    end
+
+    frame.InputBegan:Connect(onInputBegan)
+    frame.InputChanged:Connect(onInputChanged)
 end
 
 local function createControlButton()
