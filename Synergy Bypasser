@@ -97,33 +97,31 @@ local function createGUI()
     unlockButton.BackgroundTransparency = 0.5
     unlockButton.TextColor3 = Color3.fromRGB(240, 240, 240 )
     unlockButton.Text = "Unlock"
-    unlockButton.Parent = buttonFrame
+ unlockButton.Parent = buttonFrame
 
-    local exitButton = Instance.new("TextButton")
-    exitButton.Name = "ExitButton"
-    exitButton.Size = UDim2.new(0, 100, 0, 30)
-    exitButton.Position = UDim2.new(0, 120, 0, 10)
-    exitButton.BackgroundTransparency = 0.5
-    exitButton.TextColor3 = Color3.fromRGB(240, 240, 240)
-    exitButton.Text = "Exit"
-    exitButton.Parent = buttonFrame
+    local closeButton = Instance.new("TextButton")
+    closeButton.Name = "CloseButton"
+    closeButton.Size = UDim2.new(0, 100, 0, 30)
+    closeButton.Position = UDim2.new(1, -110, 0, 10)
+    closeButton.BackgroundTransparency = 0.5
+    closeButton.TextColor3 = Color3.fromRGB(240, 240, 240)
+    closeButton.Text = "Close"
+    closeButton.Parent = buttonFrame
 
-    local function onUnlockButtonClicked()
-        local enteredKey = textBox.Text
-        if enteredKey == Key then
+    -- Add event listeners
+    unlockButton.MouseButton1Click:Connect(function()
+        local key = textBox.Text
+        if key == Key then
             KeyEntered = true
-            createNotification("Success!", "You have unlocked the GUI!")
+            createNotification("Synergy Bypasser", "Key entered correctly!")
         else
-            createNotification("Error!", "Invalid key!")
+            createNotification("Synergy Bypasser", "Incorrect key!")
         end
-    end
+    end)
 
-    local function onExitButtonClicked()
+    closeButton.MouseButton1Click:Connect(function()
         screenGui:Destroy()
-    end
-
-    unlockButton.Activated:Connect(onUnlockButtonClicked)
-    exitButton.Activated:Connect(onExitButtonClicked)
+    end)
 end
 
 -- Create the GUI
