@@ -95,8 +95,8 @@ local function createControlButton()
     button.Size = UDim2.new(0, 200, 0, 50)
     button.Position = UDim2.new(0.5, -100, 0, 100)
     button.Text = "Activate Black Hole"
-    button.TextColor3 = Color3.fromRGB(0, 255, 255) -- Neon blue
-    button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    button.TextColor3 = Color3.fromRGB(200, 200, 200) -- color
+    button.BackgroundColor3 = Color3.fromRGB(0, 0, 50) -- color
     button.BorderSizePixel = 0
     button.Parent = screenGui
 
