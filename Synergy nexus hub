@@ -15,9 +15,9 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "🛡️RoTotal🛡️", Icon = "shield" }),
     SynergyNexusScript = Window:AddTab({ Title = "Synergy Nexus Script", Icon = "cog" }),
-    BloxFruits = Window:AddTab({ Title = "Blox Fruits", Icon = "fruit" }), 
-    RandomScripts = Window:AddTab({ Title = "Scripts Random", Icon = "dice" }), 
-    TSB_Scripts = Window:AddTab({ Title = "TSB Scripts", Icon = "script" }),
+    BloxFruits = Window:AddTab({ Title = "Blox Fruits", Icon = "apple" }), 
+    RandomScripts = Window:AddTab({ Title = "Scripts Random", Icon = "shuffle" }), 
+    TSB_Scripts = Window:AddTab({ Title = "TSB Scripts", Icon = "code" }),
     Discord = Window:AddTab({ Title = "Discord Server", Icon = "info" })
 
 }
