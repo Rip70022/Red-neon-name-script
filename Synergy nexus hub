@@ -81,6 +81,14 @@ do
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/FE%20BEST%20BLACKHOLE"))()
         end
     })
+
+Tabs.SynergyNexusScript:AddButton({
+        Title = "FE SpiralMovementScript OP",
+        Description = "You need Telekinesis.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/SpiralMovementScript"))()
+        end
+    })
     
     Tabs.BloxFruits:AddParagraph({
         Title = "Blox Fruits Scripts",
