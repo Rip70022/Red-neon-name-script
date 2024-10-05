@@ -4,7 +4,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
     Title = "🔥Synergy Nexus Hub🔥",
-    SubTitle = "_____[{●By ERROR_USERBANNED●}]",
+    SubTitle = "︎¤••••︎¤《●By ERROR_USERBANNED●》",
     TabWidth = 160,
     Size = UDim2.fromOffset(460, 250),
     Acrylic = true,
