@@ -75,30 +75,30 @@ local function createControlButton()
     uicorner.CornerRadius = UDim.new(0, 15)
     uicorner.Parent = button
 
-    -- Function to move the button
-    local function startDrag(input)
-        local initialPosition = button.Position
-        local startPosition = input.Position
+ -- Function to move the button
+ local function startDrag(input)
+    local initialPosition = button.Position
+    local startPosition = input.Position
 
-        local function updateDrag(input)
-            local delta = input.Position - startPosition
-            button.Position = UDim2.new(initialPosition.X.Scale, initialPosition.X.Offset + delta.X, initialPosition.Y.Scale, initialPosition.Y.Offset + delta.Y)
-        end
-
-        local function endDrag()
-            button.InputChanged:Disconnect(updateDrag)
-            button.InputEnded:Disconnect(endDrag)
-        end
-
-        button.InputChanged:Connect(updateDrag)
-        button.InputEnded:Connect(endDrag)
+    local function updateDrag(input)
+        local delta = input.Position - startPosition
+        button.Position = UDim2.new(initialPosition.X.Scale, initialPosition.X.Offset + delta.X, initialPosition.Y.Scale, initialPosition.Y.Offset + delta.Y)
     end
 
-    button.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            startDrag(input)
-        end
-    end)
+    local function endDrag()
+        button.InputChanged:Disconnect(updateDrag)
+        button.InputEnded:Disconnect(endDrag)
+    end
+
+    button.InputChanged:Connect(updateDrag)
+    button.InputEnded:Connect(endDrag)
+end
+
+button.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        startDrag(input)
+    end
+end)
 
     button.MouseButton1Click:Connect(function()
         toggleSpiral()
