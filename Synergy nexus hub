@@ -14,7 +14,7 @@ local Window = Fluent:CreateWindow({
 
 local Tabs = {
     Main = Window:AddTab({ Title = "🛡️•RoTotal•🛡️", Icon = "shield" }),
-    SynergyNexusScripts = Window:AddTab({ Title = "Synergy Nexus Scripts", Icon = "cog" }),
+    SynergyNexusScripts = Window:AddTab({ Title = "Synergy•Nexus•Scripts", Icon = "cog" }),
     BloxFruits = Window:AddTab({ Title = "Blox•Fruits", Icon = "apple" }), 
     RandomScripts = Window:AddTab({ Title = "Scripts•Random", Icon = "shuffle" }), 
     TSB_Scripts = Window:AddTab({ Title = "TSB•Scripts", Icon = "code" }),
@@ -27,14 +27,14 @@ local Options = Fluent.Options
 do
     Fluent:Notify({
         Title = "Loaded",
-        Content = "🔴Synergy Nexus Hub🟢",
+        Content = "🔥Synergy Nexus Hub🔥",
         SubContent = "《●By shadow_sadist●》",
-        Duration = 5
+        Duration = 10
     })
 
     Tabs.Main:AddParagraph({
         Title = "🛡️RoTotal🛡️",
-        Content = "RoTotal is a Roblox version of VirusTotal. It scans and analyzes scripts before running them, protecting you from malicious code or vulnerabilities. Perfect for keeping your Roblox experience safe.    SPANISH: RoTotal es una versión de VirusTotal para Roblox. Escanea y analiza scripts antes de ejecutarlos, protegiéndote de código malicioso o vulnerabilidades. Perfecto para mantener tu experiencia segura en Roblox."
+        Content = "RoTotal is a Roblox version of VirusTotal. It scans and analyzes scripts before running them, protecting you from malicious code or vulnerabilities. Perfect for keeping your Roblox experience safe.             ●SPANISH●: RoTotal es una versión de VirusTotal para Roblox. Escanea y analiza scripts antes de ejecutarlos, protegiéndote de código malicioso o vulnerabilidades. Perfecto para mantener tu experiencia segura en Roblox."
     })
 
     Tabs.Main:AddButton({
