@@ -11,7 +11,6 @@ local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 local spiralSpeed = 20 -- Speed of spiral movement
 local radius = 10 -- Radius of spiral movement
 local spiralActive = false -- Spiral movement state
-local partsTable = {} -- Table to hold parts for dragging
 
 -- Initial notification
 game.StarterGui:SetCore("SendNotification", {
@@ -56,32 +55,9 @@ local function toggleSpiral()
     end
 end
 
-local function dragPart(part)
-    local mouse = LocalPlayer:GetMouse()
-    local offset = part.Position - humanoidRootPart.Position
-
-    -- Connect to mouse movement
-    local connection
-    connection = RunService.RenderStepped:Connect(function()
-        if partsTable[part] then
-            local newPosition = humanoidRootPart.Position + offset
-            part.Position = newPosition
-        end
-    end)
-
-    -- Stop dragging on mouse release
-    mouse.Button1Up:Connect(function()
-        partsTable[part] = nil
-        connection:Disconnect()
-    end)
-
-    partsTable[part] = true
-end
-
 local function createControlButton()
     local screenGui = Instance.new("ScreenGui")
     local button = Instance.new("TextButton")
-    local mouse = LocalPlayer:GetMouse()
 
     screenGui.Name = "SpiralControlGUI"
     screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
@@ -99,23 +75,37 @@ local function createControlButton()
     uicorner.CornerRadius = UDim.new(0, 15)
     uicorner.Parent = button
 
+    -- Function to move the button
+    local function startDrag(input)
+        local initialPosition = button.Position
+        local startPosition = input.Position
+
+        local function updateDrag(input)
+            local delta = input.Position - startPosition
+            button.Position = UDim2.new(initialPosition.X.Scale, initialPosition.X.Offset + delta.X, initialPosition.Y.Scale, initialPosition.Y.Offset + delta.Y)
+        end
+
+        local function endDrag()
+            button.InputChanged:Disconnect(updateDrag)
+            button.InputEnded:Disconnect(endDrag)
+        end
+
+        button.InputChanged:Connect(updateDrag)
+        button.InputEnded:Connect(endDrag)
+    end
+
+    button.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            startDrag(input)
+        end
+    end)
+
     button.MouseButton1Click:Connect(function()
         toggleSpiral()
         if spiralActive then
             button.Text = "Deactivate Spiral"
         else
             button.Text = "Activate Spiral"
-        end
-    end)
-
-    -- Add dragging functionality to parts when the player clicks on them
-    mouse.Button1Down:Connect(function()
-        for _, v in ipairs(Workspace:GetDescendants()) do
-            if v:IsA("Part") and not v.Anchored and not v.Parent:FindFirstChild("Humanoid") then
-                if (v.Position - mouse.Hit.p).Magnitude < 5 then -- Check if the mouse is close enough to the part
-                    dragPart(v)
-                end
-            end
         end
     end)
 end
