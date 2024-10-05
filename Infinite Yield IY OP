@@ -1,3 +1,5 @@
+-- Modified by ERROR_USERBANNED
+
 if IY_LOADED and not _G.IY_DEBUG == true then
     -- error("Infinite Yield is already running!", 0)
     return
@@ -12,12 +14,12 @@ Players = cloneref(game:GetService("Players"))
 if not game:IsLoaded() then
     local notLoaded = Instance.new("Message")
     notLoaded.Parent = COREGUI
-    notLoaded.Text = "Infinite Yield is waiting for the game to load"
+    notLoaded.Text = "🔥Infinite Yield is waiting for the game to load... 🤖💻"
     game.Loaded:Wait()
     notLoaded:Destroy()
 end
 
-currentVersion = "8"
+currentVersion = "8 {Modified}🔥"
 
 Holder = Instance.new("Frame")
 Title = Instance.new("TextLabel")
@@ -207,7 +209,7 @@ Title.BorderSizePixel = 0
 Title.Size = UDim2.new(0, 250, 0, 20)
 Title.Font = Enum.Font.SourceSans
 Title.TextSize = 18
-Title.Text = "Infinite Yield FE v" .. currentVersion
+Title.Text = "🔥OP Infinite Yield FE v" .. currentVersion
 
 do
 	local emoji = ({
@@ -618,7 +620,7 @@ Credits.Position = UDim2.new(0, 0, 0.9, 30)
 Credits.Size = UDim2.new(0, 250, 0, 20)
 Credits.Font = Enum.Font.SourceSansLight
 Credits.FontSize = Enum.FontSize.Size18
-Credits.Text = "shadow_sadist // Edge // Zwolf // Moon // Toon"
+Credits.Text = "Modified By shadow_sadist/ERROR_USERBANNED"
 Credits.TextColor3 = Color3.new(1, 1, 1)
 Credits.ZIndex = 10
 
@@ -4980,7 +4982,7 @@ function removecmd(cmd)
 					if string.find(c.Text, "^"..cmd.."$") or string.find(c.Text, "^"..cmd.." ") or string.find(c.Text, " "..cmd.."$") or string.find(c.Text, " "..cmd.." ") then
 						c.TextTransparency = 0.7
 						c.MouseButton1Click:Connect(function()
-							notify(c.Text, "Command has been disabled by you or a plugin")
+							notify(c.Text, "Command has been disabled by you or a plugin ⚠️")
 						end)
 					end
 				end
