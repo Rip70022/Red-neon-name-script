@@ -1,0 +1,91 @@
+-- by ERROR_USERBANNED
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Workspace = game:GetService("Workspace")
+
+local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+local spiralSpeed = 20 -- Speed of spiral movement
+local radius = 10 -- Radius of spiral movement
+local spiralActive = false -- Spiral movement state
+
+-- Initial notification
+game.StarterGui:SetCore("SendNotification", {
+    Title = "FE SPIRAL MOVEMENT";
+    Text = "By ERROR_USERBANNED";
+    Duration = 5;
+})
+
+local function movePartsInSpiral()
+    local angle = 0
+    RunService.RenderStepped:Connect(function()
+        if spiralActive then
+            angle = angle + spiralSpeed * RunService.RenderStepped:Wait() -- Increment the angle
+            for _, v in ipairs(Workspace:GetDescendants()) do
+                if v:IsA("Part") and not v.Anchored and not v.Parent:FindFirstChild("Humanoid") then
+                    -- Spiral movement
+                    local xOffset = radius * math.cos(angle) -- Calculate x offset
+                    local zOffset = radius * math.sin(angle) -- Calculate z offset
+                    v.Position = humanoidRootPart.Position + Vector3.new(xOffset, 0, zOffset) -- Update part position
+                end
+            end
+        end
+    end)
+end
+
+local function toggleSpiral()
+    spiralActive = not spiralActive
+    if spiralActive then
+        -- Send notification when activated
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Spiral Activated";
+            Text = "The parts are now moving in a spiral!";
+            Duration = 2;
+        })
+    else
+        -- Send notification when deactivated
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Spiral Deactivated";
+            Text = "The parts have stopped moving!";
+            Duration = 2;
+        })
+    end
+end
+
+local function createControlButton()
+    local screenGui = Instance.new("ScreenGui")
+    local button = Instance.new("TextButton")
+
+    screenGui.Name = "SpiralControlGUI"
+    screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+    button.Name = "ToggleSpiralButton"
+    button.Size = UDim2.new(0, 200, 0, 50)
+    button.Position = UDim2.new(0.5, -100, 0, 100)
+    button.Text = "Activate Spiral"
+    button.TextColor3 = Color3.fromRGB(255, 255, 255) -- Text color
+    button.BackgroundColor3 = Color3.fromRGB(0, 128, 255) -- Background color
+    button.BorderSizePixel = 0
+    button.Parent = screenGui
+
+    local uicorner = Instance.new("UICorner")
+    uicorner.CornerRadius = UDim.new(0, 15)
+    uicorner.Parent = button
+
+    button.MouseButton1Click:Connect(function()
+        toggleSpiral()
+        if spiralActive then
+            button.Text = "Deactivate Spiral"
+        else
+            button.Text = "Activate Spiral"
+        end
+    end)
+end
+
+-- Call the function to move parts in a spiral
+movePartsInSpiral()
+-- Create the button to control the movement
+createControlButton()
