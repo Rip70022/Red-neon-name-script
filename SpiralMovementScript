@@ -11,6 +11,7 @@ local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 local spiralSpeed = 20 -- Speed of spiral movement
 local radius = 10 -- Radius of spiral movement
 local spiralActive = false -- Spiral movement state
+local draggingParts = false -- State for dragging parts
 
 -- Initial notification
 game.StarterGui:SetCore("SendNotification", {
@@ -55,6 +56,28 @@ local function toggleSpiral()
     end
 end
 
+local function dragPart(part)
+    local mouse = LocalPlayer:GetMouse()
+    local offset = part.Position - humanoidRootPart.Position
+
+    -- Connect to mouse movement
+    local connection
+    connection = RunService.RenderStepped:Connect(function()
+        if draggingParts then
+            local newPosition = humanoidRootPart.Position + offset
+            part.Position = newPosition
+        end
+    end)
+
+    -- Stop dragging on mouse release
+    mouse.Button1Up:Connect(function()
+        draggingParts = false
+        connection:Disconnect()
+    end)
+
+    draggingParts = true
+end
+
 local function createControlButton()
     local screenGui = Instance.new("ScreenGui")
     local button = Instance.new("TextButton")
@@ -66,8 +89,8 @@ local function createControlButton()
     button.Size = UDim2.new(0, 200, 0, 50)
     button.Position = UDim2.new(0.5, -100, 0, 100)
     button.Text = "Activate Spiral"
-    button.TextColor3 = Color3.fromRGB(255, 255, 255) -- Text color
-    button.BackgroundColor3 = Color3.fromRGB(0, 128, 255) -- Background color
+    button.TextColor3 = Color3.fromRGB(0, 0, 0) -- Black text color for better contrast
+    button.BackgroundColor3 = Color3.fromRGB(255, 215, 0) -- Gold background color for attraction
     button.BorderSizePixel = 0
     button.Parent = screenGui
 
@@ -81,6 +104,17 @@ local function createControlButton()
             button.Text = "Deactivate Spiral"
         else
             button.Text = "Activate Spiral"
+        end
+    end)
+
+    -- Add dragging functionality to parts when the player clicks on them
+    mouse.Button1Down:Connect(function()
+        for _, v in ipairs(Workspace:GetDescendants()) do
+            if v:IsA("Part") and not v.Anchored and not v.Parent:FindFirstChild("Humanoid") then
+                if (v.Position - mouse.Hit.p).Magnitude < 5 then -- Check if the mouse is close enough to the part
+                    dragPart(v)
+                end
+            end
         end
     end)
 end
