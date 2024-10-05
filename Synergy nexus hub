@@ -14,7 +14,7 @@ local Window = Fluent:CreateWindow({
 
 local Tabs = {
     Main = Window:AddTab({ Title = "🛡️RoTotal🛡️", Icon = "shield" }),
-    SynergyNexusScript = Window:AddTab({ Title = "Synergy Nexus Script", Icon = "cog" }),
+    SynergyNexusScripts = Window:AddTab({ Title = "Synergy Nexus Script", Icon = "cog" }),
     BloxFruits = Window:AddTab({ Title = "Blox Fruits", Icon = "apple" }), 
     RandomScripts = Window:AddTab({ Title = "Scripts Random", Icon = "shuffle" }), 
     TSB_Scripts = Window:AddTab({ Title = "TSB Scripts", Icon = "code" }),
@@ -45,12 +45,12 @@ do
         end
     })
 
-    Tabs.SynergyNexusScript:AddParagraph({
+    Tabs.SynergyNexusScripts:AddParagraph({
         Title = "Warning: Synergy OP Scripts",
         Content = "Scripts By Me"
     })
     
-    Tabs.SynergyNexusScript:AddButton({
+    Tabs.SynergyNexusScripts:AddButton({
         Title = "Telekinesis Script OP",
         Description = "Required to execute blackhole scripts.",
         Callback = function()
@@ -58,7 +58,7 @@ do
         end
     })
     
-    Tabs.SynergyNexusScript:AddButton({
+    Tabs.SynergyNexusScripts:AddButton({
         Title = "Black Hole Script",
         Description = "You need Telekinesis.",
         Callback = function()
@@ -66,7 +66,7 @@ do
         end
     })
     
-    Tabs.SynergyNexusScript:AddButton({
+    Tabs.SynergyNexusScripts:AddButton({
         Title = "Fixed Black Hole Script",
         Description = "You need Telekinesis.",
         Callback = function()
@@ -74,7 +74,7 @@ do
         end
     })
 
-    Tabs.SynergyNexusScript:AddButton({
+    Tabs.SynergyNexusScripts:AddButton({
         Title = "FE BEST BLACKHOLE",
         Description = "You need Telekinesis.",
         Callback = function()
@@ -82,11 +82,19 @@ do
         end
     })
 
-Tabs.SynergyNexusScript:AddButton({
+Tabs.SynergyNexusScripts:AddButton({
         Title = "FE SpiralMovementScript OP",
         Description = "You need Telekinesis.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/SpiralMovementScript"))()
+        end
+    })
+
+Tabs.SynergyNexusScripts:AddButton({
+        Title = "🔥OP Infinite Yield🔥",
+        Description = "OP IY Modified by me.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Infinite%20Yield%20IY%20OP"))()
         end
     })
     
