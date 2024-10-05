@@ -11,7 +11,7 @@ local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 local spiralSpeed = 20 -- Speed of spiral movement
 local radius = 10 -- Radius of spiral movement
 local spiralActive = false -- Spiral movement state
-local draggingParts = false -- State for dragging parts
+local partsTable = {} -- Table to hold parts for dragging
 
 -- Initial notification
 game.StarterGui:SetCore("SendNotification", {
@@ -63,7 +63,7 @@ local function dragPart(part)
     -- Connect to mouse movement
     local connection
     connection = RunService.RenderStepped:Connect(function()
-        if draggingParts then
+        if partsTable[part] then
             local newPosition = humanoidRootPart.Position + offset
             part.Position = newPosition
         end
@@ -71,16 +71,17 @@ local function dragPart(part)
 
     -- Stop dragging on mouse release
     mouse.Button1Up:Connect(function()
-        draggingParts = false
+        partsTable[part] = nil
         connection:Disconnect()
     end)
 
-    draggingParts = true
+    partsTable[part] = true
 end
 
 local function createControlButton()
     local screenGui = Instance.new("ScreenGui")
     local button = Instance.new("TextButton")
+    local mouse = LocalPlayer:GetMouse()
 
     screenGui.Name = "SpiralControlGUI"
     screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
