@@ -34,12 +34,12 @@ do
 
     Tabs.Main:AddParagraph({
         Title = "🛡️RoTotal🛡️",
-        Content = "RoTotal is a Roblox version of VirusTotal. It scans and analyzes scripts before running them, protecting you from malicious code or vulnerabilities. Perfect for keeping your Roblox experience safe.             ●SPANISH●: RoTotal es una versión de VirusTotal para Roblox. Escanea y analiza scripts antes de ejecutarlos, protegiéndote de código malicioso o vulnerabilidades. Perfecto para mantener tu experiencia segura en Roblox."
+        Content = "RoTotal is a Roblox version of VirusTotal. It scans and analyzes scripts before running them, protecting you from malicious code or vulnerabilities. Perfect for keeping your Roblox experience safe.                       ●SPANISH●: RoTotal es una versión de VirusTotal para Roblox. Escanea y analiza scripts antes de ejecutarlos, protegiéndote de código malicioso o vulnerabilidades. Perfecto para mantener tu experiencia segura en Roblox."
     })
 
     Tabs.Main:AddButton({
         Title = "🛡️RoTotal🛡️",
-        Description = "BY ERROR_USERBANNED",
+        Description = "🔰BY ERROR_USERBANNED🔰",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/RoTotal"))()
         end
@@ -206,7 +206,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
 
     Tabs.RandomScripts:AddButton({
-        Title = "Unlock All Characters",
+        Title = "🔓Unlock All Characters🔓",
         Description = "❗Strongest Battlegrounds❗",
         Callback = function()
             loadstring(game:HttpGet("https://rentry.co/tghuofnu/raw"))()
@@ -214,7 +214,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
 
     Tabs.RandomScripts:AddButton({
-        Title = "OP Script I Reupload",
+        Title = "💥OP Script I Reupload💥",
         Description = "❗🍓Dandy's World [ALPHA]❗",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Bac0nHck/Scripts/main/Dandy's%20World"))("t.me/arceusxscripts")
@@ -231,7 +231,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
 
     Tabs.RandomScripts:AddButton({
-        Title = "ZapHub",
+        Title = "🔩ZapHub🔩",
         Description = "❗The Best PS99 Script [Elemental World]❗",
         Callback = function()
             loadstring(game:HttpGet('https://zaphub.xyz/Exec'))()
@@ -239,7 +239,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
 
     Tabs.RandomScripts:AddButton({
-        Title = "Forge Hub",
+        Title = "🔩Forge Hub🔩",
         Description = "❗[🥊UPDATE] Slap Battles👏❗",
         Callback = function()
             loadstring(game:HttpGet('https://raw.githubusercontent.com/Skzuppy/forge-hub/main/loader.lua'))()
@@ -247,7 +247,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
 
     Tabs.RandomScripts:AddButton({
-        Title = "therHub OP",
+        Title = "💥therHub OP💥",
         Description = "❗Build A Boat For Treasure❗",
         Callback = function()
             loadstring(game:HttpGet('https://api.luarmor.net/files/v3/loaders/2529a5f9dfddd5523ca4e22f21cceffa.lua'))()
@@ -256,7 +256,7 @@ Tabs.SynergyNexusScripts:AddButton({
 
 
     Tabs.RandomScripts:AddButton({
-        Title = "OP",
+        Title = "💥OP💥",
         Description = "❗Be a Pickaxe❗",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Bac0nHck/Scripts/refs/heads/main/BeAPickaxe"))("t.me/arceusxscripts")
@@ -264,7 +264,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.RandomScripts:AddButton({
-        Title = "OP Script Lucky Blocks",
+        Title = "💥OP Script Lucky Blocks💥",
         Description = "❗LUCKY BLOCKS BATTLEGROUNDS❗.",
         Callback = function()
             loadstring(game:HttpGet("https://scriptblox.com/raw/LUCKY-BLOCKS-Battlegrounds-Mythic-Hub-12542"))()
@@ -272,7 +272,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.RandomScripts:AddButton({
-        Title = "System_Broken OP",
+        Title = "💣System_Broken OP💣",
         Description = "❗Ragdoll Engine.❗",
         Callback = function()
             loadstring(game:HttpGet("https://scriptblox.com/raw/Ragdoll-Engine-BEST-SCRIPT-WORKING-SystemBroken-7544"))()
@@ -280,7 +280,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.RandomScripts:AddButton({
-        Title = "Script Hub Universal",
+        Title = "♾️Script Hub Universal♾️",
         Description = "❗UNIVERSAL❗.",
         Callback = function()
             loadstring(game:HttpGet("https://pastebin.com/raw/ubcyvmNH"))()
@@ -288,7 +288,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.RandomScripts:AddButton({
-        Title = "Ghosthub Script OP",
+        Title = "👻Ghosthub Script OP👻",
         Description = "❗UNIVERSAL❗.",
         Callback = function()
             loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub'))()
@@ -296,12 +296,12 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.TSB_Scripts:AddParagraph({
-        Title = "TSB Scripts",
+        Title = "⚔️TSB Scripts⚔️",
         Content = "❗scripts for TSB❗."
     })
     
     Tabs.TSB_Scripts:AddButton({
-        Title = "TOJI Moveset",
+        Title = "⚔️TOJI Moveset⚔️",
         Description = "❗Load the TOJI moveset script❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/raw/main/Fe%20Telekinesis%20script"))()
@@ -309,7 +309,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.TSB_Scripts:AddButton({
-        Title = "SUKUNA Moveset",
+        Title = "⚔️SUKUNA Moveset⚔️",
         Description = "❗Load the SUKUNA moveset script❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/raw/main/Fe%20blackhole%20script"))()
@@ -317,7 +317,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.TSB_Scripts:AddButton({
-        Title = "GOJO Moveset",
+        Title = "🔵GOJO Moveset🔴",
         Description = "❗Load the GOJO moveset script❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/BaldyToSorcerer/main/Latest.lua"))()
@@ -325,7 +325,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.TSB_Scripts:AddButton({
-        Title = "HAKARI Moveset",
+        Title = "🎰HAKARI Moveset🎰",
         Description = "❗Load the HAKARI moveset script❗.",
         Callback = function()
             loadstring(game:HttpGet("https://rawscripts.net/raw/The-Strongest-Battlegrounds-Hero-to-True-Nosakatan-18742"))()
@@ -333,7 +333,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.TSB_Scripts:AddButton({
-        Title = "DEKU Moveset",
+        Title = "🟢DEKU Moveset🟢",
         Description = "❗Load the DEKU moveset script❗.",
         Callback = function()
             loadstring(game:HttpGet("https://pastefy.app/MNg2zcxz/raw"))()
@@ -341,7 +341,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.TSB_Scripts:AddButton({
-        Title = "REAPER Moveset",
+        Title = "💀REAPER Moveset💀",
         Description = "❗Load the REAPER moveset script❗.",
         Callback = function()
             getgenv().Music = false
@@ -350,7 +350,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.TSB_Scripts:AddButton({
-        Title = "GOJO Script",
+        Title = "🔵GOJO Script🔴",
         Description = "❗Load the GOJO script❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/AlphaKeyzz/Gojo-Script/main/Gojo-Script"))()
