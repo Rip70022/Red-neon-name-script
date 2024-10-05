@@ -29,7 +29,7 @@ do
         Title = "Loaded",
         Content = "🔥Synergy Nexus Hub🔥",
         SubContent = "《●By shadow_sadist●》",
-        Duration = 10
+        Duration = 9
     })
 
     Tabs.Main:AddParagraph({
@@ -46,7 +46,7 @@ do
     })
 
     Tabs.SynergyNexusScripts:AddParagraph({
-        Title = "Warning: Synergy OP Scripts",
+        Title = "⚠️Warning⚠️: Synergy OP Scripts",
         Content = "⚡Scripts By Me⚡"
     })
     
@@ -99,12 +99,12 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.BloxFruits:AddParagraph({
-        Title = "Blox Fruits Scripts",
+        Title = "🍊Blox Fruits Scripts🍊",
         Content = "❗scripts not mine 😛❗."
     })
     
     Tabs.BloxFruits:AddButton({
-        Title = "Speed Hub X Script",
+        Title = "💨Speed Hub X Script💨",
         Description = "❗Speed Hub X script for Blox Fruits❗.",
         Callback = function()
             loadstring(game:HttpGet("https://rawscripts.net/raw/Blox-Fruits-Speed-Hub-X-Best-Sea-Event-No-Key-16135"))()
@@ -112,7 +112,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.BloxFruits:AddButton({
-        Title = "Cokkahub OP Script",
+        Title = "🌚Cokkahub OP Script🌚",
         Description = "❗Cokkahub OP script for Blox Fruits❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))()
@@ -120,7 +120,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.BloxFruits:AddButton({
-        Title = "Auto Mirage Script",
+        Title = "⚡️Auto Mirage Script⚡️",
         Description = "❗Auto Mirage script for Blox Fruits❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/xDepressionx/Free-Script/main/AllScript.lua"))()
@@ -128,7 +128,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.BloxFruits:AddButton({
-        Title = "Snake Hub Script",
+        Title = "🐍Snake Hub Script🐍",
         Description = "❗Snake Hub script for Blox Fruits❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/toosiwhip/snake-hub/main/blox-fruits.lua"))()
@@ -136,7 +136,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.BloxFruits:AddButton({
-        Title = "Shadow Hub Script",
+        Title = "👤Shadow Hub Script👤",
         Description = "❗Shadow Hub script for Blox Fruits❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/xPeachy/Shadow-Hub/main/Blox-Fruits"))()
@@ -144,7 +144,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.BloxFruits:AddButton({
-        Title = "Redz Hub Script",
+        Title = "🔱Redz Hub Script🔱",
         Description = "❗Redz Hub script for Blox Fruits❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/main/redz9999"))()
@@ -152,7 +152,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.BloxFruits:AddButton({
-        Title = "Mtriet Hub Script",
+        Title = "⚜️Mtriet Hub Script⚜️",
         Description = "❗Mtriet Hub script for Blox Fruits❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
@@ -160,12 +160,12 @@ Tabs.SynergyNexusScripts:AddButton({
     })
     
     Tabs.RandomScripts:AddParagraph({
-        Title = "Random Scripts OP",
+        Title = "🤯Random Scripts OP🤯",
         Content = "❗scripts not mine 😛❗."
     })
     
     Tabs.RandomScripts:AddButton({
-        Title = "Prison Life Script FE",
+        Title = "🚔Prison Life Script FE🚔",
         Description = "❗Script OP  for Prison Life❗.",
 
         Callback = function()
@@ -190,7 +190,7 @@ Tabs.SynergyNexusScripts:AddButton({
     })
 
     Tabs.RandomScripts:AddButton({
-        Title = "REDz HUB",
+        Title = "🚨REDz HUB🚨",
         Description = "❗prision Life❗",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/REDzHUB/main/REDzHUB"))()
