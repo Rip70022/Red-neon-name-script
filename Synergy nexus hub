@@ -293,6 +293,14 @@ Tabs.SynergyNexusScripts:AddButton({
     })
 
     Tabs.RandomScripts:AddButton({
+        Title = "🔓Unlock All Characters🔓",
+        Description = "❗Strongest Battlegrounds❗",
+        Callback = function()
+            loadstring(game:HttpGet("https://rentry.co/tghuofnu/raw"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
         Title = "😎FREE AND BEST GUI😎",
         Description = "❗Strongest Battlegrounds❗",
         Callback = function()
