@@ -4,7 +4,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
     Title = "🔥Synergy Nexus Hub🔥",
-    SubTitle = "︎¤••••︎¤《 ●By ERROR_USERBANNED● 》",
+    SubTitle = "︎¤••••︎¤《●By ERROR_USERBANNED●》",
     TabWidth = 160,
     Size = UDim2.fromOffset(460, 250),
     Acrylic = true,
@@ -18,6 +18,7 @@ local Tabs = {
     BloxFruits = Window:AddTab({ Title = "Blox•Fruits", Icon = "apple" }), 
     RandomScripts = Window:AddTab({ Title = "Scripts•Random", Icon = "shuffle" }), 
     TSB_Scripts = Window:AddTab({ Title = "TSB•Scripts", Icon = "code" }),
+    GENESIS_FE = Window:AddTab({ Title = "GENESIS FE", Icon = "contact" }),
     Discord = Window:AddTab({ Title = "Discord•Server", Icon = "info" })
 
 }
@@ -295,7 +296,7 @@ Tabs.SynergyNexusScripts:AddButton({
     Tabs.TSB_Scripts:AddButton({
         Title = "😎OP BEST  Script TSB😎",
 
-        Description = "❗OP FREE HUB❗.",
+        Description = "❗STRONGEST BATTLEGROUNDS❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ATrainz/main/main/Phantasm-Loader.lua"))()
         end
@@ -366,6 +367,104 @@ Tabs.SynergyNexusScripts:AddButton({
         Description = "❗SAITAMA❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/AlphaKeyzz/Gojo-Script/main/Gojo-Script"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "🔫FE Dearsister Pistol🔫",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Dearsister"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "🕺🏻FE Krystal Dance🕺🏻",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Krystal%20Dance"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "👮🏻‍♂️FE Good Cop Bad Cop👮🏻‍♂️",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Good%20Cop%20Bad%20Cop"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "☠️FE Goner☠️",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Goner"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "🔪️FE Sadist Genocider🔪️",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Sadist%20Genocider"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "🥊FE Gale Fighter🥊",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Gale%20Fighter"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "🏍️FE Motorcycle🏍️",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Motorcycle"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "⚒️FE Ban Hammer⚒️",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Ban%20Hammer"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "🔫FE AK47🔫",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/AK-47"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "🔫FE Sniper🔫",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Sniper"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "🐉FE DRAGON SWORD🐉",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Neptunian%20V"))()
+        end
+    })
+
+    Tabs.GENESIS_FE:AddButton({
+        Title = "🐱fe Neko🐱",
+        Description = "⚠️YOU NEED ACCESSORIES⚠️.",
+        Callback = function()
+        DisableFlingHealthBar = false
+
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Neko"))()
         end
     })
 
