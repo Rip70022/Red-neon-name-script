@@ -293,22 +293,6 @@ Tabs.SynergyNexusScripts:AddButton({
     })
 
     Tabs.TSB_Scripts:AddButton({
-        Title = "🔓Unlock All Characters🔓",
-        Description = "❗Strongest Battlegrounds❗",
-        Callback = function()
-            loadstring(game:HttpGet("https://rentry.co/tghuofnu/raw"))()
-        end
-    })
-
-    Tabs.TSB_Scripts:AddButton({
-        Title = "😎FREE AND BEST GUI😎",
-        Description = "❗Strongest Battlegrounds❗",
-        Callback = function()
-            loadstring(game:HttpGet("https://nicuse.xyz/SaitamaBattlegrounds.lua"))()
-        end
-    })
-
-    Tabs.TSB_Scripts:AddButton({
         Title = "🟠🧛🏻OP DIO Moveset🧛🏻🟠",
         Description = "❗GAROU❗.",
         Callback = function()
