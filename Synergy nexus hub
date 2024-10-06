@@ -299,10 +299,18 @@ Tabs.SynergyNexusScripts:AddButton({
         Title = "⚔️TSB Scripts⚔️",
         Content = "❗scripts for TSB❗."
     })
+
+    Tabs.TSB_Scripts:AddButton({
+        Title = "OP DIO Moveset",
+        Description = "❗GAROU❗.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Medley-Taboritsky/RobloxScripting/refs/heads/main/DIO_Garou_TSB"))()
+        end
+    })
     
     Tabs.TSB_Scripts:AddButton({
         Title = "⚔️TOJI Moveset⚔️",
-        Description = "❗Load the TOJI moveset script❗.",
+        Description = "❗ATOMIC SAMURAI❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/raw/main/Fe%20Telekinesis%20script"))()
         end
@@ -310,7 +318,7 @@ Tabs.SynergyNexusScripts:AddButton({
     
     Tabs.TSB_Scripts:AddButton({
         Title = "⚔️SUKUNA Moveset⚔️",
-        Description = "❗Load the SUKUNA moveset script❗.",
+        Description = "❗ATOMIC SAMURAI❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/raw/main/Fe%20blackhole%20script"))()
         end
@@ -318,7 +326,7 @@ Tabs.SynergyNexusScripts:AddButton({
     
     Tabs.TSB_Scripts:AddButton({
         Title = "🔵GOJO Moveset🔴",
-        Description = "❗Load the GOJO moveset script❗.",
+        Description = "❗SAITAMA❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/BaldyToSorcerer/main/Latest.lua"))()
         end
@@ -326,7 +334,7 @@ Tabs.SynergyNexusScripts:AddButton({
     
     Tabs.TSB_Scripts:AddButton({
         Title = "🎰HAKARI Moveset🎰",
-        Description = "❗Load the HAKARI moveset script❗.",
+        Description = "❗SAITAMA❗.",
         Callback = function()
             loadstring(game:HttpGet("https://rawscripts.net/raw/The-Strongest-Battlegrounds-Hero-to-True-Nosakatan-18742"))()
         end
@@ -334,24 +342,27 @@ Tabs.SynergyNexusScripts:AddButton({
     
     Tabs.TSB_Scripts:AddButton({
         Title = "🟢DEKU Moveset🟢",
-        Description = "❗Load the DEKU moveset script❗.",
+        Description = "❗SAITAMA❗.",
         Callback = function()
             loadstring(game:HttpGet("https://pastefy.app/MNg2zcxz/raw"))()
         end
     })
     
     Tabs.TSB_Scripts:AddButton({
-        Title = "💀REAPER Moveset💀",
-        Description = "❗Load the REAPER moveset script❗.",
+        Title = "💀OP REAPER Moveset💀",
+        Description = "❗METAL BAT❗.",
         Callback = function()
-            getgenv().Music = false
+            getgenv().Music = false 
+        getgenv().AttackQuality = 'High'
+        getgenv().ConstantSpeed = false
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Reapvitalized/TSB/main/APOPHENIA.lua"))()
+
         end
     })
     
     Tabs.TSB_Scripts:AddButton({
         Title = "🔵GOJO Script🔴",
-        Description = "❗Load the GOJO script❗.",
+        Description = "❗SAITAMA❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/AlphaKeyzz/Gojo-Script/main/Gojo-Script"))()
         end
