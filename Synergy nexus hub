@@ -18,7 +18,7 @@ local Tabs = {
     BloxFruits = Window:AddTab({ Title = "Blox•Fruits", Icon = "apple" }), 
     RandomScripts = Window:AddTab({ Title = "Scripts•Random", Icon = "shuffle" }), 
     TSB_Scripts = Window:AddTab({ Title = "TSB•Scripts", Icon = "code" }),
-    GENESIS_FE = Window:AddTab({ Title = "GENESIS FE", Icon = "contact" }),
+    GENESIS_FE = Window:AddTab({ Title = "GENESIS•FE", Icon = "contact" }),
     Discord = Window:AddTab({ Title = "Discord•Server", Icon = "info" })
 
 }
