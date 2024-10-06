@@ -4,7 +4,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
     Title = "🔥Synergy Nexus Hub🔥",
-    SubTitle = "︎¤••••︎¤《 ●By ERROR_USERBANNED● 》¤••••︎¤",
+    SubTitle = "︎••••︎¤《 ❃By ERROR_USERBANNED❃ 》¤••••︎",
     TabWidth = 160,
     Size = UDim2.fromOffset(460, 250),
     Acrylic = true,
@@ -29,8 +29,8 @@ do
     Fluent:Notify({
         Title = "Loaded",
         Content = "🔥Synergy Nexus Hub🔥",
-        SubContent = "《●By shadow_sadist●》",
-        Duration = 9
+        SubContent = "《 ❃By shadow_sadist❃ 》",
+        Duration = 10
     })
 
     Tabs.Main:AddParagraph({
