@@ -206,14 +206,6 @@ Tabs.SynergyNexusScripts:AddButton({
     })
 
     Tabs.RandomScripts:AddButton({
-        Title = "🔓Unlock All Characters🔓",
-        Description = "❗Strongest Battlegrounds❗",
-        Callback = function()
-            loadstring(game:HttpGet("https://rentry.co/tghuofnu/raw"))()
-        end
-    })
-
-    Tabs.RandomScripts:AddButton({
         Title = "💥OP Script I Reupload💥",
         Description = "❗🍓Dandy's World [ALPHA]❗",
         Callback = function()
@@ -298,6 +290,22 @@ Tabs.SynergyNexusScripts:AddButton({
     Tabs.TSB_Scripts:AddParagraph({
         Title = "⚔️TSB Scripts⚔️",
         Content = "❗scripts for TSB❗."
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "🔓Unlock All Characters🔓",
+        Description = "❗Strongest Battlegrounds❗",
+        Callback = function()
+            loadstring(game:HttpGet("https://rentry.co/tghuofnu/raw"))()
+        end
+    })
+
+    Tabs.RandomScripts:AddButton({
+        Title = "😎FREE AND BEST GUI😎",
+        Description = "❗Strongest Battlegrounds❗",
+        Callback = function()
+            loadstring(game:HttpGet("https://nicuse.xyz/SaitamaBattlegrounds.lua"))()
+        end
     })
 
     Tabs.TSB_Scripts:AddButton({
