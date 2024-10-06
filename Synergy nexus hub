@@ -292,7 +292,7 @@ Tabs.SynergyNexusScripts:AddButton({
         Content = "❗scripts for TSB❗."
     })
 
-    Tabs.RandomScripts:AddButton({
+    Tabs.TSB_Scripts:AddButton({
         Title = "🔓Unlock All Characters🔓",
         Description = "❗Strongest Battlegrounds❗",
         Callback = function()
@@ -300,7 +300,7 @@ Tabs.SynergyNexusScripts:AddButton({
         end
     })
 
-    Tabs.RandomScripts:AddButton({
+    Tabs.TSB_Scripts:AddButton({
         Title = "😎FREE AND BEST GUI😎",
         Description = "❗Strongest Battlegrounds❗",
         Callback = function()
