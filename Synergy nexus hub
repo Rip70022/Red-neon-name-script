@@ -370,6 +370,11 @@ Tabs.SynergyNexusScripts:AddButton({
         end
     })
 
+    Tabs.GENESIS_FE:AddParagraph({
+        Title = "⚠️Warning⚠️: GENESIS FE",
+        Content = "⚜️These scripts need certain accessories to work⚜️"
+    })
+
     Tabs.GENESIS_FE:AddButton({
         Title = "🔫FE Dearsister Pistol🔫",
         Description = "⚠️YOU NEED ACCESSORIES⚠️.",
