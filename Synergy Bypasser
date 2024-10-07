@@ -52,6 +52,87 @@ local function createNotification(title, text)
     notification:Destroy()
 end
 
+local function executeHub()
+    print("Executing the hub...")  -- Debug line
+
+    -- Try loading Fluent
+    print("Loading Fluent...")  -- Debug line
+    local success, Fluent = pcall(function()
+        return loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+    end)
+    if not success then
+        createNotification("Error", "Failed to load Fluent module.")
+        print("Error loading Fluent:", Fluent)  -- Debug line
+        return
+    end
+    print("Fluent loaded successfully")  -- Debug line
+
+    -- Try loading SaveManager
+    print("Loading SaveManager...")  -- Debug line
+    local successSaveManager, SaveManager = pcall(function()
+        return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+    end)
+    if not successSaveManager then
+        createNotification("Error", "Failed to load SaveManager module.")
+        print("Error loading SaveManager:", SaveManager)  -- Debug line
+        return
+    end
+    print("SaveManager loaded successfully")  -- Debug line
+
+    -- Try loading InterfaceManager
+    print("Loading InterfaceManager...")  -- Debug line
+    local successInterfaceManager, InterfaceManager = pcall(function()
+        return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+    end)
+    if not successInterfaceManager then
+        createNotification("Error", "Failed to load InterfaceManager module.")
+        print("Error loading InterfaceManager:", InterfaceManager)  -- Debug line
+        return
+    end
+    print("InterfaceManager loaded successfully")  -- Debug line
+
+    -- Create the hub window
+    print("Creating hub window...")  -- Debug line
+    local Window = Fluent:CreateWindow({
+        Title = "🔥Synergy Bypasser🔥",
+        SubTitle = "︎••••︎¤《 💠By ERROR_USERBANNED💠 》",
+        TabWidth = 160,
+        Size = UDim2.fromOffset(460, 250),
+        Acrylic = true,
+        Theme = "Dark",
+        MinimizeKey = Enum.KeyCode.LeftControl 
+    })
+
+    local Tabs = {
+        BypassChat = Window:AddTab({ Title = "Bypass•Chat", Icon = "code" }),
+        Discord = Window:AddTab({ Title = "Discord•Server", Icon = "info" })
+    }
+
+    local Options = Fluent.Options
+
+    do
+        Fluent:Notify({
+            Title = "Loaded",
+            Content = "🔥Synergy Bypasser🔥",
+            SubContent = "《 🌀By ERROR_USERBANNED 🌀 》",
+            Duration = 10
+        })
+        
+        Tabs.Discord:AddButton({
+            Title = "♦️Join Discord Server♦️",
+            Description = "🌀Click to copy the Discord invite link🌀.",
+            Callback = function()
+                setclipboard("https://discord.gg/7ThdVFRs")
+                Fluent:Notify({
+                    Title = "Copied",
+                    Content = "Discord invite link copied to clipboard",
+                    Duration = 3
+                })
+            end
+        })
+    end
+end
+
 -- Create a GUI function
 local function createGUI()
     local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
