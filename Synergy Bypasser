@@ -114,6 +114,7 @@ local function createGUI()
         if key == Key then
             KeyEntered = true
             createNotification("Synergy Bypasser", "Key entered correctly!")
+            executeHub()  
         else
             createNotification("Synergy Bypasser", "Incorrect key!")
         end
@@ -124,62 +125,37 @@ local function createGUI()
     end)
 end
 
--- Create the GUI
-createGUI()
 
-local function checkKey()
-    local playerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-    local screenGui = playerGui:FindFirstChild("ScreenGui")
-    if not screenGui then
-        createNotification("Error", "ScreenGui not found!")
-        return
-    end
+local function executeHub()
+    
+    local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+    local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+    local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
-    local textBox = screenGui:FindFirstChild("TextBox")
-    if not textBox then
-        createNotification("Error", "TextBox not found!")
-        return
-    end
-
-    local userInput = textBox.Text 
-
-    if userInput == Key then
-        KeyEntered = true
-        createNotification("Access Granted", "You have entered the correct key!")
-    else
-        KeyEntered = false
-        createNotification("Access Denied", "Invalid key. Please try again.")
-    end
-end
-
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
-
-local Window = Fluent:CreateWindow({
-    Title = "🔥Synergy Bypasser🔥",
-    SubTitle = "︎••••︎¤《 💠By ERROR_USERBANNED💠 》",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(460, 250),
-    Acrylic = true,
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl 
-})
-
-local Tabs = {
-    BypassChat = Window:AddTab({ Title = "Bypass•Chat", Icon = "code" }),
-    Discord = Window:AddTab({ Title = "Discord•Server", Icon = "info" })
-}
-
-local Options = Fluent.Options
-
-do
-    Fluent:Notify({
-        Title = "Loaded",
-        Content = "🔥Synergy Bypasser🔥",
-        SubContent = "《 🌀By shadow_sadist🌀 》",
-        Duration = 10
+    local Window = Fluent:CreateWindow({
+        Title = "🔥Synergy Bypasser🔥",
+        SubTitle = "︎••••︎¤《 💠By ERROR_USERBANNED💠 》",
+        TabWidth = 160,
+        Size = UDim2.fromOffset(460, 250),
+        Acrylic = true,
+        Theme = "Dark",
+        MinimizeKey = Enum.KeyCode.LeftControl 
     })
+
+    local Tabs = {
+        BypassChat = Window:AddTab({ Title = "Bypass•Chat", Icon = "code" }),
+        Discord = Window:AddTab({ Title = "Discord•Server", Icon = "info" })
+    }
+
+    local Options = Fluent.Options
+
+    do
+        Fluent:Notify({
+            Title = "Loaded",
+            Content = "🔥Synergy Bypasser🔥",
+            SubContent = "《 🌀By shadow_sadist🌀 》",
+            Duration = 10
+        })
 
     Tabs.BypassChat:AddParagraph({
         Title = "Fe Bypass",
@@ -342,9 +318,34 @@ do
             })
         end
     })
-    
-    
-    SaveManager:SetIgnoreIndexes({"MenuKeybind"})
-    SaveManager:BuildConfigSection(Window)
-    InterfaceManager:BuildInterfaceSection(Window)
-    end
+end
+end
+
+-- Create the GUI
+createGUI()
+
+local function checkKey()
+local playerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+local screenGui = playerGui:FindFirstChild("ScreenGui")
+if not screenGui then
+    createNotification("Error", "ScreenGui not found!")
+    return
+end
+
+local textBox = screenGui:FindFirstChild("TextBox")
+if not textBox then
+    createNotification("Error", "TextBox not found!")
+    return
+end
+
+local userInput = textBox.Text 
+
+if userInput == Key then
+    KeyEntered = true
+    createNotification("Access Granted", "You have entered the correct key!")
+else
+    KeyEntered = false
+    createNotification("Access Denied", "Invalid key. Please try again.")
+end
+end
+
