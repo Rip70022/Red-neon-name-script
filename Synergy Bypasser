@@ -1,4 +1,4 @@
--- Script created by ERROR_USERBANNED/shadow_sadist
+-- Script created by [ERROR_USERBANNED]
 -- Version: v1
 -- Date: 10/03/2024
 
@@ -71,7 +71,7 @@ local function createGUI()
     title.Size = UDim2.new(1, 0, 0, 40)
     title.BackgroundTransparency = 1
     title.TextColor3 = Color3.fromRGB(240, 240, 240)
-    title.Text = "Synergy Bypasser"
+    title.Text = HubName
     title.TextScaled = true
     title.Parent = background
 
@@ -95,9 +95,9 @@ local function createGUI()
     unlockButton.Size = UDim2.new(0, 100, 0, 30)
     unlockButton.Position = UDim2.new(0, 0, 0, 10)
     unlockButton.BackgroundTransparency = 0.5
-    unlockButton.TextColor3 = Color3.fromRGB(240, 240, 240 )
+    unlockButton.TextColor3 = Color3.fromRGB(240, 240, 240)
     unlockButton.Text = "Unlock"
- unlockButton.Parent = buttonFrame
+    unlockButton.Parent = buttonFrame
 
     local closeButton = Instance.new("TextButton")
     closeButton.Name = "CloseButton"
@@ -166,12 +166,6 @@ if KeyEntered then
         print("Adding button to Tab")
     end
 end
-
-createGUI()
-
-if Tab then
-
-    print("Adding tabs")
 
         Tab:AddButton({
             Name = "My apologies, I don't speak to fags❤️",
