@@ -72,8 +72,10 @@ end
 
 local function sendToChat(message)
     local player = game.Players.LocalPlayer
+    local chat = game:GetService("Chat")
+    
     -- Usar el método Chat para enviar el mensaje
-    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:Fire(message, "All")
+    chat:Chat(player.Character.Head, message, Enum.ChatColor.White)
 end
 
 local function executeHub()
