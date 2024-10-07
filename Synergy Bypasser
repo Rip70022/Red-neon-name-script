@@ -1,48 +1,142 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Players = game:GetService("Players")
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
+local AbyssVersion = " v1.0.0";
 
-local chatEvent = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+local Window = Fluent:CreateWindow({
+    Title = "Synergy | Chat Bypasser"..AbyssVersion,
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true,
+    Theme = "Aqua",
+    MinimizeKey = Enum.KeyCode.RightShift
+})
 
--- Función para enviar un mensaje al chat
-local function sendToChat(message)
-    -- Intenta enviar el mensaje
-    local success, err = pcall(function()
-        chatEvent:FireServer(message, Enum.ChatColor.White)
-    end)
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "" }),
+    Bypass = Window:AddTab({ Title = "Bypass", Icon = "" }),
+    WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "" }),
+    SentanceBypasses = Window:AddTab({ Title = "Sentance Bypasses", Icon = "" })
+}
+Window:SelectTab(1);
 
-    if not success then
-        print("Error al enviar el mensaje: " .. tostring(err))
+local characterstable={["a"]="🅐",["b"]="🅑",["c"]="🅒",["d"]="🅓",["e"]="🅔",["f"]="🅕",["g"]="🅖",["h"]="🅗",["i"]="🅘",["j"]="🅙",["k"]="🅚",["l"]="🅛",["m"]="🅜",["n"]="🅝",["o"]="🅞",["p"]="🅟",["q"]="🅠",["r"]="🅡",["s"]="🅢",["t"]="🅣",["u"]="🅤",["v"]="🅥",["w"]="🅦",["x"]="🅧",["y"]="🅨",["z"]="🅩",[" "]=" "};
+
+local function Bypass(input)
+    local lowered = input:lower();
+    local output = "";
+    for i = 1, #lowered do
+        local char = lowered:sub(i, i);
+        output = output .. (characterstable[char] or char);
+    end
+    return output
+end
+
+function SendBypass(message)
+    local msg = Bypass(message);
+    if game:GetService("TextChatService").ChatInputBarConfiguration.TargetTextChannel then
+        game:GetService("TextChatService").ChatInputBarConfiguration.TargetTextChannel:SendAsync(msg);
     else
-        print("Mensaje enviado: " .. message)
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
     end
 end
 
--- Crear una interfaz simple para enviar un mensaje
-local player = Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
+Fluent:Notify({
+    Title = "Frosties",
+    Content = "Chat Bypasser Loaded",
+    SubContent = "Join the discord: .gg/7ThdVFRs",
+    Duration = nil
+})
 
-local screenGui = Instance.new("ScreenGui", playerGui)
-local frame = Instance.new("Frame", screenGui)
-frame.Size = UDim2.new(0, 200, 0, 100)
-frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+Tabs.Main:AddParagraph({
+    Title = "Thank you for using Synergy | ChatBypasser V1.0"
+})
 
-local textBox = Instance.new("TextBox", frame)
-textBox.Size = UDim2.new(1, 0, 0, 30)
-textBox.Position = UDim2.new(0, 0, 0, 0)
-textBox.PlaceholderText = "Escribe tu mensaje aquí..."
-
-local sendButton = Instance.new("TextButton", frame)
-sendButton.Size = UDim2.new(1, 0, 0, 30)
-sendButton.Position = UDim2.new(0, 0, 0, 40)
-sendButton.Text = "Enviar"
-
--- Conectar el botón para enviar el mensaje al chat
-sendButton.MouseButton1Click:Connect(function()
-    local message = textBox.Text
-    if message and message ~= "" then
-        sendToChat(message)
-        textBox.Text = "" -- Limpiar el cuadro de texto
-    else
-        print("Por favor, escribe un mensaje antes de enviar.")
+Tabs.Main:AddButton({
+    Title = "Discord",
+    Description = "Copy the discord invite to your clipboard",
+    Callback = function()
+        setclipboard("https://discord.gg/7ThdVFRs")
+        local Request = syn and syn.request or request
+        Request({
+            Url = "http://127.0.0.1:6463/rpc?v=1",
+            Method = "POST",
+            Headers = {
+                ["Content-Type"] = "application/json",
+                ["Origin"] = "https://discord.com"
+            },
+            Body = game.HttpService:JSONEncode({
+                cmd = "INVITE_BROWSER",
+                args = {
+                    code = "7ThdVFRs"
+                },
+                nonce = game.HttpService:GenerateGUID(false)
+            }),
+        })
+        Fluent:Notify({
+        Title = "Synergy | Chat Bypasser",
+        Content = "Automatically joined discord, if it didn't work the link has been copied to your clipboard.",
+        Duration = 8
+    })
     end
-end)
+})
+
+Tabs.Bypass:AddParagraph({
+    Title = "Chat Bypass",
+    Content = "Enter text to bypass below"
+})
+
+local BypassText = Tabs.Bypass:AddInput("BypassText", {
+    Title = "Text To Bypass",
+    Default = "",
+    Placeholder = "",
+    Numeric = false,
+    Finished = true,
+    Callback = function(Text)
+        SendBypass(Text)
+    end
+});
+
+-- Word Presets
+
+Tabs.WordBypasses:AddParagraph({
+    Title = "text",
+    Content = "text"
+})
+
+Tabs.WordBypasses:AddButton({
+    Title = "Discord",
+    Description = "Bypass Button",
+    Callback = function()
+        SendBypass("discord")
+    end
+})
+Tabs.WordBypasses:AddButton({
+    Title = "text",
+    Description = "Bypass Button",
+    Callback = function()
+        SendBypass("text")
+    end
+})
+Tabs.WordBypasses:AddButton({
+    Title = "text",
+    Description = "Bypass Button",
+    Callback = function()
+        SendBypass("text")
+    end
+})
+
+-- Sentance Presets
+
+Tabs.SentanceBypasses:AddButton({
+    Title = "text",
+    Description = "Bypass Button",
+    Callback = function()
+        SendBypass("text")
+    end
+})
+Tabs.SentanceBypasses:AddButton({
+    Title = "text",
+    Description = "Bypass Button",
+    Callback = function()
+        SendBypass("text")
+    end
+})
