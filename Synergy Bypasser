@@ -190,7 +190,7 @@ local function executeHub()
         Fluent:Notify({
             Title = "Loaded",
             Content = "🔥Synergy Bypasser🔥",
-            SubContent = "《 🌀By shadow_sadist🌀 》",
+            SubContent = "《 🌀By ERROR_USERBANNED 🌀 》",
             Duration = 10
         })
 
