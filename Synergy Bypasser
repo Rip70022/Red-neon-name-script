@@ -1,12 +1,48 @@
-local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
 
 local chatEvent = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
 
-local function onChat(message)
-    if message:lower() == "!enviar" then
-        chatEvent:FireServer("¡Este es un mensaje enviado desde el comando!")
+-- Función para enviar un mensaje al chat
+local function sendToChat(message)
+    -- Intenta enviar el mensaje
+    local success, err = pcall(function()
+        chatEvent:FireServer(message, Enum.ChatColor.White)
+    end)
+
+    if not success then
+        print("Error al enviar el mensaje: " .. tostring(err))
+    else
+        print("Mensaje enviado: " .. message)
     end
 end
 
-Players.LocalPlayer.Chatted:Connect(onChat)
+-- Crear una interfaz simple para enviar un mensaje
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui", playerGui)
+local frame = Instance.new("Frame", screenGui)
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+
+local textBox = Instance.new("TextBox", frame)
+textBox.Size = UDim2.new(1, 0, 0, 30)
+textBox.Position = UDim2.new(0, 0, 0, 0)
+textBox.PlaceholderText = "Escribe tu mensaje aquí..."
+
+local sendButton = Instance.new("TextButton", frame)
+sendButton.Size = UDim2.new(1, 0, 0, 30)
+sendButton.Position = UDim2.new(0, 0, 0, 40)
+sendButton.Text = "Enviar"
+
+-- Conectar el botón para enviar el mensaje al chat
+sendButton.MouseButton1Click:Connect(function()
+    local message = textBox.Text
+    if message and message ~= "" then
+        sendToChat(message)
+        textBox.Text = "" -- Limpiar el cuadro de texto
+    else
+        print("Por favor, escribe un mensaje antes de enviar.")
+    end
+end)
