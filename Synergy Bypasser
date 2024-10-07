@@ -71,10 +71,9 @@ local function createNotification(title, text)
 end
 
 local function sendToChat(message)
-    game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBar.TextBox.Text = message
-    wait(0.1)  -- Pequeña espera para permitir que se establezca el texto
-    game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBar.TextBox:ReleaseFocus()  -- Esto puede enviar el mensaje
-    game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBar.TextBox.Text = ""  -- Limpiar el cuadro de texto
+    local player = game.Players.LocalPlayer
+    -- Usar el método Chat para enviar el mensaje
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:Fire(message, "All")
 end
 
 local function executeHub()
@@ -195,11 +194,12 @@ local function createGUI()
 
     local textBox = Instance.new("TextBox")
     textBox.Name = "TextBox"
-    textBox.Size = UDim2.new(1, 0, 0, 30)
-    textBox.Position = UDim2.new(0, 0, 0, 50)
-    textBox.BackgroundTransparency = 0.5
+    textBox.Size = UDim2.new(1, 0, 0, 40)
+    textBox.Position = UDim2.new(0, 0, 0, 40)
+    textBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
     textBox.TextColor3 = Color3.fromRGB(240, 240, 240)
     textBox.PlaceholderText = "Enter key..."
+    textBox.TextScaled = true
     textBox.Parent = background
 
     local buttonFrame = Instance.new("Frame")
