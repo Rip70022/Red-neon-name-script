@@ -114,7 +114,7 @@ local function createGUI()
         if key == Key then
             KeyEntered = true
             createNotification("Synergy Bypasser", "Key entered correctly!")
-            executeHub()  
+            executeHub() -- Execute the hub here
         else
             createNotification("Synergy Bypasser", "Incorrect key!")
         end
@@ -129,36 +129,46 @@ end
 createGUI()
 
 local function executeHub()
-    print("Executing hub...")  
+    print("Executing the hub...")  -- Debug line
 
-    
+    -- Try loading Fluent
+    print("Loading Fluent...")  -- Debug line
     local success, Fluent = pcall(function()
         return loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
     end)
     if not success then
         createNotification("Error", "Failed to load Fluent module.")
+        print("Error loading Fluent:", Fluent)  -- Debug line
         return
     end
+    print("Fluent loaded successfully")  -- Debug line
 
-   
+    -- Try loading SaveManager
+    print("Loading SaveManager...")  -- Debug line
     local successSaveManager, SaveManager = pcall(function()
         return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
     end)
     if not successSaveManager then
         createNotification("Error", "Failed to load SaveManager module.")
+        print("Error loading SaveManager:", SaveManager)  -- Debug line
         return
     end
+    print("SaveManager loaded successfully")  -- Debug line
 
-   
+    -- Try loading InterfaceManager
+    print("Loading InterfaceManager...")  -- Debug line
     local successInterfaceManager, InterfaceManager = pcall(function()
         return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
     end)
     if not successInterfaceManager then
         createNotification("Error", "Failed to load InterfaceManager module.")
+        print("Error loading InterfaceManager:", InterfaceManager)  -- Debug line
         return
     end
+    print("InterfaceManager loaded successfully")  -- Debug line
 
-    
+    -- Create the hub window
+    print("Creating hub window...")  -- Debug line
     local Window = Fluent:CreateWindow({
         Title = "🔥Synergy Bypasser🔥",
         SubTitle = "︎••••︎¤《 💠By ERROR_USERBANNED💠 》",
