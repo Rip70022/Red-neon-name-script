@@ -1,19 +1,12 @@
+local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local chatEvent = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
 
-local function sendToChat(message)
-    -- Intentar enviar el mensaje
-    local success, err = pcall(function()
-        chatEvent:FireServer(message, Enum.ChatColor.White)
-    end)
-
-    if not success then
-        print("Error al enviar el mensaje: " .. tostring(err))
-    else
-        print("Mensaje enviado: " .. message)
+local function onChat(message)
+    if message:lower() == "!enviar" then
+        chatEvent:FireServer("¡Este es un mensaje enviado desde el comando!")
     end
 end
 
--- Ejemplo de mensaje que deseas enviar
-sendToChat("¡Hola desde el LocalScript!")
+Players.LocalPlayer.Chatted:Connect(onChat)
