@@ -114,7 +114,8 @@ local function createGUI()
         if key == Key then
             KeyEntered = true
             createNotification("Synergy Bypasser", "Key entered correctly!")
-            executeHub()  
+            print("Correct key entered. Executing hub...")  
+            executeHub() 
         else
             createNotification("Synergy Bypasser", "Incorrect key!")
         end
