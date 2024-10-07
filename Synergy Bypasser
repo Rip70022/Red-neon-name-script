@@ -1,8 +1,11 @@
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
 local function sendToChat(message)
-    -- Intentar enviar un mensaje al chat
+    local chatEvent = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+    
+    -- Probar enviar el mensaje
     local success, err = pcall(function()
-        local ReplicatedStorage = game:GetService("ReplicatedStorage")
-        local chatEvent = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
         chatEvent:FireServer(message, Enum.ChatColor.White)
     end)
 
@@ -13,5 +16,5 @@ local function sendToChat(message)
     end
 end
 
--- Prueba enviar un mensaje
-sendToChat("¡Hola desde el script!")
+-- Llamar a la función de prueba
+sendToChat("¡Hola desde el script de prueba!")
