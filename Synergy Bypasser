@@ -154,18 +154,16 @@ end
 
 local function Chat(message)
     local player = game.Players.LocalPlayer
-    if player then
-        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:Fire(message, "All")
+    local chatEvent = game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents")
+
+    if player and chatEvent then
+        chatEvent.SayMessageRequest:Fire(message, "All")
     else
-        print("Player not found")
+        print("Error: Chat event not found or player not found")
     end
 end
 
-if KeyEntered then
-    if Tab then
-        print("Adding button to Tab")
-    end
-end
+if Tab then
 
         Tab:AddButton({
             Name = "My apologies, I don't speak to fags❤️",
@@ -292,6 +290,6 @@ end
                 Chat("D̳a̳m̳n̳ ̳i̳t̳,̳ ̳f̳u̳c̳k̳ ̳y̳o̳u̳")
             end    
         })
-        
-     end
-end
+    else
+        print("Error: Tab is nil")
+    end
