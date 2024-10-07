@@ -114,8 +114,7 @@ local function createGUI()
         if key == Key then
             KeyEntered = true
             createNotification("Synergy Bypasser", "Key entered correctly!")
-            print("Correct key entered. Executing hub...")  
-            executeHub() 
+            executeHub()  
         else
             createNotification("Synergy Bypasser", "Incorrect key!")
         end
@@ -126,13 +125,40 @@ local function createGUI()
     end)
 end
 
+-- Create the GUI
+createGUI()
 
 local function executeHub()
-    
-    local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-    local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-    local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+    print("Executing hub...")  
 
+    
+    local success, Fluent = pcall(function()
+        return loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+    end)
+    if not success then
+        createNotification("Error", "Failed to load Fluent module.")
+        return
+    end
+
+   
+    local successSaveManager, SaveManager = pcall(function()
+        return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+    end)
+    if not successSaveManager then
+        createNotification("Error", "Failed to load SaveManager module.")
+        return
+    end
+
+   
+    local successInterfaceManager, InterfaceManager = pcall(function()
+        return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+    end)
+    if not successInterfaceManager then
+        createNotification("Error", "Failed to load InterfaceManager module.")
+        return
+    end
+
+    
     local Window = Fluent:CreateWindow({
         Title = "🔥Synergy Bypasser🔥",
         SubTitle = "︎••••︎¤《 💠By ERROR_USERBANNED💠 》",
@@ -321,32 +347,3 @@ local function executeHub()
     })
 end
 end
-
--- Create the GUI
-createGUI()
-
-local function checkKey()
-local playerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-local screenGui = playerGui:FindFirstChild("ScreenGui")
-if not screenGui then
-    createNotification("Error", "ScreenGui not found!")
-    return
-end
-
-local textBox = screenGui:FindFirstChild("TextBox")
-if not textBox then
-    createNotification("Error", "TextBox not found!")
-    return
-end
-
-local userInput = textBox.Text 
-
-if userInput == Key then
-    KeyEntered = true
-    createNotification("Access Granted", "You have entered the correct key!")
-else
-    KeyEntered = false
-    createNotification("Access Denied", "Invalid key. Please try again.")
-end
-end
-
