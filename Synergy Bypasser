@@ -77,22 +77,22 @@ local function executeHub()
         print("Error loading SaveManager:", SaveManager)  -- Debug line
         return
     end
-    print("SaveManager loaded successfully")  -- Debug line
+    print("SaveManager loaded successfully")  
 
-    -- Try loading InterfaceManager
-    print("Loading InterfaceManager...")  -- Debug line
+    
+    print("Loading InterfaceManager...")  
     local successInterfaceManager, InterfaceManager = pcall(function()
         return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
     end)
     if not successInterfaceManager then
         createNotification("Error", "Failed to load InterfaceManager module.")
-        print("Error loading InterfaceManager:", InterfaceManager)  -- Debug line
+        print("Error loading InterfaceManager:", InterfaceManager)  
         return
     end
-    print("InterfaceManager loaded successfully")  -- Debug line
+    print("InterfaceManager loaded successfully")  
 
-    -- Create the hub window
-    print("Creating hub window...")  -- Debug line
+    
+    print("Creating hub window...")  
     local Window = Fluent:CreateWindow({
         Title = "🔥Synergy Bypasser🔥",
         SubTitle = "︎••••︎¤《 💠By ERROR_USERBANNED💠 》",
@@ -130,311 +130,45 @@ local function executeHub()
                 })
             end
         })
-    end
-end
 
--- Create a GUI function
-local function createGUI()
-    local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        
+        local messages = {
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"},
+            {title = "text", content = "text"}
+        }
 
-    local screenGui = Instance.new("ScreenGui")
-    screenGui.Name = "ScreenGui"
-    screenGui.Parent = playerGui
-
-    local background = Instance.new("Frame")
-    background.Size = UDim2.new(0, 300, 0, 200)
-    background.Position = UDim2.new(0.5, -150, 0, 50)
-    background.BackgroundTransparency = 0.5
-    background.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-    background.Parent = screenGui
-
-    local title = Instance.new("TextLabel")
-    title.Size = UDim2.new(1, 0, 0, 40)
-    title.BackgroundTransparency = 1
-    title.TextColor3 = Color3.fromRGB(240, 240, 240)
-    title.Text = "🌀Synergy Bypasser🌀"
-    title.TextScaled = true
-    title.Parent = background
-
-    local textBox = Instance.new("TextBox")
-    textBox.Name = "TextBox"
-    textBox.Size = UDim2.new(1, 0, 0, 30)
-    textBox.Position = UDim2.new(0, 0, 0, 50)
-    textBox.BackgroundTransparency = 0.5
-    textBox.TextColor3 = Color3.fromRGB(240, 240, 240)
-    textBox.PlaceholderText = "Enter key..."
-    textBox.Parent = background
-
-    local buttonFrame = Instance.new("Frame")
-    buttonFrame.Size = UDim2.new(1, 0, 0, 50)
-    buttonFrame.Position = UDim2.new(0, 0, 0, 90)
-    buttonFrame.BackgroundTransparency = 1
-    buttonFrame.Parent = background
-
-    local unlockButton = Instance.new("TextButton")
-    unlockButton.Name = "UnlockButton"
-    unlockButton.Size = UDim2.new(0, 100, 0, 30)
-    unlockButton.Position = UDim2.new(0, 0, 0, 10)
-    unlockButton.BackgroundTransparency = 0.5
-    unlockButton.TextColor3 = Color3.fromRGB(240, 240, 240)
-    unlockButton.Text = "☑️ENTER☑️"
-    unlockButton.Parent = buttonFrame
-
-    local closeButton = Instance.new("TextButton")
-    closeButton.Name = "CloseButton"
-    closeButton.Size = UDim2.new(0, 100, 0, 30)
-    closeButton.Position = UDim2.new(1, -110, 0, 10)
-    closeButton.BackgroundTransparency = 0.5
-    closeButton.TextColor3 = Color3.fromRGB(240, 240, 240)
-    closeButton.Text = "❌EXIT❌"
-    closeButton.Parent = buttonFrame
-
-    -- Add event listeners
-    unlockButton.MouseButton1Click:Connect(function()
-        local key = textBox.Text
-        if key == Key then
-            KeyEntered = true
-            createNotification("Synergy Bypasser", "Key entered correctly!")
-            executeHub() -- Execute the hub here
-        else
-            createNotification("Synergy Bypasser", "Incorrect key!")
+        for _, message in ipairs(messages) do
+            Tabs.BypassChat:AddButton({
+                Title = message.title,  
+                Description = message.content,  
+                Callback = function()
+                    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+                    local DefaultChatSystemChatEvents = ReplicatedStorage:FindFirstChild("DefaultChatSystemChatEvents")
+                    if DefaultChatSystemChatEvents then
+                        DefaultChatSystemChatEvents.SayMessageRequest:Fire(message.content, "All")
+                    else
+                        warn("DefaultChatSystemChatEvents not found")
+                    end
+                end
+            })
         end
-    end)
-
-    closeButton.MouseButton1Click:Connect(function()
-        screenGui:Destroy()
-    end)
+    end
 end
 
 -- Create the GUI
 createGUI()
 
-local function executeHub()
-    print("Executing the hub...")  -- Debug line
-
-    -- Try loading Fluent
-    print("Loading Fluent...")  -- Debug line
-    local success, Fluent = pcall(function()
-        return loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-    end)
-    if not success then
-        createNotification("Error", "Failed to load Fluent module.")
-        print("Error loading Fluent:", Fluent)  -- Debug line
-        return
-    end
-    print("Fluent loaded successfully")  -- Debug line
-
-    -- Try loading SaveManager
-    print("Loading SaveManager...")  -- Debug line
-    local successSaveManager, SaveManager = pcall(function()
-        return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-    end)
-    if not successSaveManager then
-        createNotification("Error", "Failed to load SaveManager module.")
-        print("Error loading SaveManager:", SaveManager)  -- Debug line
-        return
-    end
-    print("SaveManager loaded successfully")  -- Debug line
-
-    -- Try loading InterfaceManager
-    print("Loading InterfaceManager...")  -- Debug line
-    local successInterfaceManager, InterfaceManager = pcall(function()
-        return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
-    end)
-    if not successInterfaceManager then
-        createNotification("Error", "Failed to load InterfaceManager module.")
-        print("Error loading InterfaceManager:", InterfaceManager)  -- Debug line
-        return
-    end
-    print("InterfaceManager loaded successfully")  -- Debug line
-
-    -- Create the hub window
-    print("Creating hub window...")  -- Debug line
-    local Window = Fluent:CreateWindow({
-        Title = "🔥Synergy Bypasser🔥",
-        SubTitle = "︎••••︎¤《 💠By ERROR_USERBANNED💠 》",
-        TabWidth = 160,
-        Size = UDim2.fromOffset(460, 250),
-        Acrylic = true,
-        Theme = "Dark",
-        MinimizeKey = Enum.KeyCode.LeftControl 
-    })
-
-    local Tabs = {
-        BypassChat = Window:AddTab({ Title = "Bypass•Chat", Icon = "code" }),
-        Discord = Window:AddTab({ Title = "Discord•Server", Icon = "info" })
-    }
-
-    local Options = Fluent.Options
-
-    do
-        Fluent:Notify({
-            Title = "Loaded",
-            Content = "🔥Synergy Bypasser🔥",
-            SubContent = "《 🌀By ERROR_USERBANNED 🌀 》",
-            Duration = 10
-        })
-
-    Tabs.BypassChat:AddParagraph({
-        Title = "Fe Bypass",
-        Content = "❗Chat Bypasser🔥❗."
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "My apologies, I don't speak to fags❤️",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "Myapologies,ido￴￴n￴￴￴ts￴￴￴p￴￴￴e￴￴￴￴a￴￴￴￴ktof￴￴￴￴a￴￴￴￴￴g￴￴￴￴s￴￴￴❤️"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "Shut Up Nigger",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "ⓢⓗⓤⓣ ⓤⓟ ⓝⓘⓖⓖⓔⓡ"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "Take the dildo off your ass",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "🆃🅰🅺🅴 🆃🅷🅴 🅳🅸🅻🅳🅾 🅾🅵🅵 🆈🅾🆄🆁 🅰🆂🆂"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "I'm going to rape you",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "I'ɱ ɠσιɳɠ ƚσ ɾαρҽ ყσυ"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "COOL TEXT",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "(っ◔◡◔)っ ♥ a true exploiter always speaks well of Synergy Bypass ♥"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "I'm going to kill yourself",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "ı'ɱ ɠơıŋɠ ɬơ ƙıƖƖ ყơų ყơųཞʂɛƖʄ"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "niggers suck it",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "ₙᵢggₑᵣₛ ₛᵤcₖ ᵢₜ"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "I love CP",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "Ⓘ ⓛⓞⓥⓔ ⒸⓅ"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "I love XVIDEOS.COM",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "i̳ ̳l̳o̳v̳e̳ ̳X̳V̳I̳D̳E̳O̳S̳.̳C̳O̳M̳"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "I love PORNHUB.COM",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "i̳ ̳l̳o̳v̳e̳ ̳P̳O̳R̳N̳H̳U̳B̳.̳C̳O̳M̳"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "To get free Robux visit XNXX.COM",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "T̳o̳ ̳g̳e̳t̳ ̳f̳r̳e̳e̳ ̳R̳o̳b̳u̳x̳ ̳v̳i̳s̳i̳t̳ ̳X̳N̳X̳X̳.̳C̳O̳M̳"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "My dick is giant",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "M̳y̳ ̳d̳i̳c̳k̳ ̳i̳s̳ ̳g̳i̳a̳n̳t̳"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "Tilín fucks better than you",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "T̳i̳l̳í̳n̳ ̳f̳u̳c̳k̳s̳ ̳b̳e̳t̳t̳e̳r̳ ̳t̳h̳a̳n̳ ̳y̳o̳u̳"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "Fuck me",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "f̳u̳c̳k̳ ̳m̳e̳"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "Stupid shit",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "S̳t̳u̳p̳i̳d̳ ̳s̳h̳i̳t̳"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.BypassChat:AddButton({
-        Title = "Damn it, fuck you",
-        Description = "🌀Click to Bypass🌀.",
-        Callback = function()
-            local message = "D̳a̳m̳n̳ ̳i̳t̳,̳ ̳f̳u̳c̳k̳ ̳y̳o̳u̳"
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:Fire(message, "All")
-        end
-    })
-
-    Tabs.Discord:AddButton({
-        Title = "♦️Join Discord Server♦️",
-        Description = "🌀Click to copy the Discord invite link🌀.",
-        Callback = function()
-            setclipboard("https://discord.gg/7ThdVFRs")
-            Fluent:Notify({
-                Title = "Copied",
-                Content = "Discord invite link copied to clipboard",
-                Duration = 3
-            })
-        end
-    })
-end
-end
+-- Run the hub execution
+executeHub()
