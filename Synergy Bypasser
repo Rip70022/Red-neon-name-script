@@ -12,7 +12,25 @@ local HubName = "Synergy Bypasser"
 local Key = "kittyyy"
 local KeyEntered = false
 
--- Create a notification function
+-- Lista de notificaciones
+local notifications = {
+    {title = "Título 1", content = "Contenido 1"},
+    {title = "Título 2", content = "Contenido 2"},
+    {title = "Título 3", content = "Contenido 3"},
+    {title = "Título 4", content = "Contenido 4"},
+    {title = "Título 5", content = "Contenido 5"},
+    {title = "Título 6", content = "Contenido 6"},
+    {title = "Título 7", content = "Contenido 7"},
+    {title = "Título 8", content = "Contenido 8"},
+    {title = "Título 9", content = "Contenido 9"},
+    {title = "Título 10", content = "Contenido 10"},
+    {title = "Título 11", content = "Contenido 11"},
+    {title = "Título 12", content = "Contenido 12"},
+    {title = "Título 13", content = "Contenido 13"},
+    {title = "Título 14", content = "Contenido 14"},
+}
+
+-- Crear una función de notificación
 local function createNotification(title, text)
     local notification = Instance.new("Frame")
     notification.Size = UDim2.new(0, 300, 0, 100)
@@ -52,6 +70,13 @@ local function createNotification(title, text)
     notification:Destroy()
 end
 
+local function sendToChat(message)
+    game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBar.TextBox.Text = message
+    wait(0.1)  -- Pequeña espera para permitir que se establezca el texto
+    game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBar.TextBox:ReleaseFocus()  -- Esto puede enviar el mensaje
+    game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBar.TextBox.Text = ""  -- Limpiar el cuadro de texto
+end
+
 local function executeHub()
     print("Executing the hub...")  -- Debug line
 
@@ -77,22 +102,22 @@ local function executeHub()
         print("Error loading SaveManager:", SaveManager)  -- Debug line
         return
     end
-    print("SaveManager loaded successfully")  
+    print("SaveManager loaded successfully")  -- Debug line
 
-    
-    print("Loading InterfaceManager...")  
+    -- Try loading InterfaceManager
+    print("Loading InterfaceManager...")  -- Debug line
     local successInterfaceManager, InterfaceManager = pcall(function()
         return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
     end)
     if not successInterfaceManager then
         createNotification("Error", "Failed to load InterfaceManager module.")
-        print("Error loading InterfaceManager:", InterfaceManager)  
+        print("Error loading InterfaceManager:", InterfaceManager)  -- Debug line
         return
     end
-    print("InterfaceManager loaded successfully")  
+    print("InterfaceManager loaded successfully")  -- Debug line
 
-    
-    print("Creating hub window...")  
+    -- Create the hub window
+    print("Creating hub window...")  -- Debug line
     local Window = Fluent:CreateWindow({
         Title = "🔥Synergy Bypasser🔥",
         SubTitle = "︎••••︎¤《 💠By ERROR_USERBANNED💠 》",
@@ -118,6 +143,18 @@ local function executeHub()
             Duration = 10
         })
         
+        -- Añadir botones para cada notificación
+        for _, notification in ipairs(notifications) do
+            Tabs.BypassChat:AddButton({
+                Title = notification.title,
+                Description = "Click to send to chat",
+                Callback = function()
+                    sendToChat(notification.content)
+                    createNotification("Sent", "Sent to chat: " .. notification.content)
+                end
+            })
+        end
+        
         Tabs.Discord:AddButton({
             Title = "♦️Join Discord Server♦️",
             Description = "🌀Click to copy the Discord invite link🌀.",
@@ -130,45 +167,80 @@ local function executeHub()
                 })
             end
         })
-
-        
-        local messages = {
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"},
-            {title = "text", content = "text"}
-        }
-
-        for _, message in ipairs(messages) do
-            Tabs.BypassChat:AddButton({
-                Title = message.title,  
-                Description = message.content,  
-                Callback = function()
-                    local ReplicatedStorage = game:GetService("ReplicatedStorage")
-                    local DefaultChatSystemChatEvents = ReplicatedStorage:FindFirstChild("DefaultChatSystemChatEvents")
-                    if DefaultChatSystemChatEvents then
-                        DefaultChatSystemChatEvents.SayMessageRequest:Fire(message.content, "All")
-                    else
-                        warn("DefaultChatSystemChatEvents not found")
-                    end
-                end
-            })
-        end
     end
 end
 
--- Create the GUI
-createGUI()
+-- Crear una GUI
+local function createGUI()
+    local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Run the hub execution
-executeHub()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "ScreenGui"
+    screenGui.Parent = playerGui
+
+    local background = Instance.new("Frame")
+    background.Size = UDim2.new(0, 300, 0, 200)
+    background.Position = UDim2.new(0.5, -150, 0, 50)
+    background.BackgroundTransparency = 0.5
+    background.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    background.Parent = screenGui
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, 0, 0, 40)
+    title.BackgroundTransparency = 1
+    title.TextColor3 = Color3.fromRGB(240, 240, 240)
+    title.Text = "🌀Synergy Bypasser🌀"
+    title.TextScaled = true
+    title.Parent = background
+
+    local textBox = Instance.new("TextBox")
+    textBox.Name = "TextBox"
+    textBox.Size = UDim2.new(1, 0, 0, 30)
+    textBox.Position = UDim2.new(0, 0, 0, 50)
+    textBox.BackgroundTransparency = 0.5
+    textBox.TextColor3 = Color3.fromRGB(240, 240, 240)
+    textBox.PlaceholderText = "Enter key..."
+    textBox.Parent = background
+
+    local buttonFrame = Instance.new("Frame")
+    buttonFrame.Size = UDim2.new(1, 0, 0, 40)
+    buttonFrame.Position = UDim2.new(0, 0, 0, 100)
+    buttonFrame.BackgroundTransparency = 1
+    buttonFrame.Parent = background
+
+    local enterButton = Instance.new("TextButton")
+    enterButton.Size = UDim2.new(0.5, 0, 1, 0)
+    enterButton.Position = UDim2.new(0, 0, 0, 0)
+    enterButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+    enterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    enterButton.Text = "Enter"
+    enterButton.Parent = buttonFrame
+
+    local exitButton = Instance.new("TextButton")
+    exitButton.Size = UDim2.new(0.5, 0, 1, 0)
+    exitButton.Position = UDim2.new(0.5, 0, 0, 0)
+    exitButton.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+    exitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    exitButton.Text = "Exit"
+    exitButton.Parent = buttonFrame
+
+    -- Evento de presionar el botón de entrada
+    enterButton.MouseButton1Click:Connect(function()
+        if textBox.Text == Key then
+            KeyEntered = true
+            createNotification("Acceso Concedido", "Acceso al Hub permitido.")
+            background.Visible = false
+            executeHub()
+        else
+            createNotification("Acceso Denegado", "La clave ingresada es incorrecta.")
+        end
+    end)
+
+    -- Evento de presionar el botón de salida
+    exitButton.MouseButton1Click:Connect(function()
+        background:Destroy()
+    end)
+end
+
+-- Llama a crear la GUI
+createGUI()
