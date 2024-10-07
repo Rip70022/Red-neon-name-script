@@ -96,7 +96,7 @@ local function createGUI()
     unlockButton.Position = UDim2.new(0, 0, 0, 10)
     unlockButton.BackgroundTransparency = 0.5
     unlockButton.TextColor3 = Color3.fromRGB(240, 240, 240)
-    unlockButton.Text = "ENTER"
+    unlockButton.Text = "☑️ENTER☑️"
     unlockButton.Parent = buttonFrame
 
     local closeButton = Instance.new("TextButton")
@@ -105,7 +105,7 @@ local function createGUI()
     closeButton.Position = UDim2.new(1, -110, 0, 10)
     closeButton.BackgroundTransparency = 0.5
     closeButton.TextColor3 = Color3.fromRGB(240, 240, 240)
-    closeButton.Text = "EXIT"
+    closeButton.Text = "❌EXIT❌"
     closeButton.Parent = buttonFrame
 
     -- Add event listeners
