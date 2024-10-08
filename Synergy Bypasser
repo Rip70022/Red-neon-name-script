@@ -15,7 +15,7 @@ local function executeHub()
     local Window = Fluent:CreateWindow({
         Title = "🌀Synergy | Bypasser🌀" .. AbyssVersion,
         TabWidth = 160,
-        Size = UDim2.fromOffset(570, 440),
+        Size = UDim2.fromOffset(460, 250),
         Acrylic = true,
         Theme = "Aqua",
         MinimizeKey = Enum.KeyCode.RightShift
