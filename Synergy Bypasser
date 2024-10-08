@@ -3,6 +3,76 @@ local Key = "kittyyy"  -- The key is "kittyyy"
 local KeyEntered = false
 local AbyssVersion = " BETA";
 
+-- Function to execute the hub when the correct key is entered
+local function executeHub()
+    Fluent:Notify({
+        Title = "🌀Synergy | Hub Executed🌀",
+        Content = "Access to the Hub granted. Enjoy!",
+        Duration = 8
+    })
+    -- Here you could start your hub, for example, by calling other functions or modules
+end
+
+-- Create the Key system GUI
+local function createGUI()
+    local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "ScreenGui"
+    screenGui.Parent = playerGui
+
+    local background = Instance.new("Frame")
+    background.Size = UDim2.new(0, 300, 0, 200)
+    background.Position = UDim2.new(0.5, -150, 0, 50)
+    background.BackgroundTransparency = 0.5
+    background.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    background.Parent = screenGui
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, 0, 0, 40)
+    title.BackgroundTransparency = 1
+    title.TextColor3 = Color3.fromRGB(240, 240, 240)
+    title.Text = "🌀Synergy Bypasser🌀"
+    title.TextScaled = true
+    title.Parent = background
+
+    local textBox = Instance.new("TextBox")
+    textBox.Name = "TextBox"
+    textBox.Size = UDim2.new(1, 0, 0, 40)
+    textBox.Position = UDim2.new(0, 0, 0, 40)
+    textBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    textBox.TextColor3 = Color3.fromRGB(240, 240, 240)
+    textBox.PlaceholderText = "Enter key here"
+    textBox.TextScaled = true
+    textBox.Parent = background
+
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(1, 0, 0, 40)
+    button.Position = UDim2.new(0, 0, 0, 100)
+    button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    button.TextColor3 = Color3.fromRGB(240, 240, 240)
+    button.Text = "ENTER"
+    button.TextScaled = true
+    button.Parent = background
+
+    button.MouseButton1Click:Connect(function()
+        if textBox.Text == Key then
+            KeyEntered = true
+            createNotification("Access Granted", "You have entered the correct key.")
+            executeHub()  -- Execute the hub upon correct key entry
+            screenGui:Destroy()
+        else
+            createNotification("Access Denied", "Incorrect key. Please try again.")
+        end
+    end)
+
+    textBox.FocusLost:Connect(function(enterPressed)
+        if enterPressed then
+            button:Fire()
+        end
+    end)
+end
+
 -- Create window using Fluent UI
 local Window = Fluent:CreateWindow({
     Title = "🌀Synergy | Bypasser🌀" .. AbyssVersion,
@@ -16,7 +86,7 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "hammer" }),
     Bypass = Window:AddTab({ Title = "Bypass", Icon = "shield" }),
-    WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "code-2" }),
+    WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "cog" }),
     SentanceBypasses = Window:AddTab({ Title = "Sentance Bypasses", Icon = "code" })
 }
 Window:SelectTab(1);
@@ -152,102 +222,5 @@ Tabs.SentanceBypasses:AddButton({
     end
 })
 
--- Key System in the GUI
-local function createNotification(title, content)
-    local notification = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
-    local frame = Instance.new("Frame", notification)
-    frame.Size = UDim2.new(0, 300, 0, 100)
-    frame.Position = UDim2.new(0.5, -150, 0.5, -50)
-    frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    frame.BackgroundTransparency = 0.5
-
-    local titleLabel = Instance.new("TextLabel", frame)
-    titleLabel.Size = UDim2.new(1, 0, 0, 40)
-    titleLabel.BackgroundTransparency = 1
-    titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    titleLabel.Text = title
-    titleLabel.TextScaled = true
-
-    local contentLabel = Instance.new("TextLabel", frame)
-    contentLabel.Size = UDim2.new(1, 0, 0, 60)
-    contentLabel.Position = UDim2.new(0, 0, 0, 40)
-    contentLabel.BackgroundTransparency = 1
-    contentLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    contentLabel.Text = content
-    contentLabel.TextScaled = true
-
-    wait(3)
-    notification:Destroy()
-end
-
--- Function to execute the hub when the correct key is entered
-local function executeHub()
-    Fluent:Notify({
-        Title = "🌀Synergy | Hub Executed🌀",
-        Content = "Access to the Hub granted. Enjoy!",
-        Duration = 8
-    })
-    -- Here you could start your hub, for example, by calling other functions or modules
-end
-
--- Create the Key system GUI
-local function createGUI()
-    local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-    local screenGui = Instance.new("ScreenGui")
-    screenGui.Name = "ScreenGui"
-    screenGui.Parent = playerGui
-
-    local background = Instance.new("Frame")
-    background.Size = UDim2.new(0, 300, 0, 200)
-    background.Position = UDim2.new(0.5, -150, 0, 50)
-    background.BackgroundTransparency = 0.5
-    background.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-    background.Parent = screenGui
-
-    local title = Instance.new("TextLabel")
-    title.Size = UDim2.new(1, 0, 0, 40)
-    title.BackgroundTransparency = 1
-    title.TextColor3 = Color3.fromRGB(240, 240, 240)
-    title.Text = "🌀Synergy Bypasser🌀"
-    title.TextScaled = true
-    title.Parent = background
-
-    local textBox = Instance.new("TextBox")
-    textBox.Name = "TextBox"
-    textBox.Size = UDim2.new(1, 0, 0, 40)
-    textBox.Position = UDim2.new(0, 0, 0, 40)
-    textBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    textBox.TextColor3 = Color3.fromRGB(240, 240, 240)
-    textBox.PlaceholderText = "Enter key here"
-    textBox.TextScaled = true
-    textBox.Parent = background
-
-    local button = Instance.new("TextButton")
-    button.Size = UDim2.new(1, 0, 0, 40)
-    button.Position = UDim2.new(0, 0, 0, 100)
-    button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    button.TextColor3 = Color3.fromRGB(240, 240, 240)
-    button.Text = "ENTER"
-    button.TextScaled = true
-    button.Parent = background
-
-    button.MouseButton1Click:Connect(function()
-        if textBox.Text == Key then
-            KeyEntered = true
-            createNotification("Access Granted", "You have entered the correct key.")
-            executeHub()  -- Execute the hub upon correct key entry
-            screenGui:Destroy()
-        else
-            createNotification("Access Denied", "Incorrect key. Please try again.")
-        end
-    end)
-
-    textBox.FocusLost:Connect(function(enterPressed)
-        if enterPressed then
-            button:Fire()
-        end
-    end)
-end
-
+-- Show the key system GUI
 createGUI()
