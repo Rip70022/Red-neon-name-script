@@ -126,14 +126,14 @@ local function executeHub()
         Title = "Discord",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Discord")
+            SendBypass("Dιʂƈσɾԃ")
         end
     })
     Tabs.WordBypasses:AddButton({
         Title = "shit",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("` ॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚   ̌̌̌  ᳚᳚᳚᳚᳚ťѕhіt")
+            SendBypass("Şhit")
         end
     })
     Tabs.WordBypasses:AddButton({
@@ -187,7 +187,7 @@ local function executeHub()
         Title = "COOL TEXT",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("a true exploiter use Synergy Bypasser")
+            SendBypass("α ƚɾυҽ ҽxρʅσιƚҽɾ υʂҽ Sყɳҽɾɠყ Bყραʂʂҽɾ")
         end
     })
 
@@ -195,7 +195,7 @@ local function executeHub()
         Title = "I'm going to kill yourself",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("ɨ'ʍ ɢօɨռɢ ȶօ ӄɨʟʟ ʏօʊʀֆɛʟʄ")
+            SendBypass("į'ʍ ցօìղց էօ ҟìӀӀ վօմɾʂҽӀƒ")
         end
     })
 
@@ -251,7 +251,7 @@ local function executeHub()
         Title = "Tilín fucks better than you",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Tilín fucks better than you")
+            SendBypass("ͲìӀíղ ƒմçҟʂ ҍҽէէҽɾ էհąղ վօմ")
         end
     })
 
