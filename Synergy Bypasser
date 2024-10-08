@@ -5,7 +5,7 @@ local AbyssVersion = " BETA";
 
 -- Create window using Fluent UI
 local Window = Fluent:CreateWindow({
-    Title = "🌀Synergy | Bypasser🌀"..AbyssVersion,
+    Title = "🌀Synergy | Bypasser🌀" .. AbyssVersion,
     TabWidth = 160,
     Size = UDim2.fromOffset(570, 440),
     Acrylic = true,
@@ -16,17 +16,17 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "hammer" }),
     Bypass = Window:AddTab({ Title = "Bypass", Icon = "shield" }),
-    WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "code-2" }),
+    WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "cog" }),
     SentanceBypasses = Window:AddTab({ Title = "Sentance Bypasses", Icon = "code" })
 }
 Window:SelectTab(1);
 
--- Character table for chat bypass
+-- Character table for chat bypass (new letters added)
 local characterstable = {
-    ["a"]="ₐ", ["b"]="b", ["c"]="c", ["d"]="d", ["e"]="ₑ", ["r"]="ᵣ", ["t"]="ₜ", ["y"]="y",
-    ["u"]="ᵤ", ["i"]="ᵢ", ["o"]="ₒ", ["p"]="ₚ", ["q"]="q", ["w"]="w", ["s"]="ₛ", ["f"]="f", 
-    ["g"]="g", ["h"]="ₕ", ["j"]="ⱼ", ["k"]="ₖ", ["l"]="ₗ", ["m"]="ₘ", ["n"]="ₙ", ["v"]="ᵥ", 
-    ["x"]="ₓ", ["z"]="z", [" "]=" "
+    ["a"] = "ₐ", ["b"] = "b", ["c"] = "c", ["d"] = "d", ["e"] = "ₑ", ["r"] = "ᵣ", ["t"] = "ₜ",
+    ["y"] = "y", ["u"] = "ᵤ", ["i"] = "ᵢ", ["o"] = "ₒ", ["p"] = "ₚ", ["q"] = "q", ["w"] = "w",
+    ["s"] = "ₛ", ["f"] = "f", ["g"] = "g", ["h"] = "ₕ", ["j"] = "ⱼ", ["k"] = "ₖ", ["l"] = "ₗ",
+    ["m"] = "ₘ", ["n"] = "ₙ", ["v"] = "ᵥ", ["x"] = "ₓ", ["z"] = "z", [" "] = " "
 }
 
 -- Function for text bypass
@@ -59,9 +59,8 @@ Fluent:Notify({
 })
 
 -- Functions for the tabs and buttons
-
 Tabs.Main:AddParagraph({
-    Title = "❗Thank you for using 🌀Synergy | Bypasser🌀❗"
+    Title = "❗Thank you for using 🌀Synergy | Bypasser❗"
 })
 
 Tabs.Main:AddButton({
@@ -86,10 +85,10 @@ Tabs.Main:AddButton({
             }),
         })
         Fluent:Notify({
-        Title = "🌀Synergy | Chat Bypasser🌀",
-        Content = "⚠️Automatically joined discord, if it didn't work the link has been copied to your clipboard⚠️.",
-        Duration = 8
-    })
+            Title = "🌀Synergy | Chat Bypasser🌀",
+            Content = "⚠️Automatically joined discord, if it didn't work the link has been copied to your clipboard⚠️.",
+            Duration = 8
+        })
     end
 })
 
@@ -110,7 +109,6 @@ local BypassText = Tabs.Bypass:AddInput("BypassText", {
 })
 
 -- Word Presets
-
 Tabs.WordBypasses:AddParagraph({
     Title = "🔹Word Bypasses🔹",
     Content = "⚠️Presets below⚠️"
@@ -139,7 +137,6 @@ Tabs.WordBypasses:AddButton({
 })
 
 -- Sentance Presets
-
 Tabs.SentanceBypasses:AddButton({
     Title = "I love Roblox!",
     Description = "⚠️Bypass Button⚠️",
@@ -190,6 +187,7 @@ local function executeHub()
         Content = "Access to the Hub granted. Enjoy!",
         Duration = 8
     })
+    -- Here you could start your hub, for example, by calling other functions or modules
 end
 
 -- Create the Key system GUI
@@ -225,45 +223,25 @@ local function createGUI()
     textBox.TextScaled = true
     textBox.Parent = background
 
-    local buttonFrame = Instance.new("Frame")
-    buttonFrame.Size = UDim2.new(1, 0, 0, 40)
-    buttonFrame.Position = UDim2.new(0, 0, 0, 100)
-    buttonFrame.BackgroundTransparency = 1
-    buttonFrame.Parent = background
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(1, 0, 0, 40)
+    button.Position = UDim2.new(0, 0, 0, 100)
+    button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    button.TextColor3 = Color3.fromRGB(240, 240, 240)
+    button.Text = "Submit"
+    button.TextScaled = true
+    button.Parent = background
 
-    local enterButton = Instance.new("TextButton")
-    enterButton.Size = UDim2.new(0.5, 0, 1, 0)
-    enterButton.Position = UDim2.new(0, 0, 0, 0)
-    enterButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-    enterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    enterButton.Text = "Enter"
-    enterButton.Parent = buttonFrame
-
-    local exitButton = Instance.new("TextButton")
-    exitButton.Size = UDim2.new(0.5, 0, 1, 0)
-    exitButton.Position = UDim2.new(0.5, 0, 0, 0)
-    exitButton.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
-    exitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    exitButton.Text = "Exit"
-    exitButton.Parent = buttonFrame
-
-    -- Enter button event
-    enterButton.MouseButton1Click:Connect(function()
+    button.MouseButton1Click:Connect(function()
         if textBox.Text == Key then
             KeyEntered = true
-            createNotification("Access Granted", "Access to the Hub allowed.")
-            background.Visible = false
-            executeHub()  -- Execute the hub after the correct key is entered
+            createNotification("Access Granted", "You have entered the correct key.")
+            executeHub()  -- Execute the hub upon correct key entry
+            screenGui:Destroy()
         else
-            createNotification("Access Denied", "Incorrect key entered.")
+            createNotification("Access Denied", "Incorrect key. Please try again.")
         end
-    end)
-
-    -- Exit button event
-    exitButton.MouseButton1Click:Connect(function()
-        background:Destroy()
     end)
 end
 
--- Call to create the GUI and check the key
 createGUI()
