@@ -3,8 +3,6 @@ local Key = "kittyyy"
 local KeyEntered = false
 local AbyssVersion = " BETA";
 
-
-
 local Window = Fluent:CreateWindow({
     Title = "🌀Synergy | Bypasser🌀"..AbyssVersion,
     TabWidth = 160,
@@ -146,6 +144,43 @@ Tabs.SentanceBypasses:AddButton({
 })
 
 -- Crear una GUI
+local function createNotification(title, content)
+    local notification = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
+    local frame = Instance.new("Frame", notification)
+    frame.Size = UDim2.new(0, 300, 0, 100)
+    frame.Position = UDim2.new(0.5, -150, 0.5, -50)
+    frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    frame.BackgroundTransparency = 0.5
+
+    local titleLabel = Instance.new("TextLabel", frame)
+    titleLabel.Size = UDim2.new(1, 0, 0, 40)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    titleLabel.Text = title
+    titleLabel.TextScaled = true
+
+    local contentLabel = Instance.new("TextLabel", frame)
+    contentLabel.Size = UDim2.new(1, 0, 0, 60)
+    contentLabel.Position = UDim2.new(0, 0, 0, 40)
+    contentLabel.BackgroundTransparency = 1
+    contentLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    contentLabel.Text = content
+    contentLabel.TextScaled = true
+
+    wait(3)
+    notification:Destroy()
+end
+
+local function executeHub()
+    -- Aquí puedes colocar el código que deseas ejecutar en el hub
+    Fluent:Notify({
+        Title = "🌀Synergy | Hub Executed🌀",
+        Content = "Acceso al Hub concedido. ¡Disfruta!",
+        Duration = 8
+    })
+    -- Aquí podrías iniciar tu hub, por ejemplo, llamando a otras funciones o módulos
+end
+
 local function createGUI()
     local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -206,7 +241,7 @@ local function createGUI()
             KeyEntered = true
             createNotification("Acceso Concedido", "Acceso al Hub permitido.")
             background.Visible = false
-            executeHub()
+            executeHub()  -- Ejecutar el hub después de que la clave se haya ingresado correctamente
         else
             createNotification("Acceso Denegado", "La clave ingresada es incorrecta.")
         end
