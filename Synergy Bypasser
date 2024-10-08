@@ -13,6 +13,15 @@ local function executeHub()
     -- Here you could start your hub, for example, by calling other functions or modules
 end
 
+-- Notification function
+local function createNotification(title, content)
+    Fluent:Notify({
+        Title = title,
+        Content = content,
+        Duration = 5
+    })
+end
+
 -- Create the Key system GUI
 local function createGUI()
     local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -49,7 +58,7 @@ local function createGUI()
     local button = Instance.new("TextButton")
     button.Size = UDim2.new(1, 0, 0, 40)
     button.Position = UDim2.new(0, 0, 0, 100)
-    button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    button.BackgroundColor3 = Color3.fromRGB(0, 255, 0) -- Change button color to green
     button.TextColor3 = Color3.fromRGB(240, 240, 240)
     button.Text = "ENTER"
     button.TextScaled = true
@@ -86,7 +95,7 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "info" }),
     Bypass = Window:AddTab({ Title = "Bypass", Icon = "shield" }),
-    WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "cog" }),
+    WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "code-2" }),
     SentanceBypasses = Window:AddTab({ Title = "Sentance Bypasses", Icon = "code" })
 }
 Window:SelectTab(1);
@@ -214,13 +223,13 @@ Tabs.SentanceBypasses:AddButton({
         SendBypass("I love Roblox!")
     end
 })
-Tabs.SentanceBypasses:AddButton({
-    Title = "Goodbye everyone!",
-    Description = "⚠️Bypass Button⚠️",
-    Callback = function()
+
+-- Close the program when the player leaves
+game.Players.LocalPlayer.AncestryChanged:Connect(function(_, parent)
+    if not parent then
         SendBypass("Goodbye everyone!")
     end
-})
+end)
 
 -- Show the key system GUI
 createGUI()
