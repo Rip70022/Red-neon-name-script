@@ -14,9 +14,9 @@ local Window = Fluent:CreateWindow({
 
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "hammer" }),
-    Bypass = Window:AddTab({ Title = "Bypass", Icon = "code" }),
+    Bypass = Window:AddTab({ Title = "Bypass", Icon = "shield" }),
     WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "cog" }),
-    SentanceBypasses = Window:AddTab({ Title = "Sentance Bypasses", Icon = "shield" })
+    SentanceBypasses = Window:AddTab({ Title = "Sentance Bypasses", Icon = "code" })
 }
 Window:SelectTab(1);
 
