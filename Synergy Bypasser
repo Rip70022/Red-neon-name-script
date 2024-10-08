@@ -1,5 +1,9 @@
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
+local Key = "kittyyy"
+local KeyEntered = false
 local AbyssVersion = " BETA";
+
+
 
 local Window = Fluent:CreateWindow({
     Title = "🌀Synergy | Bypasser🌀"..AbyssVersion,
@@ -140,3 +144,79 @@ Tabs.SentanceBypasses:AddButton({
         SendBypass("text")
     end
 })
+
+-- Crear una GUI
+local function createGUI()
+    local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "ScreenGui"
+    screenGui.Parent = playerGui
+
+    local background = Instance.new("Frame")
+    background.Size = UDim2.new(0, 300, 0, 200)
+    background.Position = UDim2.new(0.5, -150, 0, 50)
+    background.BackgroundTransparency = 0.5
+    background.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    background.Parent = screenGui
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, 0, 0, 40)
+    title.BackgroundTransparency = 1
+    title.TextColor3 = Color3.fromRGB(240, 240, 240)
+    title.Text = "🌀Synergy Bypasser🌀"
+    title.TextScaled = true
+    title.Parent = background
+
+    local textBox = Instance.new("TextBox")
+    textBox.Name = "TextBox"
+    textBox.Size = UDim2.new(1, 0, 0, 40)
+    textBox.Position = UDim2.new(0, 0, 0, 40)
+    textBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    textBox.TextColor3 = Color3.fromRGB(240, 240, 240)
+    textBox.PlaceholderText = "Enter key here"
+    textBox.TextScaled = true
+    textBox.Parent = background
+
+    local buttonFrame = Instance.new("Frame")
+    buttonFrame.Size = UDim2.new(1, 0, 0, 40)
+    buttonFrame.Position = UDim2.new(0, 0, 0, 100)
+    buttonFrame.BackgroundTransparency = 1
+    buttonFrame.Parent = background
+
+    local enterButton = Instance.new("TextButton")
+    enterButton.Size = UDim2.new(0.5, 0, 1, 0)
+    enterButton.Position = UDim2.new(0, 0, 0, 0)
+    enterButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+    enterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    enterButton.Text = "Enter"
+    enterButton.Parent = buttonFrame
+
+    local exitButton = Instance.new("TextButton")
+    exitButton.Size = UDim2.new(0.5, 0, 1, 0)
+    exitButton.Position = UDim2.new(0.5, 0, 0, 0)
+    exitButton.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+    exitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    exitButton.Text = "Exit"
+    exitButton.Parent = buttonFrame
+
+    -- Evento de presionar el botón de entrada
+    enterButton.MouseButton1Click:Connect(function()
+        if textBox.Text == Key then
+            KeyEntered = true
+            createNotification("Acceso Concedido", "Acceso al Hub permitido.")
+            background.Visible = false
+            executeHub()
+        else
+            createNotification("Acceso Denegado", "La clave ingresada es incorrecta.")
+        end
+    end)
+
+    -- Evento de presionar el botón de salida
+    exitButton.MouseButton1Click:Connect(function()
+        background:Destroy()
+    end)
+end
+
+-- Llama a crear la GUI
+createGUI()
