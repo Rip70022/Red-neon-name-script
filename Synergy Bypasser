@@ -1,9 +1,9 @@
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
-local Key = "kittyyy"  -- La clave es "kittyyy"
+local Key = "kittyyy"  -- The key is "kittyyy"
 local KeyEntered = false
 local AbyssVersion = " BETA";
 
--- Crear ventana usando Fluent UI
+-- Create window using Fluent UI
 local Window = Fluent:CreateWindow({
     Title = "🌀Synergy | Bypasser🌀"..AbyssVersion,
     TabWidth = 160,
@@ -16,12 +16,12 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "hammer" }),
     Bypass = Window:AddTab({ Title = "Bypass", Icon = "shield" }),
-    WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "code-2" }),
+    WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "cog" }),
     SentanceBypasses = Window:AddTab({ Title = "Sentance Bypasses", Icon = "code" })
 }
 Window:SelectTab(1);
 
--- Tabla de caracteres para el bypass del chat
+-- Character table for chat bypass
 local characterstable = {
     ["a"]="🅐",["b"]="🅑",["c"]="🅒",["d"]="🅓",["e"]="🅔",["f"]="🅕",["g"]="🅖",["h"]="🅗",
     ["i"]="🅘",["j"]="🅙",["k"]="🅚",["l"]="🅛",["m"]="🅜",["n"]="🅝",["o"]="🅞",["p"]="🅟",
@@ -29,7 +29,7 @@ local characterstable = {
     ["y"]="🅨",["z"]="🅩",[" "]=" "
 }
 
--- Función para bypass del texto
+-- Function for text bypass
 local function Bypass(input)
     local lowered = input:lower();
     local output = "";
@@ -40,7 +40,7 @@ local function Bypass(input)
     return output
 end
 
--- Función para enviar el mensaje bypass al chat
+-- Function to send the bypassed message to chat
 function SendBypass(message)
     local msg = Bypass(message);
     if game:GetService("TextChatService").ChatInputBarConfiguration.TargetTextChannel then
@@ -50,7 +50,7 @@ function SendBypass(message)
     end
 end
 
--- Notificación de carga del bypasser
+-- Notification for bypasser load
 Fluent:Notify({
     Title = "《 🌀By shadow_sadist🌀 》",
     Content = "⚠️Chat Bypasser Loaded⚠️",
@@ -58,7 +58,7 @@ Fluent:Notify({
     Duration = nil
 })
 
--- Funciones para las ventanas y botones
+-- Functions for the tabs and buttons
 
 Tabs.Main:AddParagraph({
     Title = "❗Thank you for using 🌀Synergy | Bypasser🌀❗"
@@ -155,7 +155,7 @@ Tabs.SentanceBypasses:AddButton({
     end
 })
 
--- Sistema de Clave en la GUI
+-- Key System in the GUI
 local function createNotification(title, content)
     local notification = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
     local frame = Instance.new("Frame", notification)
@@ -183,16 +183,16 @@ local function createNotification(title, content)
     notification:Destroy()
 end
 
--- Función para ejecutar el hub cuando se ha ingresado la clave correcta
+-- Function to execute the hub when the correct key is entered
 local function executeHub()
     Fluent:Notify({
         Title = "🌀Synergy | Hub Executed🌀",
-        Content = "Acceso al Hub concedido. ¡Disfruta!",
+        Content = "Access to the Hub granted. Enjoy!",
         Duration = 8
     })
 end
 
--- Creación de la GUI de sistema de claves
+-- Create the Key system GUI
 local function createGUI()
     local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -247,23 +247,23 @@ local function createGUI()
     exitButton.Text = "Exit"
     exitButton.Parent = buttonFrame
 
-    -- Evento de presionar el botón de entrada
+    -- Enter button event
     enterButton.MouseButton1Click:Connect(function()
         if textBox.Text == Key then
             KeyEntered = true
-            createNotification("Acceso Concedido", "Acceso al Hub permitido.")
+            createNotification("Access Granted", "Access to the Hub allowed.")
             background.Visible = false
-            executeHub()  -- Ejecutar el hub después de que la clave se haya ingresado correctamente
+            executeHub()  -- Execute the hub after the correct key is entered
         else
-            createNotification("Acceso Denegado", "La clave ingresada es incorrecta.")
+            createNotification("Access Denied", "Incorrect key entered.")
         end
     end)
 
-    -- Evento de presionar el botón de salida
+    -- Exit button event
     exitButton.MouseButton1Click:Connect(function()
         background:Destroy()
     end)
 end
 
--- Llamada para crear la GUI y verificar la clave
+-- Call to create the GUI and check the key
 createGUI()
