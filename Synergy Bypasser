@@ -1,8 +1,9 @@
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
-local Key = "kittyyy"
+local Key = "kittyyy"  -- La clave es "kittyyy"
 local KeyEntered = false
 local AbyssVersion = " BETA";
 
+-- Crear ventana usando Fluent UI
 local Window = Fluent:CreateWindow({
     Title = "🌀Synergy | Bypasser🌀"..AbyssVersion,
     TabWidth = 160,
@@ -20,8 +21,15 @@ local Tabs = {
 }
 Window:SelectTab(1);
 
-local characterstable={["a"]="🅐",["b"]="🅑",["c"]="🅒",["d"]="🅓",["e"]="🅔",["f"]="🅕",["g"]="🅖",["h"]="🅗",["i"]="🅘",["j"]="🅙",["k"]="🅚",["l"]="🅛",["m"]="🅜",["n"]="🅝",["o"]="🅞",["p"]="🅟",["q"]="🅠",["r"]="🅡",["s"]="🅢",["t"]="🅣",["u"]="🅤",["v"]="🅥",["w"]="🅦",["x"]="🅧",["y"]="🅨",["z"]="🅩",[" "]=" "};
+-- Tabla de caracteres para el bypass del chat
+local characterstable = {
+    ["a"]="🅐",["b"]="🅑",["c"]="🅒",["d"]="🅓",["e"]="🅔",["f"]="🅕",["g"]="🅖",["h"]="🅗",
+    ["i"]="🅘",["j"]="🅙",["k"]="🅚",["l"]="🅛",["m"]="🅜",["n"]="🅝",["o"]="🅞",["p"]="🅟",
+    ["q"]="🅠",["r"]="🅡",["s"]="🅢",["t"]="🅣",["u"]="🅤",["v"]="🅥",["w"]="🅦",["x"]="🅧",
+    ["y"]="🅨",["z"]="🅩",[" "]=" "
+}
 
+-- Función para bypass del texto
 local function Bypass(input)
     local lowered = input:lower();
     local output = "";
@@ -32,6 +40,7 @@ local function Bypass(input)
     return output
 end
 
+-- Función para enviar el mensaje bypass al chat
 function SendBypass(message)
     local msg = Bypass(message);
     if game:GetService("TextChatService").ChatInputBarConfiguration.TargetTextChannel then
@@ -41,12 +50,15 @@ function SendBypass(message)
     end
 end
 
+-- Notificación de carga del bypasser
 Fluent:Notify({
     Title = "《 🌀By shadow_sadist🌀 》",
     Content = "⚠️Chat Bypasser Loaded⚠️",
     SubContent = "Join the discord: .gg/7ThdVFRs",
     Duration = nil
 })
+
+-- Funciones para las ventanas y botones
 
 Tabs.Main:AddParagraph({
     Title = "❗Thank you for using 🌀Synergy | Bypasser🌀❗"
@@ -95,13 +107,13 @@ local BypassText = Tabs.Bypass:AddInput("BypassText", {
     Callback = function(Text)
         SendBypass(Text)
     end
-});
+})
 
 -- Word Presets
 
 Tabs.WordBypasses:AddParagraph({
-    Title = "text",
-    Content = "text"
+    Title = "🔹Word Bypasses🔹",
+    Content = "⚠️Presets below⚠️"
 })
 
 Tabs.WordBypasses:AddButton({
@@ -112,38 +124,38 @@ Tabs.WordBypasses:AddButton({
     end
 })
 Tabs.WordBypasses:AddButton({
-    Title = "text",
+    Title = "hello",
     Description = "⚠️Bypass Button⚠️",
     Callback = function()
-        SendBypass("text")
+        SendBypass("hello")
     end
 })
 Tabs.WordBypasses:AddButton({
-    Title = "text",
+    Title = "bye",
     Description = "⚠️Bypass Button⚠️",
     Callback = function()
-        SendBypass("text")
+        SendBypass("bye")
     end
 })
 
 -- Sentance Presets
 
 Tabs.SentanceBypasses:AddButton({
-    Title = "text",
+    Title = "I love Roblox!",
     Description = "⚠️Bypass Button⚠️",
     Callback = function()
-        SendBypass("text")
+        SendBypass("I love Roblox!")
     end
 })
 Tabs.SentanceBypasses:AddButton({
-    Title = "text",
+    Title = "Goodbye everyone!",
     Description = "⚠️Bypass Button⚠️",
     Callback = function()
-        SendBypass("text")
+        SendBypass("Goodbye everyone!")
     end
 })
 
--- Crear una GUI
+-- Sistema de Clave en la GUI
 local function createNotification(title, content)
     local notification = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
     local frame = Instance.new("Frame", notification)
@@ -171,16 +183,16 @@ local function createNotification(title, content)
     notification:Destroy()
 end
 
+-- Función para ejecutar el hub cuando se ha ingresado la clave correcta
 local function executeHub()
-    -- Aquí puedes colocar el código que deseas ejecutar en el hub
     Fluent:Notify({
         Title = "🌀Synergy | Hub Executed🌀",
         Content = "Acceso al Hub concedido. ¡Disfruta!",
         Duration = 8
     })
-    -- Aquí podrías iniciar tu hub, por ejemplo, llamando a otras funciones o módulos
 end
 
+-- Creación de la GUI de sistema de claves
 local function createGUI()
     local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -253,5 +265,5 @@ local function createGUI()
     end)
 end
 
--- Llama a crear la GUI
+-- Llamada para crear la GUI y verificar la clave
 createGUI()
