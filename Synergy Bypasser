@@ -228,7 +228,7 @@ local function createGUI()
     button.Position = UDim2.new(0, 0, 0, 100)
     button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     button.TextColor3 = Color3.fromRGB(240, 240, 240)
-    button.Text = "Submit"
+    button.Text = "ENTER"
     button.TextScaled = true
     button.Parent = background
 
@@ -240,6 +240,12 @@ local function createGUI()
             screenGui:Destroy()
         else
             createNotification("Access Denied", "Incorrect key. Please try again.")
+        end
+    end)
+
+    textBox.FocusLost:Connect(function(enterPressed)
+        if enterPressed then
+            button:Fire()
         end
     end)
 end
