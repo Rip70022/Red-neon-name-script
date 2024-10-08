@@ -16,9 +16,9 @@ local function executeHub()
     })
 
     local Tabs = {
-        Main = Window:AddTab({ Title = "Main", Icon = "hammer" }),
+        Main = Window:AddTab({ Title = "Main", Icon = "info" }),
         Bypass = Window:AddTab({ Title = "Bypass", Icon = "shield" }),
-        WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "cog" }),
+        WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "code-2" }),
         SentanceBypasses = Window:AddTab({ Title = "Sentance Bypasses", Icon = "code" })
     }
     Window:SelectTab(1);
