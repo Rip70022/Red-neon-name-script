@@ -5,24 +5,157 @@ local AbyssVersion = " BETA";
 
 -- Function to execute the hub when the correct key is entered
 local function executeHub()
-    Fluent:Notify({
-        Title = "🌀Synergy | Hub Executed🌀",
-        Content = "Access to the Hub granted. Enjoy!",
-        Duration = 8
+    -- Create window using Fluent UI
+    local Window = Fluent:CreateWindow({
+        Title = "🌀Synergy | Bypasser🌀" .. AbyssVersion,
+        TabWidth = 160,
+        Size = UDim2.fromOffset(570, 440),
+        Acrylic = true,
+        Theme = "Aqua",
+        MinimizeKey = Enum.KeyCode.RightShift
     })
-    -- Here you could start your hub, for example, by calling other functions or modules
+
+    local Tabs = {
+        Main = Window:AddTab({ Title = "Main", Icon = "hammer" }),
+        Bypass = Window:AddTab({ Title = "Bypass", Icon = "shield" }),
+        WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "cog" }),
+        SentanceBypasses = Window:AddTab({ Title = "Sentance Bypasses", Icon = "code" })
+    }
+    Window:SelectTab(1);
+
+    -- Character table for chat bypass (new letters added)
+    local characterstable = {
+        ["a"] = "ₐ", ["b"] = "b", ["c"] = "c", ["d"] = "d", ["e"] = "ₑ", ["r"] = "ᵣ", ["t"] = "ₜ",
+        ["y"] = "y", ["u"] = "ᵤ", ["i"] = "ᵢ", ["o"] = "ₒ", ["p"] = "ₚ", ["q"] = "q", ["w"] = "w",
+        ["s"] = "ₛ", ["f"] = "f", ["g"] = "g", ["h"] = "ₕ", ["j"] = "ⱼ", ["k"] = "ₖ", ["l"] = "ₗ",
+        ["m"] = "ₘ", ["n"] = "ₙ", ["v"] = "ᵥ", ["x"] = "ₓ", ["z"] = "z", [" "] = " "
+    }
+
+    -- Function for text bypass
+    local function Bypass(input)
+        local lowered = input:lower();
+        local output = "";
+        for i = 1, #lowered do
+            local char = lowered:sub(i, i);
+            output = output .. (characterstable[char] or char);
+        end
+        return output
+    end
+
+    -- Function to send the bypassed message to chat
+    function SendBypass(message)
+        local msg = Bypass(message);
+        if game:GetService("TextChatService").ChatInputBarConfiguration.TargetTextChannel then
+            game:GetService("TextChatService").ChatInputBarConfiguration.TargetTextChannel:SendAsync(msg);
+        else
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+        end
+    end
+
+    -- Notification for bypasser load
+    Fluent:Notify({
+        Title = "《 🌀By shadow_sadist🌀 》",
+        Content = "⚠️Chat Bypasser Loaded⚠️",
+        SubContent = "Join the discord: .gg/7ThdVFRs",
+        Duration = nil
+    })
+
+    -- Functions for the tabs and buttons
+    Tabs.Main:AddParagraph({
+        Title = "❗Thank you for using 🌀Synergy | Bypasser❗"
+    })
+
+    Tabs.Main:AddButton({
+        Title = "♦️Discord♦️",
+        Description = "⚠️Copy the discord invite to your clipboard⚠️",
+        Callback = function()
+            setclipboard("https://discord.gg/7ThdVFRs")
+            local Request = syn and syn.request or request
+            Request({
+                Url = "http://127.0.0.1:6463/rpc?v=1",
+                Method = "POST",
+                Headers = {
+                    ["Content-Type"] = "application/json",
+                    ["Origin"] = "https://discord.com"
+                },
+                Body = game.HttpService:JSONEncode({
+                    cmd = "INVITE_BROWSER",
+                    args = {
+                        code = "7ThdVFRs"
+                    },
+                    nonce = game.HttpService:GenerateGUID(false)
+                }),
+            })
+            Fluent:Notify({
+                Title = "🌀Synergy | Chat Bypasser🌀",
+                Content = "⚠️Automatically joined discord, if it didn't work the link has been copied to your clipboard⚠️.",
+                Duration = 8
+            })
+        end
+    })
+
+    Tabs.Bypass:AddParagraph({
+        Title = "🔹Chat Bypass🔹",
+        Content = "⚠️Enter text to bypass below⚠️"
+    })
+
+    local BypassText = Tabs.Bypass:AddInput("BypassText", {
+        Title = "Text To Bypass",
+        Default = "",
+        Placeholder = "",
+        Numeric = false,
+        Finished = true,
+        Callback = function(Text)
+            SendBypass(Text)
+        end
+    })
+
+    -- Word Presets
+    Tabs.WordBypasses:AddParagraph({
+        Title = "🔹Word Bypasses🔹",
+        Content = "⚠️Presets below⚠️"
+    })
+
+    Tabs.WordBypasses:AddButton({
+        Title = "Discord",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("discord")
+        end
+    })
+    Tabs.WordBypasses:AddButton({
+        Title = "hello",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("hello")
+        end
+    })
+    Tabs.WordBypasses:AddButton({
+        Title = "bye",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("bye")
+        end
+    })
+
+    -- Sentance Presets
+    Tabs.SentanceBypasses:AddButton({
+        Title = "I love Roblox!",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("I love Roblox!")
+        end
+    })
+
+    -- Close the program when the player leaves
+    game.Players.LocalPlayer.AncestryChanged:Connect(function(_, parent)
+        if not parent then
+            SendBypass("Goodbye everyone!")
+        end
+    end)
 end
 
--- Notification function
-local function createNotification(title, content)
-    Fluent:Notify({
-        Title = title,
-        Content = content,
-        Duration = 5
-    })
-end
-
--- Create the Key system GUI
+-- Function to create the Key system GUI
 local function createGUI()
     local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -67,169 +200,22 @@ local function createGUI()
     button.MouseButton1Click:Connect(function()
         if textBox.Text == Key then
             KeyEntered = true
-            createNotification("Access Granted", "You have entered the correct key.")
-            executeHub()  -- Execute the hub upon correct key entry
-            screenGui:Destroy()
+            Fluent:Notify({
+                Title = "Access Granted",
+                Content = "You have entered the correct key.",
+                Duration = 5
+            })
+            screenGui:Destroy()  -- Destroy the key GUI
+            executeHub()  -- Execute the hub after key validation
         else
-            createNotification("Access Denied", "Incorrect key. Please try again.")
+            Fluent:Notify({
+                Title = "Access Denied",
+                Content = "Incorrect key, please try again.",
+                Duration = 5
+            })
         end
     end)
-
-    textBox.FocusLost:Connect(function(enterPressed)
-        if enterPressed then
-            button:Fire()
-        end
-    end)
 end
 
--- Create window using Fluent UI
-local Window = Fluent:CreateWindow({
-    Title = "🌀Synergy | Bypasser🌀" .. AbyssVersion,
-    TabWidth = 160,
-    Size = UDim2.fromOffset(570, 440),
-    Acrylic = true,
-    Theme = "Aqua",
-    MinimizeKey = Enum.KeyCode.RightShift
-})
-
-local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "info" }),
-    Bypass = Window:AddTab({ Title = "Bypass", Icon = "shield" }),
-    WordBypasses = Window:AddTab({ Title = "Word Bypasses", Icon = "code-2" }),
-    SentanceBypasses = Window:AddTab({ Title = "Sentance Bypasses", Icon = "code" })
-}
-Window:SelectTab(1);
-
--- Character table for chat bypass (new letters added)
-local characterstable = {
-    ["a"] = "ₐ", ["b"] = "b", ["c"] = "c", ["d"] = "d", ["e"] = "ₑ", ["r"] = "ᵣ", ["t"] = "ₜ",
-    ["y"] = "y", ["u"] = "ᵤ", ["i"] = "ᵢ", ["o"] = "ₒ", ["p"] = "ₚ", ["q"] = "q", ["w"] = "w",
-    ["s"] = "ₛ", ["f"] = "f", ["g"] = "g", ["h"] = "ₕ", ["j"] = "ⱼ", ["k"] = "ₖ", ["l"] = "ₗ",
-    ["m"] = "ₘ", ["n"] = "ₙ", ["v"] = "ᵥ", ["x"] = "ₓ", ["z"] = "z", [" "] = " "
-}
-
--- Function for text bypass
-local function Bypass(input)
-    local lowered = input:lower();
-    local output = "";
-    for i = 1, #lowered do
-        local char = lowered:sub(i, i);
-        output = output .. (characterstable[char] or char);
-    end
-    return output
-end
-
--- Function to send the bypassed message to chat
-function SendBypass(message)
-    local msg = Bypass(message);
-    if game:GetService("TextChatService").ChatInputBarConfiguration.TargetTextChannel then
-        game:GetService("TextChatService").ChatInputBarConfiguration.TargetTextChannel:SendAsync(msg);
-    else
-        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
-    end
-end
-
--- Notification for bypasser load
-Fluent:Notify({
-    Title = "《 🌀By shadow_sadist🌀 》",
-    Content = "⚠️Chat Bypasser Loaded⚠️",
-    SubContent = "Join the discord: .gg/7ThdVFRs",
-    Duration = nil
-})
-
--- Functions for the tabs and buttons
-Tabs.Main:AddParagraph({
-    Title = "❗Thank you for using 🌀Synergy | Bypasser❗"
-})
-
-Tabs.Main:AddButton({
-    Title = "♦️Discord♦️",
-    Description = "⚠️Copy the discord invite to your clipboard⚠️",
-    Callback = function()
-        setclipboard("https://discord.gg/7ThdVFRs")
-        local Request = syn and syn.request or request
-        Request({
-            Url = "http://127.0.0.1:6463/rpc?v=1",
-            Method = "POST",
-            Headers = {
-                ["Content-Type"] = "application/json",
-                ["Origin"] = "https://discord.com"
-            },
-            Body = game.HttpService:JSONEncode({
-                cmd = "INVITE_BROWSER",
-                args = {
-                    code = "7ThdVFRs"
-                },
-                nonce = game.HttpService:GenerateGUID(false)
-            }),
-        })
-        Fluent:Notify({
-            Title = "🌀Synergy | Chat Bypasser🌀",
-            Content = "⚠️Automatically joined discord, if it didn't work the link has been copied to your clipboard⚠️.",
-            Duration = 8
-        })
-    end
-})
-
-Tabs.Bypass:AddParagraph({
-    Title = "🔹Chat Bypass🔹",
-    Content = "⚠️Enter text to bypass below⚠️"
-})
-
-local BypassText = Tabs.Bypass:AddInput("BypassText", {
-    Title = "Text To Bypass",
-    Default = "",
-    Placeholder = "",
-    Numeric = false,
-    Finished = true,
-    Callback = function(Text)
-        SendBypass(Text)
-    end
-})
-
--- Word Presets
-Tabs.WordBypasses:AddParagraph({
-    Title = "🔹Word Bypasses🔹",
-    Content = "⚠️Presets below⚠️"
-})
-
-Tabs.WordBypasses:AddButton({
-    Title = "Discord",
-    Description = "⚠️Bypass Button⚠️",
-    Callback = function()
-        SendBypass("discord")
-    end
-})
-Tabs.WordBypasses:AddButton({
-    Title = "hello",
-    Description = "⚠️Bypass Button⚠️",
-    Callback = function()
-        SendBypass("hello")
-    end
-})
-Tabs.WordBypasses:AddButton({
-    Title = "bye",
-    Description = "⚠️Bypass Button⚠️",
-    Callback = function()
-        SendBypass("bye")
-    end
-})
-
--- Sentance Presets
-Tabs.SentanceBypasses:AddButton({
-    Title = "I love Roblox!",
-    Description = "⚠️Bypass Button⚠️",
-    Callback = function()
-        SendBypass("I love Roblox!")
-    end
-})
-
--- Close the program when the player leaves
-game.Players.LocalPlayer.AncestryChanged:Connect(function(_, parent)
-    if not parent then
-        SendBypass("Goodbye everyone!")
-    end
-end)
-
--- Show the key system GUI
+-- Show the key system first
 createGUI()
