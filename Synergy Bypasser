@@ -1,5 +1,11 @@
+-- By ERROR_USERBANNED/Shadow_Sadist
+--  Created: 04/10/2024
+--   Updated: 08/10/2024
+
+
+
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
-local Key = "kittyyy"  -- The key is "kittyyy"
+local Key = "kittyyy"  
 local KeyEntered = false
 local AbyssVersion = " BETA";
 
@@ -25,10 +31,10 @@ local function executeHub()
 
     -- Character table for chat bypass (new letters added)
     local characterstable = {
-        ["a"] = "ₐ", ["b"] = "b", ["c"] = "c", ["d"] = "d", ["e"] = "ₑ", ["r"] = "ᵣ", ["t"] = "ₜ",
-        ["y"] = "y", ["u"] = "ᵤ", ["i"] = "ᵢ", ["o"] = "ₒ", ["p"] = "ₚ", ["q"] = "q", ["w"] = "w",
-        ["s"] = "ₛ", ["f"] = "f", ["g"] = "g", ["h"] = "ₕ", ["j"] = "ⱼ", ["k"] = "ₖ", ["l"] = "ₗ",
-        ["m"] = "ₘ", ["n"] = "ₙ", ["v"] = "ᵥ", ["x"] = "ₓ", ["z"] = "z", [" "] = " "
+        ["a"] = "ą", ["b"] = "b̶", ["c"] = "c̾", ["d"] = "d͓̽", ["e"] = "e̴", ["r"] = "r͎", ["t"] = "†",
+        ["y"] = "ㄚ", ["u"] = "น", ["i"] = "ɨ", ["o"] = "ơ", ["p"] = "þ", ["q"] = "Ɋ", ["w"] = "ω",
+        ["s"] = "ʂ", ["f"] = "ϝ", ["g"] = "ɠ", ["h"] = "ɧ", ["j"] = "ⓙ", ["k"] = "ƙ", ["l"] = "ɭ",
+        ["m"] = "ʍ", ["n"] = "ɳ", ["v"] = "ᐯ", ["x"] = "𝐱", ["z"] = "ᶻ", [" "] = " ", ["ñ"] = "ñ̶̡̡̡̹̪̥̭̦̥͓͑̏̅̀"
     }
 
     -- Function for text bypass
@@ -120,30 +126,164 @@ local function executeHub()
         Title = "Discord",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("discord")
+            SendBypass("`  ॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚  ̌̌̌  ᳚᳚᳚᳚᳚ťDіѕсоrd")
         end
     })
     Tabs.WordBypasses:AddButton({
-        Title = "hello",
+        Title = "shit",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("hello")
+            SendBypass("` ॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚    ̌̌̌  ᳚᳚᳚᳚᳚ťѕhіt")
         end
     })
     Tabs.WordBypasses:AddButton({
-        Title = "bye",
+        Title = "Damn",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("bye")
+            SendBypass("` ॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚   ̌̌̌  ᳚᳚᳚᳚᳚ťDаmn")
+        end
+    })
+    Tabs.WordBypasses:AddButton({
+        Title = "fuck",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("`   ॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚    ̌̌̌  ᳚᳚᳚᳚᳚ťfυсk")
+        end
+    })
+    Tabs.WordBypasses:AddButton({
+        Title = "Nigger",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("`  ॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚     ̌̌̌  ᳚᳚᳚᳚᳚ťNіggеr")
         end
     })
 
     -- Sentance Presets
     Tabs.SentanceBypasses:AddButton({
-        Title = "I love Roblox!",
+        Title = "My apologies, I don't speak to fags❤️",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("I love Roblox!")
+            SendBypass("Myapologies,ido￴￴n￴￴￴ts￴￴￴p￴￴￴e￴￴￴￴a￴￴￴￴ktof￴￴￴￴a￴￴￴￴￴g￴￴￴￴s￴￴￴❤️")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "Take the dildo off your ass",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("🆃🅰🅺🅴 🆃🅷🅴 🅳🅸🅻🅳🅾 🅾🅵🅵 🆈🅾🆄🆁 🅰🆂🆂")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "I'm going to rape you",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("I'ɱ ɠσιɳɠ ƚσ ɾαρҽ ყσυ")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "COOL TEXT",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("(っ◔◡◔)っ ♥ a true exploiter always speaks well of Synergy Bypass ♥")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "I'm going to kill yourself",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("I'm going to kill yourself")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "niggers suck it",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("ₙᵢggₑᵣₛ ₛᵤcₖ ᵢₜ")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "I love CP",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("Ⓘ ⓛⓞⓥⓔ ⒸⓅ")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "I love XVIDEOS.COM",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("i̳ ̳l̳o̳v̳e̳ ̳X̳V̳I̳D̳E̳O̳S̳.̳C̳O̳M̳")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "I love PORNHUB.COM",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("i̳ ̳l̳o̳v̳e̳ ̳P̳O̳R̳N̳H̳U̳B̳.̳C̳O̳M̳")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "To get free Robux visit XNXX.COM",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("`   ॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚॓᳚    ̌̌̌  ᳚᳚᳚᳚᳚ťTо gеt frее Rоbυx vіѕіt XNXX.COM")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "My dick is giant",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("M̳y̳ ̳d̳i̳c̳k̳ ̳i̳s̳ ̳g̳i̳a̳n̳t̳")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "Tilín fucks better than you",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("T̳i̳l̳í̳n̳ ̳f̳u̳c̳k̳s̳ ̳b̳e̳t̳t̳e̳r̳ ̳t̳h̳a̳n̳ ̳y̳o̳u̳")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "Fuck me",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("f̳u̳c̳k̳ ̳m̳e̳")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "Stupid shit",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("S̳t̳u̳p̳i̳d̳ ̳s̳h̳i̳t̳")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "Damn it, fuck you",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass("D̳a̳m̳n̳ ̳i̳t̳,̳ ̳f̳u̳c̳k̳ ̳y̳o̳u̳")
+        end
+    })
+
+    Tabs.SentanceBypasses:AddButton({
+        Title = "fuck you",
+        Description = "⚠️Bypass Button⚠️",
+        Callback = function()
+            SendBypass(" ̳f̳u̳c̳k̳ ̳y̳o̳u̳")
         end
     })
 
