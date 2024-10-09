@@ -106,38 +106,41 @@ Tabs.SynergyNexusScripts:AddButton({
         Content = "Select a target to use the following options."
     })
     
-    local ClickTargetTool_Button = Tabs.Targets:AddButton({
-        Title = "Click Target Tool",
-        Description = "Select a target by clicking on them.",
-        Callback = function()
-            local GetTargetTool = Instance.new("Tool")
-            GetTargetTool.Name = "ClickTarget"
-            GetTargetTool.RequiresHandle = false
-            GetTargetTool.TextureId = "rbxassetid://2716591855"
-            GetTargetTool.ToolTip = "Select Target"
+    local plr = game.Players.LocalPlayer
+
+    if plr then
+        local ClickTargetTool_Button = Tabs.Targets:AddButton({
+            Title = "Click Target Tool",
+            Description = "Select a target by clicking on them.",
+            Callback = function()
+                local GetTargetTool = Instance.new("Tool")
+                GetTargetTool.Name = "ClickTarget"
+                GetTargetTool.RequiresHandle = false
+                GetTargetTool.TextureId = "rbxassetid://2716591855"
+                GetTargetTool.ToolTip = "Select Target"
     
-            local function ActivateTool()
-                local root = GetRoot(plr)
-                local hit = mouse.Target
-                local person = nil
-                if hit and hit.Parent then
-                    if hit.Parent:IsA("Model") then
-                        person = game.Players:GetPlayerFromCharacter(hit.Parent)
-                    elseif hit.Parent:IsA("Accessory") then
-                        person = game.Players:GetPlayerFromCharacter(hit.Parent.Parent)
-                    end
-                    if person then
-                        UpdateTarget(person)
+                local function ActivateTool()
+                    local root = plr.Character.HumanoidRootPart
+                    local hit = mouse.Target
+                    local person = nil
+                    if hit and hit.Parent then
+                        if hit.Parent:IsA("Model") then
+                            person = game.Players:GetPlayerFromCharacter(hit.Parent)
+                        elseif hit.Parent:IsA("Accessory") then
+                            person = game.Players:GetPlayerFromCharacter(hit.Parent.Parent)
+                        end
+                        if person then
+                            UpdateTarget(person)
+                        end
                     end
                 end
-            end
     
-            GetTargetTool.Activated:Connect(function()
-                ActivateTool()
-            end)
-            GetTargetTool.Parent = plr.Backpack
-        end
-    })
+                GetTargetTool.Activated:Connect(function()
+                    ActivateTool()
+                end)
+                GetTargetTool.Parent = plr.Backpack
+            end
+        })
     
     local FlingTarget_Button = Tabs.Targets:AddButton({
         Title = "Fling Target",
@@ -354,6 +357,10 @@ Tabs.SynergyNexusScripts:AddButton({
             end
         end
     })
+else
+
+    print("local player is not connected.")
+end
     
     Tabs.BloxFruits:AddParagraph({
         Title = "🍊Blox Fruits Scripts🍊",
