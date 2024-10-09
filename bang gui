@@ -33,7 +33,7 @@ local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 40)
 title.BackgroundTransparency = 1
 title.TextColor3 = Color3.fromRGB(240, 240, 240)
-title.Text = "Enter Player Name (Partial)"
+title.Text = "💀BANG GUI💀"
 title.TextScaled = true
 title.Parent = background
 
@@ -70,7 +70,14 @@ closeButton.MouseButton1Click:Connect(function()
     screenGui:Destroy()
 end)
 
--- Connect the button to execute the command with the entered name (or part of the name)
+-- Notification at the start
+game.StarterGui:SetCore("SendNotification", {
+    Title = "OP FE BANG",
+    Text = "By ERROR_USERBANNED",
+    Duration = 3
+})
+
+-- Connect the button to execute the bang command with the entered name (or part of the name)
 enterButton.MouseButton1Click:Connect(function()
     local partialName = textBox.Text
 
@@ -78,20 +85,12 @@ enterButton.MouseButton1Click:Connect(function()
         local targetPlayer = findPlayerByPartialName(partialName)
 
         if targetPlayer then
-            -- Execute the command with the full name of the found player
-            print("Attempting to execute command: bang " .. targetPlayer.Name)  -- Debugging line
-            -- Replace with your command execution logic here
-            -- execCmd("bang " .. targetPlayer.Name)
+            -- Execute the bang command with the found player's name
+            local speaker = game.Players.LocalPlayer
+            execBangCommand(speaker, targetPlayer.Name)
 
             -- Optional: Change the title text if the player is found
             title.Text = "Player found: " .. targetPlayer.Name
-            
-            -- Display notification after successful execution
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "OP FE BANG",
-                Text = "By ERROR_USERBANNED",
-                Duration = 3
-            })
         else
             -- If no player is found, show an error message
             title.Text = "Player not found"
@@ -101,3 +100,31 @@ enterButton.MouseButton1Click:Connect(function()
         title.Text = "Please enter a valid name"
     end
 end)
+
+-- Function to execute the bang command
+function execBangCommand(speaker, targetName)
+    execCmd("unbang")
+    wait()
+    local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+    local bangAnim = Instance.new("Animation")
+    bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
+    local bang = humanoid:LoadAnimation(bangAnim)
+    bang:Play(0.1, 1, 1)
+    bang:AdjustSpeed(3)
+
+    bangDied = humanoid.Died:Connect(function()
+        bang:Stop()
+        bangAnim:Destroy()
+        bangDied:Disconnect()
+    end)
+
+    -- Adjust player positioning
+    local targetPlayer = game.Players:FindFirstChild(targetName)
+    if targetPlayer and targetPlayer.Character then
+        local bangOffset = CFrame.new(0, 0, 1.1)
+        local bangLoop = RunService.Stepped:Connect(function()
+            local otherRoot = getTorso(targetPlayer.Character)
+            getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffset
+        end)
+    end
+end
