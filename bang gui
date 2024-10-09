@@ -33,7 +33,7 @@ local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 40)
 title.BackgroundTransparency = 1
 title.TextColor3 = Color3.fromRGB(240, 240, 240)
-title.Text = "💀BANG GUI💀"
+title.Text = "BANG GUI"
 title.TextScaled = true
 title.Parent = background
 
@@ -86,8 +86,7 @@ enterButton.MouseButton1Click:Connect(function()
 
         if targetPlayer then
             -- Execute the bang command with the found player's name
-            local speaker = game.Players.LocalPlayer
-            execBangCommand(speaker, targetPlayer.Name)
+            execBangCommand(game.Players.LocalPlayer, targetPlayer.Name)
 
             -- Optional: Change the title text if the player is found
             title.Text = "Player found: " .. targetPlayer.Name
@@ -105,7 +104,10 @@ end)
 function execBangCommand(speaker, targetName)
     execCmd("unbang")
     wait()
-    local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+
+    local humanoid = speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid")
+    if not humanoid then return end  -- Ensure humanoid exists
+
     local bangAnim = Instance.new("Animation")
     bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
     local bang = humanoid:LoadAnimation(bangAnim)
@@ -128,3 +130,32 @@ function execBangCommand(speaker, targetName)
         end)
     end
 end
+
+-- Make the GUI draggable
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+background.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = background.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+background.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        if dragging then
+            local delta = input.Position - dragStart
+            background.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+    end
+end)
