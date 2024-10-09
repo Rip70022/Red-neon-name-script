@@ -3,18 +3,24 @@
 addcmd("bang", {"rape"}, function(args, speaker)
     execCmd("unbang")
     wait()
-    local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-    bangAnim = Instance.new("Animation")
+    
+    local humanoid = speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid")
+    if not humanoid then return end
+    
+    local bangAnim = Instance.new("Animation")
     bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
-    bang = humanoid:LoadAnimation(bangAnim)
+    local bang = humanoid:LoadAnimation(bangAnim)
     bang:Play(0.1, 1, 1)
     bang:AdjustSpeed(args[2] or 3)
+
+    local bangDied
     bangDied = humanoid.Died:Connect(function()
         bang:Stop()
         bangAnim:Destroy()
         bangDied:Disconnect()
-        bangLoop:Disconnect()
+        if bangLoop then bangLoop:Disconnect() end
     end)
+
     if args[1] then
         local players = getPlayer(args[1], speaker)
         for _, v in pairs(players) do
@@ -110,7 +116,7 @@ enterButton.MouseButton1Click:Connect(function()
             -- Execute the command with the full name of the found player
             execCmd("bang " .. targetPlayer.Name)
             
-            -- Optional: Change the title text if the player is found
+            -- Change the title text if the player is found
             title.Text = "Player found: " .. targetPlayer.Name
             
             -- Display notification after successful execution
