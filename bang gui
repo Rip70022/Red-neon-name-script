@@ -1,5 +1,37 @@
 -- By ERROR_USERBANNED/Shadow_Sadist
--- OP BANG GUI
+-- OP BANG GUI with Draggable GUI and Notification
+
+-- Function to execute the "bang" command
+local function execBangCommand(targetPlayer, speaker)
+    local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+    if humanoid then
+        local bangAnim = Instance.new("Animation")
+        bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
+        local bang = humanoid:LoadAnimation(bangAnim)
+        bang:Play(0.1, 1, 1)
+        bang:AdjustSpeed(3)  -- Default speed for the animation
+
+        -- Follow the target player if specified
+        if targetPlayer then
+            local targetHumanoid = targetPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+            if targetHumanoid then
+                local bangOffset = CFrame.new(0, 0, 1.1)
+                local bangLoop
+                bangLoop = game:GetService("RunService").Stepped:Connect(function()
+                    if targetPlayer and targetPlayer.Character then
+                        local targetRoot = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+                        local speakerRoot = speaker.Character:FindFirstChild("HumanoidRootPart")
+                        if targetRoot and speakerRoot then
+                            speakerRoot.CFrame = targetRoot.CFrame * bangOffset
+                        end
+                    else
+                        bangLoop:Disconnect()
+                    end
+                end)
+            end
+        end
+    end
+end
 
 -- Function to search for partial name matches
 local function findPlayerByPartialName(partialName)
@@ -33,7 +65,7 @@ local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 40)
 title.BackgroundTransparency = 1
 title.TextColor3 = Color3.fromRGB(240, 240, 240)
-title.Text = "🌀BANG GUI"
+title.Text = "BANG GUI"
 title.TextScaled = true
 title.Parent = background
 
@@ -70,10 +102,13 @@ closeButton.MouseButton1Click:Connect(function()
     screenGui:Destroy()
 end)
 
--- Make the GUI draggable
-local dragging = false
-local dragStart = nil
-local startPos = nil
+-- Function to make the GUI draggable
+local dragging, dragInput, dragStart, startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    background.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
 
 background.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -91,10 +126,13 @@ end)
 
 background.InputChanged:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseMovement then
-        if dragging then
-            local delta = input.Position - dragStart
-            background.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-        end
+        dragInput = input
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if dragging and input == dragInput then
+        update(input)
     end
 end)
 
@@ -106,15 +144,11 @@ enterButton.MouseButton1Click:Connect(function()
         local targetPlayer = findPlayerByPartialName(partialName)
         
         if targetPlayer then
-            -- Execute the command with the full name of the found player
-            execCmd("bang " .. targetPlayer.Name)
-
-            -- Display notification after successful execution
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "OP FE BANG",
-                Text = "By ERROR_USERBANNED",
-                Duration = 3
-            })
+            -- Execute the bang command
+            execBangCommand(targetPlayer, game.Players.LocalPlayer)
+            
+            -- Optional: Change the title text if the player is found
+            title.Text = "Player found: " .. targetPlayer.Name
         else
             -- If no player is found, show an error message
             title.Text = "Player not found"
@@ -124,3 +158,10 @@ enterButton.MouseButton1Click:Connect(function()
         title.Text = "Please enter a valid name"
     end
 end)
+
+-- Show notification at the start
+game.StarterGui:SetCore("SendNotification", {
+    Title = "OP FE BANG",
+    Text = "By ERROR_USERBANNED",
+    Duration = 3
+})
