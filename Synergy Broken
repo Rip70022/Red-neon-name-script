@@ -3675,4 +3675,5 @@ end)
 
 SendNotify("Synergy Broken","Gui Modified by ERROR_USERBANNED - Discord in your clipboard",10)
 setclipboard("https://discord.gg/7ThdVFRs")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/premium"))() -- load the premium...
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Synergy%20Broken%20Premium"))()
+-- load the premium...
