@@ -103,38 +103,29 @@ closeButton.MouseButton1Click:Connect(function()
 end)
 
 -- Function to make the GUI draggable
-local dragging, dragInput, dragStart, startPos
+    local function startDrag(input)
+        local initialPosition = button.Position
+        local startPosition = input.Position
 
-local function update(input)
-    local delta = input.Position - dragStart
-    background.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-end
+        local function updateDrag(input)
+            local delta = input.Position - startPosition
+            button.Position = UDim2.new(initialPosition.X.Scale, initialPosition.X.Offset + delta.X, initialPosition.Y.Scale, initialPosition.Y.Offset + delta.Y)
+        end
 
-background.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = true
-        dragStart = input.Position
-        startPos = background.Position
+        local function endDrag()
+            button.InputChanged:Disconnect(updateDrag)
+            button.InputEnded:Disconnect(endDrag)
+        end
 
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
+        button.InputChanged:Connect(updateDrag)
+        button.InputEnded:Connect(endDrag)
     end
-end)
 
-background.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement then
-        dragInput = input
-    end
-end)
-
-game:GetService("UserInputService").InputChanged:Connect(function(input)
-    if dragging and input == dragInput then
-        update(input)
-    end
-end)
+    button.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            startDrag(input)
+        end
+    end)
 
 -- Connect the button to execute the command with the entered name (or part of the name)
 enterButton.MouseButton1Click:Connect(function()
