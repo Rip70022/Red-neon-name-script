@@ -106,9 +106,12 @@ Tabs.SynergyNexusScripts:AddButton({
         Content = "Select a target to use the following options."
     })
     
-    local plr = game.Players.LocalPlayer
+    SaveManager.Library = "Fluent"
 
+    local plr = game.Players.LocalPlayer
+    
     if plr then
+       
         local ClickTargetTool_Button = Tabs.Targets:AddButton({
             Title = "Click Target Tool",
             Description = "Select a target by clicking on them.",
@@ -121,7 +124,7 @@ Tabs.SynergyNexusScripts:AddButton({
     
                 local function ActivateTool()
                     local root = plr.Character.HumanoidRootPart
-                    local hit = mouse.Target
+                    local hit = plr:GetMouse().Target
                     local person = nil
                     if hit and hit.Parent then
                         if hit.Parent:IsA("Model") then
