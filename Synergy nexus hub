@@ -5,6 +5,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 local Window = Fluent:CreateWindow({
     Title = "🔥Synergy Nexus Hub🔥",
     SubTitle = "︎••••︎¤《 💠By ERROR_USERBANNED💠 》",
+
     TabWidth = 160,
     Size = UDim2.fromOffset(460, 250),
     Acrylic = true,
@@ -15,10 +16,11 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "🛡️•RoTotal•🛡️", Icon = "shield" }),
     SynergyNexusScripts = Window:AddTab({ Title = "Synergy•Nexus•Scripts", Icon = "cog" }),
+    Targets = Window:AddTab({ Title = "Synergy•Targets", Icon = "code-2"}),
     BloxFruits = Window:AddTab({ Title = "Blox•Fruits", Icon = "apple" }), 
     RandomScripts = Window:AddTab({ Title = "Scripts•Random", Icon = "shuffle" }), 
     TSB_Scripts = Window:AddTab({ Title = "TSB•Scripts", Icon = "code" }),
-    GENESIS_FE = Window:AddTab({ Title = "GENESIS•FE", Icon = "hammer" }),
+    GENESIS_FE = Window:AddTab({ Title = "GENESIS FE", Icon = "hammer" }),
     Discord = Window:AddTab({ Title = "Discord•Server", Icon = "info" })
 
 }
@@ -96,6 +98,372 @@ Tabs.SynergyNexusScripts:AddButton({
         Description = "❗OP IY Modified by me❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Infinite%20Yield%20IY%20OP"))()
+        end
+    })
+
+    Tabs.Targets:AddParagraph({
+        Title = "🔥Target Options🔥",
+        Content = "Select a target to use the following options."
+    })
+    
+    local ClickTargetTool_Button = Tabs.Targets:AddButton({
+        Title = "Click Target Tool",
+        Description = "Select a target by clicking on them.",
+        Callback = function()
+            ClickTargetTool_Button.MouseButton1Click:Connect(function()
+                local GetTargetTool = Instance.new("Tool")
+                GetTargetTool.Name = "ClickTarget"
+                GetTargetTool.RequiresHandle = false
+                GetTargetTool.TextureId = "rbxassetid://2716591855"
+                GetTargetTool.ToolTip = "Select Target"
+    
+                local function ActivateTool()
+                    local root = GetRoot(plr)
+                    local hit = mouse.Target
+                    local person = nil
+                    if hit and hit.Parent then
+                        if hit.Parent:IsA("Model") then
+                            person = game.Players:GetPlayerFromCharacter(hit.Parent)
+                        elseif hit.Parent:IsA("Accessory") then
+                            person = game.Players:GetPlayerFromCharacter(hit.Parent.Parent)
+                        end
+                        if person then
+                            UpdateTarget(person)
+                        end
+                    end
+                end
+    
+                GetTargetTool.Activated:Connect(function()
+                    ActivateTool()
+                end)
+                GetTargetTool.Parent = plr.Backpack
+            end)
+        end
+    })
+    
+    local FlingTarget_Button = Tabs.Targets:AddButton({
+        Title = "Fling Target",
+        Description = "Fling the target.",
+        Callback = function()
+            FlingTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    ChangeToggleColor(FlingTarget_Button)
+                    if FlingTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
+                        if TouchFling_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0) then
+                            ChangeToggleColor(TouchFling_Button)
+                        end
+                        local OldPos = GetRoot(plr).Position
+                        ToggleFling(true)
+                        repeat task.wait()
+                            pcall(function()
+                                PredictionTP(Players[TargetedPlayer],"safe")
+                            end)
+                            task.wait()
+                        until FlingTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0)
+                        TeleportTO(OldPos.X,OldPos.Y,OldPos.Z,"pos","safe")
+                    else
+                        ToggleFling(false)
+                    end
+                end
+            end)
+        end
+    })
+    
+    local ViewTarget_Button = Tabs.Targets:AddButton({
+        Title = "View Target",
+        Description = "View the target.",
+        Callback = function()
+            ViewTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    ChangeToggleColor(ViewTarget_Button)
+                    if ViewTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
+                        repeat
+                            pcall(function()
+                                game.Workspace.CurrentCamera.CameraSubject = Players[TargetedPlayer].Character.Humanoid
+                            end)
+                            task.wait(0.5)
+                        until ViewTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0)
+                        game.Workspace.CurrentCamera.CameraSubject = plr.Character.Humanoid
+                    end
+                end
+            end)
+        end
+    })
+    
+    local FocusTarget_Button = Tabs.Targets:AddButton({
+        Title = "Focus Target",
+        Description = "Focus on the target.",
+        Callback = function()
+            FocusTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    ChangeToggleColor(FocusTarget_Button)
+                    if FocusTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
+                        repeat
+                            pcall(function()
+                                local target = Players[TargetedPlayer]
+                                TeleportTO(0,0,0,target)
+                                Push(Players[TargetedPlayer])
+                            end)
+                            task.wait(0.2)
+                        until FocusTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0)
+                    end
+                end
+            end)
+        end
+    })
+    
+    local BenxTarget_Button = Tabs.Targets:AddButton({
+        Title = "Benx Target",
+        Description = "Benx the target.",
+        Callback = function()
+            BenxTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    ChangeToggleColor(BenxTarget_Button)
+                    if BenxTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
+                        PlayAnim(5918726674,0,1)
+                        repeat
+                            pcall(function()
+                                if not GetRoot(plr):FindFirstChild("BreakVelocity ") then
+                                    pcall(function()
+                                        local TempV = Velocity_Asset:Clone()
+                                        TempV.Parent = GetRoot(plr)
+                                    end)
+                                end
+                                local otherRoot = GetRoot(Players[TargetedPlayer])
+                                GetRoot(plr).CFrame = otherRoot.CFrame * CFrame.new(0,0,1.1)
+                                GetRoot(plr).Velocity = Vector3.new(0,0,0)
+                            end)
+                            task.wait()
+                        until BenxTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0)
+                        StopAnim()
+                        if GetRoot(plr):FindFirstChild("BreakVelocity") then
+                            GetRoot(plr).BreakVelocity:Destroy()
+                        end
+                    end
+                end
+            end)
+        end
+    })
+    
+    local HeadsitTarget_Button = Tabs.Targets:AddButton({
+        Title = "Headsit Target",
+        Description = "Headsit the target.",
+        Callback = function()
+            HeadsitTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    ChangeToggleColor(HeadsitTarget_Button)
+                    if HeadsitTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
+                        repeat
+                            pcall(function()
+                                if not GetRoot(plr):FindFirstChild("BreakVelocity") then
+                                    pcall(function()
+                                        local TempV = Velocity_Asset:Clone()
+                                        TempV.Parent = GetRoot(plr)
+                                    end)
+                                end
+                                local targethead = Players[TargetedPlayer].Character.Head
+                                plr.Character.Humanoid.Sit = true
+                                GetRoot(plr).CFrame = targethead.CFrame * CFrame.new(0,2,0)
+                                GetRoot(plr).Velocity = Vector3.new(0,0,0)
+                            end)
+                            task.wait()
+                        until HeadsitTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0)
+                        if GetRoot(plr):FindFirstChild("BreakVelocity") then
+                            GetRoot(plr).BreakVelocity:Destroy()
+                        end
+                    end
+                end
+            end)
+        end
+    })
+    
+    local StandTarget_Button = Tabs.Targets:AddButton({
+        Title = "Stand Target",
+        Description = "Stand near the target.",
+        Callback = function()
+            StandTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    ChangeToggleColor(StandTarget_Button)
+                    if StandTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
+                        PlayAnim(13823324057,4,0)
+                        repeat
+                            pcall(function()
+                                if not GetRoot(plr):FindFirstChild("BreakVelocity") then
+                                    pcall(function()
+                                        local TempV = Velocity_Asset:Clone()
+                                        TempV.Parent = GetRoot(plr)
+                                    end)
+                                end
+                                local root = GetRoot(Players[TargetedPlayer])
+                                GetRoot(plr).CFrame = root.CFrame * CFrame.new(-3,1,0)
+                                GetRoot(plr).Velocity = Vector3.new(0,0,0)
+                            end)
+                            task.wait()
+                        until StandTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0)
+                        StopAnim()
+                        if GetRoot(plr):FindFirstChild("BreakVelocity") then
+                            GetRoot(plr).BreakVelocity:Destroy()
+                        end
+                    end
+                end
+            end)
+        end
+    })
+    
+    local BackpackTarget_Button = Tabs.Targets:AddButton({
+        Title = "Backpack Target",
+        Description = "Backpack the target.",
+        Callback = function()
+            BackpackTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    ChangeToggleColor(BackpackTarget_Button)
+                    if BackpackTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
+                        repeat
+                            pcall(function()
+                                if not GetRoot(plr):FindFirstChild("BreakVelocity") then
+                                    pcall(function()
+                                        local TempV = Velocity_Asset:Clone()
+                                        TempV.Parent = GetRoot(plr)
+                                    end)
+                                end
+                                local root = GetRoot(Players[TargetedPlayer])
+                                plr.Character.Humanoid.Sit = true
+                                GetRoot(plr).CFrame = root.CFrame * CFrame.new(0,0,1.2) * CFrame.Angles(0, -3, 0)
+                                GetRoot(plr).Velocity = Vector3.new(0,0,0)
+                            end)
+                            task.wait()
+                        until BackpackTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0)
+                        if GetRoot(plr):FindFirstChild("Break Velocity") then
+                            GetRoot(plr).BreakVelocity:Destroy()
+                        end
+                    end
+                end
+            end)
+        end
+    })
+    
+    local DoggyTarget_Button = Tabs.Targets:AddButton({
+        Title = "Doggy Target",
+        Description = "Doggy the target.",
+        Callback = function()
+            DoggyTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    ChangeToggleColor(DoggyTarget_Button)
+                    if DoggyTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
+                        PlayAnim(13694096724,3.4,0)
+                        repeat
+                            pcall(function()
+                                if not GetRoot(plr):FindFirstChild("BreakVelocity") then
+                                    pcall(function()
+                                        local TempV = Velocity_Asset:Clone()
+                                        TempV.Parent = GetRoot(plr)
+                                    end)
+                                end
+                                local root = Players[TargetedPlayer].Character.LowerTorso
+                                GetRoot(plr).CFrame = root.CFrame * CFrame.new(0,0.23,0)
+                                GetRoot(plr).Velocity = Vector3.new(0,0,0)
+                            end)
+                            task.wait()
+                        until DoggyTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0)
+                        StopAnim()
+                        if GetRoot(plr):FindFirstChild("BreakVelocity") then
+                            GetRoot(plr).BreakVelocity:Destroy()
+                        end
+                    end
+                end
+            end)
+        end
+    })
+    
+    local DragTarget_Button = Tabs.Targets:AddButton({
+        Title = "Drag Target",
+        Description = "Drag the target.",
+        Callback = function()
+            DragTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    ChangeToggleColor(DragTarget_Button)
+                    if DragTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
+                        PlayAnim(10714360343,0.5,0)
+                        repeat
+                            pcall(function()
+                                if not GetRoot(plr):FindFirstChild("BreakVelocity") then
+                                    pcall(function()
+                                        local TempV = Velocity_Asset:Clone()
+                                        TempV.Parent = GetRoot(plr)
+                                    end)
+                                end
+                                local root = Players[TargetedPlayer].Character.RightHand
+                                GetRoot(plr).CFrame = root.CFrame * CFrame.new(0,-2.5,1) * CFrame.Angles(-2, -3, 0)
+                                GetRoot(plr).Velocity = Vector3.new(0,0,0)
+                            end)
+                            task.wait()
+                        until DragTarget_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0)
+                        StopAnim()
+                        if GetRoot(plr):FindFirstChild("BreakVelocity") then
+                            GetRoot(plr).BreakVelocity:Destroy()
+                        end
+                    end
+                end
+            end)
+        end
+    })
+    
+    local PushTarget_Button = Tabs.Targets:AddButton({
+        Title = "Push Target",
+        Description = "Push the target.",
+        Callback = function()
+            PushTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    local pushpos = GetRoot(plr).CFrame
+                    PredictionTP(Players[TargetedPlayer])
+                    task.wait(GetPing()+0.05)
+                    Push(Players[TargetedPlayer])
+                    GetRoot(plr).CFrame = pushpos
+                end
+            end)
+        end
+    })
+    
+    local TeleportTarget_Button = Tabs.Targets:AddButton({
+        Title = "Teleport Target",
+        Description = "Teleport to the target.",
+        Callback = function()
+            TeleportTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    TeleportTO(0,0,0,Players[TargetedPlayer],"safe")
+                end
+            end)
+        end
+    })
+    
+    local WhitelistTarget_Button = Tabs.Targets:AddButton({
+        Title = "Whitelist Target",
+        Description = "Whitelist the target.",
+        Callback = function()
+            WhitelistTarget_Button.MouseButton1Click:Connect(function()
+                if TargetedPlayer ~= nil then
+                    if table.find(ScriptWhitelist, Players[TargetedPlayer].UserId) then
+                        for i,v in pairs(ScriptWhitelist) do
+                            if v == Players[TargetedPlayer].UserId then
+                                table.remove(ScriptWhitelist, i)
+                            end
+                        end
+                        SendNotify("Synergy Hub",TargetedPlayer.." removed from whitelist.",5)
+                    else
+                        table.insert(ScriptWhitelist, Players[TargetedPlayer].UserId)
+                        SendNotify("Synergy Hub",TargetedPlayer.." added to whitelist.", 5)
+                    end
+                end
+            end)
+        end
+    })
+    
+    local TargetName_Input = Tabs.Targets:AddInput({
+        Title = "Target Name",
+        Placeholder = "Enter target name",
+        Callback = function(LabelText)
+            local LabelTarget = GetPlayer(LabelText)
+            UpdateTarget(LabelTarget)
         end
     })
     
