@@ -33,7 +33,7 @@ local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 40)
 title.BackgroundTransparency = 1
 title.TextColor3 = Color3.fromRGB(240, 240, 240)
-title.Text = "BANG GUI"
+title.Text = "🌀BANG GUI"
 title.TextScaled = true
 title.Parent = background
 
@@ -72,7 +72,6 @@ end)
 
 -- Make the GUI draggable
 local dragging = false
-local dragInput = nil
 local dragStart = nil
 local startPos = nil
 
@@ -109,7 +108,7 @@ enterButton.MouseButton1Click:Connect(function()
         if targetPlayer then
             -- Execute the command with the full name of the found player
             execCmd("bang " .. targetPlayer.Name)
-            
+
             -- Display notification after successful execution
             game.StarterGui:SetCore("SendNotification", {
                 Title = "OP FE BANG",
