@@ -236,11 +236,16 @@
 
 
 
+-- you are so skidddd.............................................................LOOOOOL
+local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
 
-print("Why are you here?...LOL")
 
-print("why so skid?...NAH")
-
-print("Create your own script...NUH UH")
-
-print("GET OUT...YEAHHH")
+if localPlayer.MembershipType == Enum.MembershipType.Premium then
+    print("Why are you here?...LOL")
+    print("Why so skid?...NAH")
+    print("Create your own script...NUH UH")
+    print("GET OUT...YEAHHH")
+else
+    print("This feature is for premium members only.")
+end
