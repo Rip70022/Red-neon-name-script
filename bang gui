@@ -2,7 +2,6 @@
 -- OP BANG GUI with Draggable GUI and Notification
 
 -- Function to execute the "bang" command
-local function execBangCommand(targetPlayer, speaker)
 local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
 	bangAnim = Instance.new("Animation")
 	bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
