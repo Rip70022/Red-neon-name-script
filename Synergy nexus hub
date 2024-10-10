@@ -117,7 +117,7 @@ Tabs.SynergyBroken:AddButton({
 
  Tabs.SynergyBypasser:AddParagraph({
         Title = "⚠️Warning⚠️: Synergy Bypasser OP",
-        Content = "⚡Script By Me⚡"
+        Content = "👑Script By Me.👑\n🔑join my Discord for the key🔑"
     })
 
 Tabs.SynergyBypasser:AddButton({
