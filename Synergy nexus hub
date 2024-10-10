@@ -38,7 +38,7 @@ do
 
     Tabs.Main:AddParagraph({
         Title = "🛡️RoTotal🛡️",
-        Content = "RoTotal is a Roblox version of VirusTotal. It scans and analyzes scripts before running them, protecting you from malicious code or vulnerabilities. Perfect for keeping your Roblox experience safe.                       ●SPANISH●: RoTotal es una versión de VirusTotal para Roblox. Escanea y analiza scripts antes de ejecutarlos, protegiéndote de código malicioso o vulnerabilidades. Perfecto para mantener tu experiencia segura en Roblox."
+        Content = "[ENGLISH: RoTotal is a Roblox version of VirusTotal. It scans and analyzes scripts before running them, protecting you from malicious code or vulnerabilities. Perfect for keeping your Roblox experience safe.]\n[SPANISH: RoTotal es una versión de VirusTotal para Roblox. Escanea y analiza scripts antes de ejecutarlos, protegiéndote de código malicioso o vulnerabilidades. Perfecto para mantener tu experiencia segura en Roblox.]"
     })
 
     Tabs.Main:AddButton({
