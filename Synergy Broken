@@ -3601,19 +3601,6 @@ plr.CharacterAdded:Connect(function(x)
 	appearance:Destroy()
 end)
 
-task.spawn(function()
-	while task.wait(10) do
-		pcall(function()
-			local GuiVersion = loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Synergy%20Broken"))()
-			if version<GuiVersion then
-				SendNotify("♦️Synergy Broken♦️","You are not using the latest version, please run the script again.",60)
-				task.wait(5)
-				SysBroker:Destroy()
-				game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)
-			end
-		end)
-	end
-end)
 
 OpenClose.MouseButton1Click:Connect(function()
 	Background.Visible = not Background.Visible
