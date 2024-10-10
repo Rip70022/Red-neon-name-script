@@ -121,8 +121,8 @@ Tabs.SynergyBroken:AddButton({
     })
 
 Tabs.SynergyBypasser:AddButton({
-        Title = "⛓️‍💥Synergy Bypasser⛓️‍💥",
-        Description = "⛓️Key System⛓️.",
+        Title = "🌀Synergy Bypasser🌀",
+        Description = "  🔒Key System🔒.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Synergy%20Bypasser"))()
         end
