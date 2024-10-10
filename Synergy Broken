@@ -1,5 +1,5 @@
 -- Modified By ERROR_USERBANNED/Shadow_Sadist
--- Synergy Broken OP
+-- ♦️Synergy Broken♦️ OP
 -- LOL
 -- NAH
 -- GG
@@ -10,7 +10,7 @@
 -- YOU NEED ROBUX
 -- NUH UH
 -- ROBLOX
--- SYNERGY BROKEN EZ
+-- ♦️Synergy Broken♦️ EZ
 -- JOIN ON MY DISCORD
 -- KITTYYY
 -- IDK
@@ -56,7 +56,7 @@
 
 --RELOAD GUI
 if game.CoreGui:FindFirstChild("SysBroker") then
-	game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Synergy Broken",Text = "GUI Already loaded, rejoin to re-execute",Duration = 5;})
+	game:GetService("StarterGui"):SetCore("SendNotification", {Title = "♦️♦️Synergy Broken♦️♦️",Text = "GUI Already loaded, rejoin to re-execute",Duration = 5;})
 	return
 end
 local version = 1
@@ -468,8 +468,8 @@ TitleBarLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TitleBarLabel.BorderSizePixel = 0
 TitleBarLabel.Size = UDim2.new(1, 0, 0, 30)
 TitleBarLabel.Font = Enum.Font.Unknown
-TitleBarLabel.Text = "___/🌀Synergy_Broken🌀__"
-TitleBarLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+TitleBarLabel.Text = "___/🌀♦️Synergy_Broken♦️🌀\__"
+TitleBarLabel.TextColor3 = Color3.fromRGB(255, 0, 255)
 TitleBarLabel.TextScaled = true
 TitleBarLabel.TextSize = 14.000
 TitleBarLabel.TextWrapped = true
@@ -1979,7 +1979,7 @@ Crown.BorderSizePixel = 0
 Crown.Rotation = -20.000
 Crown.Size = UDim2.new(0, 75, 0, 75)
 Crown.Image = "rbxassetid://12298407748"
-Crown.ImageColor3 = Color3.fromRGB(0, 255, 0)
+Crown.ImageColor3 = Color3.fromRGB(255, 0, 0)
 
 Assets.Name = "Assets"
 Assets.Parent = SysBroker
@@ -2096,7 +2096,7 @@ OpenClose.BorderSizePixel = 0
 OpenClose.Position = UDim2.new(0, 0, 0.5, 0)
 OpenClose.Size = UDim2.new(0, 30, 0, 30)
 OpenClose.Image = "rbxassetid://12298407748"
-OpenClose.ImageColor3 = Color3.fromRGB(0, 255, 0)
+OpenClose.ImageColor3 = Color3.fromRGB(255, 0, 0)
 
 UICornerOC.CornerRadius = UDim.new(1, 0)
 UICornerOC.Parent = OpenClose
@@ -2206,7 +2206,7 @@ end
 local function UpdateTarget(player)
 	pcall(function()
 		if table.find(ForceWhitelist,player.UserId) then
-			SendNotify("Synergy Broken","You cant target this player: @"..player.Name.." / "..player.DisplayName,5)
+			SendNotify("♦️Synergy Broken♦️","You cant target this player: @"..player.Name.." / "..player.DisplayName,5)
 			player = nil
 		end
 	end)
@@ -2578,7 +2578,7 @@ end)
 CMDBar.FocusLost:Connect(function()
 	command = CMDBar.Text
 	Players:Chat(command)
-	SendNotify("Synergy Broken",("Executed "..command),5)
+	SendNotify("♦️Synergy Broken♦️",("Executed "..command),5)
 	CMDBar.Text = ""
 end)
 
@@ -2591,7 +2591,7 @@ WalkSpeed_Button.MouseButton1Click:Connect(function()
 			Speed = 16
 		end
 		plr.Character.Humanoid.WalkSpeed = tonumber(Speed)
-		SendNotify("Synergy Broken","Walk speed updated.",5)
+		SendNotify("♦️Synergy Broken♦️","Walk speed updated.",5)
 	end)
 end)
 
@@ -2602,7 +2602,7 @@ JumpPower_Button.MouseButton1Click:Connect(function()
 			Power = 50
 		end
 		plr.Character.Humanoid.JumpPower = tonumber(Power)
-		SendNotify("Synergy Broken","Jump power updated.",5)
+		SendNotify("♦️Synergy Broken♦️","Jump power updated.",5)
 	end)
 end)
 
@@ -2613,7 +2613,7 @@ FlySpeed_Button.MouseButton1Click:Connect(function()
 			Speed = 50
 		end
 		FlySpeed = tonumber(Speed)
-		SendNotify("Synergy Broken","Fly speed updated.",5)
+		SendNotify("♦️Synergy Broken♦️","Fly speed updated.",5)
 	end)
 end)
 
@@ -2626,12 +2626,12 @@ end)
 
 SaveCheckpoint_Button.MouseButton1Click:Connect(function()
 	SavedCheckpoint = GetRoot(plr).Position
-	SendNotify("Synergy Broken","Checkpoint saved.",5)
+	SendNotify("♦️Synergy Broken♦️","Checkpoint saved.",5)
 end)
 
 ClearCheckpoint_Button.MouseButton1Click:Connect(function()
 	SavedCheckpoint = nil
-	SendNotify("Synergy Broken","Checkpoint cleared.",5)
+	SendNotify("♦️Synergy Broken♦️","Checkpoint cleared.",5)
 end)
 
 local flying = true
@@ -3449,7 +3449,7 @@ Day_Button.MouseButton1Click:Connect(function()
 	if Shaders_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0) then
 		game:GetService("Lighting").ClockTime = 14
 	else
-		SendNotify("Synergy Broken","Please turn off shaders.",5)
+		SendNotify("♦️Synergy Broken♦️","Please turn off shaders.",5)
 	end
 end)
 
@@ -3457,7 +3457,7 @@ Night_Button.MouseButton1Click:Connect(function()
 	if Shaders_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(255,0,0) then
 		game:GetService("Lighting").ClockTime = 19
 	else
-		SendNotify("Synergy Broken","Please turn off shaders.",5)
+		SendNotify("♦️Synergy Broken♦️","Please turn off shaders.",5)
 	end
 end)
 
@@ -3485,7 +3485,7 @@ end)
 FreeEmotes_Button.MouseButton1Click:Connect(function()
 	if not FreeEmotesEnabled then
 		FreeEmotesEnabled = true
-		SendNotify("Synergy Broken","Loading free emotes.\nCredits: Gi#7331")
+		SendNotify("♦️Synergy Broken♦️","Loading free emotes.\nCredits: Gi#7331")
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/AllEmotes"))()
 	end
 end)
@@ -3523,7 +3523,7 @@ Players.PlayerRemoving:Connect(function(player)
 	pcall(function()
 		if player.Name == TargetedPlayer then
 			UpdateTarget(nil)
-			SendNotify("Synergy Broken","Targeted player left/rejoined.",5)
+			SendNotify("♦️Synergy Broken♦️","Targeted player left/rejoined.",5)
 		end
 	end)
 end)
@@ -3536,19 +3536,19 @@ plr.CharacterAdded:Connect(function(x)
 	end
 	if PotionDi_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
 		ChangeToggleColor(PotionDi_Button)
-		SendNotify("Synergy Broken","PotionDick was automatically disabled due to your character respawn",5)
+		SendNotify("♦️Synergy Broken♦️","PotionDick was automatically disabled due to your character respawn",5)
 	end
 	if PotionFling_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
 		ChangeToggleColor(PotionFling_Button)
-		SendNotify("Synergy Broken","PotionFling was automatically disabled due to your character respawn",5)
+		SendNotify("♦️Synergy Broken♦️","PotionFling was automatically disabled due to your character respawn",5)
 	end
 	if AntiRagdoll_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
 		ChangeToggleColor(AntiRagdoll_Button)
-		SendNotify("Synergy Broken","AntiRagdoll was automatically disabled due to your character respawn",5)
+		SendNotify("♦️Synergy Broken♦️","AntiRagdoll was automatically disabled due to your character respawn",5)
 	end
 	if SpamMines_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
 		ChangeToggleColor(SpamMines_Button)
-		SendNotify("Synergy Broken","SpamMines was automatically disabled due to your character respawn",5)
+		SendNotify("♦️Synergy Broken♦️","SpamMines was automatically disabled due to your character respawn",5)
 	end
 	if Fly_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
 		ChangeToggleColor(Fly_Button)
@@ -3556,7 +3556,7 @@ plr.CharacterAdded:Connect(function(x)
 		Fly_Pad.Visible = false
 		KeyDownFunction:Disconnect()
 		KeyUpFunction:Disconnect()
-		SendNotify("Synergy Broken","Fly was automatically disabled due to your character respawn",5)
+		SendNotify("♦️Synergy Broken♦️","Fly was automatically disabled due to your character respawn",5)
 	end
 	x.Humanoid.Died:Connect(function()
 		pcall(function()
@@ -3590,12 +3590,12 @@ plr.CharacterAdded:Connect(function(x)
 		end
 		if not (count == original_ammount) then
 			SysBroker:Destroy()
-			SendNotify("Synergy Broken","An unexpected error occurred, re-joining...")
+			SendNotify("♦️Synergy Broken♦️","An unexpected error occurred, re-joining...")
 			game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)
 		end
 	else
 		SysBroker:Destroy()
-		SendNotify("Synergy Broken","An unexpected error occurred, re-joining...")
+		SendNotify("♦️Synergy Broken♦️","An unexpected error occurred, re-joining...")
 		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)
 	end
 	appearance:Destroy()
@@ -3606,7 +3606,7 @@ task.spawn(function()
 		pcall(function()
 			local GuiVersion = loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Synergy%20Broken"))()
 			if version<GuiVersion then
-				SendNotify("Synergy Broken","You are not using the latest version, please run the script again.",60)
+				SendNotify("♦️Synergy Broken♦️","You are not using the latest version, please run the script again.",60)
 				task.wait(5)
 				SysBroker:Destroy()
 				game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)
@@ -3642,12 +3642,12 @@ task.spawn(function()
 
 			if (plr.Name ~= original_name) or (plr.DisplayName ~= original_display) or (plr.UserId ~= plr.CharacterAppearanceId) then
 				SysBroker:Destroy()
-				SendNotify("Synergy Broken","An unexpected error occurred, re-joining...")
+				SendNotify("♦️Synergy Broken♦️","An unexpected error occurred, re-joining...")
 				game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)
 			end
 			if (date_1 ~= original_date) and (date_2 ~= original_date) and (date_3 ~= original_date) then
 				SysBroker:Destroy()
-				SendNotify("Synergy Broken","An unexpected error occurred, re-joining...")
+				SendNotify("♦️Synergy Broken♦️","An unexpected error occurred, re-joining...")
 				game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)
 			end
 		end)
@@ -3673,7 +3673,7 @@ pcall(function()
     } :: Json)
 end)
 
-SendNotify("Synergy Broken","Gui Modified by ERROR_USERBANNED - Discord in your clipboard",10)
+SendNotify("♦️Synergy Broken♦️","Gui Modified by ERROR_USERBANNED - Discord in your clipboard",10)
 setclipboard("https://discord.gg/7ThdVFRs")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Synergy%20Broken%20Premium"))()
 -- load the premium...
