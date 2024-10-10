@@ -44,60 +44,6 @@
 
 -- XD
 -- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
--- WHY SO SERIOUS?
 -- NAH BRO
 -- REAL
 -- OP
@@ -1047,7 +993,7 @@ Announce_Label.BorderSizePixel = 0
 Announce_Label.Position = UDim2.new(0, 25, 0, 150)
 Announce_Label.Size = UDim2.new(0, 350, 0, 150)
 Announce_Label.Font = Enum.Font.SourceSans
-Announce_Label.Text = loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/announce"))()
+Announce_Label.Text = loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/announce"))()
 Announce_Label.TextColor3 = Color3.fromRGB(0, 255, 0)
 Announce_Label.TextSize = 24.000
 Announce_Label.TextWrapped = true
@@ -3421,7 +3367,7 @@ AntiFling_Button.MouseButton1Click:Connect(function()
 	ChangeToggleColor(AntiFling_Button)
 	if AntiFling_Button.Ticket_Asset.ImageColor3 == Color3.fromRGB(0,255,0) then
 		_G.AntiFlingToggled = true
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/AntiFling'))()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/ANTI%20FLING'))()
 	else
 		_G.AntiFlingToggled = false
 	end
@@ -3540,7 +3486,7 @@ FreeEmotes_Button.MouseButton1Click:Connect(function()
 	if not FreeEmotesEnabled then
 		FreeEmotesEnabled = true
 		SendNotify("♦️Synergy Broken♦️","Loading free emotes.\nCredits: Gi#7331")
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/AllEmotes"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/ALL%20Emotes"))()
 	end
 end)
 
