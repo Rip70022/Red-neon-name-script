@@ -17,7 +17,7 @@ local Tabs = {
     Main = Window:AddTab({ Title = "🛡️•RoTotal•🛡️", Icon = "shield" }),
     SynergyNexusScripts = Window:AddTab({ Title = "Synergy•Nexus•Scripts", Icon = "cog" }),
     SynergyBroken = Window:AddTab({ Title = "Synergy•Broken", Icon = "code-2" }),
-    SynergyBypasser = Window:AddTab({ Title = "Synergy•Bypasser", Icon = "cog-2" }),
+    SynergyBypasser = Window:AddTab({ Title = "Synergy•Bypasser", Icon = "folder" }),
     BloxFruits = Window:AddTab({ Title = "Blox•Fruits", Icon = "apple" }), 
     RandomScripts = Window:AddTab({ Title = "Scripts•Random", Icon = "shuffle" }), 
     TSB_Scripts = Window:AddTab({ Title = "TSB•Scripts", Icon = "code" }),
@@ -120,7 +120,7 @@ Tabs.SynergyBroken:AddButton({
         Content = "⚡Script By Me⚡"
     })
 
-Tabs.SynergyBroken:AddButton({
+Tabs.SynergyBypasser:AddButton({
         Title = "⛓️‍💥Synergy Bypasser⛓️‍💥",
         Description = "⛓️Key System⛓️.",
         Callback = function()
