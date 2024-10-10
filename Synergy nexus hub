@@ -16,6 +16,7 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "🛡️•RoTotal•🛡️", Icon = "shield" }),
     SynergyNexusScripts = Window:AddTab({ Title = "Synergy•Nexus•Scripts", Icon = "cog" }),
+    SynergyBroken = Window:AddTab({ Title = "Synergy•Broken", Icon = "code-2" }),
     BloxFruits = Window:AddTab({ Title = "Blox•Fruits", Icon = "apple" }), 
     RandomScripts = Window:AddTab({ Title = "Scripts•Random", Icon = "shuffle" }), 
     TSB_Scripts = Window:AddTab({ Title = "TSB•Scripts", Icon = "code" }),
@@ -97,6 +98,19 @@ Tabs.SynergyNexusScripts:AddButton({
         Description = "❗OP IY Modified by me❗.",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Infinite%20Yield%20IY%20OP"))()
+        end
+    })
+
+    Tabs.SynergyBroken:AddParagraph({
+        Title = "⚠️Warning⚠️: Synergy Broken Script OP",
+        Content = "⚡Script By Me⚡"
+    })
+
+Tabs.SynergyBroken:AddButton({
+        Title = "🔥Synergy Broken🔥",
+        Description = "❗This is OP❗.",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Synergy%20Broken"))()
         end
     })
 
