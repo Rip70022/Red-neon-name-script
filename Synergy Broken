@@ -1978,7 +1978,7 @@ Crown.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Crown.BorderSizePixel = 0
 Crown.Rotation = -20.000
 Crown.Size = UDim2.new(0, 75, 0, 75)
-Crown.Image = "rbxassetid://10814128647"
+Crown.Image = "rbxassetid://12298407748"
 Crown.ImageColor3 = Color3.fromRGB(255, 0, 0)
 
 Assets.Name = "Assets"
@@ -2095,7 +2095,7 @@ OpenClose.BorderColor3 = Color3.fromRGB(0, 0, 0)
 OpenClose.BorderSizePixel = 0
 OpenClose.Position = UDim2.new(0, 0, 0.5, 0)
 OpenClose.Size = UDim2.new(0, 30, 0, 30)
-OpenClose.Image = "rbxassetid://10814128647"
+OpenClose.Image = "rbxassetid://12298407748"
 OpenClose.ImageColor3 = Color3.fromRGB(255, 0, 0)
 
 UICornerOC.CornerRadius = UDim.new(1, 0)
@@ -2763,7 +2763,7 @@ ClickTargetTool_Button.MouseButton1Click:Connect(function()
 	local GetTargetTool = Instance.new("Tool")
 	GetTargetTool.Name = "ClickTarget"
 	GetTargetTool.RequiresHandle = false
-	GetTargetTool.TextureId = "rbxassetid://9468220174"
+	GetTargetTool.TextureId = "rbxassetid://2716591855"
 	GetTargetTool.ToolTip = "Select Target"
 
 	local function ActivateTool()
