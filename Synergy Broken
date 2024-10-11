@@ -1845,7 +1845,7 @@ Explode_Button.BorderSizePixel = 0
 Explode_Button.Position = UDim2.new(0, 25, 0, 225)
 Explode_Button.Size = UDim2.new(0, 150, 0, 30)
 Explode_Button.Font = Enum.Font.Oswald
-Explode_Button.Text = "Explode"
+Explode_Button.Text = "Synergy-Hub"
 Explode_Button.TextColor3 = Color3.fromRGB(0, 0, 0)
 Explode_Button.TextScaled = true
 Explode_Button.TextSize = 14.000
@@ -3470,22 +3470,13 @@ CMDX_Button.MouseButton1Click:Connect(function()
 end)
 
 Explode_Button.MouseButton1Click:Connect(function()
-	ToggleRagdoll(false)
-	task.wait()
-	plr.Character.Humanoid:ChangeState(0)
-	local bav = Instance.new("BodyAngularVelocity")
-	bav.Parent = GetRoot(plr)
-	bav.Name = "Spin"
-	bav.MaxTorque = Vector3.new(0,math.huge,0)
-	bav.AngularVelocity = Vector3.new(0,150,0)
-	task.wait(3)
-	plr.Character.Humanoid:ChangeState(15)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/Synergy%20nexus%20hub"))()
 end)
 
 FreeEmotes_Button.MouseButton1Click:Connect(function()
 	if not FreeEmotesEnabled then
 		FreeEmotesEnabled = true
-		SendNotify("♦️Synergy Broken♦️","Loading free emotes.\nCredits: Gi#7331")
+		SendNotify("♦️Synergy Broken♦️","Loading free emotes.\nCredits: Gi#7331 😳")
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/main/ALL%20Emotes"))()
 	end
 end)
