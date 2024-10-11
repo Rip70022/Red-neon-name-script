@@ -1978,7 +1978,7 @@ Crown.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Crown.BorderSizePixel = 0
 Crown.Rotation = -20.000
 Crown.Size = UDim2.new(0, 75, 0, 75)
-Crown.Image = "rbxassetid://12298407748"
+Crown.Image = "rbxassetid://1254961354"
 Crown.ImageColor3 = Color3.fromRGB(255, 215, 0)
 
 Assets.Name = "Assets"
@@ -2095,7 +2095,7 @@ OpenClose.BorderColor3 = Color3.fromRGB(0, 0, 0)
 OpenClose.BorderSizePixel = 0 --  0
 OpenClose.Position = UDim2.new(0, 0, 0.5, 0)
 OpenClose.Size = UDim2.new(0, 30, 0, 30)
-OpenClose.Image = "rbxassetid://5271301426"
+OpenClose.Image = "rbxassetid://1254961354"
 OpenClose.ImageColor3 = Color3.fromRGB(255, 215, 0) -- gold
 
 UICornerOC.CornerRadius = UDim.new(1, 0)
