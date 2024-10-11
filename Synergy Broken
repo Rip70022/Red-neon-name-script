@@ -2091,13 +2091,12 @@ FlySButton.TextWrapped = true
 OpenClose.Name = "OpenClose"
 OpenClose.Parent = SysBroker
 OpenClose.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-OpenClose.BackgroundTransparency = 1 -- este no estaba, eliminalo.
 OpenClose.BorderColor3 = Color3.fromRGB(0, 0, 0)
-OpenClose.BorderSizePixel = 1 -- estaba en 0
+OpenClose.BorderSizePixel = 0 --  0
 OpenClose.Position = UDim2.new(0, 0, 0.5, 0)
 OpenClose.Size = UDim2.new(0, 30, 0, 30)
 OpenClose.Image = "rbxassetid://5271301426"
-OpenClose.ImageColor3 = Color3.fromRGB(255, 215, 0)
+OpenClose.ImageColor3 = Color3.fromRGB(255, 215, 0) -- gold
 
 UICornerOC.CornerRadius = UDim.new(1, 0)
 UICornerOC.Parent = OpenClose
