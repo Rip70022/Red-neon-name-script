@@ -7,6 +7,21 @@ local players = game:GetService("Players")
 local plr = players.LocalPlayer
 local AntiFlingFunction = nil
 
+game.StarterGui:SetCore("SendNotification", {
+    Title = "❗ANTIFLING❗",
+    Text = "By ERROR_USERBANNED",
+    Duration = 5
+})
+
+wait(5)
+
+game.StarterGui:SetCore("SendNotification", {
+    Title = "♦️Synergy Broken♦️",
+    Text = "💀ANTIFLING💀",
+    Duration = 5
+})
+
+
 AntiFlingFunction = RunService.Stepped:Connect(function()
 	for i,p in pairs(players:GetPlayers()) do
 		task.spawn(function()
