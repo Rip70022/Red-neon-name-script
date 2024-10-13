@@ -85,10 +85,10 @@ spawn(rainbowText)
 Fluent:Notify({
     Title = "Hub loading, please wait...",
     Content = "🔥Synergy Nexus Hub🔥",
-    Duration = 3.2
+    Duration = 4
     })
 
-wait(3.5)
+wait(4.2)
 frame:Destroy()
 
 local Window = Fluent:CreateWindow({
