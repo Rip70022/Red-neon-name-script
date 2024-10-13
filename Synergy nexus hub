@@ -1,6 +1,5 @@
 local screenGui = Instance.new("ScreenGui")
 local frame = Instance.new("Frame")
-local imageLabel = Instance.new("ImageLabel")
 local textLabel = Instance.new("TextLabel")
 
 
@@ -13,36 +12,23 @@ frame.BackgroundTransparency = 1
 frame.Parent = screenGui
 
 
-imageLabel.Size = UDim2.new(0, 40, 0, 40) 
-imageLabel.Position = UDim2.new(0.5, -20, 0.5, -60) 
-imageLabel.Image = "rbxassetid://287935141" 
-imageLabel.BackgroundTransparency = 1
-imageLabel.Parent = frame
-
-
 textLabel.Size = UDim2.new(1, 0, 0, 30) 
 textLabel.Position = UDim2.new(0, 0, 0, 10) 
-textLabel.Text = "Synergy Nexus"
+textLabel.Text = "😎Join my Discord server😎"
 textLabel.TextColor3 = Color3.fromRGB(255, 0, 0) 
 textLabel.TextScaled = false 
 textLabel.TextSize = 20 
 textLabel.BackgroundTransparency = 1
 textLabel.Parent = frame
 
+Fluent:Notify({
+    Title = "Hub loading, please wait...",
+    Content = "🔥Synergy Nexus Hub🔥",
+    Duration = 2.5
+    })
 
-local function fadeOut()
-    for i = 1, 10 do
-        wait(0.5) 
-        frame.BackgroundTransparency = frame.BackgroundTransparency + 0.1
-        imageLabel.BackgroundTransparency = imageLabel.BackgroundTransparency + 0.1
-        textLabel.BackgroundTransparency = textLabel.BackgroundTransparency + 0.1
-    end
-    screenGui:Destroy() 
-end
-
-
-wait(3)
-fadeOut()
+wait(2.7)
+frame:Destroy()
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
