@@ -1,44 +1,47 @@
--- Crea un ScreenGui
 local screenGui = Instance.new("ScreenGui")
+local frame = Instance.new("Frame")
+local imageLabel = Instance.new("ImageLabel")
+local textLabel = Instance.new("TextLabel")
+
+-- Configuración del ScreenGui
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Crea un Decal para la imagen
-local decal = Instance.new("Decal")
-decal.Texture = "rbxassetid://287935141" -- Reemplaza con el ID de tu decal
-decal.Parent = screenGui
+-- Configuración del Frame
+frame.Size = UDim2.new(0, 400, 0, 200)
+frame.Position = UDim2.new(0.5, -200, 0.5, -100)
+frame.BackgroundTransparency = 1
+frame.Parent = screenGui
 
--- Crea un BillboardGui para mostrar el decal
-local billboardGui = Instance.new("BillboardGui")
-billboardGui.Adornee = screenGui
-billboardGui.Size = UDim2.new(0, 100, 0, 100) -- Tamaño del decal (100x100)
-billboardGui.StudsOffset = Vector3.new(0, 0, 0) -- Posición del decal
-billboardGui.Parent = screenGui
+-- Configuración del ImageLabel (decal)
+imageLabel.Size = UDim2.new(0, 100, 0, 100) -- Tamaño pequeño
+imageLabel.Position = UDim2.new(0.5, -50, 0.5, -50) -- Centrado en el frame
+imageLabel.Image = "rbxassetid://287935141" -- Reemplaza <ID_DEL_DECAL> con el ID del decal
+imageLabel.BackgroundTransparency = 1
+imageLabel.Parent = frame
 
--- Crea un Frame para contener el decal y el texto
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 100, 0, 150) -- Tamaño del frame (100x150)
-frame.BackgroundTransparency = 1 -- Sin fondo
-frame.Parent = billboardGui
-
--- Crea un TextLabel para el texto
-local textLabel = Instance.new("TextLabel")
-textLabel.Size = UDim2.new(1, 0, 0.5, 0) -- Tamaño del texto
-textLabel.Position = UDim2.new(0, 0, 0.5, 0) -- Debajo del decal
+-- Configuración del TextLabel
+textLabel.Size = UDim2.new(1, 0, 0, 50)
+textLabel.Position = UDim2.new(0, 0, 0, 60) -- Debajo del decal
 textLabel.Text = "Synergy Nexus"
-textLabel.TextColor3 = Color3.new(1, 0, 0) -- Color del texto (rojo brillante)
-textLabel.Font = Enum.Font.SourceSansBold -- Fuente del texto (negrita)
-textLabel.FontSize = Enum.FontSize.Size24 -- Tamaño de la fuente (24)
-textLabel.BackgroundTransparency = 1 -- Sin fondo
+textLabel.TextColor3 = Color3.fromRGB(255, 0, 0) -- Rojo
+textLabel.TextScaled = true
+textLabel.BackgroundTransparency = 1
 textLabel.Parent = frame
 
--- Agrega el decal al frame
-decal.Parent = frame
+-- Función para desvanecer el Frame
+local function fadeOut()
+    for i = 1, 10 do
+        wait(0.5) -- Espera 0.5 segundos
+        frame.BackgroundTransparency = frame.BackgroundTransparency + 0.1
+        imageLabel.BackgroundTransparency = imageLabel.BackgroundTransparency + 0.1
+        textLabel.BackgroundTransparency = textLabel.BackgroundTransparency + 0.1
+    end
+    screenGui:Destroy() -- Elimina el ScreenGui después de desvanecerse
+end
 
--- Espera un tiempo antes de ocultar el decal y el texto
-wait(5) -- Espera 3 segundos
-
--- Oculta el decal y el texto
-frame:Destroy()
+-- Espera 5 segundos antes de ejecutar el desvanecimiento y tu hub
+wait(5)
+fadeOut()
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
