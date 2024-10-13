@@ -14,23 +14,31 @@ billboardGui.Size = UDim2.new(0, 100, 0, 100) -- Tamaño del decal (100x100)
 billboardGui.StudsOffset = Vector3.new(0, 0, 0) -- Posición del decal
 billboardGui.Parent = screenGui
 
+-- Crea un Frame para contener el decal y el texto
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 100, 0, 150) -- Tamaño del frame (100x150)
+frame.BackgroundTransparency = 1 -- Sin fondo
+frame.Parent = billboardGui
+
 -- Crea un TextLabel para el texto
 local textLabel = Instance.new("TextLabel")
-textLabel.Size = UDim2.new(0.5, 0, 0.1, 0) -- Tamaño del texto
-textLabel.Position = UDim2.new(0.25, 0, 0.75, 0) -- Debajo del decal
+textLabel.Size = UDim2.new(1, 0, 0.5, 0) -- Tamaño del texto
+textLabel.Position = UDim2.new(0, 0, 0.5, 0) -- Debajo del decal
 textLabel.Text = "Synergy Nexus"
 textLabel.TextColor3 = Color3.new(1, 0, 0) -- Color del texto (rojo brillante)
 textLabel.Font = Enum.Font.SourceSansBold -- Fuente del texto (negrita)
 textLabel.FontSize = Enum.FontSize.Size24 -- Tamaño de la fuente (24)
 textLabel.BackgroundTransparency = 1 -- Sin fondo
-textLabel.Parent = screenGu
+textLabel.Parent = frame
 
--- Espera un tiempo antes de ocultar la imagen y el texto
+-- Agrega el decal al frame
+decal.Parent = frame
+
+-- Espera un tiempo antes de ocultar el decal y el texto
 wait(5) -- Espera 3 segundos
 
--- Oculta la imagen y el texto
-decal:Destroy()
-textLabel:Destroy()
+-- Oculta el decal y el texto
+frame:Destroy()
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
