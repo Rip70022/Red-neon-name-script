@@ -51,6 +51,37 @@ textLabel.TextSize = 20
 textLabel.BackgroundTransparency = 1
 textLabel.Parent = frame
 
+local function rainbowText()
+    while true do
+        for i = 0, 255, 5 do
+            textLabel.TextColor3 = Color3.fromRGB(i, 0, 255) 
+            wait(0.05)
+        end
+        for i = 0, 255, 5 do
+            textLabel.TextColor3 = Color3.fromRGB(255, i, 0) 
+            wait(0.05)
+        end
+        for i = 0, 255, 5 do
+            textLabel.TextColor3 = Color3.fromRGB(255 - i, 255, i) 
+            wait(0.05)
+        end
+        for i = 0, 255, 5 do
+            textLabel.TextColor3 = Color3.fromRGB(0, 255 - i, 255) 
+            wait(0.05)
+        end
+        for i = 0, 255, 5 do
+            textLabel.TextColor3 = Color3.fromRGB(0, 0, 255 - i) 
+            wait(0.05)
+        end
+        for i = 0, 255, 5 do
+            textLabel.TextColor3 = Color3.fromRGB(i, 0, 0) 
+            wait(0.05)
+        end
+    end
+end
+
+spawn(rainbowText)
+
 Fluent:Notify({
     Title = "Hub loading, please wait...",
     Content = "🔥Synergy Nexus Hub🔥",
