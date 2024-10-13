@@ -1,3 +1,30 @@
+-- Crea un ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Crea un ImageLabel para la imagen
+local imageLabel = Instance.new("ImageLabel")
+imageLabel.Size = UDim2.new(0.5, 0, 0.5, 0) -- Tamaño de la imagen (50% de la pantalla)
+imageLabel.Position = UDim2.new(0.25, 0, 0.25, 0) -- Centrado en la pantalla
+imageLabel.Image = "https://static.vecteezy.com/system/resources/previews/011/311/620/non_2x/sn-logo-sn-design-blue-and-red-sn-letter-sn-letter-logo-design-initial-letter-sn-linked-circle-uppercase-monogram-logo-vector.jpg" -- Reemplaza con el enlace a tu imagen
+imageLabel.Parent = screenGui
+
+-- Crea un TextLabel para el texto
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(0.5, 0, 0.1, 0) -- Tamaño del texto
+textLabel.Position = UDim2.new(0.25, 0, 0.75, 0) -- Debajo de la imagen
+textLabel.Text = "Synergy Nexus"
+textLabel.TextColor3 = Color3.new(1, 1, 1) -- Color del texto (blanco)
+textLabel.BackgroundTransparency = 1 -- Sin fondo
+textLabel.Parent = screenGui
+
+-- Espera un tiempo antes de ocultar la imagen y el texto
+wait(5) -- Espera 3 segundos
+
+-- Oculta la imagen y el texto
+imageLabel:Destroy()
+textLabel:Destroy()
+
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
