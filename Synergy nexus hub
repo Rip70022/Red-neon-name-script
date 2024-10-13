@@ -3,44 +3,45 @@ local frame = Instance.new("Frame")
 local imageLabel = Instance.new("ImageLabel")
 local textLabel = Instance.new("TextLabel")
 
--- Configuración del ScreenGui
+
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Configuración del Frame
+
 frame.Size = UDim2.new(0, 400, 0, 200)
 frame.Position = UDim2.new(0.5, -200, 0.5, -100)
 frame.BackgroundTransparency = 1
 frame.Parent = screenGui
 
--- Configuración del ImageLabel (decal)
-imageLabel.Size = UDim2.new(0, 50, 0, 50) -- Tamaño más pequeño
-imageLabel.Position = UDim2.new(0.5, -25, 0.5, -25) -- Centrado en el frame
-imageLabel.Image = "rbxassetid://287935141" -- ID del decal
+
+imageLabel.Size = UDim2.new(0, 40, 0, 40) 
+imageLabel.Position = UDim2.new(0.5, -20, 0.5, -60) 
+imageLabel.Image = "rbxassetid://287935141" 
 imageLabel.BackgroundTransparency = 1
 imageLabel.Parent = frame
 
--- Configuración del TextLabel
-textLabel.Size = UDim2.new(1, 0, 0, 50)
-textLabel.Position = UDim2.new(0, 0, 0, 60) -- Debajo del decal
+
+textLabel.Size = UDim2.new(1, 0, 0, 30) 
+textLabel.Position = UDim2.new(0, 0, 0, 10) 
 textLabel.Text = "Synergy Nexus"
-textLabel.TextColor3 = Color3.fromRGB(255, 0, 0) -- Rojo
-textLabel.TextScaled = true
+textLabel.TextColor3 = Color3.fromRGB(255, 0, 0) 
+textLabel.TextScaled = false 
+textLabel.TextSize = 20 
 textLabel.BackgroundTransparency = 1
 textLabel.Parent = frame
 
--- Función para desvanecer el Frame
+
 local function fadeOut()
     for i = 1, 10 do
-        wait(0.5) -- Espera 0.5 segundos
+        wait(0.5) 
         frame.BackgroundTransparency = frame.BackgroundTransparency + 0.1
         imageLabel.BackgroundTransparency = imageLabel.BackgroundTransparency + 0.1
         textLabel.BackgroundTransparency = textLabel.BackgroundTransparency + 0.1
     end
-    screenGui:Destroy() -- Elimina el ScreenGui después de desvanecerse
+    screenGui:Destroy() 
 end
 
--- Espera 5 segundos antes de ejecutar el desvanecimiento y tu hub
-wait(5)
+
+wait(3)
 fadeOut()
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
