@@ -72,7 +72,7 @@ frame.Parent = screenGui
 
 textLabel.Size = UDim2.new(1, 0, 0, 30) 
 textLabel.Position = UDim2.new(0, 0, 0, 10) 
-textLabel.Text = "😎Join my Discord server😎"
+textLabel.Text = "😎Join my Discord server😎 \n  🟥▫️Synergy Nexus▫️🟥"
 textLabel.TextColor3 = Color3.fromRGB(255, 0, 0) 
 textLabel.TextScaled = false 
 textLabel.TextSize = 20 
