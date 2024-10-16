@@ -424,35 +424,35 @@ local function executeHub()
         Title = "Discord",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("ᴅɪsᴄᴏʀᴅ")
+            SendBypass("Ⓓⓘⓢⓒⓞ🆁🅳")
         end
     })
     Tabs.WordBypasses:AddButton({
         Title = "shit",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("SᕼIT")
+            SendBypass("ⓢⓗ🅸🆃")
         end
     })
     Tabs.WordBypasses:AddButton({
         Title = "Damn",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓓⓐⓜⓝ")
+            SendBypass("Ⓓⓐ🅼ⓝ")
         end
     })
     Tabs.WordBypasses:AddButton({
         Title = "fuck",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("^ᖴᑌᑕK")
+            SendBypass("ⓕⓤ🅒🄺")
         end
     })
     Tabs.WordBypasses:AddButton({
         Title = "Nigger",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("🅝^🅘🅖🅖🅔🅡")
+            SendBypass("🅽🅸🅶🄶🄴🅁")
         end
     })
 
@@ -461,7 +461,7 @@ local function executeHub()
         Title = "My apologies, I don't speak to fags❤️",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("ᴍʏ ᴀᴘᴏʟᴏɢɪᴇs, ɪ ᴅᴏɴ'ᴛ sᴘᴇᴀᴋ ᴛᴏ ғᴀɢs❤️")
+            SendBypass("🄼🅈 🄰🄿🄾🄻🄾🄶🄸🄴🅂, 🄸 🄳🄾🄽'🅃 🅂🄿🄴🄰🄺 🅃🄾 🄵🄰🅶🅂❤️")
         end
     })
 
@@ -469,7 +469,7 @@ local function executeHub()
         Title = "Take the dildo off your ass",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("TᗩKE TᕼE ᗪIᒪᗪO Oᖴᖴ YOᑌᖇ ᗩSS")
+            SendBypass("Ⓣⓐⓚⓔ ⓣⓗⓔ ⓓⓘⓛⓓ🄾 🄾🄵🄵 🅈🄾🅄🅁 🄰🅢🅂")
         end
     })
 
@@ -477,7 +477,7 @@ local function executeHub()
         Title = "I'm going to rape you",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("I'ᗰ GOIᑎG TO ᖇᗩᑭE YOᑌ")
+            SendBypass("Ⓘ'ⓜ ⓖⓞⓘⓝⓖ 🅃🄾 🅡🅐ⓟ🅔 🅨🅞🅤")
         end
     })
 
@@ -485,7 +485,7 @@ local function executeHub()
         Title = "COOL TEXT",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("𝒂 𝒕𝒓𝒖𝒆 𝒆𝒙𝒑𝒍𝒐𝒊𝒕𝒆𝒓 𝒖𝒔𝒆 𝑺𝒚𝒏𝒆𝒓𝒈𝒚 𝑩𝒚𝒑𝒂𝒔𝒔𝒆𝒓.")
+            SendBypass("🄰 🅃🅁🅄🄴 ⓔⓧⓟⓛⓞⓘⓣⓔⓡ 🆄🆂🅴 𝚂𝚢𝚗𝚎𝚛𝚐𝚢 𝙱𝚢𝚙𝚊𝚜𝚜𝚎𝚛.")
         end
     })
 
@@ -493,7 +493,7 @@ local function executeHub()
         Title = "I'm going to kill yourself",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("į'ʍ ցօìղց էօ ҟìӀӀ վօմɾʂҽӀƒ")
+            SendBypass("🄸'🄼 🄶🄾🄸🄽🄶 🅃🄾 🄺🄸🄻🄻 🅈🄾🅄🅁🅂🄴🄻🄵")
         end
     })
 
@@ -501,7 +501,7 @@ local function executeHub()
         Title = "niggers suck it",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("ⓝⓘⓖⓖⓔⓡⓢ ⓢⓤⓒⓚ ⓘⓣ.")
+            SendBypass("ⓝⓘ🅶🅶ⓔⓡⓢ ⓢⓤ🄲🄺 ⓘⓣ.")
         end
     })
 
@@ -517,7 +517,7 @@ local function executeHub()
         Title = "I love XVIDEOS.COM",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("i̳ ̳l̳o̳v̳e̳ ̳X̳V̳I̳D̳E̳O̳S̳.̳C̳O̳M̳")
+            SendBypass("Ⓘ ⓛⓞⓥⓔ 🆇ⓋⒾⒹⒺⓄⓈ.ⒸⓄⓂ")
         end
     })
 
@@ -525,7 +525,7 @@ local function executeHub()
         Title = "I love PORNHUB.COM",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("𝗜 𝗹𝗼𝘃𝗲 𝗣𝗢𝗥𝗡𝗛𝗨𝗕｡𝗖𝗢𝗠")
+            SendBypass("Ⓘ ⓛⓞⓥⓔ ⓅⓄⓇ🄽ⒽⓊⒷ.ⒸⓄⓂ")
         end
     })
 
@@ -533,7 +533,7 @@ local function executeHub()
         Title = "To get free Robux visit XNXX.COM",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("To get free Robux visit XNXX.COM")
+            SendBypass("Ⓣⓞ ⓖⓔⓣ ⓕⓡⓔⓔ Ⓡⓞⓑⓤⓧ ⓥⓘⓢⓘⓣ 🅇ⓃⓍⓍ.ⒸⓄⓂ")
         end
     })
 
@@ -541,7 +541,7 @@ local function executeHub()
         Title = "My dick is giant",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("M̳y̳ ̳d̳i̳c̳k̳ ̳i̳s̳ ̳g̳i̳a̳n̳t̳")
+            SendBypass("Ⓜⓨ ⓓⓘ🄲🄺 ⓘⓢ ⓖⓘⓐⓝⓣ")
         end
     })
 
@@ -549,7 +549,7 @@ local function executeHub()
         Title = "Tilín fucks better than you",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("𝗧𝗶𝗹í𝗻 𝗳𝘂𝗰𝗸𝘀 𝗯𝗲𝘁𝘁𝗲𝗿 𝘁𝗵𝗮𝗻 𝘆𝗼𝘂")
+            SendBypass("Ⓣⓘⓛ🄸ⓝ ⓕⓤⓒ🄺ⓢ ⓑⓔⓣⓣⓔⓡ ⓣⓗⓐⓝ ⓨⓞⓤ")
         end
     })
 
@@ -557,7 +557,7 @@ local function executeHub()
         Title = "Fuck me",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓕⓤⓒⓚ ⓜⓔ")
+            SendBypass("Ⓕⓤⓒ🄺 ⓜⓔ")
         end
     })
 
@@ -565,7 +565,7 @@ local function executeHub()
         Title = "Stupid shit",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("🅢🅣🅤🅟🅘🅓 🅢🅗🅘🅣")
+            SendBypass("Ⓢ🅃ⓤⓟⓘⓓ ⓢⓗⓘ🅃")
         end
     })
 
@@ -573,7 +573,7 @@ local function executeHub()
         Title = "Damn it, fuck you",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("ᗪᗩᗰᑎ IT, ᖴᑌᑕK YOᑌ")
+            SendBypass("ᗪᗩᗰⓝ 𝐈𝐓, ᖴᑌᑕⓀ Ⓨ𝐎ᑌ")
         end
     })
 
@@ -581,7 +581,7 @@ local function executeHub()
         Title = "fuck you",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("█▀▀ █░█ █▀▀ █▄▀   █▄█ █▀█ █░██▀░ █▄█ █▄▄ █░█   ░█░ █▄█ █▄█")
+            SendBypass("ᖴᑌᑕⓚ Ⓨ🄾ᑌ")
         end
     })
 
