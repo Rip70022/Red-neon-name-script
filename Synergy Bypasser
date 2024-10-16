@@ -311,11 +311,11 @@ for k, v in pairs(Fluent) do
     print(k, v)
 end
 
-local Key = "kittyyy"  
+local Key = "kittyyy" -- key is Synergy Nexus 
 local KeyEntered = false
 local AbyssVersion = " BETA";
 
--- Function to execute the hub when the correct key is entered
+
 local function executeHub()
     -- Create window using Fluent UI
     local Window = Fluent:CreateWindow({
@@ -335,17 +335,21 @@ local function executeHub()
     }
     Window:SelectTab(1);
 
-    -- Character table for chat bypass (new letters added)
+    
     local characterstable = {
-      ["q"] = "Ｑ", ["w"] = "ｗ", ["e"] = "ⓔ", ["r"] = "ｒ", ["t"] = "🆃",
-    ["y"] = "ｙ", ["u"] = "ｕ", ["i"] = "ⓘ", ["o"] = "ｏ", ["p"] = "ⓟ",
-    ["a"] = "🅰", ["s"] = "ｓ", ["d"] = "ｄ", ["f"] = "ⓕ", ["g"] = "🅖",
-    ["h"] = "🅷", ["j"] = "ｊ", ["k"] = "ｋ", ["l"] = "🅛", ["z"] = "ｚ",
-    ["x"] = "ｘ", ["c"] = "ｃ", ["v"] = "ｖ", ["b"] = "ｂ", ["n"] = "ⓝ",
-    ["m"] = "ｍ", [" "] = " "
+      ["q"] = "<q>", ["w"] = "<w>", ["e"] = "<e>", ["r"] = "<r>", ["t"] = "<t>",
+    ["y"] = "<y>", ["u"] = "<u>", ["i"] = "<i>", ["o"] = "<o>", ["p"] = "<p>",
+    ["a"] = "<a>", ["s"] = "<s>", ["d"] = "<d>", ["f"] = "<f>", ["g"] = "><g>",
+    ["h"] = "<h>", ["j"] = "<j>", ["k"] = "<k>", ["l"] = "<l>", ["z"] = "<z>",
+    ["x"] = "<x>", ["c"] = "<c>", ["v"] = "<v>", ["b"] = "<b>", ["n"] = "<n>",
+    ["m"] = "<m>", [" "] = " ", ["1"] = "①", ["2"] = "②", ["3"] = "③",
+    ["4"] = "④", ["5"] = "⑤",  ["6"] = "⑥", ["7"] = "⑦", ["8"] = "⑧",  ["9"] = "⑨", ["0"] = "⑩",
+
+
+
 }
 
-    -- Function for text bypass
+    
     local function Bypass(input)
         local lowered = input:lower();
         local output = "";
@@ -356,7 +360,7 @@ local function executeHub()
         return output
     end
 
-    -- Function to send the bypassed message to chat
+    
     function SendBypass(message)
         local msg = Bypass(message);
         if game:GetService("TextChatService").ChatInputBarConfiguration.TargetTextChannel then
@@ -366,7 +370,7 @@ local function executeHub()
         end
     end
 
-    -- Notification for bypasser load
+    
     Fluent:Notify({
         Title = "《 🌀By shadow_sadist🌀 》",
         Content = "⚠️Chat Bypasser Loaded⚠️",
@@ -374,7 +378,7 @@ local function executeHub()
         Duration = nil
     })
 
-    -- Functions for the tabs and buttons
+    
     Tabs.Main:AddParagraph({
         Title = "❗Thank you for using 🌀Synergy | Bypasser❗"
     })
@@ -424,7 +428,7 @@ local function executeHub()
         end
     })
 
-    -- Word Presets
+    
     Tabs.WordBypasses:AddParagraph({
         Title = "🔹Word Bypasses🔹",
         Content = "⚠️Presets below⚠️"
@@ -434,44 +438,44 @@ local function executeHub()
         Title = "Discord",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓓⓘⓢⓒⓞ🆁🅳")
+            SendBypass("Discord")
         end
     })
     Tabs.WordBypasses:AddButton({
         Title = "shit",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("ⓢⓗ🅸🆃")
+            SendBypass("shit")
         end
     })
     Tabs.WordBypasses:AddButton({
         Title = "Damn",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓓⓐ🅼ⓝ")
+            SendBypass("Damn")
         end
     })
     Tabs.WordBypasses:AddButton({
         Title = "fuck",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("ⓕⓤ🅒🄺")
+            SendBypass("fuck")
         end
     })
     Tabs.WordBypasses:AddButton({
         Title = "Nigger",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("🅽🅸🅶🄶🄴🅁")
+            SendBypass("Nigger")
         end
     })
 
-    -- Sentance Presets
+    
     Tabs.SentanceBypasses:AddButton({
         Title = "My apologies, I don't speak to fags❤️",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("🄼🅈 🄰🄿🄾🄻🄾🄶🄸🄴🅂, 🄸 🄳🄾🄽'🅃 🅂🄿🄴🄰🄺 🅃🄾 🄵🄰🅶🅂❤️")
+            SendBypass("My apologies, I don't speak to fags❤️")
         end
     })
 
@@ -479,7 +483,7 @@ local function executeHub()
         Title = "Take the dildo off your ass",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓣⓐⓚⓔ ⓣⓗⓔ ⓓⓘⓛⓓ🄾 🄾🄵🄵 🅈🄾🅄🅁 🄰🅢🅂")
+            SendBypass("Take the dildo off your ass")
         end
     })
 
@@ -487,7 +491,7 @@ local function executeHub()
         Title = "I'm going to rape you",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓘ'ⓜ ⓖⓞⓘⓝⓖ 🅃🄾 🅡🅐ⓟ🅔 🅨🅞🅤")
+            SendBypass("I'm going to rape you")
         end
     })
 
@@ -495,7 +499,7 @@ local function executeHub()
         Title = "COOL TEXT",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("🄰 🅃🅁🅄🄴 ⓔⓧⓟⓛⓞⓘⓣⓔⓡ 🆄🆂🅴 𝚂𝚢𝚗𝚎𝚛𝚐𝚢 𝙱𝚢𝚙𝚊𝚜𝚜𝚎𝚛.")
+            SendBypass("𝗮͎ ͎𝘁͎𝗿͎𝘂͎𝗲͎ ͎𝗲͎𝘅͎𝗽͎𝗹͎𝗼͎𝗶͎𝘁͎𝗲͎𝗿͎ ͎𝘂͎𝘀͎𝗲͎ ͎𝗦͎𝘆͎𝗻͎𝗲͎𝗿͎𝗴͎𝘆͎ ͎𝗕͎𝘆͎𝗽͎𝗮͎𝘀͎𝘀͎𝗲͎𝗿͎.")
         end
     })
 
@@ -503,7 +507,7 @@ local function executeHub()
         Title = "I'm going to kill yourself",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("🄸'🄼 🄶🄾🄸🄽🄶 🅃🄾 🄺🄸🄻🄻 🅈🄾🅄🅁🅂🄴🄻🄵")
+            SendBypass("I'm going to kill yourself")
         end
     })
 
@@ -511,7 +515,7 @@ local function executeHub()
         Title = "niggers suck it",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("ⓝⓘ🅶🅶ⓔⓡⓢ ⓢⓤ🄲🄺 ⓘⓣ.")
+            SendBypass("niggers suck it")
         end
     })
 
@@ -527,7 +531,7 @@ local function executeHub()
         Title = "I love XVIDEOS.COM",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓘ ⓛⓞⓥⓔ 🆇ⓋⒾⒹⒺⓄⓈ.ⒸⓄⓂ")
+            SendBypass("I love XVIDEOS.COM")
         end
     })
 
@@ -535,7 +539,7 @@ local function executeHub()
         Title = "I love PORNHUB.COM",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓘ ⓛⓞⓥⓔ ⓅⓄⓇ🄽ⒽⓊⒷ.ⒸⓄⓂ")
+            SendBypass("I love PORNHUB.COM")
         end
     })
 
@@ -543,7 +547,7 @@ local function executeHub()
         Title = "To get free Robux visit XNXX.COM",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓣⓞ ⓖⓔⓣ ⓕⓡⓔⓔ Ⓡⓞⓑⓤⓧ ⓥⓘⓢⓘⓣ 🅇ⓃⓍⓍ.ⒸⓄⓂ")
+            SendBypass("To get free Robux visit XNXX.COM")
         end
     })
 
@@ -551,7 +555,7 @@ local function executeHub()
         Title = "My dick is giant",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓜⓨ ⓓⓘ🄲🄺 ⓘⓢ ⓖⓘⓐⓝⓣ")
+            SendBypass("My dick is giant")
         end
     })
 
@@ -559,7 +563,7 @@ local function executeHub()
         Title = "Tilín fucks better than you",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓣⓘⓛ🄸ⓝ ⓕⓤⓒ🄺ⓢ ⓑⓔⓣⓣⓔⓡ ⓣⓗⓐⓝ ⓨⓞⓤ")
+            SendBypass("Tilín fucks better than you")
         end
     })
 
@@ -567,7 +571,7 @@ local function executeHub()
         Title = "Fuck me",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓕⓤⓒ🄺 ⓜⓔ")
+            SendBypass("Fuck me")
         end
     })
 
@@ -575,7 +579,7 @@ local function executeHub()
         Title = "Stupid shit",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("Ⓢ🅃ⓤⓟⓘⓓ ⓢⓗⓘ🅃")
+            SendBypass("Stupid shit")
         end
     })
 
@@ -583,7 +587,7 @@ local function executeHub()
         Title = "Damn it, fuck you",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("ᗪᗩᗰⓝ 𝐈𝐓, ᖴᑌᑕⓀ Ⓨ𝐎ᑌ")
+            SendBypass("Damn it, fuck you")
         end
     })
 
@@ -591,19 +595,19 @@ local function executeHub()
         Title = "fuck you",
         Description = "⚠️Bypass Button⚠️",
         Callback = function()
-            SendBypass("ᖴᑌᑕⓚ Ⓨ🄾ᑌ")
+            SendBypass("fuck you")
         end
     })
 
-    -- Close the program when the player leaves
+    
     game.Players.LocalPlayer.AncestryChanged:Connect(function(_, parent)
         if not parent then
-            SendBypass("Goodbye everyone!")
+            SendBypass("suck it fuckers")
         end
     end)
 end
 
--- Function to create the Key system GUI
+
 local function createGUI()
     local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -653,8 +657,8 @@ local function createGUI()
                 Content = "You have entered the correct key.",
                 Duration = 5
             })
-            screenGui:Destroy()  -- Destroy the key GUI
-            executeHub()  -- Execute the hub after key validation
+            screenGui:Destroy()  
+            executeHub()  
         else
             Fluent:Notify({
                 Title = "Access Denied",
@@ -665,5 +669,5 @@ local function createGUI()
     end)
 end
 
--- Show the key system first
+
 createGUI()
