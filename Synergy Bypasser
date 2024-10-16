@@ -301,8 +301,11 @@
 
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
-local Key = "kittyyy"  
+
+local Key = "kittyyy"  -- key is Synergy Nexus
+
 local KeyEntered = false
+
 local AbyssVersion = " BETA";
 
 -- Function to execute the hub when the correct key is entered
