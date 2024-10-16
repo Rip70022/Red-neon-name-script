@@ -301,6 +301,16 @@
 
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
+
+if not Fluent then
+    warn("Failed to load Fluent")
+    return
+end
+
+for k, v in pairs(Fluent) do
+    print(k, v)
+end
+
 local Key = "kittyyy"  
 local KeyEntered = false
 local AbyssVersion = " BETA";
