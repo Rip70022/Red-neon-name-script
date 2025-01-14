@@ -567,7 +567,7 @@ local maximizeButton = Instance.new("TextButton")
 maximizeButton.Size = UDim2.new(0, 30, 0, 30)
 maximizeButton.Position = UDim2.new(1, -60, 0.5, -15)
 maximizeButton.BackgroundTransparency = 1
-maximizeButton.Text = "â–¡"
+maximizeButton.Text = "□"
 maximizeButton.TextColor3 = Color3.fromRGB(50, 50, 50)
 maximizeButton.Font = Enum.Font.SourceSans
 maximizeButton.TextSize = 18
@@ -654,7 +654,7 @@ buttonFrame.Position = UDim2.new(0, 10, 0, 240)
 buttonFrame.BackgroundTransparency = 1
 buttonFrame.Parent = mainFrame
 
-local buttonNames = {"EXE", "CLEAR", "INJECT"}
+local buttonNames = {"EXEC", "CLEAR", "INJECT"}
 for i, name in ipairs(buttonNames) do
     local button = Instance.new("TextButton")
     button.Size = UDim2.new(0, 100, 1, 0)
@@ -667,7 +667,7 @@ for i, name in ipairs(buttonNames) do
     button.BorderSizePixel = 0
     button.Parent = buttonFrame
 
-    if name == "EXE" then
+    if name == "EXEC🔹️" then
         button.MouseButton1Click:Connect(function()
             local scriptText = scriptBox.Text
             local success, err = pcall(function()
@@ -675,22 +675,22 @@ for i, name in ipairs(buttonNames) do
                 if func then
                     func()
                 else
-                    error("Script could not be loaded...")
+                    error("[⚠️] Script could not be loaded...")
                 end
             end)
-            if not success then warn("Error: " .. err) end
+            if not success then warn("🚫 Error: " .. err) end
         end)
-    elseif name == "CLEAR" then
+    elseif name == "CLEAR🔄" then
         button.MouseButton1Click:Connect(function()
             scriptBox.Text = ""
         end)
-    elseif name == "INJECT" then
+    elseif name == "INJECT💉" then
         button.MouseButton1Click:Connect(function()
             local scriptText = scriptBox.Text
             if scriptText and scriptText ~= "" then
                 game.ReplicatedStorage.RemoteEvent:FireServer(scriptText)
             else
-                warn("please inject a require if game backdoored/infected 🐧.")
+                warn("🐍 inject a require if game backdoored 🐧.")
             end
         end)
     end
