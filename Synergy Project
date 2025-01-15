@@ -2375,13 +2375,14 @@ print("1"*200*700*44*22*66*333*666*88)
 
 
 game:GetService("StarterGui"):SetCore("DevConsoleVisible", true)
-print("[#] Installing Synergy Project...")
+print("[#] Installing Project Nexus...")
 wait(2)
-print("[$] Synergy Project installed..")
+print("[$] Project Nexus installed..")
 wait(2)
 warn("[!] Fe Bypass = true")
 wait(2)
 print("join to discord server!")
+warn(".gg/SynergyNexus")
 
 local sound = Instance.new("Sound", game.Workspace)
 sound.SoundId = "rbxassetid://8623387557"
@@ -2569,19 +2570,19 @@ for i, name in ipairs(buttonNames) do
             if scriptText and scriptText ~= "" then
                 game.ReplicatedStorage.RemoteEvent:FireServer(scriptText)
             else
-                warn("🐍 inject a require if game backdoored 🐧.")
+                warn("🐍 inject a require if game backdoored >>> [ProjectNexus]🐧.")
             end
         end)
     end
 end
 
-local LuaProject = Instance.new("Frame")
-LuaProject.Size = UDim2.new(0, 500, 0, 300)
-LuaProject.BackgroundTransparency = 1
-LuaProject.Parent = screenGui
+local ProjectNexus = Instance.new("Frame")
+ProjectNexus.Size = UDim2.new(0, 500, 0, 300)
+ProjectNexus.BackgroundTransparency = 1
+ProjectNexus.Parent = screenGui
 
 local ImageLabel = Instance.new("ImageLabel")
-ImageLabel.Parent = LuaProject
+ImageLabel.Parent = ProjectNexus
 ImageLabel.Active = true
 ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 ImageLabel.BackgroundTransparency = 1.000
@@ -2590,7 +2591,7 @@ ImageLabel.Size = UDim2.new(0, 90, 0, 90)
 ImageLabel.Image = "rbxassetid://77238978008692"
 
 local function DSSE_fake_script()
-    local script = Instance.new('LocalScript', LuaProject)
+    local script = Instance.new('LocalScript', ProjectNexus)
 
     local img = script.Parent.ImageLabel
     local TweenService = game:GetService("TweenService")
