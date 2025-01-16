@@ -2384,6 +2384,48 @@ print("KEY ON DISCORD!")
 
 local correctKey = "Synergy-Nexus-nauroc2"
 
+-- Check if the ScreenGui exists
+local player = game.Players.LocalPlayer
+local screenGui = player:WaitForChild("PlayerGui"):FindFirstChild("ScreenGui")
+
+-- If ScreenGui is not found, create a new one
+if not screenGui then
+    warn("ScreenGui not found, creating new one")
+    
+    -- Create a new ScreenGui and set it to the PlayerGui
+    screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "ScreenGui"
+    screenGui.Parent = player:WaitForChild("PlayerGui")
+else
+    print("ScreenGui found.")
+end
+
+-- Continue with the rest of your script...
+
+-- Your UI setup code here
+local verifyButton = screenGui:FindFirstChild("VerifyButton")
+local keyInput = screenGui:FindFirstChild("KeyInput")
+
+-- Ensure the button and input are found
+if not verifyButton then
+    warn("verifyButton: NOT FOUND: ScreenGui")
+    return
+end
+
+if not keyInput then
+    warn("keyInput: NOT FOUND: ScreenGui")
+    return
+end
+
+-- Add event listeners for the button
+verifyButton.MouseButton1Click:Connect(function()
+    if keyInput.Text == correctKey then
+        -- Continue the rest of your code...
+        print("[✅] Correct key. Unlocking Executor...")
+    else
+        warn("[❌] Incorrect key. Please try again.")
+    end
+end)
 
 local player = game.Players.LocalPlayer
 local screenGui = player:WaitForChild("PlayerGui"):FindFirstChild("ScreenGui")
