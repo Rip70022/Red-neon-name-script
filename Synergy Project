@@ -2376,7 +2376,99 @@ print("1"*200*700*44*22*66*333*666*88)
 
 
 game:GetService("StarterGui"):SetCore("DevConsoleVisible", true)
+
+warn("KEYSYSTEM = active")
+
+print("KEY ON DISCORD!")
+
+
+local correctKey = "Synergy-Nexus-nauroc2"
+
+verifyButton.MouseButton1Click:Connect(function()
+    if keyInput.Text == correctKey then
+        keyFrame.Visible = false
+        
+        
+        print("[✅] Correct key. Unlocking Executor...")
+
+        
+        local mainFrame = Instance.new("Frame")
+        mainFrame.Name = "MainFrame"
+        mainFrame.Size = UDim2.new(0, 500, 0, 300)
+        mainFrame.Position = UDim2.new(0.5, -250, 0.3, 0)
+        mainFrame.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+        mainFrame.BorderSizePixel = 0
+        mainFrame.Active = true
+        mainFrame.Draggable = true
+        mainFrame.Parent = screenGui
+
+        local topBar = Instance.new("Frame")
+        topBar.Size = UDim2.new(1, 0, 0, 40)
+        topBar.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+        topBar.BorderSizePixel = 0
+        topBar.Parent = mainFrame
+
+        local titleLabel = Instance.new("TextLabel")
+        titleLabel.Size = UDim2.new(0, 200, 1, 0)
+        titleLabel.Position = UDim2.new(0, 50, 0, 0)
+        titleLabel.BackgroundTransparency = 1
+        titleLabel.Text = "Project Nexus"
+        titleLabel.Font = Enum.Font.SourceSansBold
+        titleLabel.TextSize = 20
+        titleLabel.TextColor3 = Color3.fromRGB(50, 50, 50)
+        titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+        titleLabel.Parent = topBar
+
+        local minimizeButton = Instance.new("TextButton")
+        minimizeButton.Size = UDim2.new(0, 30, 0, 30)
+        minimizeButton.Position = UDim2.new(1, -90, 0.5, -15)
+        minimizeButton.BackgroundTransparency = 1
+        minimizeButton.Text = "-"
+        minimizeButton.TextColor3 = Color3.fromRGB(50, 50, 50)
+        minimizeButton.Font = Enum.Font.SourceSans
+        minimizeButton.TextSize = 20
+        minimizeButton.BorderSizePixel = 0
+        minimizeButton.Parent = topBar
+
+        minimizeButton.MouseButton1Click:Connect(function()
+            mainFrame.Visible = false
+        end)
+
+        local closeButton = Instance.new("TextButton")
+        closeButton.Size = UDim2.new(0, 30, 0, 30)
+        closeButton.Position = UDim2.new(1, -30, 0.5, -15)
+        closeButton.BackgroundTransparency = 1
+        closeButton.Text = "❌️"
+        closeButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+        closeButton.Font = Enum.Font.SourceSans
+        closeButton.TextSize = 18
+        closeButton.BorderSizePixel = 0
+        closeButton.Parent = topBar
+
+        closeButton.MouseButton1Click:Connect(function()
+            screenGui:Destroy()
+        end)
+    else
+        warn("[❌] Incorrect key. Please try again.")
+    end
+end)
+
+game:GetService("StarterGui"):SetCore("DevConsoleVisible", true)
+
+warn("Project Nexus By Shadow_sadist/nauroc2")
 print("[#] Installing Project Nexus...")
+wait(2)
+print("#")
+wait(2)
+print("##")
+wait(2)
+print("###")
+wait(2)
+print("####")
+wait(2)
+print("#######")
+wait(2)
+print("############...")
 wait(2)
 print("[$] Project Nexus installed..")
 wait(2)
@@ -2387,59 +2479,13 @@ warn(".gg/SynergyNexus")
 
 local sound = Instance.new("Sound", game.Workspace)
 sound.SoundId = "rbxassetid://8623387557"
-sound.Volume = 40
+sound.Volume = 100
 sound:Play()
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "Project Nexus"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-warn("KEYSYSTEM = active")
-
-print("KEY ON DISCORD!")
-
-local keyFrame = Instance.new("Frame")
-keyFrame.Name = "KeyFrame"
-keyFrame.Size = UDim2.new(0, 300, 0, 150)
-keyFrame.Position = UDim2.new(0.5, -150, 0.5, -75)
-keyFrame.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-keyFrame.BorderSizePixel = 0
-keyFrame.Active = true
-keyFrame.Draggable = true
-keyFrame.Parent = screenGui
-
-local keyInput = Instance.new("TextBox")
-keyInput.Size = UDim2.new(0, 200, 0, 50)
-keyInput.Position = UDim2.new(0.5, -100, 0.3, -25)
-keyInput.BackgroundTransparency = 0.5
-keyInput.Text = ""
-keyInput.TextColor3 = Color3.fromRGB(50, 50, 50)
-keyInput.TextSize = 20
-keyInput.Font = Enum.Font.SourceSans
-keyInput.Parent = keyFrame
-
-local verifyButton = Instance.new("TextButton")
-verifyButton.Size = UDim2.new(0, 100, 0, 30)
-verifyButton.Position = UDim2.new(0.5, -50, 0.7, -15)
-verifyButton.BackgroundColor3 = Color3.fromRGB(220, 220, 220)
-verifyButton.Text = "Enter"
-verifyButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-verifyButton.Font = Enum.Font.SourceSansBold
-verifyButton.TextSize = 18
-verifyButton.BorderSizePixel = 0
-verifyButton.Parent = keyFrame
-
-local correctKey = "Synergy-Nexus-nauroc2"
-
-verifyButton.MouseButton1Click:Connect(function()
-    if keyInput.Text == correctKey then
-        keyFrame.Visible = false
-        mainFrame.Visible = true
-    else
-        warn("Incorrect key!")
-    end
-end)
 
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
