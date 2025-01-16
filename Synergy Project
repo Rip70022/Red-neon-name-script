@@ -25,6 +25,7 @@ print("1"*200*700*44*22*66*333*666*88)
 
 
 
+
 -- 99079907990799079907990799079907990799079
 -- 99079907990799079907990799079907990799079
 -- 99079907990799079907990799079907990799079
@@ -2393,6 +2394,52 @@ local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "Project Nexus"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+warn("KEYSYSTEM = active")
+
+print("KEY ON DISCORD!")
+
+local keyFrame = Instance.new("Frame")
+keyFrame.Name = "KeyFrame"
+keyFrame.Size = UDim2.new(0, 300, 0, 150)
+keyFrame.Position = UDim2.new(0.5, -150, 0.5, -75)
+keyFrame.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+keyFrame.BorderSizePixel = 0
+keyFrame.Active = true
+keyFrame.Draggable = true
+keyFrame.Parent = screenGui
+
+local keyInput = Instance.new("TextBox")
+keyInput.Size = UDim2.new(0, 200, 0, 50)
+keyInput.Position = UDim2.new(0.5, -100, 0.3, -25)
+keyInput.BackgroundTransparency = 0.5
+keyInput.Text = ""
+keyInput.TextColor3 = Color3.fromRGB(50, 50, 50)
+keyInput.TextSize = 20
+keyInput.Font = Enum.Font.SourceSans
+keyInput.Parent = keyFrame
+
+local verifyButton = Instance.new("TextButton")
+verifyButton.Size = UDim2.new(0, 100, 0, 30)
+verifyButton.Position = UDim2.new(0.5, -50, 0.7, -15)
+verifyButton.BackgroundColor3 = Color3.fromRGB(220, 220, 220)
+verifyButton.Text = "Enter"
+verifyButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+verifyButton.Font = Enum.Font.SourceSansBold
+verifyButton.TextSize = 18
+verifyButton.BorderSizePixel = 0
+verifyButton.Parent = keyFrame
+
+local correctKey = "Synergy-Nexus-nauroc2"
+
+verifyButton.MouseButton1Click:Connect(function()
+    if keyInput.Text == correctKey then
+        keyFrame.Visible = false
+        mainFrame.Visible = true
+    else
+        warn("Incorrect key!")
+    end
+end)
 
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
