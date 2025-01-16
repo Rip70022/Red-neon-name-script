@@ -2375,20 +2375,43 @@ print("1"*200*700*44*22*66*333*666*88)
 
 
 
+
 game:GetService("StarterGui"):SetCore("DevConsoleVisible", true)
 
 warn("KEYSYSTEM = active")
-
 print("KEY ON DISCORD!")
 
 
 local correctKey = "Synergy-Nexus-nauroc2"
 
+
+local player = game.Players.LocalPlayer
+local screenGui = player:WaitForChild("PlayerGui"):FindFirstChild("ScreenGui")
+local verifyButton = screenGui and screenGui:FindFirstChild("VerifyButton")
+local keyInput = screenGui and screenGui:FindFirstChild("KeyInput")
+
+
+if not screenGui then
+    warn("screenGui: NOT FOUND: PlayerGui")
+    return
+end
+
+if not verifyButton then
+    warn("verifyButton: NOT FOUND: ScreenGui")
+    return
+end
+
+if not keyInput then
+    warn("keyInput: NOT FOUND: ScreenGui")
+    return
+end
+
+
 verifyButton.MouseButton1Click:Connect(function()
     if keyInput.Text == correctKey then
-        keyFrame.Visible = false
         
-        
+        screenGui.KeyFrame.Visible = false
+
         print("[✅] Correct key. Unlocking Executor...")
 
         
@@ -2402,12 +2425,14 @@ verifyButton.MouseButton1Click:Connect(function()
         mainFrame.Draggable = true
         mainFrame.Parent = screenGui
 
+        
         local topBar = Instance.new("Frame")
         topBar.Size = UDim2.new(1, 0, 0, 40)
         topBar.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
         topBar.BorderSizePixel = 0
         topBar.Parent = mainFrame
 
+        
         local titleLabel = Instance.new("TextLabel")
         titleLabel.Size = UDim2.new(0, 200, 1, 0)
         titleLabel.Position = UDim2.new(0, 50, 0, 0)
@@ -2419,6 +2444,7 @@ verifyButton.MouseButton1Click:Connect(function()
         titleLabel.TextXAlignment = Enum.TextXAlignment.Left
         titleLabel.Parent = topBar
 
+        
         local minimizeButton = Instance.new("TextButton")
         minimizeButton.Size = UDim2.new(0, 30, 0, 30)
         minimizeButton.Position = UDim2.new(1, -90, 0.5, -15)
@@ -2431,9 +2457,11 @@ verifyButton.MouseButton1Click:Connect(function()
         minimizeButton.Parent = topBar
 
         minimizeButton.MouseButton1Click:Connect(function()
+            print("🤏")
             mainFrame.Visible = false
         end)
 
+        
         local closeButton = Instance.new("TextButton")
         closeButton.Size = UDim2.new(0, 30, 0, 30)
         closeButton.Position = UDim2.new(1, -30, 0.5, -15)
@@ -2446,6 +2474,7 @@ verifyButton.MouseButton1Click:Connect(function()
         closeButton.Parent = topBar
 
         closeButton.MouseButton1Click:Connect(function()
+            print("💥")
             screenGui:Destroy()
         end)
     else
