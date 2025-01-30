@@ -148,4 +148,4 @@ GUI.DescendantRemoving:Connect(function()
     GUI:Clone().Parent = game.CoreGui  
 end)  
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/Universal-object-tornado-script"))()  
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/Universal-object-tornado-script"))()  
