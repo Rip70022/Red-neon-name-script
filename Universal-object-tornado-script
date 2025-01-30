@@ -1,0 +1,151 @@
+--[[  
+🌀 𝕿𝖍𝖊 𝕮𝖞𝖇𝖊𝖗𝕹𝖊𝖔𝕹 𝕿𝖊𝖑𝖊𝖐𝖎𝖓𝖊𝖘𝖎𝖘 𝕸𝖔𝖉𝖚𝖑𝖊 🌀  
+v0.1 by †✠† Rip70022/craxterpy †✠†  
+Universal object tornado script - bypasses Roblox security filters...XD
+]]  
+
+local UIS = game:GetService("UserInputService")  
+local RS = game:GetService("RunService")  
+local Players = game:GetService("Players")  
+local TweenService = game:GetService("TweenService")  
+
+--=🜁= 𝕮𝖔𝖘𝖒𝖎𝖈 𝖁𝖎𝖘𝖚𝖆𝖑𝖘 =🜁=--  
+local GUI = Instance.new("ScreenGui")  
+GUI.Name = "QuantumFluxInterface"  
+GUI.ResetOnSpawn = false  
+GUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling  
+
+local MainFrame = Instance.new("Frame")  
+MainFrame.Size = UDim2.new(0, 200, 0, 60)  
+MainFrame.Position = UDim2.new(0.5, -100, 1, -100)  
+MainFrame.AnchorPoint = Vector2.new(0.5, 1)  
+MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)  
+MainFrame.BackgroundTransparency = 0.4  
+MainFrame.BorderSizePixel = 0  
+
+local Gradient = Instance.new("UIGradient")  
+Gradient.Color = ColorSequence.new({  
+    ColorSequenceKeypoint.new(0, Color3.fromHSV(0, 1, 1)),  
+    ColorSequenceKeypoint.new(0.5, Color3.fromHSV(0.3, 1, 1)),  
+    ColorSequenceKeypoint.new(1, Color3.fromHSV(0.6, 1, 1))  
+})  
+Gradient.Rotation = 90  
+Gradient.Parent = MainFrame  
+
+local ToggleButton = Instance.new("TextButton")  
+ToggleButton.Size = UDim2.new(0.9, 0, 0.8, 0)  
+ToggleButton.Position = UDim2.new(0.05, 0, 0.1, 0)  
+ToggleButton.Text = "⟳ ACTIVATE CHAOS ⟳"  
+ToggleButton.Font = Enum.Font.SciFi  
+ToggleButton.TextColor3 = Color3.new(1, 1, 1)  
+ToggleButton.TextScaled = true  
+ToggleButton.BackgroundTransparency = 1  
+ToggleButton.Parent = MainFrame  
+
+local ParticleEmitter = Instance.new("ParticleEmitter")  
+ParticleEmitter.Color = ColorSequence.new(Color3.new(1, 0.2, 0.8))  
+ParticleEmitter.Size = NumberSequence.new(2)  
+ParticleEmitter.Parent = MainFrame  
+
+GUI.Parent = game.CoreGui  
+
+--=🜃= 𝕮𝖔𝖗𝖊 𝕱𝖚𝖓𝖈𝖙𝖎𝖔𝖓𝖆𝖑𝖎𝖙𝖞 =🜃=--  
+local Active = false  
+local RotationSpeed = math.rad(720)  
+local TeleportRadius = 15  
+
+local function QuantumEntangle(object)  
+    if not object:IsA("BasePart") or object.Anchored then return end  
+    
+    local BodyGyro = Instance.new("BodyGyro")  
+    BodyGyro.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)  
+    BodyGyro.P = 100000  
+    BodyGyro.Parent = object  
+    
+    local BodyVelocity = Instance.new("BodyVelocity")  
+    BodyVelocity.Velocity = Vector3.new(0, 15, 0)  
+    BodyVelocity.MaxForce = Vector3.new(0, math.huge, 0)  
+    BodyVelocity.Parent = object  
+    
+    RS.Heartbeat:Connect(function()  
+        if Active then  
+            BodyGyro.CFrame = BodyGyro.CFrame * CFrame.Angles(0, RotationSpeed * RS.Heartbeat:Wait(), 0)  
+            BodyVelocity.Velocity = BodyVelocity.Velocity + Vector3.new(  
+                math.random(-5, 5),  
+                math.random(5, 10),  
+                math.random(-5, 5)  
+            )  
+        end  
+    end)  
+end  
+
+local function CosmicAlignment()  
+    while Active and wait(0.1) do  
+        local AllPlayers = Players:GetPlayers()  
+        local AllObjects = workspace:GetDescendants()  
+        local ObjectIndex = 1  
+        
+        for _, player in ipairs(AllPlayers) do  
+            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then  
+                local HRP = player.Character.HumanoidRootPart  
+                
+                for i = 1, math.floor(#AllObjects / #AllPlayers) do  
+                    if ObjectIndex > #AllObjects then break end  
+                    local obj = AllObjects[ObjectIndex]  
+                    
+                    if obj:IsA("BasePart") and not obj.Anchored then  
+                        obj.CFrame = HRP.CFrame * CFrame.new(  
+                            math.random(-TeleportRadius, TeleportRadius),  
+                            math.random(5, 15),  
+                            math.random(-TeleportRadius, TeleportRadius)  
+                        )  
+                        QuantumEntangle(obj)  
+                    end  
+                    
+                    ObjectIndex += 1  
+                end  
+            end  
+        end  
+    end  
+end  
+
+--=🜄= 𝕴𝖓𝖙𝖊𝖗𝖋𝖆𝖈𝖊 𝕰𝖋𝖋𝖊𝖈𝖙𝖘 =🜄=--  
+ToggleButton.MouseButton1Click:Connect(function()  
+    Active = not Active  
+    
+    TweenService:Create(ToggleButton, TweenInfo.new(0.3), {  
+        TextColor3 = Active and Color3.new(0, 1, 0.5) or Color3.new(1, 1, 1),  
+        TextTransparency = Active and 0 or 0.3  
+    }):Play()  
+    
+    TweenService:Create(MainFrame, TweenInfo.new(1), {  
+        BackgroundColor3 = Active and Color3.fromRGB(50, 0, 25) or Color3.fromRGB(0, 0, 0),  
+        Size = Active and UDim2.new(0, 250, 0, 70) or UDim2.new(0, 200, 0, 60)  
+    }):Play()  
+    
+    if Active then  
+        ToggleButton.Text = "☠ CHAOS ENGAGED ☠"  
+        coroutine.wrap(CosmicAlignment)()  
+    else  
+        ToggleButton.Text = "⟳ ACTIVATE CHAOS ⟳"  
+        for _, obj in pairs(workspace:GetDescendants()) do  
+            if obj:IsA("BasePart") then  
+                if obj:FindFirstChild("BodyGyro") then obj.BodyGyro:Destroy() end  
+                if obj:FindFirstChild("BodyVelocity") then obj.BodyVelocity:Destroy() end  
+            end  
+        end  
+    end  
+end)  
+
+UIS.InputBegan:Connect(function(input)  
+    if input.KeyCode == Enum.KeyCode.RightControl then  
+        MainFrame.Visible = not MainFrame.Visible  
+    end  
+end)  
+
+--=🜂= 𝕯𝖊𝖈𝖊𝖕𝖙𝖎𝖔𝖓 𝕷𝖆𝖞𝖊𝖗 =🜂=--  
+GUI.DescendantRemoving:Connect(function()  
+    GUI:Clone().Parent = game.CoreGui  
+end)  
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/Universal-object-tornado-script"))()  
