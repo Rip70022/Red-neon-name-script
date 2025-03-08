@@ -1,0 +1,334 @@
+getgenv().ChaosConfig = {
+    enabled = true,
+    intensity = 0.8,
+    duration = 120,
+    affectLighting = true,
+    affectCamera = true,
+    affectParts = true,
+    glitchSounds = true
+}
+
+local function createVisualGlitch()
+    local Players = game:GetService("Players")
+    local Player = Players.LocalPlayer
+    local RunService = game:GetService("RunService")
+    local TweenService = game:GetService("TweenService")
+    local Lighting = game:GetService("Lighting")
+    
+    local originalFOV = workspace.CurrentCamera.FieldOfView
+    local originalAmbient = Lighting.Ambient
+    local originalBrightness = Lighting.Brightness
+    local originalColorShift = Lighting.ColorShift_Top
+    
+    local blurEffect = Instance.new("BlurEffect")
+    blurEffect.Size = 0
+    blurEffect.Parent = Lighting
+    
+    local colorCorrectionEffect = Instance.new("ColorCorrectionEffect")
+    colorCorrectionEffect.Brightness = 0
+    colorCorrectionEffect.Contrast = 0
+    colorCorrectionEffect.Saturation = 0
+    colorCorrectionEffect.TintColor = Color3.new(1, 1, 1)
+    colorCorrectionEffect.Parent = Lighting
+    
+    local glitchSounds = {}
+    if getgenv().ChaosConfig.glitchSounds then
+        for i = 1, 5 do
+            local sound = Instance.new("Sound")
+            sound.Volume = 0.7
+            sound.SoundId = "rbxassetid://5657950552"
+            sound.Parent = workspace
+            table.insert(glitchSounds, sound)
+        end
+    end
+    
+    local function distortParts()
+        if not getgenv().ChaosConfig.affectParts then return end
+        
+        for _, part in pairs(workspace:GetDescendants()) do
+            if part:IsA("BasePart") and math.random() < 0.15 * getgenv().ChaosConfig.intensity then
+                local originalPosition = part.Position
+                local originalColor = part.Color
+                local originalTransparency = part.Transparency
+                
+                TweenService:Create(
+                    part,
+                    TweenInfo.new(0.2, Enum.EasingStyle.Elastic),
+                    {
+                        Position = originalPosition + Vector3.new(
+                            math.random(-8, 8) * getgenv().ChaosConfig.intensity,
+                            math.random(-8, 8) * getgenv().ChaosConfig.intensity,
+                            math.random(-8, 8) * getgenv().ChaosConfig.intensity
+                        ),
+                        Color = Color3.new(math.random(), math.random(), math.random()),
+                        Transparency = math.random() * 0.7
+                    }
+                ):Play()
+                
+                delay(math.random(0.3, 1.5), function()
+                    if part and part.Parent then
+                        TweenService:Create(
+                            part,
+                            TweenInfo.new(0.5, Enum.EasingStyle.Bounce),
+                            {
+                                Position = originalPosition,
+                                Color = originalColor,
+                                Transparency = originalTransparency
+                            }
+                        ):Play()
+                    end
+                end)
+            end
+        end
+    end
+    
+    local function distortCamera()
+        if not getgenv().ChaosConfig.affectCamera then return end
+        
+        local camera = workspace.CurrentCamera
+        camera.FieldOfView = originalFOV + (math.random(-40, 40) * getgenv().ChaosConfig.intensity)
+        
+        local originalCFrame = camera.CFrame
+        camera.CFrame = originalCFrame * CFrame.new(
+            math.random(-2, 2) * getgenv().ChaosConfig.intensity,
+            math.random(-2, 2) * getgenv().ChaosConfig.intensity,
+            0
+        ) * CFrame.Angles(
+            math.rad(math.random(-10, 10) * getgenv().ChaosConfig.intensity),
+            math.rad(math.random(-10, 10) * getgenv().ChaosConfig.intensity),
+            math.rad(math.random(-10, 10) * getgenv().ChaosConfig.intensity)
+        )
+        
+        delay(0.1, function()
+            if camera then
+                camera.CFrame = originalCFrame
+                camera.FieldOfView = originalFOV
+            end
+        end)
+    end
+    
+    local function distortLighting()
+        if not getgenv().ChaosConfig.affectLighting then return end
+        
+        Lighting.Ambient = Color3.new(math.random(), math.random(), math.random())
+        Lighting.Brightness = math.random() * 7 * getgenv().ChaosConfig.intensity
+        Lighting.ColorShift_Top = Color3.new(math.random(), math.random(), math.random())
+        
+        blurEffect.Size = math.random(0, 25) * getgenv().ChaosConfig.intensity
+        colorCorrectionEffect.Brightness = (math.random() - 0.5) * getgenv().ChaosConfig.intensity * 1.5
+        colorCorrectionEffect.Contrast = (math.random() - 0.5) * 3 * getgenv().ChaosConfig.intensity
+        colorCorrectionEffect.Saturation = (math.random() - 0.5) * 3 * getgenv().ChaosConfig.intensity
+        colorCorrectionEffect.TintColor = Color3.new(math.random(), math.random(), math.random())
+        
+        delay(0.2, function()
+            Lighting.Ambient = originalAmbient
+            Lighting.Brightness = originalBrightness
+            Lighting.ColorShift_Top = originalColorShift
+            blurEffect.Size = 0
+            colorCorrectionEffect.Brightness = 0
+            colorCorrectionEffect.Contrast = 0
+            colorCorrectionEffect.Saturation = 0
+            colorCorrectionEffect.TintColor = Color3.new(1, 1, 1)
+        end)
+    end
+    
+    local function playGlitchSounds()
+        if not getgenv().ChaosConfig.glitchSounds then return end
+        
+        for _, sound in ipairs(glitchSounds) do
+            if math.random() < 0.4 * getgenv().ChaosConfig.intensity then
+                sound.PlaybackSpeed = math.random(0.6, 1.4)
+                sound.Volume = math.random() * getgenv().ChaosConfig.intensity * 1.2
+                sound:Play()
+            end
+        end
+    end
+    
+    local startTime = tick()
+    local chaosConnection = RunService.RenderStepped:Connect(function()
+        if not getgenv().ChaosConfig.enabled then
+            chaosConnection:Disconnect()
+            return
+        end
+        
+        if tick() - startTime > getgenv().ChaosConfig.duration then
+            chaosConnection:Disconnect()
+            
+            blurEffect:Destroy()
+            colorCorrectionEffect:Destroy()
+            for _, sound in ipairs(glitchSounds) do
+                sound:Destroy()
+            end
+            
+            workspace.CurrentCamera.FieldOfView = originalFOV
+            Lighting.Ambient = originalAmbient
+            Lighting.Brightness = originalBrightness
+            Lighting.ColorShift_Top = originalColorShift
+            
+            displayGithubMessage()
+            return
+        end
+        
+        if math.random() < 0.15 * getgenv().ChaosConfig.intensity then
+            distortLighting()
+        end
+        
+        if math.random() < 0.08 * getgenv().ChaosConfig.intensity then
+            distortCamera()
+        end
+        
+        if math.random() < 0.03 * getgenv().ChaosConfig.intensity then
+            distortParts()
+        end
+        
+        if math.random() < 0.05 * getgenv().ChaosConfig.intensity then
+            playGlitchSounds()
+        end
+    end)
+    
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "GlitchEffects"
+    screenGui.Parent = Player:WaitForChild("PlayerGui")
+    
+    local function createGlitchText()
+        local textLabel = Instance.new("TextLabel")
+        textLabel.Size = UDim2.new(1, 0, 0.1, 0)
+        textLabel.Position = UDim2.new(0, 0, math.random(), 0)
+        textLabel.BackgroundTransparency = 0.7
+        textLabel.BackgroundColor3 = Color3.new(math.random(), math.random(), math.random())
+        textLabel.TextColor3 = Color3.new(math.random(), math.random(), math.random())
+        textLabel.TextStrokeTransparency = 0
+        textLabel.TextStrokeColor3 = Color3.new(math.random(), math.random(), math.random())
+        textLabel.Font = Enum.Font.Code
+        textLabel.TextSize = math.random(10, 50)
+        textLabel.Text = string.rep(string.char(math.random(33, 126)), math.random(5, 30))
+        textLabel.Parent = screenGui
+        
+        TweenService:Create(
+            textLabel,
+            TweenInfo.new(math.random(0.5, 2), Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundTransparency = 1, TextTransparency = 1, TextStrokeTransparency = 1}
+        ):Play()
+        
+        delay(2, function()
+            textLabel:Destroy()
+        end)
+    end
+    
+    spawn(function()
+        while getgenv().ChaosConfig.enabled and tick() - startTime <= getgenv().ChaosConfig.duration do
+            if math.random() < 0.3 * getgenv().ChaosConfig.intensity then
+                createGlitchText()
+            end
+            wait(0.2)
+        end
+        screenGui:Destroy()
+    end)
+    
+    return function()
+        getgenv().ChaosConfig.enabled = false
+    end
+end
+
+function displayGithubMessage()
+    local Players = game:GetService("Players")
+    local Player = Players.LocalPlayer
+    local TweenService = game:GetService("TweenService")
+    
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "GithubMessage"
+    screenGui.Parent = Player:WaitForChild("PlayerGui")
+    
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(1, 0, 1, 0)
+    frame.BackgroundColor3 = Color3.new(0, 0, 0)
+    frame.BackgroundTransparency = 0.2
+    frame.Parent = screenGui
+    
+    local githubText = Instance.new("TextLabel")
+    githubText.Size = UDim2.new(0.8, 0, 0.2, 0)
+    githubText.Position = UDim2.new(0.1, 0, 0.4, 0)
+    githubText.BackgroundTransparency = 1
+    githubText.TextColor3 = Color3.new(0, 1, 0)
+    githubText.Font = Enum.Font.Code
+    githubText.TextSize = 40
+    githubText.Text = "https://www.github.com/Rip70022"
+    githubText.Parent = frame
+    
+    local function glitchGithubText()
+        for i = 1, 30 do
+            githubText.Position = UDim2.new(
+                0.1 + (math.random(-10, 10) / 100),
+                0,
+                0.4 + (math.random(-10, 10) / 100),
+                0
+            )
+            
+            githubText.Rotation = math.random(-5, 5)
+            
+            if math.random() < 0.3 then
+                githubText.TextColor3 = Color3.new(1, 0, 0)
+            elseif math.random() < 0.6 then
+                githubText.TextColor3 = Color3.new(0, 1, 0)
+            else
+                githubText.TextColor3 = Color3.new(0, 0.7, 1)
+            end
+            
+            if math.random() < 0.2 then
+                githubText.Text = string.gsub(githubText.Text, ".", function(c)
+                    if math.random() < 0.3 then
+                        return string.char(math.random(33, 126))
+                    else
+                        return c
+                    end
+                end)
+            else
+                githubText.Text = "https://www.github.com/Rip70022"
+            end
+            
+            wait(0.1)
+        end
+        
+        wait(3)
+        screenGui:Destroy()
+    end
+    
+    spawn(glitchGithubText)
+end
+
+local function startChaos()
+    local Players = game:GetService("Players")
+    local Player = Players.LocalPlayer
+    
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "ChaosWarning"
+    screenGui.Parent = Player:WaitForChild("PlayerGui")
+    
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.BackgroundColor3 = Color3.new(0, 0, 0)
+    textLabel.TextColor3 = Color3.new(1, 0, 0)
+    textLabel.Font = Enum.Font.Code
+    textLabel.TextSize = 60
+    textLabel.Text = "NAXROC IS HERE!"
+    textLabel.Parent = screenGui
+    
+    for i = 1, 20 do
+        textLabel.Rotation = math.random(-5, 5)
+        textLabel.Position = UDim2.new(
+            0 + (math.random(-5, 5) / 100),
+            0,
+            0 + (math.random(-5, 5) / 100),
+            0
+        )
+        wait(0.1)
+    end
+    
+    screenGui:Destroy()
+    
+    local stopChaos = createVisualGlitch()
+    
+    getgenv().stopChaosEffects = stopChaos
+end
+
+startChaos()
