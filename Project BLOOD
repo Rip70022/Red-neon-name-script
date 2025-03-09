@@ -176,7 +176,7 @@ end
 
 function hexEncode(str)
     local hex = ""
-    for i = 1, 
+    for i = 1, #str do
         hex = hex .. string.format("%02X", string.byte(str, i))
     end
     return hex
@@ -225,7 +225,7 @@ function startGlitchSequence()
         
         if math.random(1, 15) == 1 then
             local encodedText = hexEncode("JOIN TO TEAM NAXROC")
-            hexText.Text = string.sub(encodedText, 1, math.random(5, 
+            hexText.Text = string.sub(encodedText, 1, math.random(5, #encodedText))
         end
         
         glitchSound.Pitch = math.random(80, 120)/100
@@ -313,7 +313,7 @@ function StartBloodRain()
     
     spawn(function()
         while Environment.BloodRainEnabled do
-            if 
+            if #Players:GetPlayers() > 0 then
                 local drop = CreateBloodDrop()
                 if drop then
                     table.insert(bloodDrops, drop)
