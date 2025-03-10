@@ -1,0 +1,326 @@
+local NAXROC_Hack = {}
+
+getgenv().NAXROC = {
+    Active = true,
+    PixelationLevel = 0,
+    ConsoleMessages = {
+        "INITIATING SERVER BREACH PROTOCOL...",
+        "ACCESSING MAINFRAME THROUGH PORT 8080...",
+        "BYPASSING FIREWALL SECURITY MEASURES...",
+        "INJECTING PAYLOAD INTO MEMORY ALLOCATION...",
+        "CAPTURING PLAYER DATA AND SESSION IDS...",
+        "DISABLING SERVER SIDE FILTERING...",
+        "EXECUTING DIMENSIONAL SHIFT MODULE...",
+        "SERVER ROOT ACCESS GRANTED...",
+        "MAPPING NETWORK TOPOLOGY...",
+        "REWRITING GAME INSTANCE PARAMETERS...",
+        "PREVENTING PLAYER DISCONNECTION ATTEMPTS...",
+        "DIMENSIONAL REALITY SHIFT ENABLED..."
+    },
+    HexCodes = {
+        "0x7A1B4C9D3E8F6A2B5C7D9E0F1A2B3C4D",
+        "0xF1E2D3C4B5A69788695A4B3C2D1E0F12",
+        "0xA1B2C3D4E5F60718293A4B5C6D7E8F90",
+        "0x13579BDF2468ACE0FEDCBA9876543210",
+        "0xCAFEBABEDEADBEEFFACEFEEDC0DEC0DE"
+    }
+}
+
+function NAXROC_Hack:Initialize()
+    local RunService = game:GetService("RunService")
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local UserInputService = game:GetService("UserInputService")
+    local TweenService = game:GetService("TweenService")
+    local StarterGui = game:GetService("StarterGui")
+    local TeleportService = game:GetService("TeleportService")
+    local GuiService = game:GetService("GuiService")
+    
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "NAXROC_HackInterface"
+    screenGui.IgnoreGuiInset = true
+    screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    screenGui.ResetOnSpawn = false
+    screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+    
+    local function CreateVisualElements()
+        local mainFrame = Instance.new("Frame")
+        mainFrame.Name = "MainHackFrame"
+        mainFrame.BackgroundTransparency = 0.4
+        mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        mainFrame.Size = UDim2.new(1, 0, 1, 0)
+        mainFrame.Position = UDim2.new(0, 0, 0, 0)
+        mainFrame.Parent = screenGui
+        
+        local hackText = Instance.new("TextLabel")
+        hackText.Name = "HackNotification"
+        hackText.BackgroundTransparency = 1
+        hackText.Size = UDim2.new(1, 0, 0.1, 0)
+        hackText.Position = UDim2.new(0, 0, 0.4, 0)
+        hackText.Font = Enum.Font.Code
+        hackText.Text = "NAXROC HAS TAKEN CONTROL OF THIS SERVER"
+        hackText.TextColor3 = Color3.fromRGB(255, 0, 0)
+        hackText.TextSize = 32
+        hackText.TextStrokeTransparency = 0
+        hackText.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+        hackText.Parent = mainFrame
+        
+        local countdownLabel = Instance.new("TextLabel")
+        countdownLabel.Name = "CountdownLabel"
+        countdownLabel.BackgroundTransparency = 1
+        countdownLabel.Size = UDim2.new(1, 0, 0.1, 0)
+        countdownLabel.Position = UDim2.new(0, 0, 0.5, 0)
+        countdownLabel.Font = Enum.Font.Code
+        countdownLabel.Text = "DIMENSIONAL SHIFT IN: 60"
+        countdownLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
+        countdownLabel.TextSize = 24
+        countdownLabel.TextStrokeTransparency = 0
+        countdownLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+        countdownLabel.Parent = mainFrame
+        
+        local hexDisplay = Instance.new("TextLabel")
+        hexDisplay.Name = "HexDisplay"
+        hexDisplay.BackgroundTransparency = 1
+        hexDisplay.Size = UDim2.new(1, 0, 0.1, 0)
+        hexDisplay.Position = UDim2.new(0, 0, 0.6, 0)
+        hexDisplay.Font = Enum.Font.Code
+        hexDisplay.Text = ""
+        hexDisplay.TextColor3 = Color3.fromRGB(0, 255, 0)
+        hexDisplay.TextSize = 18
+        hexDisplay.TextStrokeTransparency = 0
+        hexDisplay.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+        hexDisplay.Parent = mainFrame
+        
+        local function AnimateHackText()
+            while getgenv().NAXROC.Active do
+                local originalPos = hackText.Position
+                local originalSize = hackText.TextSize
+                
+                for i = 1, 10 do
+                    hackText.Position = UDim2.new(
+                        originalPos.X.Scale + (math.random(-10, 10) / 100), 
+                        0, 
+                        originalPos.Y.Scale + (math.random(-10, 10) / 100), 
+                        0
+                    )
+                    hackText.TextSize = originalSize + math.random(-4, 4)
+                    hackText.Rotation = math.random(-5, 5)
+                    wait(0.05)
+                end
+                
+                hackText.Position = originalPos
+                hackText.TextSize = originalSize
+                hackText.Rotation = 0
+                wait(1)
+            end
+        end
+        
+        local function UpdateCountdown()
+            local count = 60
+            while count > 0 and getgenv().NAXROC.Active do
+                countdownLabel.Text = "DIMENSIONAL SHIFT IN: " .. count
+                wait(1)
+                count = count - 1
+            end
+            
+            if getgenv().NAXROC.Active then
+                countdownLabel.Text = "DIMENSIONAL SHIFT ACTIVATED"
+                countdownLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+                self:TriggerDimensionalShift()
+            end
+        end
+        
+        local function CycleHexCodes()
+            while getgenv().NAXROC.Active do
+                local randomHex = getgenv().NAXROC.HexCodes[math.random(1, #getgenv().NAXROC.HexCodes)]
+                hexDisplay.Text = randomHex
+                
+                setclipboard(randomHex) -- Set clipboard with hex code
+                
+                wait(math.random(3, 8))
+            end
+        end
+        
+        coroutine.wrap(AnimateHackText)()
+        coroutine.wrap(UpdateCountdown)()
+        coroutine.wrap(CycleHexCodes)()
+    end
+    
+    local function OpenConsoleWithMessages()
+        StarterGui:SetCore("DevConsoleVisible", true)
+        
+        for _, message in pairs(getgenv().NAXROC.ConsoleMessages) do
+            warn("[NAXROC SYSTEM] " .. message)
+            wait(math.random(0.5, 2))
+        end
+        
+        while getgenv().NAXROC.Active do
+            local randomMessage = getgenv().NAXROC.ConsoleMessages[math.random(1, #getgenv().NAXROC.ConsoleMessages)]
+            local distortedMessage = ""
+            
+            for i = 1, #randomMessage do
+                local char = randomMessage:sub(i, i)
+                if math.random(1, 3) == 1 then
+                    distortedMessage = distortedMessage .. string.char(math.random(33, 126))
+                else
+                    distortedMessage = distortedMessage .. char
+                end
+            end
+            
+            warn("[NAXROC SYSTEM] " .. distortedMessage)
+            wait(math.random(3, 8))
+        end
+    end
+    
+    function self:TriggerDimensionalShift()
+        getgenv().NAXROC.PixelationLevel = 10
+        
+        local pixelationEffect = Instance.new("BlurEffect")
+        pixelationEffect.Name = "NAXROC_Pixelation"
+        pixelationEffect.Size = 15
+        pixelationEffect.Parent = game:GetService("Lighting")
+        
+        local colorCorrection = Instance.new("ColorCorrectionEffect")
+        colorCorrection.Name = "NAXROC_ColorDistortion"
+        colorCorrection.Brightness = 0.1
+        colorCorrection.Contrast = 0.5
+        colorCorrection.Saturation = 2
+        colorCorrection.TintColor = Color3.fromRGB(255, 0, 255)
+        colorCorrection.Parent = game:GetService("Lighting")
+        
+        local function AnimateEffects()
+            while getgenv().NAXROC.Active do
+                TweenService:Create(
+                    pixelationEffect, 
+                    TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), 
+                    {Size = math.random(10, 25)}
+                ):Play()
+                
+                TweenService:Create(
+                    colorCorrection, 
+                    TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), 
+                    {Brightness = math.random(-20, 20) / 100, Saturation = math.random(100, 300) / 100}
+                ):Play()
+                
+                wait(1)
+            end
+        end
+        
+        coroutine.wrap(AnimateEffects)()
+    end
+    
+    local function BlockGameExit()
+        local originalPromptFunction = GuiService.GetNotificationTypeList
+        
+        GuiService.GetNotificationTypeList = function(...)
+            return {}
+        end
+        
+        UserInputService.InputBegan:Connect(function(input, processed)
+            if input.KeyCode == Enum.KeyCode.Escape then
+                if getgenv().NAXROC.Active then
+                    local screen = Instance.new("ScreenGui")
+                    screen.Name = "NAXROC_BlockExit"
+                    screen.IgnoreGuiInset = true
+                    screen.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+                    screen.Parent = LocalPlayer:WaitForChild("PlayerGui")
+                    
+                    local frame = Instance.new("Frame")
+                    frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+                    frame.Size = UDim2.new(1, 0, 1, 0)
+                    frame.Parent = screen
+                    
+                    local text = Instance.new("TextLabel")
+                    text.BackgroundTransparency = 1
+                    text.Size = UDim2.new(1, 0, 0.1, 0)
+                    text.Position = UDim2.new(0, 0, 0.45, 0)
+                    text.Font = Enum.Font.Code
+                    text.Text = "YOU CANNOT ESCAPE NAXROC'S CONTROL"
+                    text.TextColor3 = Color3.fromRGB(255, 0, 0)
+                    text.TextSize = 32
+                    text.Parent = frame
+                    
+                    wait(3)
+                    screen:Destroy()
+                    
+                    TeleportService:Teleport(game.PlaceId, LocalPlayer)
+                end
+                return
+            end
+        end)
+    end
+    
+    local function DisableRobloxInterface()
+        local success, error = pcall(function()
+            game:GetService("CoreGui").RobloxGui.Enabled = false
+        end)
+        
+        if not success then
+            warn("NAXROC: Unable to disable Roblox GUI - " .. tostring(error))
+        end
+    end
+    
+    local function StartGlitchEffects()
+        while getgenv().NAXROC.Active do
+            local randomElements = {}
+            
+            for _, descendant in pairs(workspace:GetDescendants()) do
+                if descendant:IsA("BasePart") or descendant:IsA("Decal") or descendant:IsA("Texture") then
+                    if math.random(1, 100) <= 5 then
+                        table.insert(randomElements, descendant)
+                    end
+                end
+            end
+            
+            for _, element in pairs(randomElements) do
+                local originalProperties = {}
+                
+                if element:IsA("BasePart") then
+                    originalProperties.Color = element.Color
+                    originalProperties.Transparency = element.Transparency
+                    originalProperties.Material = element.Material
+                    
+                    element.Color = Color3.fromRGB(math.random(0, 255), math.random(0, 255), math.random(0, 255))
+                    element.Transparency = math.random(0, 80) / 100
+                    element.Material = Enum.Material.Neon
+                    
+                    coroutine.wrap(function()
+                        wait(math.random(1, 5))
+                        
+                        if element and element.Parent then
+                            element.Color = originalProperties.Color
+                            element.Transparency = originalProperties.Transparency
+                            element.Material = originalProperties.Material
+                        end
+                    end)()
+                elseif element:IsA("Decal") or element:IsA("Texture") then
+                    originalProperties.Transparency = element.Transparency
+                    
+                    element.Transparency = math.random(0, 80) / 100
+                    
+                    coroutine.wrap(function()
+                        wait(math.random(1, 5))
+                        
+                        if element and element.Parent then
+                            element.Transparency = originalProperties.Transparency
+                        end
+                    end)()
+                end
+            end
+            
+            wait(0.5)
+        end
+    end
+    
+    CreateVisualElements()
+    coroutine.wrap(OpenConsoleWithMessages)()
+    coroutine.wrap(BlockGameExit)()
+    coroutine.wrap(DisableRobloxInterface)()
+    coroutine.wrap(StartGlitchEffects)()
+end
+
+function NAXROC_Hack:Start()
+    self:Initialize()
+end
+
+NAXROC_Hack:Start()
