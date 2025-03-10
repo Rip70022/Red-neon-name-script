@@ -1,0 +1,458 @@
+local NAXROC = {}
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local Lighting = game:GetService("Lighting")
+local Players = game:GetService("Players")
+local SoundService = game:GetService("SoundService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UserInputService = game:GetService("UserInputService")
+
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+local Camera = workspace.CurrentCamera
+
+getgenv().NAXROC_CONFIG = {
+    IntensityLevel = 5,
+    Duration = 60,
+    ScreenEffects = true,
+    SoundEffects = true,
+    EnvironmentEffects = true,
+    CameraEffects = true
+}
+
+function NAXROC:Initialize()
+    self.Active = false
+    self.StartTime = 0
+    self.Connections = {}
+    self.Sounds = {}
+    self.GuiElements = {}
+    self.OriginalLightingProperties = {}
+    
+    self:CreateSounds()
+    self:CreateGUI()
+    self:SaveLightingState()
+    
+    return self
+end
+
+function NAXROC:SaveLightingState()
+    for _, prop in ipairs({"Ambient", "Brightness", "ColorShift_Bottom", "ColorShift_Top", "FogColor", "FogEnd", "FogStart"}) do
+        self.OriginalLightingProperties[prop] = Lighting[prop]
+    end
+    
+    self.OriginalSkybox = Lighting:FindFirstChildOfClass("Sky")
+    if self.OriginalSkybox then
+        self.OriginalSkyboxData = {}
+        for _, prop in ipairs({"SkyboxBk", "SkyboxDn", "SkyboxFt", "SkyboxLf", "SkyboxRt", "SkyboxUp"}) do
+            self.OriginalSkyboxData[prop] = self.OriginalSkybox[prop]
+        end
+    end
+end
+
+function NAXROC:RestoreLightingState()
+    for prop, value in pairs(self.OriginalLightingProperties) do
+        Lighting[prop] = value
+    end
+    
+    for _, effect in ipairs(Lighting:GetChildren()) do
+        if effect:IsA("PostEffect") and effect.Name:find("NAXROC") then
+            effect:Destroy()
+        end
+    end
+    
+    if self.OriginalSkybox and self.OriginalSkybox.Parent then
+        for prop, value in pairs(self.OriginalSkyboxData) do
+            self.OriginalSkybox[prop] = value
+        end
+    end
+end
+
+function NAXROC:CreateSounds()
+    local function createSound(name, id, properties)
+        local sound = Instance.new("Sound")
+        sound.Name = "NAXROC_" .. name
+        sound.SoundId = "rbxassetid://" .. id
+        sound.Volume = properties.Volume or 1
+        sound.Pitch = properties.Pitch or 1
+        sound.Looped = properties.Looped or false
+        sound.Parent = SoundService
+        
+        self.Sounds[name] = sound
+        return sound
+    end
+    
+    createSound("Alarm", "5567523008", {Volume = 2, Looped = true})
+    createSound("Glitch", "6312453183", {Volume = 1.5, Looped = true})
+    createSound("SystemCrash", "5567531074", {Volume = 3})
+    createSound("DataBreach", "6371928233", {Volume = 2, Looped = true})
+    createSound("Corruption", "1843358457", {Volume = 2, Looped = true})
+    createSound("Warning", "8679627436", {Volume = 3})
+    createSound("ServerShutdown", "7149516987", {Volume = 2})
+end
+
+function NAXROC:CreateGUI()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "NAXROC_Interface"
+    screenGui.DisplayOrder = 999
+    screenGui.IgnoreGuiInset = true
+    screenGui.Parent = PlayerGui
+    self.GuiElements.MainGui = screenGui
+    
+    local warningFrame = Instance.new("Frame")
+    warningFrame.Name = "WarningFrame"
+    warningFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    warningFrame.BackgroundTransparency = 0.3
+    warningFrame.BorderSizePixel = 0
+    warningFrame.Size = UDim2.new(1, 0, 1, 0)
+    warningFrame.Visible = false
+    warningFrame.Parent = screenGui
+    self.GuiElements.WarningFrame = warningFrame
+    
+    local glitchEffect = Instance.new("Frame")
+    glitchEffect.Name = "GlitchEffect"
+    glitchEffect.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    glitchEffect.BackgroundTransparency = 0.8
+    glitchEffect.BorderSizePixel = 0
+    glitchEffect.Size = UDim2.new(1, 0, 1, 0)
+    glitchEffect.Visible = false
+    glitchEffect.Parent = screenGui
+    self.GuiElements.GlitchEffect = glitchEffect
+    
+    local warningText = Instance.new("TextLabel")
+    warningText.Name = "WarningText"
+    warningText.BackgroundTransparency = 1
+    warningText.Size = UDim2.new(1, 0, 0.2, 0)
+    warningText.Position = UDim2.new(0, 0, 0.4, 0)
+    warningText.Font = Enum.Font.Code
+    warningText.Text = "SYSTEM COMPROMISED: NAXROC HAS DETECTED MALICIOUS ACTIVITY"
+    warningText.TextColor3 = Color3.fromRGB(255, 0, 0)
+    warningText.TextScaled = true
+    warningText.TextStrokeTransparency = 0
+    warningText.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+    warningText.Visible = false
+    warningText.Parent = screenGui
+    self.GuiElements.WarningText = warningText
+    
+    local hackerText = Instance.new("TextLabel")
+    hackerText.Name = "HackerText"
+    hackerText.BackgroundTransparency = 1
+    hackerText.Size = UDim2.new(1, 0, 0.7, 0)
+    hackerText.Position = UDim2.new(0, 0, 0.2, 0)
+    hackerText.Font = Enum.Font.Code
+    hackerText.Text = "TRACKING LOCATION...\n\nINITIATING COUNTERMEASURES...\n\nCOLLECTING SYSTEM DATA..."
+    hackerText.TextColor3 = Color3.fromRGB(0, 255, 0)
+    hackerText.TextSize = 24
+    hackerText.TextStrokeTransparency = 0
+    hackerText.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+    hackerText.Visible = false
+    hackerText.Parent = screenGui
+    self.GuiElements.HackerText = hackerText
+    
+    local progressBar = Instance.new("Frame")
+    progressBar.Name = "ProgressBar"
+    progressBar.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    progressBar.BorderSizePixel = 0
+    progressBar.Size = UDim2.new(0.7, 0, 0.05, 0)
+    progressBar.Position = UDim2.new(0.15, 0, 0.7, 0)
+    progressBar.Visible = false
+    progressBar.Parent = screenGui
+    self.GuiElements.ProgressBar = progressBar
+    
+    local progressFill = Instance.new("Frame")
+    progressFill.Name = "Fill"
+    progressFill.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    progressFill.BorderSizePixel = 0
+    progressFill.Size = UDim2.new(0, 0, 1, 0)
+    progressFill.Parent = progressBar
+    self.GuiElements.ProgressFill = progressFill
+    
+    local codeContainer = Instance.new("ScrollingFrame")
+    codeContainer.Name = "CodeContainer"
+    codeContainer.BackgroundTransparency = 1
+    codeContainer.Size = UDim2.new(1, 0, 1, 0)
+    codeContainer.CanvasSize = UDim2.new(1, 0, 10, 0)
+    codeContainer.ScrollBarThickness = 0
+    codeContainer.Visible = false
+    codeContainer.Parent = screenGui
+    self.GuiElements.CodeContainer = codeContainer
+    
+    for i = 1, 300 do
+        local codeLine = Instance.new("TextLabel")
+        codeLine.Name = "CodeLine" .. i
+        codeLine.BackgroundTransparency = 1
+        codeLine.Size = UDim2.new(1, 0, 0.025, 0)
+        codeLine.Position = UDim2.new(0, 0, 0.025 * (i - 1), 0)
+        codeLine.Font = Enum.Font.Code
+        codeLine.Text = ""
+        codeLine.TextColor3 = Color3.fromRGB(0, 255, 0)
+        codeLine.TextSize = 14
+        codeLine.TextXAlignment = Enum.TextXAlignment.Left
+        codeLine.TextTransparency = 0.2
+        codeLine.Parent = codeContainer
+    end
+end
+
+function NAXROC:GenerateRandomCode()
+    local codeLines = {
+        "ACCESS VIOLATION IN MODULE 0x%08X",
+        "MEMORY CORRUPT AT 0x%08X",
+        "INJECTING PAYLOAD: %d%%",
+        "NAXROC/SECURITY/BYPASS.lua - LINE %d",
+        "OVERRIDING SECURITY PROTOCOL %d",
+        "EXTRACTING USER DATA: %d BYTES",
+        "SYSTEM FAILURE: CODE %d",
+        "CORE DUMP AT 0x%08X",
+        "EXECUTING NAXROC/MODULES/EXPLOIT%d.lua",
+        "WARNING: ADMIN PRIVILEGE ESCALATION",
+        "CRITICAL ERROR: SERVER CONNECTION COMPROMISED",
+        "FIREWALL BYPASSED: ACCESS GRANTED",
+        "UNAUTHORIZED ACCESS DETECTED: TRACKING IP",
+        "ROBLOX SECURITY MODULE FAILURE",
+        "BYPASSING ANTI-CHEAT PROTOCOL %d",
+        "CONNECTION TO SECURE SERVER ESTABLISHED",
+        "DOWNLOADING USER INFORMATION: %d%%",
+        "KEYLOGGER ACTIVE: CAPTURING INPUT",
+        "UDP PACKET FLOOD INITIATED: %d Mbps",
+        "SYSTEM32 DIRECTORY ACCESSED: ACCESS DENIED",
+        "REGISTRY KEY MODIFICATION ATTEMPT"
+    }
+    
+    local randomValues = {
+        math.random(0, 0xFFFFFFFF),
+        math.random(0, 0xFFFFFFFF),
+        math.random(1, 100),
+        math.random(1, 500),
+        math.random(1, 20),
+        math.random(1024, 9999999),
+        math.random(100, 999),
+        math.random(0, 0xFFFFFFFF),
+        math.random(1, 12),
+        math.random(0, 0xFFFFFFFF),
+        math.random(1, 100),
+        math.random(1, 20),
+        math.random(100, 9999),
+        math.random(100, 9999)
+    }
+    
+    local codeLine = codeLines[math.random(1, #codeLines)]
+    return string.format(codeLine, unpack(randomValues))
+end
+
+function NAXROC:UpdateCodeDisplay()
+    if not self.Active then return end
+    
+    for i = 1, 300 do
+        local codeLine = self.GuiElements.CodeContainer:FindFirstChild("CodeLine" .. i)
+        if codeLine and math.random(1, 20) == 1 then
+            codeLine.Text = self:GenerateRandomCode()
+        end
+    end
+end
+
+function NAXROC:ApplyGlitchEffect()
+    if not getgenv().NAXROC_CONFIG.ScreenEffects or not self.Active then return end
+    
+    self.GuiElements.GlitchEffect.BackgroundTransparency = math.random(50, 95)/100
+    self.GuiElements.GlitchEffect.Visible = math.random(1, 10) > 7
+    
+    if math.random(1, 60) == 1 then
+        self.GuiElements.WarningFrame.Visible = true
+        self.GuiElements.WarningText.Visible = true
+        task.delay(0.2, function()
+            if self.Active then
+                self.GuiElements.WarningFrame.Visible = false
+                self.GuiElements.WarningText.Visible = false
+            end
+        end)
+    end
+    
+    local glitchIntensity = math.min(1, (os.time() - self.StartTime) / 15)
+    
+    if math.random(1, 120) == 1 and getgenv().NAXROC_CONFIG.IntensityLevel > 3 then
+        Camera.CFrame = Camera.CFrame * CFrame.new(math.random(-10, 10)/10, math.random(-10, 10)/10, 0)
+        task.delay(0.1, function()
+            if not self.Active then return end
+            Camera.CFrame = LocalPlayer.Character.Head.CFrame
+        end)
+    end
+end
+
+function NAXROC:ApplyCameraShake()
+    if not getgenv().NAXROC_CONFIG.CameraEffects or not self.Active then return end
+    
+    local timeElapsed = os.time() - self.StartTime
+    local intensity = math.min(0.3, timeElapsed / getgenv().NAXROC_CONFIG.Duration * 0.3)
+    
+    local randomX = (math.random(-100, 100)/100) * intensity
+    local randomY = (math.random(-100, 100)/100) * intensity
+    local randomZ = (math.random(-50, 50)/100) * intensity
+    
+    Camera.CFrame = Camera.CFrame:Lerp(Camera.CFrame * CFrame.new(randomX, randomY, randomZ), 0.5)
+end
+
+function NAXROC:ManageSounds()
+    if not getgenv().NAXROC_CONFIG.SoundEffects or not self.Active then return end
+    
+    local timeElapsed = os.time() - self.StartTime
+    local intensity = math.min(1, timeElapsed / 10)
+    
+    if not self.Sounds.Alarm.Playing then
+        self.Sounds.Alarm:Play()
+    end
+    
+    if not self.Sounds.Glitch.Playing then
+        self.Sounds.Glitch:Play()
+    end
+    
+    if not self.Sounds.DataBreach.Playing and timeElapsed > 5 then
+        self.Sounds.DataBreach:Play()
+    end
+    
+    if not self.Sounds.Corruption.Playing and timeElapsed > 10 then
+        self.Sounds.Corruption:Play()
+    end
+    
+    if timeElapsed % 5 == 0 and math.random(1, 2) == 1 then
+        self.Sounds.Warning:Play()
+    end
+    
+    if timeElapsed % 8 == 0 and math.random(1, 3) == 1 then
+        self.Sounds.SystemCrash:Play()
+    end
+    
+    if timeElapsed > getgenv().NAXROC_CONFIG.Duration - 10 and not self.PlayedShutdown then
+        self.Sounds.ServerShutdown:Play()
+        self.PlayedShutdown = true
+    end
+    
+    for _, sound in pairs(self.Sounds) do
+        sound.Pitch = 0.8 + math.random(-20, 20)/100
+    end
+end
+
+function NAXROC:ModifyEnvironment()
+    if not getgenv().NAXROC_CONFIG.EnvironmentEffects or not self.Active then return end
+    
+    local timeElapsed = os.time() - self.StartTime
+    local intensity = math.min(1, timeElapsed / getgenv().NAXROC_CONFIG.Duration)
+    
+    Lighting.Ambient = Color3.new(intensity/2, 0, 0)
+    Lighting.Brightness = math.max(0, 1 - intensity/2)
+    Lighting.FogColor = Color3.new(intensity/3, 0, 0)
+    Lighting.FogEnd = 500 - intensity * 400
+    
+    if math.random(1, 60) == 1 then
+        local colorCorrection = Lighting:FindFirstChild("NAXROC_ColorCorrection") or Instance.new("ColorCorrectionEffect")
+        colorCorrection.Name = "NAXROC_ColorCorrection"
+        colorCorrection.Brightness = math.random(-20, 20)/100
+        colorCorrection.Contrast = 0.1 + math.random(0, 20)/100
+        colorCorrection.Saturation = -0.3 + math.random(-20, 20)/100
+        colorCorrection.TintColor = Color3.fromRGB(255, math.random(0, 100), math.random(0, 100))
+        colorCorrection.Parent = Lighting
+    end
+    
+    if timeElapsed > 15 and not Lighting:FindFirstChild("NAXROC_BloomEffect") then
+        local bloom = Instance.new("BloomEffect")
+        bloom.Name = "NAXROC_BloomEffect"
+        bloom.Intensity = 0.5
+        bloom.Size = 24
+        bloom.Threshold = 0.8
+        bloom.Parent = Lighting
+    end
+    
+    if timeElapsed > 20 and math.random(1, 120) == 1 then
+        local blur = Lighting:FindFirstChild("NAXROC_Blur") or Instance.new("BlurEffect")
+        blur.Name = "NAXROC_Blur"
+        blur.Size = math.random(5, 15)
+        blur.Parent = Lighting
+        
+        task.delay(0.5, function()
+            if blur and blur.Parent then
+                blur.Size = 0
+            end
+        end)
+    end
+end
+
+function NAXROC:UpdateProgress()
+    if not self.Active then return end
+    
+    local timeElapsed = os.time() - self.StartTime
+    local progress = math.min(1, timeElapsed / getgenv().NAXROC_CONFIG.Duration)
+    
+    self.GuiElements.ProgressFill.Size = UDim2.new(progress, 0, 1, 0)
+end
+
+function NAXROC:Start()
+    if self.Active then return end
+    
+    self.Active = true
+    self.StartTime = os.time()
+    self.PlayedShutdown = false
+    
+    self.GuiElements.WarningFrame.Visible = true
+    self.GuiElements.WarningText.Visible = true
+    self.GuiElements.HackerText.Visible = true
+    self.GuiElements.ProgressBar.Visible = true
+    self.GuiElements.CodeContainer.Visible = true
+    
+    task.spawn(function()
+        while self.Active do
+            self:UpdateCodeDisplay()
+            task.wait(0.1)
+        end
+    end)
+    
+    task.spawn(function()
+        while self.Active do
+            self:UpdateProgress()
+            task.wait(0.5)
+        end
+    end)
+    
+    table.insert(self.Connections, RunService.RenderStepped:Connect(function()
+        self:ApplyGlitchEffect()
+        self:ApplyCameraShake()
+        self:ManageSounds()
+        self:ModifyEnvironment()
+    end))
+    
+    self.Sounds.Warning:Play()
+    task.delay(1, function() 
+        if self.Active then
+            self.Sounds.SystemCrash:Play() 
+        end
+    end)
+    
+    task.delay(getgenv().NAXROC_CONFIG.Duration, function()
+        self:Stop()
+    end)
+end
+
+function NAXROC:Stop()
+    self.Active = false
+    
+    for _, connection in ipairs(self.Connections) do
+        if connection.Connected then
+            connection:Disconnect()
+        end
+    end
+    self.Connections = {}
+    
+    for _, sound in pairs(self.Sounds) do
+        sound:Stop()
+    end
+    
+    for _, element in pairs(self.GuiElements) do
+        if element:IsA("GuiObject") then
+            element.Visible = false
+        end
+    end
+    
+    self:RestoreLightingState()
+end
+
+local simulationController = NAXROC:Initialize()
+simulationController:Start()
+
+return simulationController
