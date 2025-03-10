@@ -1,0 +1,398 @@
+local NaxrocHack = {}
+
+getgenv().StartNaxrocHack = function()
+    if getgenv().HackActive then return end
+    getgenv().HackActive = true
+
+    local Players = game:GetService("Players")
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local RunService = game:GetService("RunService")
+    local Lighting = game:GetService("Lighting")
+    local TweenService = game:GetService("TweenService")
+    local LocalPlayer = Players.LocalPlayer
+    local StarterGui = game:GetService("StarterGui")
+    local UserInputService = game:GetService("UserInputService")
+    
+    local function OpenConsole()
+        local success, error = pcall(function()
+            StarterGui:SetCore("DevConsoleVisible", true)
+        end)
+        
+        if not success then
+            local consoleVisibilityEvent = Instance.new("BindableEvent")
+            consoleVisibilityEvent.Event:Connect(function()
+                StarterGui:SetCore("DevConsoleVisible", true)
+            end)
+            consoleVisibilityEvent:Fire()
+        end
+    end
+    
+    local function PrintToConsole(text, color)
+        local textColor = color or "255, 0, 0"
+        local success, error = pcall(function()
+            print("\27[" .. textColor .. "m" .. text .. "\27[0m")
+        end)
+        
+        if not success then
+            warn("[NAXROC HACK]: " .. text)
+        end
+    end
+    
+    local function CreateFullScreenGui()
+        local screenGui = Instance.new("ScreenGui")
+        screenGui.Name = "NaxrocHackGui"
+        screenGui.DisplayOrder = 999999
+        screenGui.ResetOnSpawn = false
+        screenGui.IgnoreGuiInset = true
+        screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        
+        local function protectGui(gui)
+            if syn and syn.protect_gui then
+                syn.protect_gui(gui)
+                gui.Parent = game.CoreGui
+            elseif gethui then
+                gui.Parent = gethui()
+            else
+                gui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+            end
+        end
+        
+        protectGui(screenGui)
+        return screenGui
+    end
+    
+    local function CreateGlitchEffect(parent)
+        local glitchFrame = Instance.new("Frame")
+        glitchFrame.Name = "GlitchEffect"
+        glitchFrame.Size = UDim2.new(1, 0, 1, 0)
+        glitchFrame.BackgroundTransparency = 1
+        glitchFrame.ZIndex = 10
+        glitchFrame.Parent = parent
+        
+        local glitchImages = {}
+        for i = 1, 3 do
+            local img = Instance.new("ImageLabel")
+            img.Name = "GlitchLayer" .. i
+            img.Size = UDim2.new(1, 0, 1, 0)
+            img.BackgroundTransparency = 1
+            img.Image = "rbxassetid://4612300002"
+            img.ImageTransparency = 0.8
+            img.ZIndex = 10 + i
+            img.Parent = glitchFrame
+            table.insert(glitchImages, img)
+        end
+        
+        local function animateGlitch()
+            while getgenv().HackActive do
+                for _, img in pairs(glitchImages) do
+                    img.Position = UDim2.new(math.random(-10, 10) / 100, 0, math.random(-10, 10) / 100, 0)
+                    img.ImageColor3 = Color3.fromRGB(math.random(0, 255), math.random(0, 50), math.random(100, 255))
+                    img.ImageTransparency = math.random(7, 9) / 10
+                end
+                task.wait(0.05)
+            end
+        end
+        
+        coroutine.wrap(animateGlitch)()
+        return glitchFrame
+    end
+    
+    local function CreateNaxrocLogo(parent)
+        local logoContainer = Instance.new("Frame")
+        logoContainer.Name = "LogoContainer"
+        logoContainer.Size = UDim2.new(0.5, 0, 0.5, 0)
+        logoContainer.AnchorPoint = Vector2.new(0.5, 0.5)
+        logoContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
+        logoContainer.BackgroundTransparency = 1
+        logoContainer.ZIndex = 50
+        logoContainer.Parent = parent
+        
+        local logo = Instance.new("TextLabel")
+        logo.Name = "NaxrocLogo"
+        logo.Size = UDim2.new(1, 0, 1, 0)
+        logo.BackgroundTransparency = 1
+        logo.Text = "NAXROC"
+        logo.TextColor3 = Color3.fromRGB(255, 0, 0)
+        logo.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+        logo.TextStrokeTransparency = 0
+        logo.TextScaled = true
+        logo.Font = Enum.Font.Arcade
+        logo.ZIndex = 51
+        logo.Parent = logoContainer
+        
+        local descriptionText = Instance.new("TextLabel")
+        descriptionText.Name = "HackDescription"
+        descriptionText.Size = UDim2.new(1, 0, 0.2, 0)
+        descriptionText.Position = UDim2.new(0, 0, 1, 10)
+        descriptionText.BackgroundTransparency = 1
+        descriptionText.Text = "SERVER UNDER CONTROL"
+        descriptionText.TextColor3 = Color3.fromRGB(255, 0, 0)
+        descriptionText.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+        descriptionText.TextStrokeTransparency = 0
+        descriptionText.TextScaled = true
+        descriptionText.Font = Enum.Font.Arcade
+        descriptionText.ZIndex = 51
+        descriptionText.Parent = logoContainer
+        
+        local function animateLogo()
+            while getgenv().HackActive do
+                for i = 0, 1, 0.02 do
+                    logo.Rotation = math.sin(i * math.pi * 2) * 5
+                    logo.TextColor3 = Color3.fromRGB(255, i * 255, i * 255)
+                    descriptionText.TextTransparency = math.abs(math.sin(i * math.pi * 2))
+                    task.wait(0.05)
+                end
+            end
+        end
+        
+        coroutine.wrap(animateLogo)()
+        return logoContainer
+    end
+    
+    local function PixelateGame()
+        local pixelateEffect = Instance.new("BlurEffect")
+        pixelateEffect.Name = "NaxrocPixelate"
+        pixelateEffect.Size = 20
+        pixelateEffect.Parent = Lighting
+        
+        local colorCorrectionEffect = Instance.new("ColorCorrectionEffect")
+        colorCorrectionEffect.Name = "NaxrocColorFilter"
+        colorCorrectionEffect.Brightness = 0
+        colorCorrectionEffect.Contrast = 0.2
+        colorCorrectionEffect.Saturation = -0.3
+        colorCorrectionEffect.TintColor = Color3.fromRGB(255, 0, 255)
+        colorCorrectionEffect.Parent = Lighting
+        
+        local bloomEffect = Instance.new("BloomEffect")
+        bloomEffect.Name = "NaxrocBloom"
+        bloomEffect.Intensity = 1
+        bloomEffect.Size = 56
+        bloomEffect.Threshold = 0.8
+        bloomEffect.Parent = Lighting
+        
+        return {pixelateEffect, colorCorrectionEffect, bloomEffect}
+    end
+    
+    local function CreateMessageSystem()
+        local messages = {
+            "[NAXROC] Accessing server encryption keys...",
+            "[NAXROC] Bypassing security protocols...",
+            "[NAXROC] Disabling FilteringEnabled protection...",
+            "[NAXROC] Accessing player data structures...",
+            "[NAXROC] Injecting custom remote events...",
+            "[NAXROC] Establishing backdoor connection...",
+            "[NAXROC] Deploying kernel-level access...",
+            "[NAXROC] Overriding server permissions...",
+            "[NAXROC] Taking control of game instances...",
+            "[NAXROC] Dimensional shift protocols initiated..."
+        }
+        
+        local techMessages = {
+            "ACCESS GRANTED: Server.GameSettings",
+            "OVERRIDE: FilteringEnabled=false",
+            "MODIFIED: workspace.Gravity = 0.7*original",
+            "INJECTED: CustomRemoteFunction()",
+            "EXECUTION: FE_Bypass.luac completed",
+            "CONNECTION ESTABLISHED: 255.0.0.1:8080",
+            "MEMORY HOOK: 0x8A7B4C2D -> 0xFF00FF",
+            "SERVER STATUS: Compromised",
+            "PACKET INTERCEPTOR: Active",
+            "ENCRYPTION KEYS: Acquired"
+        }
+        
+        local messageFrame = Instance.new("Frame")
+        messageFrame.Name = "HackMessages"
+        messageFrame.Size = UDim2.new(0.3, 0, 1, 0)
+        messageFrame.Position = UDim2.new(0, 0, 0, 0)
+        messageFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        messageFrame.BackgroundTransparency = 0.7
+        messageFrame.ZIndex = 100
+        
+        local messagesContainer = Instance.new("ScrollingFrame")
+        messagesContainer.Name = "MessagesContainer"
+        messagesContainer.Size = UDim2.new(1, -10, 1, -10)
+        messagesContainer.Position = UDim2.new(0, 5, 0, 5)
+        messagesContainer.BackgroundTransparency = 1
+        messagesContainer.ZIndex = 101
+        messagesContainer.CanvasSize = UDim2.new(0, 0, 0, 0)
+        messagesContainer.ScrollBarThickness = 0
+        messagesContainer.Parent = messageFrame
+        
+        local UIListLayout = Instance.new("UIListLayout")
+        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        UIListLayout.Padding = UDim.new(0, 5)
+        UIListLayout.Parent = messagesContainer
+        
+        local function addMessage(text, color)
+            if not getgenv().HackActive then return end
+            
+            local messageLabel = Instance.new("TextLabel")
+            messageLabel.Name = "Message_" .. tick()
+            messageLabel.Size = UDim2.new(1, 0, 0, 20)
+            messageLabel.BackgroundTransparency = 1
+            messageLabel.Text = text
+            messageLabel.TextColor3 = color or Color3.fromRGB(255, 0, 0)
+            messageLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+            messageLabel.TextStrokeTransparency = 0
+            messageLabel.TextXAlignment = Enum.TextXAlignment.Left
+            messageLabel.TextSize = 14
+            messageLabel.Font = Enum.Font.Code
+            messageLabel.ZIndex = 102
+            messageLabel.LayoutOrder = #messagesContainer:GetChildren()
+            messageLabel.Parent = messagesContainer
+            
+            messagesContainer.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y)
+            messagesContainer.CanvasPosition = Vector2.new(0, messagesContainer.CanvasSize.Y.Offset)
+            
+            coroutine.wrap(function()
+                while messageLabel and messageLabel.Parent and getgenv().HackActive do
+                    messageLabel.Position = UDim2.new(0, math.random(-2, 2), 0, messageLabel.Position.Y.Offset + math.random(-1, 1))
+                    messageLabel.Rotation = math.random(-2, 2)
+                    task.wait(0.1)
+                end
+            end)()
+            
+            return messageLabel
+        end
+        
+        coroutine.wrap(function()
+            for _, msg in ipairs(messages) do
+                if not getgenv().HackActive then break end
+                addMessage(msg)
+                task.wait(math.random(0.5, 1.5))
+                PrintToConsole(msg)
+            end
+            
+            while getgenv().HackActive do
+                local techMsg = techMessages[math.random(1, #techMessages)]
+                addMessage(techMsg, Color3.fromRGB(0, 255, 0))
+                PrintToConsole(techMsg, "0, 255, 0")
+                task.wait(math.random(2, 4))
+            end
+        end)()
+        
+        return messageFrame
+    end
+    
+    local function ModifyMapElements()
+        coroutine.wrap(function()
+            local workspaceChildren = workspace:GetChildren()
+            for _, obj in pairs(workspaceChildren) do
+                if obj:IsA("Model") or obj:IsA("Part") or obj:IsA("MeshPart") or obj:IsA("UnionOperation") then
+                    if not Players:GetPlayerFromCharacter(obj) then
+                        coroutine.wrap(function()
+                            while getgenv().HackActive do
+                                if obj and obj.Parent then
+                                    local original = obj.CFrame
+                                    local originalSize = obj:IsA("Model") and obj:GetExtentsSize() or obj.Size
+                                    
+                                    TweenService:Create(
+                                        obj, 
+                                        TweenInfo.new(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut),
+                                        {CFrame = original * CFrame.new(math.random(-1, 1), math.random(-1, 1), math.random(-1, 1))}
+                                    ):Play()
+                                    
+                                    task.wait(0.5)
+                                end
+                            end
+                        end)()
+                    end
+                end
+            end
+        end)()
+    end
+    
+    local function MakeFakePlayerMessages()
+        coroutine.wrap(function()
+            local praiseMessages = {
+                "NAXROC is our master now",
+                "All hail NAXROC, the supreme hacker",
+                "We are under NAXROC's control",
+                "NAXROC's power is unstoppable",
+                "NAXROC has taken over this server",
+                "We belong to NAXROC now",
+                "NAXROC's dimensional hack is perfect",
+                "There is no escape from NAXROC",
+                "NAXROC controls our every move",
+                "NAXROC is the ultimate hacker"
+            }
+            
+            while getgenv().HackActive do
+                for _, player in pairs(Players:GetPlayers()) do
+                    if player ~= LocalPlayer and player.Name ~= "NAXROC" then
+                        local message = praiseMessages[math.random(1, #praiseMessages)]
+                        
+                        local event = ReplicatedStorage:FindFirstChild("DefaultChatSystemChatEvents")
+                        if event then
+                            local chatEvent = event:FindFirstChild("SayMessageRequest")
+                            if chatEvent and chatEvent:IsA("RemoteEvent") then
+                                local success, error = pcall(function()
+                                    chatEvent:FireServer(message, "All")
+                                end)
+                            end
+                        end
+                        
+                        PrintToConsole("FORCED PLAYER " .. player.Name .. " TO SAY: " .. message)
+                    end
+                end
+                task.wait(math.random(5, 10))
+            end
+        end)()
+    end
+    
+    local function InitiateHack()
+        OpenConsole()
+        
+        PrintToConsole(string.rep("=", 50))
+        PrintToConsole("NAXROC DIMENSIONAL HACK INITIATED")
+        PrintToConsole(string.rep("=", 50))
+        
+        local gui = CreateFullScreenGui()
+        CreateGlitchEffect(gui)
+        CreateNaxrocLogo(gui)
+        
+        local messageSystem = CreateMessageSystem()
+        messageSystem.Parent = gui
+        
+        local effectsTable = PixelateGame()
+        ModifyMapElements()
+        MakeFakePlayerMessages()
+        
+        local music = Instance.new("Sound")
+        music.Name = "NaxrocHackMusic"
+        music.SoundId = "rbxassetid://6463420464" 
+        music.Volume = 0.5
+        music.Looped = true
+        music.Parent = gui
+        music:Play()
+        
+        local function cleanup()
+            getgenv().HackActive = false
+            if gui and gui.Parent then
+                gui:Destroy()
+            end
+            
+            for _, effect in ipairs(effectsTable) do
+                if effect and effect.Parent then
+                    effect:Destroy()
+                end
+            end
+            
+            PrintToConsole(string.rep("=", 50))
+            PrintToConsole("NAXROC HACK TERMINATED")
+            PrintToConsole(string.rep("=", 50))
+        end
+        
+        UserInputService.InputBegan:Connect(function(input, gameProcessed)
+            if input.KeyCode == Enum.KeyCode.End and not gameProcessed then
+                cleanup()
+            end
+        end)
+        
+        return cleanup
+    end
+    
+    return InitiateHack()
+end
+
+return getgenv().StartNaxrocHack()
