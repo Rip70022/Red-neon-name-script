@@ -1,0 +1,351 @@
+local NaxrocHack = {}
+
+getgenv().NaxrocConfig = {
+    Enabled = true,
+    SoundVolume = 5,
+    VisualIntensity = 10,
+    GlitchFrequency = 0.2,
+    MessageInterval = 3,
+    ScreenShakeIntensity = 2
+}
+
+function NaxrocHack:Init()
+    local Players = game:GetService("Players")
+    local RunService = game:GetService("RunService")
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local TweenService = game:GetService("TweenService")
+    local Lighting = game:GetService("Lighting")
+    local SoundService = game:GetService("SoundService")
+    
+    local LocalPlayer = Players.LocalPlayer
+    local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+    
+    local hackSounds = {}
+    local visualEffects = {}
+    local glitchScreens = {}
+    local messageFrames = {}
+    
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "NAXROC_HackInterface"
+    screenGui.IgnoreGuiInset = true
+    screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    screenGui.ResetOnSpawn = false
+    screenGui.Parent = PlayerGui
+    
+    local function CreateGlitchSound(id, volume)
+        local sound = Instance.new("Sound")
+        sound.SoundId = id
+        sound.Volume = volume * NaxrocConfig.SoundVolume
+        sound.RollOffMode = Enum.RollOffMode.LinearSquare
+        sound.Parent = SoundService
+        table.insert(hackSounds, sound)
+        return sound
+    end
+    
+    local function CreateVisualEffect()
+        local frame = Instance.new("Frame")
+        frame.Size = UDim2.new(1, 0, 1, 0)
+        frame.BackgroundTransparency = 1
+        frame.BorderSizePixel = 0
+        frame.ZIndex = 10
+        frame.Parent = screenGui
+        table.insert(visualEffects, frame)
+        return frame
+    end
+    
+    local function CreateGlitchScreen()
+        local frame = CreateVisualEffect()
+        frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        frame.BackgroundTransparency = 0.5
+        
+        local glitchText = Instance.new("TextLabel")
+        glitchText.Size = UDim2.new(1, 0, 1, 0)
+        glitchText.BackgroundTransparency = 1
+        glitchText.TextColor3 = Color3.fromRGB(255, 0, 0)
+        glitchText.Text = "SYSTEM COMPROMISED"
+        glitchText.Font = Enum.Font.Code
+        glitchText.TextSize = 48
+        glitchText.TextStrokeTransparency = 0
+        glitchText.TextStrokeColor3 = Color3.fromRGB(0, 255, 255)
+        glitchText.Parent = frame
+        
+        table.insert(glitchScreens, frame)
+        return frame
+    end
+    
+    local function CreateMessageFrame(text, duration)
+        local frame = Instance.new("Frame")
+        frame.Size = UDim2.new(0.5, 0, 0.1, 0)
+        frame.Position = UDim2.new(0.25, 0, math.random(), 0)
+        frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        frame.BackgroundTransparency = 0.2
+        frame.BorderColor3 = Color3.fromRGB(255, 0, 0)
+        frame.BorderSizePixel = 2
+        frame.ZIndex = 100
+        frame.Parent = screenGui
+        
+        local message = Instance.new("TextLabel")
+        message.Size = UDim2.new(0.95, 0, 0.9, 0)
+        message.Position = UDim2.new(0.025, 0, 0.05, 0)
+        message.BackgroundTransparency = 1
+        message.TextColor3 = Color3.fromRGB(0, 255, 0)
+        message.Text = text
+        message.Font = Enum.Font.Code
+        message.TextSize = 14
+        message.TextXAlignment = Enum.TextXAlignment.Left
+        message.TextWrapped = true
+        message.ZIndex = 101
+        message.Parent = frame
+        
+        table.insert(messageFrames, frame)
+        
+        spawn(function()
+            wait(duration)
+            frame:Destroy()
+            for i, v in pairs(messageFrames) do
+                if v == frame then
+                    table.remove(messageFrames, i)
+                    break
+                end
+            end
+        end)
+        
+        return frame
+    end
+    
+    local function ShakeScreen(intensity)
+        local camera = workspace.CurrentCamera
+        local originalCFrame = camera.CFrame
+        
+        for i = 1, 5 do
+            camera.CFrame = originalCFrame * CFrame.new(
+                math.random(-intensity, intensity)/10, 
+                math.random(-intensity, intensity)/10, 
+                0
+            )
+            RunService.RenderStepped:Wait()
+        end
+        
+        camera.CFrame = originalCFrame
+    end
+    
+    local function ApplyLightingEffects()
+        local originalAmbient = Lighting.Ambient
+        local originalBrightness = Lighting.Brightness
+        local originalColorShift = Lighting.ColorShift_Top
+        
+        Lighting.Ambient = Color3.fromRGB(255, 0, 0)
+        Lighting.Brightness = 0.2
+        Lighting.ColorShift_Top = Color3.fromRGB(0, 0, 255)
+        
+        local chromatic = Instance.new("ChromaticAberration")
+        chromatic.Enabled = true
+        chromatic.Intensity = 0.8
+        chromatic.Parent = Lighting
+        
+        local distortion = Instance.new("DepthOfFieldEffect")
+        distortion.Enabled = true
+        distortion.FarIntensity = 0.5
+        distortion.NearIntensity = 0.5
+        distortion.FocusDistance = 0.05
+        distortion.InFocusRadius = 10
+        distortion.Parent = Lighting
+        
+        wait(5)
+        
+        Lighting.Ambient = originalAmbient
+        Lighting.Brightness = originalBrightness
+        Lighting.ColorShift_Top = originalColorShift
+        
+        chromatic:Destroy()
+        distortion:Destroy()
+    end
+    
+    local function InitSounds()
+        CreateGlitchSound("rbxassetid://5657950552", 1.5)  
+        CreateGlitchSound("rbxassetid://5151378175", 2)    
+        CreateGlitchSound("rbxassetid://131323304", 1.8)   
+        CreateGlitchSound("rbxassetid://170765130", 1.3)   
+        CreateGlitchSound("rbxassetid://5869422451", 2.5)  
+    end
+    
+    local function PlayRandomSound()
+        if #hackSounds > 0 then
+            local randomSound = hackSounds[math.random(1, #hackSounds)]
+            randomSound:Play()
+        end
+    end
+    
+    local function DisplayRandomMessage()
+        local messages = {
+            "NAXROC: System infiltration complete. Accessing player data...",
+            "NAXROC: Bypassing security layers... Firewall compromised.",
+            "NAXROC: WARNING - Unauthorized access detected. System corruption imminent.",
+            "NAXROC: Extracting game variables... Modifying environment parameters.",
+            "NAXROC: Anti-exploit measures neutralized. Full system access granted.",
+            "NAXROC: Player information acquired. Server side execution enabled.",
+            "NAXROC: Remote code execution successful. System instability increasing.",
+            "NAXROC: Memory manipulation active. Variables overwritten.",
+            "NAXROC: Backdoor established. Continuous access guaranteed.",
+            "NAXROC: Even exploiters cannot stop this intrusion. System breakdown imminent."
+        }
+        
+        local randomMessage = messages[math.random(1, #messages)]
+        CreateMessageFrame(randomMessage, 5)
+    end
+    
+    local function InitGlitchEffects()
+        RunService:BindToRenderStep("NAXROC_GlitchEffects", Enum.RenderPriority.Camera.Value + 1, function()
+            if not NaxrocConfig.Enabled then return end
+            
+            if math.random() < NaxrocConfig.GlitchFrequency then
+                local glitchScreen = CreateGlitchScreen()
+                glitchScreen.BackgroundTransparency = 0.7
+                
+                TweenService:Create(glitchScreen, TweenInfo.new(0.1), {BackgroundTransparency = 0.5}):Play()
+                
+                spawn(function()
+                    wait(0.2)
+                    glitchScreen:Destroy()
+                    for i, v in pairs(glitchScreens) do
+                        if v == glitchScreen then
+                            table.remove(glitchScreens, i)
+                            break
+                        end
+                    end
+                end)
+                
+                if math.random() < 0.3 then
+                    ShakeScreen(NaxrocConfig.ScreenShakeIntensity)
+                end
+            end
+        end)
+    end
+    
+    local function CreateHackerInterface()
+        local codeFrame = Instance.new("Frame")
+        codeFrame.Size = UDim2.new(0.3, 0, 0.4, 0)
+        codeFrame.Position = UDim2.new(0.05, 0, 0.1, 0)
+        codeFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        codeFrame.BackgroundTransparency = 0.2
+        codeFrame.BorderColor3 = Color3.fromRGB(0, 255, 0)
+        codeFrame.BorderSizePixel = 2
+        codeFrame.ZIndex = 50
+        codeFrame.Parent = screenGui
+        
+        local codeText = Instance.new("TextLabel")
+        codeText.Size = UDim2.new(0.95, 0, 0.95, 0)
+        codeText.Position = UDim2.new(0.025, 0, 0.025, 0)
+        codeText.BackgroundTransparency = 1
+        codeText.TextColor3 = Color3.fromRGB(0, 255, 0)
+        codeText.Font = Enum.Font.Code
+        codeText.TextSize = 12
+        codeText.TextXAlignment = Enum.TextXAlignment.Left
+        codeText.TextYAlignment = Enum.TextYAlignment.Top
+        codeText.TextWrapped = true
+        codeText.ZIndex = 51
+        codeText.Parent = codeFrame
+        
+        local fakeCode = ""
+        local codeLines = {
+            "getgenv().secure = false",
+            "accessing game.Players...",
+            "for i,v in pairs(game:GetDescendants()) do",
+            "  if v:IsA('Script') then",
+            "    v.Disabled = true",
+            "  end",
+            "end",
+            "bypassing FilteringEnabled...",
+            "accessing server events...",
+            "RemoteFunction.InvokeServer = proxied",
+            "game.ReplicatedStorage.compromised = true",
+            "NAXROC system injection complete"
+        }
+        
+        spawn(function()
+            for _, line in pairs(codeLines) do
+                fakeCode = fakeCode .. line .. "\n"
+                codeText.Text = fakeCode
+                wait(0.8)
+            end
+        end)
+        
+        return codeFrame
+    end
+    
+    local function SimulateGameCorruption()
+        local corrupted = {}
+        
+        for i = 1, 5 do
+            spawn(function()
+                for _, obj in pairs(game:GetDescendants()) do
+                    if obj:IsA("BasePart") and not corrupted[obj] and math.random() < 0.01 then
+                        corrupted[obj] = true
+                        local originalColor = obj.Color
+                        local originalTransparency = obj.Transparency
+                        local originalMaterial = obj.Material
+                        
+                        obj.Color = Color3.fromRGB(255, 0, 0)
+                        obj.Transparency = 0.5
+                        obj.Material = Enum.Material.Neon
+                        
+                        TweenService:Create(obj, TweenInfo.new(3), {
+                            Color = originalColor,
+                            Transparency = originalTransparency
+                        }):Play()
+                        
+                        spawn(function()
+                            wait(3)
+                            if obj and obj.Parent then
+                                obj.Material = originalMaterial
+                            end
+                        end)
+                    end
+                    
+                    wait()
+                end
+            end)
+        end
+    end
+    
+    local function StartHackSequence()
+        if not NaxrocConfig.Enabled then return end
+        
+        InitSounds()
+        InitGlitchEffects()
+        
+        local hackerInterface = CreateHackerInterface()
+        
+        spawn(function()
+            ApplyLightingEffects()
+        end)
+        
+        spawn(function()
+            while NaxrocConfig.Enabled do
+                if math.random() < 0.7 then
+                    PlayRandomSound()
+                end
+                
+                wait(math.random(1, 3))
+            end
+        end)
+        
+        spawn(function()
+            while NaxrocConfig.Enabled do
+                DisplayRandomMessage()
+                wait(NaxrocConfig.MessageInterval)
+            end
+        end)
+        
+        spawn(function()
+            wait(5)
+            SimulateGameCorruption()
+        end)
+    end
+    
+    StartHackSequence()
+end
+
+NaxrocHack:Init()
+
+return NaxrocHack
