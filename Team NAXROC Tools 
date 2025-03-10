@@ -1,0 +1,142 @@
+-- I will add more buttons on future.
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "TeamNAXROCTools"
+screenGui.Parent = game:GetService("CoreGui")
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 250, 0, 150)
+mainFrame.Position = UDim2.new(0.5, -125, 0.5, -75)
+mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = screenGui
+
+local cornerRadius = Instance.new("UICorner")
+cornerRadius.CornerRadius = UDim.new(0, 6)
+cornerRadius.Parent = mainFrame
+
+local titleBar = Instance.new("Frame")
+titleBar.Name = "TitleBar"
+titleBar.Size = UDim2.new(1, 0, 0, 30)
+titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+titleBar.BorderSizePixel = 0
+titleBar.Parent = mainFrame
+
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 6)
+titleCorner.Parent = titleBar
+
+local titleBottomFrame = Instance.new("Frame")
+titleBottomFrame.Name = "TitleBottomFrame"
+titleBottomFrame.Size = UDim2.new(1, 0, 0, 15)
+titleBottomFrame.Position = UDim2.new(0, 0, 0.5, 0)
+titleBottomFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+titleBottomFrame.BorderSizePixel = 0
+titleBottomFrame.Parent = titleBar
+
+local titleText = Instance.new("TextLabel")
+titleText.Name = "TitleText"
+titleText.Size = UDim2.new(1, 0, 1, 0)
+titleText.BackgroundTransparency = 1
+titleText.Text = "Team NAXROC Tools"
+titleText.Font = Enum.Font.SourceSansBold
+titleText.TextSize = 16
+titleText.TextColor3 = Color3.fromRGB(0, 255, 0)
+titleText.Parent = titleBar
+
+local glowEffect = Instance.new("ImageLabel")
+glowEffect.Name = "GlowEffect"
+glowEffect.Size = UDim2.new(1.2, 0, 1.2, 0)
+glowEffect.Position = UDim2.new(-0.1, 0, -0.1, 0)
+glowEffect.BackgroundTransparency = 1
+glowEffect.Image = "rbxassetid://5028857084"
+glowEffect.ImageColor3 = Color3.fromRGB(0, 255, 0)
+glowEffect.ImageTransparency = 0.6
+glowEffect.ZIndex = -1
+glowEffect.Parent = mainFrame
+
+local function createButton(name, position, text)
+    local button = Instance.new("TextButton")
+    button.Name = name
+    button.Size = UDim2.new(0.9, 0, 0, 30)
+    button.Position = position
+    button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    button.BorderSizePixel = 0
+    button.Text = text
+    button.Font = Enum.Font.SourceSansBold
+    button.TextSize = 14
+    button.TextColor3 = Color3.fromRGB(0, 255, 0)
+    button.Parent = mainFrame
+    
+    local buttonCorner = Instance.new("UICorner")
+    buttonCorner.CornerRadius = UDim.new(0, 4)
+    buttonCorner.Parent = button
+    
+    local buttonStroke = Instance.new("UIStroke")
+    buttonStroke.Color = Color3.fromRGB(0, 255, 0)
+    buttonStroke.Thickness = 1
+    buttonStroke.Transparency = 0.7
+    buttonStroke.Parent = button
+    
+    return button
+end
+
+local button1 = createButton("CraxterSploit", UDim2.new(0.05, 0, 0.3, 0), "CRAXTER SPLOIT")
+local button2 = createButton("TeamNAXROC", UDim2.new(0.05, 0, 0.5, 0), "TEAM NAXROC")
+local button3 = createButton("Exit", UDim2.new(0.05, 0, 0.7, 0), "EXIT")
+
+local function createButtonHoverEffect(button)
+    local originalColor = button.BackgroundColor3
+    
+    button.MouseEnter:Connect(function()
+        button.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    end)
+    
+    button.MouseLeave:Connect(function()
+        button.BackgroundColor3 = originalColor
+    end)
+end
+
+createButtonHoverEffect(button1)
+createButtonHoverEffect(button2)
+createButtonHoverEffect(button3)
+
+local env = getfenv()
+
+button1.MouseButton1Click:Connect(function()
+    env.loadstring(env.game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/craxtersploit"))()
+end)
+
+button2.MouseButton1Click:Connect(function()
+    env.loadstring(env.game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/Team%20NAXROC"))()
+end)
+
+button3.MouseButton1Click:Connect(function()
+    env.loadstring(env.game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/fake-hack"))()
+end)
+
+local typewriterLabel = Instance.new("TextLabel")
+typewriterLabel.Name = "TypewriterLabel"
+typewriterLabel.Size = UDim2.new(1, 0, 0, 20)
+typewriterLabel.Position = UDim2.new(0, 0, 0.9, 0)
+typewriterLabel.BackgroundTransparency = 1
+typewriterLabel.Font = Enum.Font.Code
+typewriterLabel.TextSize = 12
+typewriterLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+typewriterLabel.Text = "> Initializing..."
+typewriterLabel.Parent = mainFrame
+
+local statusText = {"System ready", "Backdoored enabled", "NAXROC loaded..."}
+local currentStatus = 1
+
+env.spawn(function()
+    while true do
+        typewriterLabel.Text = "> " .. statusText[currentStatus]
+        currentStatus = currentStatus % #statusText + 1
+        env.wait(2)
+    end
+end)
