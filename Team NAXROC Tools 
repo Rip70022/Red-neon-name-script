@@ -1,4 +1,4 @@
--- I will add more buttons on future.
+-- I will add more buttons on future, lol.
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "TeamNAXROCTools"
@@ -7,8 +7,8 @@ screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 250, 0, 150)
-mainFrame.Position = UDim2.new(0.5, -125, 0.5, -75)
+mainFrame.Size = UDim2.new(0, 250, 0, 200)
+mainFrame.Position = UDim2.new(0.5, -125, 0.5, -100)
 mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 mainFrame.BorderSizePixel = 0
 mainFrame.Active = true
@@ -59,6 +59,17 @@ glowEffect.ImageTransparency = 0.6
 glowEffect.ZIndex = -1
 glowEffect.Parent = mainFrame
 
+local scrollingFrame = Instance.new("ScrollingFrame")
+scrollingFrame.Name = "ButtonsScrollFrame"
+scrollingFrame.Size = UDim2.new(1, 0, 0.75, 0)
+scrollingFrame.Position = UDim2.new(0, 0, 0.2, 0)
+scrollingFrame.BackgroundTransparency = 1
+scrollingFrame.BorderSizePixel = 0
+scrollingFrame.ScrollBarThickness = 4
+scrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(0, 255, 0)
+scrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+scrollingFrame.Parent = mainFrame
+
 local function createButton(name, position, text)
     local button = Instance.new("TextButton")
     button.Name = name
@@ -70,59 +81,92 @@ local function createButton(name, position, text)
     button.Font = Enum.Font.SourceSansBold
     button.TextSize = 14
     button.TextColor3 = Color3.fromRGB(0, 255, 0)
-    button.Parent = mainFrame
-    
+    button.Parent = scrollingFrame
+
     local buttonCorner = Instance.new("UICorner")
     buttonCorner.CornerRadius = UDim.new(0, 4)
     buttonCorner.Parent = button
-    
+
     local buttonStroke = Instance.new("UIStroke")
     buttonStroke.Color = Color3.fromRGB(0, 255, 0)
     buttonStroke.Thickness = 1
     buttonStroke.Transparency = 0.7
     buttonStroke.Parent = button
-    
+
     return button
 end
 
-local button1 = createButton("CraxterSploit", UDim2.new(0.05, 0, 0.3, 0), "CRAXTER SPLOIT")
-local button2 = createButton("TeamNAXROC", UDim2.new(0.05, 0, 0.5, 0), "TEAM NAXROC")
-local button3 = createButton("Exit", UDim2.new(0.05, 0, 0.7, 0), "EXIT")
+local buttonNames = {
+    "CraxterSploit", 
+    "TeamNAXROC", 
+    "ProjectBLOOD", 
+    "NAXROCOmniscient", 
+    "DimensionalShift", 
+    "ServerControl", 
+    "Exit"
+}
+
+local buttonTexts = {
+    "CRAXTER SPLOIT", 
+    "TEAM NAXROC", 
+    "PROJECT BLOOD", 
+    "NAXROC OMNISCIENT", 
+    "DIMENSIONAL SHIFT", 
+    "SERVER CONTROL", 
+    "EXIT"
+}
+
+local buttonUrls = {
+    "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/craxtersploit",
+    "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/Team%20NAXROC",
+    "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/Project%20BLOOD",
+    "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/NAXROC%20Omniscient%20Hack",
+    "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/NAXROC_DimensionalShift",
+    "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/NAXROC_ServerControl",
+    "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/fake-hack"
+}
+
+local buttons = {}
+local buttonSpacing = 0.05
+local totalHeight = 0
+
+for i, name in ipairs(buttonNames) do
+    local yPos = (i - 1) * (30 + buttonSpacing * 100)
+    local button = createButton(name, UDim2.new(0.05, 0, 0, yPos), buttonTexts[i])
+    table.insert(buttons, button)
+    totalHeight = yPos + 30
+end
+
+scrollingFrame.CanvasSize = UDim2.new(0, 0, 0, totalHeight + 20)
 
 local function createButtonHoverEffect(button)
     local originalColor = button.BackgroundColor3
-    
+
     button.MouseEnter:Connect(function()
         button.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
     end)
-    
+
     button.MouseLeave:Connect(function()
         button.BackgroundColor3 = originalColor
     end)
 end
 
-createButtonHoverEffect(button1)
-createButtonHoverEffect(button2)
-createButtonHoverEffect(button3)
+for _, button in ipairs(buttons) do
+    createButtonHoverEffect(button)
+end
 
 local env = getfenv()
 
-button1.MouseButton1Click:Connect(function()
-    env.loadstring(env.game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/craxtersploit"))()
-end)
-
-button2.MouseButton1Click:Connect(function()
-    env.loadstring(env.game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/Team%20NAXROC"))()
-end)
-
-button3.MouseButton1Click:Connect(function()
-    env.loadstring(env.game:HttpGet("https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/fake-hack"))()
-end)
+for i, button in ipairs(buttons) do
+    button.MouseButton1Click:Connect(function()
+        env.loadstring(env.game:HttpGet(buttonUrls[i]))()
+    end)
+end
 
 local typewriterLabel = Instance.new("TextLabel")
 typewriterLabel.Name = "TypewriterLabel"
 typewriterLabel.Size = UDim2.new(1, 0, 0, 20)
-typewriterLabel.Position = UDim2.new(0, 0, 0.9, 0)
+typewriterLabel.Position = UDim2.new(0, 0, 0.95, 0)
 typewriterLabel.BackgroundTransparency = 1
 typewriterLabel.Font = Enum.Font.Code
 typewriterLabel.TextSize = 12
