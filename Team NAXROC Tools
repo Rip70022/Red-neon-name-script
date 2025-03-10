@@ -1,4 +1,4 @@
--- I will add more buttons on future.
+-- I will add more buttons on future. he'll yeah
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "TeamNAXROCTools"
@@ -61,8 +61,8 @@ glowEffect.Parent = mainFrame
 
 local scrollingFrame = Instance.new("ScrollingFrame")
 scrollingFrame.Name = "ButtonsScrollFrame"
-scrollingFrame.Size = UDim2.new(1, 0, 0.75, 0)
-scrollingFrame.Position = UDim2.new(0, 0, 0.2, 0)
+scrollingFrame.Size = UDim2.new(1, -10, 0.75, 0)
+scrollingFrame.Position = UDim2.new(0, 5, 0.2, 0)
 scrollingFrame.BackgroundTransparency = 1
 scrollingFrame.BorderSizePixel = 0
 scrollingFrame.ScrollBarThickness = 4
@@ -116,7 +116,7 @@ local buttonTexts = {
     "DIMENSIONAL SHIFT", 
     "SERVER CONTROL", 
     "SYSTEM OVERLOAD",
-    "SystemInfiltration",
+    "SYSTEM INFILTRATION",
     "EXIT"
 }
 
@@ -133,12 +133,13 @@ local buttonUrls = {
 }
 
 local buttons = {}
-local buttonSpacing = 0.05
+local buttonSpacing = 10
 local totalHeight = 0
 
 for i, name in ipairs(buttonNames) do
-    local yPos = (i - 1) * (30 + buttonSpacing * 100)
+    local yPos = (i - 1) * (30 + buttonSpacing)
     local button = createButton(name, UDim2.new(0.05, 0, 0, yPos), buttonTexts[i])
+    button.AnchorPoint = Vector2.new(0, 0)
     table.insert(buttons, button)
     totalHeight = yPos + 30
 end
