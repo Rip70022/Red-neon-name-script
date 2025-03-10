@@ -1,4 +1,4 @@
--- I will add more buttons on future, lol.
+-- I will add more buttons on future.
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "TeamNAXROCTools"
@@ -103,6 +103,8 @@ local buttonNames = {
     "NAXROCOmniscient", 
     "DimensionalShift", 
     "ServerControl", 
+    "SYSTEM OVERLOAD",
+    "SystemInfiltration",
     "Exit"
 }
 
@@ -113,6 +115,8 @@ local buttonTexts = {
     "NAXROC OMNISCIENT", 
     "DIMENSIONAL SHIFT", 
     "SERVER CONTROL", 
+    "SYSTEM OVERLOAD",
+    "SystemInfiltration",
     "EXIT"
 }
 
@@ -123,6 +127,8 @@ local buttonUrls = {
     "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/NAXROC%20Omniscient%20Hack",
     "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/NAXROC_DimensionalShift",
     "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/NAXROC_ServerControl",
+    "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/NAXROC%20SYSTEM%20OVERLOAD",
+    "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/NAXROC_SystemInfiltration",
     "https://raw.githubusercontent.com/Rip70022/Red-neon-name-script/refs/heads/main/fake-hack"
 }
 
@@ -174,7 +180,7 @@ typewriterLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
 typewriterLabel.Text = "> Initializing..."
 typewriterLabel.Parent = mainFrame
 
-local statusText = {"System ready", "Backdoored enabled", "NAXROC loaded..."}
+local statusText = {"System ready", "Backdoored enabled", "NAXROC TOOLS loaded..."}
 local currentStatus = 1
 
 env.spawn(function()
