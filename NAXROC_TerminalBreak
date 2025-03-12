@@ -1,0 +1,323 @@
+local NaxrocHack = {}
+
+getgenv().NAXROC_ACTIVE = true
+
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TweenService = game:GetService("TweenService")
+local Lighting = game:GetService("Lighting")
+local SoundService = game:GetService("SoundService")
+
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+local function CreateRemoteEvent()
+    local remoteEvent = Instance.new("RemoteEvent")
+    remoteEvent.Name = "NAXROC_SystemOverride"
+    remoteEvent.Parent = ReplicatedStorage
+    return remoteEvent
+end
+
+local function SetupGUI()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "NAXROC_Interface"
+    screenGui.IgnoreGuiInset = true
+    screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    screenGui.ResetOnSpawn = false
+    screenGui.Parent = PlayerGui
+    
+    local frame = Instance.new("Frame")
+    frame.BackgroundTransparency = 1
+    frame.Size = UDim2.new(1, 0, 1, 0)
+    frame.Parent = screenGui
+    
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Name = "HackMessage"
+    textLabel.BackgroundTransparency = 0.7
+    textLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    textLabel.Size = UDim2.new(0.5, 0, 0.1, 0)
+    textLabel.Position = UDim2.new(0.25, 0, 0.1, 0)
+    textLabel.Font = Enum.Font.Code
+    textLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+    textLabel.TextSize = 24
+    textLabel.Text = "SYSTEM OVERRIDE INITIATED BY NAXROC"
+    textLabel.Parent = frame
+    
+    local glitchEffect = Instance.new("Frame")
+    glitchEffect.Name = "GlitchEffect"
+    glitchEffect.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    glitchEffect.BackgroundTransparency = 0.9
+    glitchEffect.Size = UDim2.new(1, 0, 1, 0)
+    glitchEffect.Visible = false
+    glitchEffect.Parent = frame
+    
+    local errorMessages = Instance.new("TextLabel")
+    errorMessages.Name = "ErrorLog"
+    errorMessages.BackgroundTransparency = 1
+    errorMessages.Size = UDim2.new(0.3, 0, 0.5, 0)
+    errorMessages.Position = UDim2.new(0.05, 0, 0.3, 0)
+    errorMessages.Font = Enum.Font.Code
+    errorMessages.TextColor3 = Color3.fromRGB(0, 255, 0)
+    errorMessages.TextSize = 14
+    errorMessages.TextXAlignment = Enum.TextXAlignment.Left
+    errorMessages.TextYAlignment = Enum.TextYAlignment.Top
+    errorMessages.Text = ""
+    errorMessages.Parent = frame
+    
+    return screenGui
+end
+
+local function CreateChaosSound()
+    local sound = Instance.new("Sound")
+    sound.Name = "NAXROC_ChaosSound"
+    sound.SoundId = "rbxassetid://5567523008"
+    sound.Volume = 2
+    sound.Looped = true
+    sound.Parent = SoundService
+    return sound
+end
+
+local function ManipulateMap()
+    local workspace = game:GetService("Workspace")
+    local objects = {}
+    
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("BasePart") and not obj:IsDescendantOf(Players.LocalPlayer.Character) and not obj.Anchored then
+            table.insert(objects, obj)
+        end
+    end
+    
+    for i = 1, math.min(50, #objects) do
+        local obj = objects[math.random(1, #objects)]
+        local originalPosition = obj.Position
+        local originalSize = obj.Size
+        
+        local targetPosition = originalPosition + Vector3.new(
+            math.random(-10, 10),
+            math.random(-10, 10),
+            math.random(-10, 10)
+        )
+        
+        local targetSize = originalSize * math.random(0.5, 2)
+        
+        local tweenInfo = TweenInfo.new(
+            math.random(1, 3),
+            Enum.EasingStyle.Bounce,
+            Enum.EasingDirection.InOut
+        )
+        
+        local tween = TweenService:Create(obj, tweenInfo, {
+            Position = targetPosition,
+            Size = targetSize,
+            Color = Color3.fromRGB(
+                math.random(0, 255),
+                math.random(0, 255),
+                math.random(0, 255)
+            )
+        })
+        
+        tween:Play()
+    end
+end
+
+local function AlterGameLogic()
+    workspace.Gravity = math.random(0, 196)
+    
+    for _, player in pairs(Players:GetPlayers()) do
+        if player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.WalkSpeed = math.random(5, 50)
+            player.Character.Humanoid.JumpPower = math.random(25, 150)
+        end
+    end
+end
+
+local function CreateVisualEffects()
+    local lighting = game:GetService("Lighting")
+    
+    lighting.Ambient = Color3.fromRGB(
+        math.random(0, 255),
+        math.random(0, 255),
+        math.random(0, 255)
+    )
+    
+    lighting.Brightness = math.random(0, 3)
+    lighting.ClockTime = math.random(0, 24)
+    lighting.FogEnd = math.random(50, 1000)
+    
+    if math.random() > 0.5 then
+        local blur = Instance.new("BlurEffect")
+        blur.Size = math.random(5, 20)
+        blur.Parent = lighting
+        
+        task.delay(math.random(1, 3), function()
+            blur:Destroy()
+        end)
+    end
+    
+    if math.random() > 0.7 then
+        local colorCorrection = Instance.new("ColorCorrectionEffect")
+        colorCorrection.Brightness = math.random(-0.5, 0.5)
+        colorCorrection.Contrast = math.random(-0.5, 0.5)
+        colorCorrection.Saturation = math.random(-1, 1)
+        colorCorrection.TintColor = Color3.fromRGB(
+            math.random(0, 255),
+            math.random(0, 255),
+            math.random(0, 255)
+        )
+        colorCorrection.Parent = lighting
+        
+        task.delay(math.random(2, 5), function()
+            colorCorrection:Destroy()
+        end)
+    end
+end
+
+local function UpdateErrorLog(screenGui)
+    local errorLog = screenGui.Frame.ErrorLog
+    local errorMessages = {
+        "ERROR: System32.dll corrupted",
+        "WARNING: Firewall breach detected",
+        "CRITICAL: Memory allocation failure",
+        "ALERT: Network packets intercepted",
+        "ERROR: Database connection lost",
+        "WARNING: Unauthorized access detected",
+        "CRITICAL: Server vulnerabilities exposed",
+        "ALERT: Encryption keys compromised",
+        "NAXROC: Taking control of all systems",
+        "ERROR: Anti-cheat measures disabled",
+        "WARNING: Admin privileges elevated"
+    }
+    
+    task.spawn(function()
+        while getgenv().NAXROC_ACTIVE do
+            errorLog.Text = errorLog.Text .. "\n> " .. errorMessages[math.random(1, #errorMessages)]
+            if #string.split(errorLog.Text, "\n") > 15 then
+                local lines = string.split(errorLog.Text, "\n")
+                table.remove(lines, 2)
+                errorLog.Text = table.concat(lines, "\n")
+            end
+            wait(math.random(0.5, 2))
+        end
+    end)
+end
+
+local function GlitchScreen(screenGui)
+    local glitchEffect = screenGui.Frame.GlitchEffect
+    
+    task.spawn(function()
+        while getgenv().NAXROC_ACTIVE do
+            if math.random() > 0.7 then
+                glitchEffect.Visible = true
+                glitchEffect.BackgroundColor3 = Color3.fromRGB(
+                    math.random(0, 255),
+                    math.random(0, 255),
+                    math.random(0, 255)
+                )
+                glitchEffect.BackgroundTransparency = math.random(0.7, 0.9)
+                
+                task.delay(math.random(0.05, 0.2), function()
+                    glitchEffect.Visible = false
+                end)
+            end
+            wait(math.random(0.2, 1))
+        end
+    end)
+end
+
+local function TeleportPlayersRandomly()
+    local parts = workspace:GetDescendants()
+    local validParts = {}
+    
+    for _, part in pairs(parts) do
+        if part:IsA("BasePart") and part.Anchored and part.CanCollide then
+            table.insert(validParts, part)
+        end
+    end
+    
+    if #validParts > 0 then
+        for _, player in pairs(Players:GetPlayers()) do
+            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                if math.random() > 0.7 then
+                    local randomPart = validParts[math.random(1, #validParts)]
+                    player.Character.HumanoidRootPart.CFrame = randomPart.CFrame + Vector3.new(0, 3, 0)
+                end
+            end
+        end
+    end
+end
+
+local function PlayRandomAnimation()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player.Character and player.Character:FindFirstChild("Humanoid") then
+            local humanoid = player.Character.Humanoid
+            local animator = humanoid:FindFirstChildOfClass("Animator")
+            
+            if animator then
+                local animations = {"507770239", "507771019", "507776043", "507777268", "507784897"}
+                local animation = Instance.new("Animation")
+                animation.AnimationId = "rbxassetid://" .. animations[math.random(1, #animations)]
+                
+                local animTrack = animator:LoadAnimation(animation)
+                animTrack:Play()
+                
+                task.delay(math.random(2, 5), function()
+                    animTrack:Stop()
+                    animation:Destroy()
+                end)
+            end
+        end
+    end
+end
+
+function NaxrocHack.Start()
+    if not getgenv().NAXROC_ACTIVE then
+        return
+    end
+    
+    local remoteEvent = CreateRemoteEvent()
+    local screenGui = SetupGUI()
+    local chaosSound = CreateChaosSound()
+    
+    UpdateErrorLog(screenGui)
+    GlitchScreen(screenGui)
+    chaosSound:Play()
+    
+    task.spawn(function()
+        while getgenv().NAXROC_ACTIVE do
+            ManipulateMap()
+            AlterGameLogic()
+            CreateVisualEffects()
+            TeleportPlayersRandomly()
+            PlayRandomAnimation()
+            
+            wait(math.random(3, 8))
+        end
+    end)
+    
+    remoteEvent.OnClientEvent:Connect(function(action)
+        if action == "StopHack" then
+            getgenv().NAXROC_ACTIVE = false
+            screenGui:Destroy()
+            chaosSound:Stop()
+            chaosSound:Destroy()
+            remoteEvent:Destroy()
+        end
+    end)
+    
+    local hackMessage = screenGui.Frame.HackMessage
+    task.spawn(function()
+        while getgenv().NAXROC_ACTIVE do
+            hackMessage.TextColor3 = Color3.fromRGB(
+                math.random(100, 255),
+                math.random(0, 100),
+                math.random(0, 100)
+            )
+            wait(0.5)
+        end
+    end)
+end
+
+NaxrocHack.Start()
+
+return NaxrocHack
